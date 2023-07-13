@@ -4,7 +4,7 @@
 
 namespace me
 {
-	Controller::Controller(GameObject* gobj) : Component(enums::eComponentType::Controller, gobj)
+	Controller::Controller(GameObject* gobj, const std::wstring& name) : Component(enums::eComponentType::Controller, gobj, name)
 	{
 	}
 	Controller::~Controller()

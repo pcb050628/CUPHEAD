@@ -17,7 +17,7 @@ namespace me
 
 		GameObject* main_bg = AddGameObj(enums::eLayer::Background, L"main_background");
 		Texture* image_main_bg = ResourceManager::Load<Texture>(L"main_background", L"..\\content\\main screen\\Main_Menu_Background.bmp");
-		main_bg->AddComponent<SpriteRenderer>()->SetImage(image_main_bg);
+		main_bg->AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer)->SetImage(image_main_bg);
 	}
 	void MainScene::Update()
 	{

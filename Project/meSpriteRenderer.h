@@ -8,7 +8,7 @@ namespace me
 	class SpriteRenderer : public Component
 	{
 	public:
-		SpriteRenderer(GameObject* gobj);
+		SpriteRenderer(GameObject* gobj, const std::wstring& name);
 		virtual ~SpriteRenderer() override;
 
 		virtual void Init() override;
@@ -26,22 +26,38 @@ namespace me
 		}
 
 		virtual void SetScale(math::Vector2 scale) { mScale = scale; }
+		virtual math::Vector2 GetScale() { return mScale; }
 
-		virtual void SetWidth(UINT width) { mWidht = width; }
-		virtual void SetHeight(UINT height) { mHeight = height; }
-		virtual void SetStartPointX(UINT x) { mStartPointX = x; }
-		virtual void SetStartPointY(UINT y) { mStartPointY = y; }
+		virtual void SetFlipX(bool flip) {
+			if (flip)
+				mFlipX = -1;
+			else
+				mFlipX = 1;
+		}
+
+		virtual bool IsFlipX() {
+			if (mFlipX > 0)
+				return false;
+			else if (mFlipX < 0)
+				return true;
+		}
+
+		virtual void SetWidth(ULONG width) { mWidht = width; }
+		virtual void SetHeight(ULONG height) { mHeight = height; }
+		virtual void SetStartPointX(ULONG x) { mStartPointX = x; }
+		virtual void SetStartPointY(ULONG y) { mStartPointY = y; }
 		
 	private:
 		Texture* mTexture;
 
-		UINT mStartPointX;
-		UINT mStartPointY;
+		ULONG mStartPointX;
+		ULONG mStartPointY;
 
-		UINT mWidht;
-		UINT mHeight;
+		ULONG mWidht;
+		ULONG mHeight;
 
 		math::Vector2 mScale;
+		float mFlipX;
 
 		bool mAffectCamera;
 	};

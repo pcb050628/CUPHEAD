@@ -143,6 +143,7 @@
     <ClInclude Include="meLayer.h" />
     <ClInclude Include="meMath.h" />
     <ClInclude Include="meMainScene.h" />
+    <ClInclude Include="mePlayer.h" />
     <ClInclude Include="meTexture.h" />
     <ClInclude Include="meResource.h" />
     <ClInclude Include="meTItleScene.h" />
@@ -170,6 +171,7 @@
     <ClCompile Include="meKeyInput.cpp" />
     <ClCompile Include="meLayer.cpp" />
     <ClCompile Include="meMainScene.cpp" />
+    <ClCompile Include="mePlayer.cpp" />
     <ClCompile Include="meTexture.cpp" />
     <ClCompile Include="meResource.cpp" />
     <ClCompile Include="meResourceManager.cpp" />

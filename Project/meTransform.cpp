@@ -3,7 +3,7 @@
 
 namespace me
 {
-	Transform::Transform(GameObject* gobj) : Component(enums::eComponentType::Transform, gobj)
+	Transform::Transform(GameObject* gobj, const std::wstring& name) : Component(enums::eComponentType::Transform, gobj, name)
 	{
 		mScale = math::Vector2(100, 100);
 	}

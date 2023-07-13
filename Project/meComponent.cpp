@@ -2,9 +2,10 @@
 
 namespace me
 {
-	Component::Component(enums::eComponentType type, GameObject* gobj)
-		: mType(type)
+	Component::Component(enums::eComponentType type, GameObject* gobj, const std::wstring& name) : Entity(name)
+		, mType(type)
 		, mOwner(gobj)
+		, mActivate(true)
 	{
 	}
 

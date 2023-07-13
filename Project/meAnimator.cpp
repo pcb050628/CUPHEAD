@@ -7,10 +7,14 @@
 
 namespace me
 {
-	Animator::Animator(GameObject* gobj) : Component(enums::eComponentType::Animator, gobj)
+	Animator::Animator(GameObject* gobj, const std::wstring& name) : Component(enums::eComponentType::Animator, gobj, name)
+		, mType(enums::eAnimType::None)
+		, mSheet(nullptr)
 		, mIdx(0)
 		, mScale(math::Vector2::One)
 		, mAffectCamera(true)
+		, UnitX(0.f)
+		, UnitY(0.f)
 	{
 		mTextures = {};
 	}
@@ -29,7 +33,7 @@ namespace me
 		if (mIdx >= mTextures.size())
 			mIdx = 0;
 
-		Transform* tr = GetOwner()->GetComponent<Transform>();
+		Transform* tr = GetOwner()->GetComponent<Transform>(L"defaultTransform");
 		math::Vector2 pos = tr->GetPos();
 
 		if (mAffectCamera)
@@ -74,6 +78,8 @@ namespace me
 			return false;
 		else
 		{
+			mType = enums::eAnimType::Folder;
+
 			while (FindNextFile(hFind, &findFileData) != 0)
 			{
 				std::wstring FullPath = FolderPath + findFileData.cFileName;
@@ -82,6 +88,34 @@ namespace me
 			}
 
 			FindClose(hFind);
+			return true;
+		}
+	}
+
+	bool Animator::AddAnimationX(const std::wstring& name, const std::wstring& SheetsPath, float _UnitX)
+	{
+		mSheet = ResourceManager::Load<Texture>(name, SheetsPath.c_str());
+		if (mSheet == nullptr)
+			return false;
+		else
+		{
+			mType = enums::eAnimType::Sheet;
+			UnitX = _UnitX;
+
+			return true;
+		}
+	}
+
+	bool Animator::AddAnimationY(const std::wstring& name, const std::wstring& SheetsPath, float _UnitY)
+	{
+		mSheet = ResourceManager::Load<Texture>(name, SheetsPath.c_str());
+		if (mSheet == nullptr)
+			return false;
+		else
+		{
+			mType = enums::eAnimType::Sheet;
+			UnitY = _UnitY;
+
 			return true;
 		}
 	}

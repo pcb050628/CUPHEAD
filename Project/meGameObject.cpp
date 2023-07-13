@@ -6,17 +6,17 @@ namespace me
 	GameObject::GameObject(const std::wstring& name) : Entity(name)
 		,tag()
 	{
-		AddComponent<Transform>();
+		AddComponent<Transform>(L"defaultTransform");
 	}
 	GameObject::~GameObject()
 	{
 		if (mComponents.size() > 0)
 		{
-			int idx = 0;
-			while (idx < mComponents.size())
+			auto iter = mComponents.begin();
+
+			for (int i = 0; i < mComponents.size(); i++, iter++)
 			{
-				delete mComponents[idx];
-				idx++;
+				delete iter->second;
 			}
 		}
 		mComponents.clear();
@@ -24,22 +24,33 @@ namespace me
 
 	void GameObject::Init()
 	{
+		auto iter = mComponents.begin();
 
+		for (int i = 0; i < mComponents.size(); i++, iter++)
+		{
+			iter->second->Init();
+		}
 	}
 
 	void GameObject::Update()
 	{
-		for (Component* comp : mComponents)
+		auto iter = mComponents.begin();
+
+		for (int i = 0; i < mComponents.size(); i++, iter++)
 		{
-			comp->Update();
+			if (iter->second->GetActivate())
+				iter->second->Update();
 		}
 	}
 
 	void GameObject::Render(HDC hdc)
 	{
-		for (Component* comp : mComponents)
+		auto iter = mComponents.begin();
+
+		for (int i = 0; i < mComponents.size(); i++, iter++)
 		{
-			comp->Render(hdc);
+			if (iter->second->GetActivate())
+				iter->second->Render(hdc);
 		}
 	}
 }

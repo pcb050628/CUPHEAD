@@ -7,7 +7,7 @@ namespace me
 	class Transform : public Component
 	{
 	public:
-		Transform(GameObject* gobj);
+		Transform(GameObject* gobj, const std::wstring& name);
 		virtual ~Transform() override;
 
 		virtual void Init() override;

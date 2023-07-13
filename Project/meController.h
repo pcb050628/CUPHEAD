@@ -7,7 +7,7 @@ namespace me
 	class Controller : public Component
 	{
 	public:
-		Controller(GameObject* gobj);
+		Controller(GameObject* gobj, const std::wstring& name);
 		virtual ~Controller() override;
 
 		virtual void Init();

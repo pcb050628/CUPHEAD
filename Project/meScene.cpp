@@ -42,14 +42,23 @@ namespace me
 		}
 	}
 
-	GameObject* Scene::AddGameObj(enums::eLayer layertype, std::wstring name)
+	GameObject* Scene::AddGameObj(enums::eLayer layerType, std::wstring name)
 	{
-		return mLayers[(int)layertype].AddGameObj(name);
+		GameObject* obj = mLayers[(int)layerType].AddGameObj(name);
+		obj->Init();
+		return obj;
 	}
 
 	GameObject* Scene::GetGameObj(enums::eLayer layerType, std::wstring name)
 	{
 		return mLayers[(int)layerType].GetGameObj(name);
+	}
+
+	Player* Scene::AddPlayer(std::wstring name)
+	{
+		Player* p = mLayers[(int)enums::eLayer::Player].AddPlayer(name);
+		p->Init();
+		return p;
 	}
 
 }

@@ -5,6 +5,8 @@
 
 namespace me
 {
+	class Player;
+
 	class Scene : public Entity
 	{
 	public:
@@ -15,8 +17,10 @@ namespace me
 		void Update() override;
 		void Render(HDC hdc) override;
 
-		virtual GameObject* AddGameObj(enums::eLayer layertype, std::wstring name);
+		virtual GameObject* AddGameObj(enums::eLayer layerType, std::wstring name);
 		virtual GameObject* GetGameObj(enums::eLayer layerType, std::wstring name);
+
+		virtual Player* AddPlayer(std::wstring name);
 
 	private:
 		std::vector<Layer> mLayers;

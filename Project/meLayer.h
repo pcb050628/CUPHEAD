@@ -1,6 +1,7 @@
 #pragma once
 #include "DEFAULT.h"
 #include "meGameObject.h"
+#include "mePlayer.h"
 
 namespace me
 {	
@@ -17,6 +18,13 @@ namespace me
 		{
 			GameObject* tmp = new GameObject(name);
 			mGameObjs.insert(std::make_pair(name, tmp)); 
+			return tmp;
+		}
+
+		Player* AddPlayer(std::wstring name)
+		{
+			Player* tmp = new Player(name);
+			mGameObjs.insert(std::make_pair(name, tmp));
 			return tmp;
 		}
 

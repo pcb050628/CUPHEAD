@@ -79,6 +79,9 @@
     <Filter Include="Engine\GameObject\Component\Animator">
       <UniqueIdentifier>{3ed4445d-7a59-4ad9-8644-75b0fc41cdb7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObject\Player">
+      <UniqueIdentifier>{489eb3fa-87d3-46d9-8014-3b082ab543d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -165,6 +168,9 @@
     <ClInclude Include="OBJECTS.h">
       <Filter>Engine\GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="mePlayer.h">
+      <Filter>Engine\GameObject\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -243,6 +249,9 @@
     </ClCompile>
     <ClCompile Include="meAnimator.cpp">
       <Filter>Engine\GameObject\Component\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="mePlayer.cpp">
+      <Filter>Engine\GameObject\Player</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

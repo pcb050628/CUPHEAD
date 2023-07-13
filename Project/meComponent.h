@@ -1,30 +1,31 @@
 #pragma once
+#include "meEntity.h"
 #include "DEFAULT.h"
 
 namespace me
 {
 	class GameObject;
 
-	class Component 
+	class Component : public Entity
 	{
 	public:
-		Component(enums::eComponentType type, GameObject* gobj);
+		Component(enums::eComponentType type, GameObject* gobj, const std::wstring& name);
 		virtual ~Component() = 0;
 
-		virtual void Init();
-		virtual void Update();
-		virtual void Render(HDC hdc);
+		virtual void Init() override;
+		virtual void Update() override;
+		virtual void Render(HDC hdc) override;
 
 		virtual GameObject* GetOwner() { return mOwner; }
 
-		virtual void SetActivate(bool val) { Activate = val; }
-		virtual bool GetActivate() { return Activate; }
+		virtual void SetActivate(bool val) { mActivate = val; }
+		virtual bool GetActivate() { return mActivate; }
 
 	private:
 		const enums::eComponentType mType;
 		GameObject* mOwner;
 
-		bool Activate;
+		bool mActivate;
 	};
 }
 

@@ -3,6 +3,8 @@
 #include "COMPONENTS.h"
 #include "meResourceManager.h"
 #include "meSceneManager.h"
+#include "meCamera.h"
+#include "mePlayer.h"
 
 namespace me
 {
@@ -17,18 +19,13 @@ namespace me
 	{
 		Scene::Init();
 
-		GameObject* map_small = AddGameObj(enums::eLayer::Background, L"map_ocean");
-		Texture* iamge_map_small_isle = ResourceManager::Load<Texture>(L"world_ocean", L"..\\\content\\overWorld\\Inkwell Isle I\\Ocean\\world1_ocean_03.bmp");
-		SpriteRenderer* title_bg_sr = map_small->AddComponent<SpriteRenderer>();
-		title_bg_sr->SetImage(iamge_map_small_isle);
-		map_small->AddComponent<Controller>();
+		GameObject* map = AddGameObj(enums::eLayer::Background, L"map_ocean");
+		Texture* image_map = ResourceManager::Load<Texture>(L"world_ocean", L"..\\\content\\overWorld\\Inkwell Isle I\\world1_map_.bmp");
+		SpriteRenderer* map_sr = map->AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
+		map_sr->SetImage(image_map);
+		map->GetComponent<Transform>()->SetPos(math::Vector2(1060, 420));
 
-
-
-		/*GameObject* map_small = AddGameObj(enums::eLayer::Background, L"map_small_isle");
-		Texture* iamge_map_small_isle = ResourceManager::Load<Texture>(L"world_small_island", L"..\\content\\overWorld\\Inkwell Isle I\\Small Island\\Main\\world1_small_island_main.png");
-		SpriteRenderer* title_bg_sr = map_small->AddComponent<SpriteRenderer>();
-		title_bg_sr->SetImage(iamge_map_small_isle);*/
+		Camera::SetTarget(AddPlayer(L"CupHead_map"));
 	}
 	void WorldMapScene::Update()
 	{
