@@ -1,0 +1,5 @@
+C:\Users\assor\OneDrive\바탕 화면\meFile\infernaxCopy\x64\Debug\Client.exe
+C:\Users\chanb\OneDrive\바탕 화면\WinApi32\x64\Debug\Client.exe
+C:\Users\chanb\OneDrive\바탕 화면\WinApi32\Project\x64\Debug\Client.exe
+C:\Users\chanb\OneDrive\바탕 화면\INFERNAX\Project\x64\Debug\Client.exe
+C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\x64\Debug\Client.exe

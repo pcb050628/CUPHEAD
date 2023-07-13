@@ -1,0 +1,248 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Windows">
+      <UniqueIdentifier>{bcce1cdc-217b-4a95-b9c5-827f0112fdc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Windows\Header">
+      <UniqueIdentifier>{20bcb183-b2b7-4d6b-b7fa-82482a559af4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Windows\Resource">
+      <UniqueIdentifier>{1674702e-91a4-43dc-b388-1c9b3d530f3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{5d825d91-f13b-4c5c-8fa6-013618c8b0fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Core">
+      <UniqueIdentifier>{62ffb3a2-3f17-4394-8700-b6129d151599}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\DefaultHeader">
+      <UniqueIdentifier>{e7e9f8a7-74ce-41df-b13a-5a7db19b24dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\KeyInput">
+      <UniqueIdentifier>{c8dc74d5-00ef-42f0-bddf-c8eb65f55f30}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Time">
+      <UniqueIdentifier>{17a8cd12-1171-4c72-96fa-1558478424fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Entity">
+      <UniqueIdentifier>{5c1b4dea-4e2d-48fc-8a7a-f31699c954e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject">
+      <UniqueIdentifier>{4e9a7c48-c19e-46a5-bcfc-e1bf6bc0c220}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Component">
+      <UniqueIdentifier>{9c123ac6-0708-4cc0-8313-3af9bede0274}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Component\Transform">
+      <UniqueIdentifier>{1498dd00-b24e-42b6-a1a4-589773abc64f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Component\SpriteRenderer">
+      <UniqueIdentifier>{35c4c8e2-ac86-4ac1-9c93-0257c707981e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Component\Controller">
+      <UniqueIdentifier>{9b4a6110-3c20-43ec-ac63-0a0d601c8900}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\SceneManager">
+      <UniqueIdentifier>{452c6fb7-e638-43f0-af17-1b09f42f6aa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\SceneManager\Scene">
+      <UniqueIdentifier>{5c05d1c5-cefb-4c09-8557-37ea88f0ac16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\SceneManager\Scene\Layer">
+      <UniqueIdentifier>{9122579b-0947-40c2-a263-044abce3f4cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ResourceManager">
+      <UniqueIdentifier>{c67f88c3-fc95-4e5a-8e93-cd61bba81af9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ResourceManager\Resource">
+      <UniqueIdentifier>{18cf9636-1661-4ae3-83ed-c2ce41feb7f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ResourceManager\Resource\Texture">
+      <UniqueIdentifier>{aea1dea4-ac72-4ffe-b33c-49a50b1cafa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\SceneManager\Scene\TitleScene">
+      <UniqueIdentifier>{08000fe8-3980-41af-b586-58ff3d9d12ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Camera">
+      <UniqueIdentifier>{c78a776d-1410-48c2-8ffe-21097e690782}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\SceneManager\Scene\MainScene">
+      <UniqueIdentifier>{dc50d598-b363-436c-aa24-88e03345ca45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\SceneManager\Scene\BossFightScene">
+      <UniqueIdentifier>{b782a398-14c3-4dd8-aaf8-bcb3da385e0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\SceneManager\Scene\WorldMapScene">
+      <UniqueIdentifier>{4ffa927b-d3d8-4b99-9931-371651895234}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Component\Animator">
+      <UniqueIdentifier>{3ed4445d-7a59-4ad9-8644-75b0fc41cdb7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Client.h">
+      <Filter>Windows\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>Windows\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Windows\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Windows\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="meApplication.h">
+      <Filter>Engine\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="DEFAULT.h">
+      <Filter>Engine\DefaultHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="meMath.h">
+      <Filter>Engine\DefaultHeader</Filter>
+    </ClInclude>
+    <ClInclude Include="meKeyInput.h">
+      <Filter>Engine\KeyInput</Filter>
+    </ClInclude>
+    <ClInclude Include="meTime.h">
+      <Filter>Engine\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="meEntity.h">
+      <Filter>Engine\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="meScene.h">
+      <Filter>Engine\SceneManager\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="meLayer.h">
+      <Filter>Engine\SceneManager\Scene\Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="meGameObject.h">
+      <Filter>Engine\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="meComponent.h">
+      <Filter>Engine\GameObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="meTransform.h">
+      <Filter>Engine\GameObject\Component\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="meSpriteRenderer.h">
+      <Filter>Engine\GameObject\Component\SpriteRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="meController.h">
+      <Filter>Engine\GameObject\Component\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="meSceneManager.h">
+      <Filter>Engine\SceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="COMPONENTS.h">
+      <Filter>Engine\GameObject\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="meResource.h">
+      <Filter>Engine\ResourceManager\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="meResourceManager.h">
+      <Filter>Engine\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="meTexture.h">
+      <Filter>Engine\ResourceManager\Resource\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="meTItleScene.h">
+      <Filter>Engine\SceneManager\Scene\TitleScene</Filter>
+    </ClInclude>
+    <ClInclude Include="meMainScene.h">
+      <Filter>Engine\SceneManager\Scene\MainScene</Filter>
+    </ClInclude>
+    <ClInclude Include="meCamera.h">
+      <Filter>Engine\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="meWorldMapScene.h">
+      <Filter>Engine\SceneManager\Scene\WorldMapScene</Filter>
+    </ClInclude>
+    <ClInclude Include="meAnimator.h">
+      <Filter>Engine\GameObject\Component\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="OBJECTS.h">
+      <Filter>Engine\GameObject</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>Windows\Resource</Filter>
+    </Image>
+    <Image Include="Client.ico">
+      <Filter>Windows\Resource</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Client.rc">
+      <Filter>Windows\Resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Client.cpp" />
+    <ClCompile Include="meApplication.cpp">
+      <Filter>Engine\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="meKeyInput.cpp">
+      <Filter>Engine\KeyInput</Filter>
+    </ClCompile>
+    <ClCompile Include="meTime.cpp">
+      <Filter>Engine\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="meEntity.cpp">
+      <Filter>Engine\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="meScene.cpp">
+      <Filter>Engine\SceneManager\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="meLayer.cpp">
+      <Filter>Engine\SceneManager\Scene\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="meGameObject.cpp">
+      <Filter>Engine\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="meComponent.cpp">
+      <Filter>Engine\GameObject\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="meTransform.cpp">
+      <Filter>Engine\GameObject\Component\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="meSpriteRenderer.cpp">
+      <Filter>Engine\GameObject\Component\SpriteRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="meController.cpp">
+      <Filter>Engine\GameObject\Component\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="meSceneManager.cpp">
+      <Filter>Engine\SceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="meResource.cpp">
+      <Filter>Engine\ResourceManager\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="meResourceManager.cpp">
+      <Filter>Engine\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="meTexture.cpp">
+      <Filter>Engine\ResourceManager\Resource\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="meMath.cpp">
+      <Filter>Engine\DefaultHeader</Filter>
+    </ClCompile>
+    <ClCompile Include="meTItleScene.cpp">
+      <Filter>Engine\SceneManager\Scene\TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="meMainScene.cpp">
+      <Filter>Engine\SceneManager\Scene\MainScene</Filter>
+    </ClCompile>
+    <ClCompile Include="meCamera.cpp">
+      <Filter>Engine\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="meWorldMapScene.cpp">
+      <Filter>Engine\SceneManager\Scene\WorldMapScene</Filter>
+    </ClCompile>
+    <ClCompile Include="meAnimator.cpp">
+      <Filter>Engine\GameObject\Component\Animator</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
