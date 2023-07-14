@@ -1,5 +1,6 @@
 #include "meScene.h"
 #include "COMPONENTS.h"
+#include "mePlayer_map.h"
 
 namespace me
 {
@@ -54,9 +55,9 @@ namespace me
 		return mLayers[(int)layerType].GetGameObj(name);
 	}
 
-	Player* Scene::AddPlayer(std::wstring name)
+	Player_map* Scene::AddPlayer_map(std::wstring name)
 	{
-		Player* p = mLayers[(int)enums::eLayer::Player].AddPlayer(name);
+		Player_map* p = mLayers[(int)enums::eLayer::Player].AddPlayer_map(name);
 		p->Init();
 		return p;
 	}

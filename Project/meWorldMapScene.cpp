@@ -4,7 +4,7 @@
 #include "meResourceManager.h"
 #include "meSceneManager.h"
 #include "meCamera.h"
-#include "mePlayer.h"
+#include "mePlayer_map.h"
 
 namespace me
 {
@@ -25,7 +25,7 @@ namespace me
 		map_sr->SetImage(image_map);
 		map->GetComponent<Transform>()->SetPos(math::Vector2(1060, 420));
 
-		Camera::SetTarget(AddPlayer(L"CupHead_map"));
+		Camera::SetTarget(AddPlayer_map(L"CupHead_map"));
 	}
 	void WorldMapScene::Update()
 	{

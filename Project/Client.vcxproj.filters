@@ -82,6 +82,18 @@
     <Filter Include="Engine\GameObject\Player">
       <UniqueIdentifier>{489eb3fa-87d3-46d9-8014-3b082ab543d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObject\Boss">
+      <UniqueIdentifier>{a3153cd0-6671-4dc9-abcb-192972ab90a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\SceneManager\Scene\BossFightScene\Goopy Le Grande">
+      <UniqueIdentifier>{a52d469d-6a84-4fc6-b9dc-9e66617bf6ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Player\Player_map">
+      <UniqueIdentifier>{270ad9d5-3013-4105-a102-9b9d04763cd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Player\Player_stage">
+      <UniqueIdentifier>{1500ace7-220b-4234-8741-c41bb9cca66c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -168,8 +180,20 @@
     <ClInclude Include="OBJECTS.h">
       <Filter>Engine\GameObject</Filter>
     </ClInclude>
-    <ClInclude Include="mePlayer.h">
-      <Filter>Engine\GameObject\Player</Filter>
+    <ClInclude Include="meBossFightScene.h">
+      <Filter>Engine\SceneManager\Scene\BossFightScene</Filter>
+    </ClInclude>
+    <ClInclude Include="meBoss.h">
+      <Filter>Engine\GameObject\Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="meGoopy_Le_Grande_Stage.h">
+      <Filter>Engine\SceneManager\Scene\BossFightScene\Goopy Le Grande</Filter>
+    </ClInclude>
+    <ClInclude Include="mePlayer_map.h">
+      <Filter>Engine\GameObject\Player\Player_map</Filter>
+    </ClInclude>
+    <ClInclude Include="mePlayer_stage.h">
+      <Filter>Engine\GameObject\Player\Player_stage</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -250,8 +274,20 @@
     <ClCompile Include="meAnimator.cpp">
       <Filter>Engine\GameObject\Component\Animator</Filter>
     </ClCompile>
-    <ClCompile Include="mePlayer.cpp">
-      <Filter>Engine\GameObject\Player</Filter>
+    <ClCompile Include="meBossFightScene.cpp">
+      <Filter>Engine\SceneManager\Scene\BossFightScene</Filter>
+    </ClCompile>
+    <ClCompile Include="meBoss.cpp">
+      <Filter>Engine\GameObject\Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="meGoopy_Le_Grande_Stage.cpp">
+      <Filter>Engine\SceneManager\Scene\BossFightScene\Goopy Le Grande</Filter>
+    </ClCompile>
+    <ClCompile Include="mePlayer_map.cpp">
+      <Filter>Engine\GameObject\Player\Player_map</Filter>
+    </ClCompile>
+    <ClCompile Include="mePlayer_stage.cpp">
+      <Filter>Engine\GameObject\Player\Player_stage</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

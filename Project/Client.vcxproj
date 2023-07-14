@@ -131,6 +131,8 @@
     <ClInclude Include="meAnimator.h" />
     <ClInclude Include="meApplication.h" />
     <ClInclude Include="Client.h" />
+    <ClInclude Include="meBoss.h" />
+    <ClInclude Include="meBossFightScene.h" />
     <ClInclude Include="meCamera.h" />
     <ClInclude Include="meComponent.h" />
     <ClInclude Include="COMPONENTS.h" />
@@ -139,11 +141,13 @@
     <ClInclude Include="meEntity.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="meGameObject.h" />
+    <ClInclude Include="meGoopy_Le_Grande_Stage.h" />
     <ClInclude Include="meKeyInput.h" />
     <ClInclude Include="meLayer.h" />
     <ClInclude Include="meMath.h" />
     <ClInclude Include="meMainScene.h" />
-    <ClInclude Include="mePlayer.h" />
+    <ClInclude Include="mePlayer_map.h" />
+    <ClInclude Include="mePlayer_stage.h" />
     <ClInclude Include="meTexture.h" />
     <ClInclude Include="meResource.h" />
     <ClInclude Include="meTItleScene.h" />
@@ -160,7 +164,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="meAnimator.cpp" />
+    <ClCompile Include="meBoss.cpp" />
+    <ClCompile Include="meBossFightScene.cpp" />
     <ClCompile Include="meCamera.cpp" />
+    <ClCompile Include="meGoopy_Le_Grande_Stage.cpp" />
     <ClCompile Include="meMath.cpp" />
     <ClCompile Include="meApplication.cpp" />
     <ClCompile Include="Client.cpp" />
@@ -171,7 +178,8 @@
     <ClCompile Include="meKeyInput.cpp" />
     <ClCompile Include="meLayer.cpp" />
     <ClCompile Include="meMainScene.cpp" />
-    <ClCompile Include="mePlayer.cpp" />
+    <ClCompile Include="mePlayer_map.cpp" />
+    <ClCompile Include="mePlayer_stage.cpp" />
     <ClCompile Include="meTexture.cpp" />
     <ClCompile Include="meResource.cpp" />
     <ClCompile Include="meResourceManager.cpp" />

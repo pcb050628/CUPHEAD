@@ -1,5 +1,8 @@
 C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meAnimator.cpp;C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\x64\Debug\meAnimator.obj
+C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meBoss.cpp;C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\x64\Debug\meBoss.obj
+C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meBossFightScene.cpp;C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\x64\Debug\meBossFightScene.obj
 C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meCamera.cpp;C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\x64\Debug\meCamera.obj
+C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meGoopy_Le_Grande_Stage.cpp;C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\x64\Debug\meGoopy_Le_Grande_Stage.obj
 C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meMath.cpp;C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\x64\Debug\meMath.obj
 C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meApplication.cpp;C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\x64\Debug\meApplication.obj
 C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\Client.cpp;C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\x64\Debug\Client.obj
@@ -10,7 +13,8 @@ C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meGameObject.cpp;C:\Users\
 C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meKeyInput.cpp;C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\x64\Debug\meKeyInput.obj
 C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meLayer.cpp;C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\x64\Debug\meLayer.obj
 C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meMainScene.cpp;C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\x64\Debug\meMainScene.obj
-C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\mePlayer.cpp;C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\x64\Debug\mePlayer.obj
+C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\mePlayer_map.cpp;C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\x64\Debug\mePlayer_map.obj
+C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\mePlayer_stage.cpp;C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\x64\Debug\mePlayer_stage.obj
 C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meTexture.cpp;C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\x64\Debug\meTexture.obj
 C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meResource.cpp;C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\x64\Debug\meResource.obj
 C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meResourceManager.cpp;C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\x64\Debug\meResourceManager.obj

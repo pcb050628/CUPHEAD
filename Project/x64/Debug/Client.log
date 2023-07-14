@@ -1,39 +1,6 @@
-﻿  Client.cpp
-  meAnimator.cpp
-C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meAnimator.cpp(47,77): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meAnimator.cpp(47,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meAnimator.cpp(46,85): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meAnimator.cpp(46,31): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  meApplication.cpp
-  meCamera.cpp
-  meController.cpp
-  meGameObject.cpp
-  meLayer.cpp
-  meMainScene.cpp
-  mePlayer.cpp
-C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\mePlayer.cpp(44,23): warning C4244: '인수': 'float'에서 'ULONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\mePlayer.cpp(45,24): warning C4244: '인수': 'float'에서 'ULONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\mePlayer.cpp(47,22): warning C4244: '인수': 'float'에서 'ULONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\mePlayer.cpp(48,23): warning C4244: '인수': 'float'에서 'ULONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\mePlayer.cpp(49,28): warning C4244: '인수': 'float'에서 'ULONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\mePlayer.cpp(51,28): warning C4244: '인수': 'float'에서 'ULONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\mePlayer.cpp(52,29): warning C4244: '인수': 'float'에서 'ULONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\mePlayer.cpp(53,34): warning C4244: '인수': 'float'에서 'ULONG'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  meScene.cpp
-  meSceneManager.cpp
-  meSpriteRenderer.cpp
-C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meSpriteRenderer.cpp(40,72): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meSpriteRenderer.cpp(40,40): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meSpriteRenderer.cpp(39,87): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meSpriteRenderer.cpp(39,31): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meSpriteRenderer.cpp(66,15): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meSpriteRenderer.cpp(67,15): warning C4267: '초기화 중': 'size_t'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  meTItleScene.cpp
-  meTexture.cpp
-  meTransform.cpp
-  meWorldMapScene.cpp
-C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meWorldMapScene.cpp(23,71): warning C4129: 'c': 문자 이스케이프 시퀀스를 인식할 수 없습니다.
+﻿  meBoss.cpp
+  meBossFightScene.cpp
+  meGoopy_Le_Grande_Stage.cpp
+  mePlayer_stage.cpp
   코드를 생성하고 있습니다...
-C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meTexture.cpp(61): warning C4715: 'me::Texture::Load': 모든 제어 경로에서 값을 반환하지는 않습니다.
-C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\meSpriteRenderer.h(43): warning C4715: 'me::SpriteRenderer::IsFlipX': 모든 제어 경로에서 값을 반환하지는 않습니다.
   Client.vcxproj -> C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\x64\Debug\Client.exe

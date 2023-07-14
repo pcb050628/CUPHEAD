@@ -47,6 +47,8 @@ namespace me
 		float UnitX;
 		float UnitY;
 
+		bool mLoop;
+
 		bool mAffectCamera;
 	};
 }

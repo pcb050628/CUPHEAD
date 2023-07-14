@@ -5,7 +5,7 @@
 
 namespace me
 {
-	class Player;
+	class Player_map;
 
 	class Scene : public Entity
 	{
@@ -20,7 +20,7 @@ namespace me
 		virtual GameObject* AddGameObj(enums::eLayer layerType, std::wstring name);
 		virtual GameObject* GetGameObj(enums::eLayer layerType, std::wstring name);
 
-		virtual Player* AddPlayer(std::wstring name);
+		virtual Player_map* AddPlayer_map(std::wstring name);
 
 	private:
 		std::vector<Layer> mLayers;

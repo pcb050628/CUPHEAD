@@ -1,7 +1,7 @@
 #pragma once
 #include "DEFAULT.h"
 #include "meGameObject.h"
-#include "mePlayer.h"
+#include "mePlayer_map.h"
 
 namespace me
 {	
@@ -21,9 +21,9 @@ namespace me
 			return tmp;
 		}
 
-		Player* AddPlayer(std::wstring name)
+		Player_map* AddPlayer_map(std::wstring name)
 		{
-			Player* tmp = new Player(name);
+			Player_map* tmp = new Player_map(name);
 			mGameObjs.insert(std::make_pair(name, tmp));
 			return tmp;
 		}

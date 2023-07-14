@@ -15,6 +15,7 @@ namespace me
 		, mAffectCamera(true)
 		, UnitX(0.f)
 		, UnitY(0.f)
+		, mLoop(true)
 	{
 		mTextures = {};
 	}
@@ -30,7 +31,9 @@ namespace me
 	}
 	void Animator::Render(HDC hdc)
 	{
-		if (mIdx >= mTextures.size())
+		if (mIdx >= mTextures.size() && !mLoop)
+			SetActivate(false);
+		else if (mIdx >= mTextures.size() && mLoop)
 			mIdx = 0;
 
 		Transform* tr = GetOwner()->GetComponent<Transform>(L"defaultTransform");
