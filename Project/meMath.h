@@ -56,5 +56,17 @@ namespace me::math
 			Vector2 value(x - other.x, y - other.y);
 			return value;
 		}
+
+		Vector2 operator+(const Vector2& other)
+		{
+			Vector2 value(x + other.x, y + other.y);
+			return value;
+		}
+
+		Vector2 operator*(const Vector2& other)
+		{
+			Vector2 value(x * other.x, y * other.y);
+			return value;
+		}
 	};
 }

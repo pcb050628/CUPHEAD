@@ -13,7 +13,7 @@ namespace me
 
 	enum class KeyState
 	{
-		Up, Down, Pressed, None
+		Up, Down, Pressed, Released, None
 	};
 
 	class KeyInput
@@ -42,6 +42,7 @@ namespace me
 
 		static bool GetKeyDown(KeyCode code) { return mKeys[(int)code].state == KeyState::Down; }
 		static bool GetKeyUp(KeyCode code) { return mKeys[(int)code].state == KeyState::Up; }
+		static bool GetKeyReleased(KeyCode code) { return mKeys[(int)code].state == KeyState::Released; }
 		static bool GetKey(KeyCode code) { return mKeys[(int)code].Pressed; }
 
 	private:

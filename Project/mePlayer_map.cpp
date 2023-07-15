@@ -8,9 +8,7 @@ namespace me
 		, mFront_sr(nullptr)
 		, mBack_sr(nullptr)
 		, mHorizontal_sr(nullptr)
-		, mFront_anim(nullptr)
-		, mBack_anim(nullptr)
-		, mHorizontal_anim(nullptr)
+		, mAnimtor(nullptr)
 	{
 	}
 	Player_map::~Player_map()
@@ -19,63 +17,60 @@ namespace me
 	void Player_map::Init()
 	{
 		GameObject::Init();
-		mFront_sr = AddComponent<SpriteRenderer>(L"CupHead_map_front_sr");
-		mBack_sr = AddComponent<SpriteRenderer>(L"CupHead_map_back_sr");
-		mHorizontal_sr = AddComponent<SpriteRenderer>(L"CupHead_map_horizontal_sr");
 
-		mFront_anim = AddComponent<Animator>(L"CupHead_map_front_anim");
-		mBack_anim = AddComponent<Animator>(L"CupHead_map_back_anim");
-		mHorizontal_anim = AddComponent<Animator>(L"CupHead_map_horizontal_anim");
-
+		mAnimtor = AddComponent<Animator>(L"CupHead_map_anim");
+		mAnimtor->AddAnim(ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_front_idle", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(0, 0), 16, 4, 5.f));
+		mAnimtor->AddAnim(ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_back_idle", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(0, 565.625f), 16, 2));
+		mAnimtor->AddAnim(ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_horizontal_idle", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(0, 339.375f), 16, 2));
+		mAnimtor->AddAnim(ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_front_walk", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(412.25f, 0), 16, 12, 2.f));
+		mAnimtor->AddAnim(ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_diagonal_front_walk", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(309.1875f, 113.125f), 16, 12));
+		mAnimtor->AddAnim(ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_horizontal_walk", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(309.1875f, 339.375f), 16, 11));
+		mAnimtor->AddAnim(ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_diagonal_back_walk", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(412.25f, 452.5f), 16, 12));
+		mAnimtor->AddAnim(ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_back_walk", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(0, 678.75f), 16, 13));
+		mAnimtor->PlayAnim(L"CupHead_map_anim_back_idle");
 		AddComponent<Controller>(enums::eComponentType::Controller);
-
-		mFront_sr->SetActivate(false);
-		mBack_sr->SetActivate(false);
-
-		mFront_anim->SetActivate(false);
-		mBack_anim->SetActivate(false);
-		mHorizontal_anim->SetActivate(false);
-
-		Texture* image = ResourceManager::Load<Texture>(L"CupHead_Map", L"..\\content\\overWorld\\Cuphead Overworld.png");
-		mFront_sr->SetImage(image);
-		mBack_sr->SetImage(image);
-		mHorizontal_sr->SetImage(image);
-
-		mFront_sr->SetWidth(103.0625f);
-		mFront_sr->SetHeight(113.125f);
-
-		mBack_sr->SetWidth(103.0625f);
-		mBack_sr->SetHeight(113.125f);
-		mBack_sr->SetStartPointY(565.625f);
-
-		mHorizontal_sr->SetWidth(103.0625f);
-		mHorizontal_sr->SetHeight(113.125f);
-		mHorizontal_sr->SetStartPointY(226.25f);
 	}
 	void Player_map::Update()
 	{
 		GameObject::Update();
 
-		if (KeyInput::GetKey(KeyCode::LeftArrow))
-		{
-			mHorizontal_anim->SetActivate(true);
+		if (KeyInput::GetKeyDown(KeyCode::LeftArrow))
+			mAnimtor->SetFlipX(true);
+		if (KeyInput::GetKeyDown(KeyCode::RightArrow))
+			mAnimtor->SetFlipX(false);
 
-			if(!mHorizontal_sr->IsFlipX())
-				mHorizontal_sr->SetFlipX(true);
-		}
-		
-		if (KeyInput::GetKey(KeyCode::RightArrow))
+		if (KeyInput::GetKey(KeyCode::UpArrow))
 		{
-			mHorizontal_anim->SetActivate(true);
+			if(KeyInput::GetKey(KeyCode::RightArrow) || KeyInput::GetKey(KeyCode::LeftArrow))
+				mAnimtor->PlayAnim(L"CupHead_map_anim_diagonal_front_walk");
+			else
+				mAnimtor->PlayAnim(L"CupHead_map_anim_front_walk");
+		}
+		else if (KeyInput::GetKeyReleased(KeyCode::UpArrow))
+				mAnimtor->PlayAnim(L"CupHead_map_anim_front_idle");
 
-			if(mHorizontal_sr->IsFlipX())
-				mHorizontal_sr->SetFlipX(false);
-		}
-		
-		if (KeyInput::GetKeyUp(KeyCode::RightArrow) || KeyInput::GetKeyUp(KeyCode::LeftArrow))
+		if (KeyInput::GetKey(KeyCode::DownArrow))
 		{
-			mHorizontal_anim->SetActivate(false);
+			if (KeyInput::GetKey(KeyCode::RightArrow) || KeyInput::GetKey(KeyCode::LeftArrow))
+				mAnimtor->PlayAnim(L"CupHead_map_anim_diagonal_back_walk");
+			else
+				mAnimtor->PlayAnim(L"CupHead_map_anim_back_walk");
 		}
+		else if (KeyInput::GetKeyReleased(KeyCode::DownArrow))
+			mAnimtor->PlayAnim(L"CupHead_map_anim_back_idle");
+
+		if (KeyInput::GetKey(KeyCode::LeftArrow) || KeyInput::GetKey(KeyCode::RightArrow))
+		{
+			if (KeyInput::GetKey(KeyCode::DownArrow))
+				mAnimtor->PlayAnim(L"CupHead_map_anim_diagonal_back_walk");
+			else if (KeyInput::GetKey(KeyCode::UpArrow))
+				mAnimtor->PlayAnim(L"CupHead_map_anim_diagonal_front_walk");
+			else
+				mAnimtor->PlayAnim(L"CupHead_map_anim_horizontal_walk");
+		}
+
+		if(KeyInput::GetKeyReleased(KeyCode::RightArrow) || KeyInput::GetKeyReleased(KeyCode::LeftArrow))
+			mAnimtor->PlayAnim(L"CupHead_map_anim_horizontal_idle");
 	}
 	void Player_map::Render(HDC hdc)
 	{

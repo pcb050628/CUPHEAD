@@ -30,12 +30,21 @@ namespace me
 
 	void Time::Render(HDC hdc)
 	{
-		wchar_t buffer[50] = {};
+		//frame late
+		wchar_t fpsBuffer[50] = {};
 		float fps = 1.0 / mDeltaTime;
 
-		swprintf_s(buffer, L"fps : %f", fps);
-		int strLen = wcsnlen_s(buffer, 50);
+		swprintf_s(fpsBuffer, L"fps : %f", fps);
+		int fpsLen = wcsnlen_s(fpsBuffer, 50);
 
-		TextOut(hdc, 10, 10, buffer, strLen);
+		TextOut(hdc, 10, 10, fpsBuffer, fpsLen);
+
+		//time
+		/*wchar_t timeBuffer[50] = {};
+
+		swprintf_s(timeBuffer, L"fps : %f", time);
+		int timeLen = wcsnlen_s(timeBuffer, 50);
+
+		TextOut(hdc, 10, 10, timeBuffer, timeLen);*/
 	}
 }

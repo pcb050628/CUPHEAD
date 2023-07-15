@@ -1,24 +1,14 @@
 #pragma once
 #include "meComponent.h"
+#include "meAnimation.h"
 
 namespace me
 {
-	namespace enums
-	{
-		enum class eAnimType
-		{
-			Folder,
-			Sheet,
-			None
-		};
-	}
-
 	class Texture;
 
 	class Animator : public Component
 	{
 	public:
-
 		Animator(GameObject* gobj, const std::wstring& name);
 		virtual ~Animator() override;
 
@@ -26,27 +16,53 @@ namespace me
 		virtual void Update();
 		virtual void Render(HDC hdc);
 
-		virtual bool AddAnimation(const std::wstring& FolderPath);
-		virtual bool AddAnimationX(const std::wstring& name, const std::wstring& SheetsPath, float _UnitX);
-		virtual bool AddAnimationY(const std::wstring& name, const std::wstring& SheetsPath, float _UnitY);
-
 		virtual void SetScale(math::Vector2 scale) { mScale = scale; }
+		virtual void SetOffset(math::Vector2 offset) { mOffset = offset; }
 
-		virtual enums::eAnimType GetType() { return mType; }
-		virtual float GetUnitX() { return UnitX; }
-		virtual float GetUnitY() { return UnitY; }
+		virtual void SetFlipX(bool value) { isFlipX = value; }
+		virtual void SetFlipY(bool value) { isFlipY = value; }
+
+		virtual void AddAnim(Animation* anim)
+		{
+			mAnims.insert(std::make_pair(anim->GetName(), anim));
+		}
+
+		virtual void PlayAnim(const std::wstring& name)
+		{
+			auto iter = mAnims.find(name);
+			if (iter != mAnims.end() && mCurPlayAnim != iter->second)
+				mCurPlayAnim = iter->second;
+
+			isPlay = true;
+		}
+
+		virtual void StopPlay()
+		{
+			isPlay = false;
+		}
+
+		virtual Animation* GetAnim(const std::wstring& name)
+		{
+			auto iter = mAnims.find(name);
+			if (iter == mAnims.end())
+				return nullptr;
+			else
+				return iter->second;
+		}
+
+		virtual Animation* GetCurAnim() { return mCurPlayAnim; }
 
 	private:
-		enums::eAnimType mType;
+		std::map<std::wstring, Animation*> mAnims;
+		Animation* mCurPlayAnim;
 
-		std::vector<Texture*> mTextures;
 		math::Vector2 mScale;
-		int mIdx;
+		math::Vector2 mOffset;
 
-		Texture* mSheet;
-		float UnitX;
-		float UnitY;
+		bool isFlipX;
+		bool isFlipY;
 
+		bool isPlay;
 		bool mLoop;
 
 		bool mAffectCamera;

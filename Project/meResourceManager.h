@@ -1,6 +1,7 @@
 #pragma once
 #include "DEFAULT.h"
 #include "meResource.h"
+#include "meAnimation.h"
 
 namespace me
 {
@@ -30,6 +31,24 @@ namespace me
 				resource->SetPath(path);
 				mResources.insert(std::make_pair(resource->GetName(), resource));
 				return dynamic_cast<T*>(resource);
+			}
+			else
+				return nullptr;
+		}
+
+		static Animation* Load(const std::wstring& SheetName, const std::wstring& AnimName, const std::wstring& path, math::Vector2 startpoint, int sliceUnit, int imageCount, float duration = 1.f)
+		{
+			Animation* resource = ResourceManager::Find<Animation>(AnimName);
+			if (resource != nullptr)
+				return resource;
+
+			resource = new Animation(AnimName);
+			if (resource->Load(SheetName, path, startpoint, sliceUnit, imageCount))
+			{
+				resource->SetPath(path);
+				resource->SetDuration(duration);
+				mResources.insert(std::make_pair(resource->GetName(), resource));
+				return resource;
 			}
 			else
 				return nullptr;

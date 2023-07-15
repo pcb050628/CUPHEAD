@@ -11,6 +11,7 @@ namespace me
 		static void Render(HDC hdc);
 
 		static float GetDeltaTime() { return mDeltaTime; }
+		static float GetTime() { return time; }
 
 	private:
 		static LARGE_INTEGER mCpuFreq;

@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="meAnimation.h" />
     <ClInclude Include="meAnimator.h" />
     <ClInclude Include="meApplication.h" />
     <ClInclude Include="Client.h" />
@@ -163,6 +164,7 @@
     <ClInclude Include="meTransform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="meAnimation.cpp" />
     <ClCompile Include="meAnimator.cpp" />
     <ClCompile Include="meBoss.cpp" />
     <ClCompile Include="meBossFightScene.cpp" />

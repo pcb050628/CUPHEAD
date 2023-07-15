@@ -18,9 +18,7 @@ namespace me
 		SpriteRenderer* mBack_sr;
 		SpriteRenderer* mHorizontal_sr;
 
-		Animator* mFront_anim;
-		Animator* mBack_anim;
-		Animator* mHorizontal_anim;
+		Animator* mAnimtor;
 	};
 }
 

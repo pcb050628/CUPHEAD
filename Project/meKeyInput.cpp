@@ -44,7 +44,11 @@ namespace me
 			}
 			else
 			{
-				mKeys[i].state = KeyState::Up;
+				if (mKeys[i].state == KeyState::Down || mKeys[i].state == KeyState::Pressed)
+					mKeys[i].state = KeyState::Released;
+				else
+					mKeys[i].state = KeyState::Up;
+
 				mKeys[i].Pressed = false;
 			}
 		}

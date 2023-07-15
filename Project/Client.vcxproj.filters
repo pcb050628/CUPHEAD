@@ -94,6 +94,9 @@
     <Filter Include="Engine\GameObject\Player\Player_stage">
       <UniqueIdentifier>{1500ace7-220b-4234-8741-c41bb9cca66c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\ResourceManager\Resource\Animation">
+      <UniqueIdentifier>{97c3aae5-ef8d-4e1e-90e6-743a4d255060}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -195,6 +198,9 @@
     <ClInclude Include="mePlayer_stage.h">
       <Filter>Engine\GameObject\Player\Player_stage</Filter>
     </ClInclude>
+    <ClInclude Include="meAnimation.h">
+      <Filter>Engine\ResourceManager\Resource\Animation</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -288,6 +294,9 @@
     </ClCompile>
     <ClCompile Include="mePlayer_stage.cpp">
       <Filter>Engine\GameObject\Player\Player_stage</Filter>
+    </ClCompile>
+    <ClCompile Include="meAnimation.cpp">
+      <Filter>Engine\ResourceManager\Resource\Animation</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
