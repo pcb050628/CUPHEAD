@@ -1,6 +1,7 @@
 #include "meScene.h"
 #include "COMPONENTS.h"
 #include "mePlayer_map.h"
+#include "mePlayer_stage.h"
 
 namespace me
 {
@@ -58,6 +59,13 @@ namespace me
 	Player_map* Scene::AddPlayer_map(std::wstring name)
 	{
 		Player_map* p = mLayers[(int)enums::eLayer::Player].AddPlayer_map(name);
+		p->Init();
+		return p;
+	}
+
+	Player_stage* Scene::AddPlayer_stage(std::wstring name)
+	{
+		Player_stage* p = mLayers[(int)enums::eLayer::Player].AddPlayer_stage(name);
 		p->Init();
 		return p;
 	}

@@ -15,7 +15,6 @@ namespace me
 		, isFlipX(false)
 		, isFlipY(false)
 		, isPlay(false)
-		, mLoop(true)
 	{
 		mAnims = {};
 	}
@@ -49,7 +48,7 @@ namespace me
 
 			mCurPlayAnim->Render(hdc, pos + mOffset, mScale * flipValue);
 
-			if (prevTime + mCurPlayAnim->GetDuration() * Time::GetDeltaTime() < Time::GetTime() && isPlay)
+			if (!mCurPlayAnim->IsComplete() && prevTime + mCurPlayAnim->GetDuration() /** Time::GetDeltaTime()*/ < Time::GetTime() && isPlay)
 			{
 				prevTime = Time::GetTime();
 				mCurPlayAnim->Next();
@@ -57,10 +56,12 @@ namespace me
 
 			if (mCurPlayAnim != nullptr && mCurPlayAnim->IsComplete())
 			{
-				if (mLoop)
-					mCurPlayAnim->Reset();
-				else
-					mCurPlayAnim = nullptr;
+				mCurPlayAnim->Reset();
+				if(!mCurPlayAnim->IsLoop() && mNextAnims.size() > 0)
+				{
+					mCurPlayAnim = mNextAnims.front();
+					mNextAnims.pop();
+				}
 			}
 		}
 	}

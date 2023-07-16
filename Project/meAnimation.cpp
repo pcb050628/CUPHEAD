@@ -9,8 +9,9 @@ namespace me
 		, mIdx(0)
 		, mSheet(NULL), mStartPoint(math::Vector2::Zero), mUnitX(0)
 		, mSheetCount(0), mSheetSliceUnit(0)
-		, mDuration(1.f)
+		, mDuration(0.1f)
 		, mComplete(false)
+		, mLoop(true)
 	{
 		mTextures = {};
 	}
@@ -30,6 +31,10 @@ namespace me
 		else
 		{
 			mType = enums::eAnimType::Folder;
+
+			std::wstring FullPath = path + findFileData.cFileName;
+			Texture* image = ResourceManager::Load<Texture>(findFileData.cFileName, FullPath.c_str());
+			mTextures.push_back(image);
 
 			while (FindNextFile(hFind, &findFileData) != 0)
 			{

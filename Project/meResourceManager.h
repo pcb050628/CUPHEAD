@@ -36,7 +36,7 @@ namespace me
 				return nullptr;
 		}
 
-		static Animation* Load(const std::wstring& SheetName, const std::wstring& AnimName, const std::wstring& path, math::Vector2 startpoint, int sliceUnit, int imageCount, float duration = 1.f)
+		static Animation* Load(const std::wstring& SheetName, const std::wstring& AnimName, const std::wstring& path, math::Vector2 startpoint, int sliceUnit, int imageCount, float duration = 0.1f)
 		{
 			Animation* resource = ResourceManager::Find<Animation>(AnimName);
 			if (resource != nullptr)

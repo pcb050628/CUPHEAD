@@ -41,11 +41,16 @@ namespace me
 		static void Update();
 
 		static bool GetKeyDown(KeyCode code) { return mKeys[(int)code].state == KeyState::Down; }
+		static bool GetKeyPressed(KeyCode code) { return mKeys[(int)code].state == KeyState::Pressed; }
 		static bool GetKeyUp(KeyCode code) { return mKeys[(int)code].state == KeyState::Up; }
 		static bool GetKeyReleased(KeyCode code) { return mKeys[(int)code].state == KeyState::Released; }
 		static bool GetKey(KeyCode code) { return mKeys[(int)code].Pressed; }
 
+		static bool IsAllKeyUp() { return mAllKeyUp; }
+
 	private:
 		static std::vector<Key> mKeys;
+
+		static bool mAllKeyUp;
 	};
 }

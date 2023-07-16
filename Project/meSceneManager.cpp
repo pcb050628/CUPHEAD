@@ -5,6 +5,7 @@
 #include "meTItleScene.h"
 #include "meMainScene.h"
 #include "meWorldMapScene.h"
+#include "meGoopy_Le_Grande_Stage.h"
 #include "meTexture.h"
 
 namespace me
@@ -16,7 +17,8 @@ namespace me
 	{
 		CreateScene<TitleScene>(L"title");
 		CreateScene<MainScene>(L"main");
-		mCurScene = CreateScene<WorldMapScene>(L"overWorld");
+		CreateScene<WorldMapScene>(L"overWorld");
+		mCurScene = CreateScene<Goopy_Le_Grande_Stage>(L"test");
 	}
 
 	void SceneManager::Update()

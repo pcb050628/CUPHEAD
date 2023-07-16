@@ -14,6 +14,12 @@ namespace me
 		virtual void Render(HDC hdc) override;
 
 	private:
+		Animator* mAnimator;
 
+		bool mIsAim;
+		bool mIsDuck;
+		bool mIsJumping;
+		float mJumpMaxHeight;
+		float mJumpStartHeight;
 	};
 }

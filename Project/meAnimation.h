@@ -37,6 +37,9 @@ namespace me
 			return false;
 		}
 
+		virtual bool IsLoop() { return mLoop; }
+		virtual void SetLoop(bool value) { mLoop = value; }
+
 		virtual void Next() { mIdx += 1; }
 		virtual void Reset() { mIdx = 0; }
 
@@ -63,5 +66,6 @@ namespace me
 
 		float mDuration;
 		bool mComplete;
+		bool mLoop;
 	};
 }

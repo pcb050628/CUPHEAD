@@ -36,6 +36,25 @@ namespace me
 			isPlay = true;
 		}
 
+		virtual void PlayAnim(const std::wstring& name, float duration)
+		{
+			auto iter = mAnims.find(name);
+			if (iter != mAnims.end() && mCurPlayAnim != iter->second)
+				mCurPlayAnim = iter->second;
+
+			isPlay = true;
+			mCurPlayAnim->SetDuration(duration);
+		}
+
+		virtual void NextPlayAnim(const std::wstring& name)
+		{
+			auto iter = mAnims.find(name);
+			if (iter != mAnims.end())
+			{
+				mNextAnims.push(iter->second);
+			}
+		}
+
 		virtual void StopPlay()
 		{
 			isPlay = false;
@@ -52,9 +71,14 @@ namespace me
 
 		virtual Animation* GetCurAnim() { return mCurPlayAnim; }
 
+		virtual bool GetFlipX() { return isFlipX; }
+		virtual bool GetFlipY() { return isFlipY; }
+
 	private:
 		std::map<std::wstring, Animation*> mAnims;
 		Animation* mCurPlayAnim;
+
+		std::queue<Animation*> mNextAnims;
 
 		math::Vector2 mScale;
 		math::Vector2 mOffset;
@@ -63,7 +87,6 @@ namespace me
 		bool isFlipY;
 
 		bool isPlay;
-		bool mLoop;
 
 		bool mAffectCamera;
 	};

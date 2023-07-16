@@ -15,9 +15,12 @@ namespace me
 		void Update() override;
 		void Render(HDC hdc) override;
 
+		Player_stage* GetPlayer() { return mPlayer; }
+		Boss* GetBoss() { return mBoss; }
+
 	private:
-		Boss			boss;
-		Player_stage	player;
+		Boss*			mBoss;
+		Player_stage*	mPlayer;
 	};
 }
 

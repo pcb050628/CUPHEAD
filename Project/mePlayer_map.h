@@ -14,11 +14,7 @@ namespace me
 		virtual void Render(HDC hdc) override;
 
 	private:
-		SpriteRenderer* mFront_sr;
-		SpriteRenderer* mBack_sr;
-		SpriteRenderer* mHorizontal_sr;
-
-		Animator* mAnimtor;
+		Animator* mAnimator;
 	};
 }
 

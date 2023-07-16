@@ -4,6 +4,16 @@
 
 namespace me
 {
+	namespace enums
+	{
+		enum class eControlType
+		{
+			map,
+			stage,
+			none
+		};
+	}
+
 	class Controller : public Component
 	{
 	public:
@@ -14,8 +24,10 @@ namespace me
 		virtual void Update();
 		virtual void Render(HDC hdc);
 
-	private:
+		virtual void SetType(enums::eControlType type) { mType = type; }
 
+	private:
+		enums::eControlType mType;
 	};
 }
 

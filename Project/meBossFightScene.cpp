@@ -6,8 +6,8 @@
 namespace me
 {
 	BossFightScene::BossFightScene(std::wstring name) : Scene(name)
-		, boss(NULL)
-		, player(NULL)
+		, mBoss(NULL)
+		, mPlayer(NULL)
 	{
 	}
 	BossFightScene::~BossFightScene()
@@ -16,6 +16,8 @@ namespace me
 	void BossFightScene::Init()
 	{
 		Scene::Init();
+
+		mPlayer = AddPlayer_stage(L"CupHead_stage");
 	}
 	void BossFightScene::Update()
 	{

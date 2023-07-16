@@ -3,6 +3,7 @@
 namespace me
 {
 	std::vector<KeyInput::Key> KeyInput::mKeys = {};
+	bool KeyInput::mAllKeyUp = true;
 
 	int ASCII[(int)KeyCode::END] =
 	{
@@ -31,6 +32,7 @@ namespace me
 
 	void KeyInput::Update()
 	{
+		mAllKeyUp = true;
 		for (int i = 0; i < mKeys.size(); i++)
 		{
 			if (GetAsyncKeyState(ASCII[i]) && 0x8000)
@@ -41,6 +43,7 @@ namespace me
 					mKeys[i].state = KeyState::Down;
 
 				mKeys[i].Pressed = true;
+				mAllKeyUp = false;
 			}
 			else
 			{
