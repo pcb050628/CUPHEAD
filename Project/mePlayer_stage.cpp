@@ -41,6 +41,7 @@ namespace me
 		mAnimator->GetAnim(L"CupHead_stage_anim_jump")->SetDuration(0.05f);
 		mAnimator->GetAnim(L"CupHead_stage_anim_shoot_straight_run")->SetDuration(0.05f);
 		mAnimator->GetAnim(L"CupHead_stage_anim_shoot_diagonal_run")->SetDuration(0.05f);
+		mAnimator->GetAnim(L"CupHead_stage_anim_duck_down")->SetDuration(0.05f);
 		mAnimator->GetAnim(L"CupHead_stage_anim_duck_down")->SetLoop(false);
 	}
 	void Player_stage::Update()
