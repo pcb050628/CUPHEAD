@@ -17,8 +17,14 @@ namespace me
 		Animator* mAnimator;
 
 		bool mIsAim;
+		bool mIsRun;
 		bool mIsDuck;
+		bool mIsShooting;
 		bool mIsJumping;
+		bool mIsLookUp;
+		bool mIsLookDiagonalUp;
+		bool mIsLookDown;
+		bool mIsLookDiagonalDown;
 		float mJumpMaxHeight;
 		float mJumpStartHeight;
 	};

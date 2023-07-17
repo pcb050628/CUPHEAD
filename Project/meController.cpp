@@ -32,7 +32,7 @@ namespace me
 		}
 		else if (mType == enums::eControlType::stage)
 		{
-			if(!KeyInput::GetKey(KeyCode::DownArrow) && !KeyInput::GetKey(KeyCode::C))
+			if(KeyInput::GetKeyUp(KeyCode::DownArrow) && KeyInput::GetKeyUp(KeyCode::C))
 			{
 				if (KeyInput::GetKey(KeyCode::LeftArrow))
 					tr->SetPos(math::Vector2(tr->GetPos().x - 100.f * Time::GetDeltaTime(), tr->GetPos().y));

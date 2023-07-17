@@ -37,7 +37,7 @@ namespace me
 		{
 			if (GetAsyncKeyState(ASCII[i]) && 0x8000)
 			{
-				if (mKeys[i].Pressed)
+				if (!mKeys[i].Pressed)
 					mKeys[i].state = KeyState::Pressed;
 				else
 					mKeys[i].state = KeyState::Down;

@@ -26,6 +26,7 @@ namespace me
 		Animator* title_char_anim = title_character->AddComponent<Animator>(enums::eComponentType::Animator);
 		title_char_anim->AddAnim(ResourceManager::Load<Animation>(L"title_character", L"..\\content\\title screen\\Cuphead and Mugman\\"));
 		title_char_anim->PlayAnim(L"title_character");
+		title_char_anim->GetCurAnim()->SetDuration(0.04f);
 	}
 	void TitleScene::Update()
 	{
