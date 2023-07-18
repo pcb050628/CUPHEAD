@@ -24,7 +24,7 @@ namespace me
 		WIN32_FIND_DATA findFileData;
 		HANDLE hFind;
 
-		hFind = FindFirstFile((path + L"*.png").c_str(), &findFileData);
+		hFind = FindFirstFile((path + L"*.bmp").c_str(), &findFileData);
 
 		if (hFind == INVALID_HANDLE_VALUE)
 			return false;

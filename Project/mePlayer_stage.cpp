@@ -32,12 +32,12 @@ namespace me
 
 		mAnimator = AddComponent<Animator>(L"CupHead_stage_anim");
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_idle", L"..\\content\\BossFight\\Cuphead\\Idle\\"));
-		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_run", L"..\\content\\BossFight\\Cuphead\\Run\\Normal\\")); 
+		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_run", L"..\\content\\BossFight\\Cuphead\\Run\\Normal\\"));
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_jump", L"..\\content\\BossFight\\Cuphead\\Jump\\Cuphead\\"));
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_hit_ground", L"..\\content\\BossFight\\Cuphead\\Hit\\Ground\\"));
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_hit_air", L"..\\content\\BossFight\\Cuphead\\Hit\\Air\\"));
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_shoot_straight", L"..\\content\\BossFight\\Cuphead\\Shoot\\Straight\\"));
-		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_shoot_straight_run", L"..\\content\\BossFight\\Cuphead\\Run\\Shooting\\Straight\\")); 
+		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_shoot_straight_run", L"..\\content\\BossFight\\Cuphead\\Run\\Shooting\\Straight\\"));
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_shoot_down", L"..\\content\\BossFight\\Cuphead\\Shoot\\Down\\"));
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_shoot_up", L"..\\content\\BossFight\\Cuphead\\Shoot\\Up\\"));
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_shoot_diagonal_down", L"..\\content\\BossFight\\Cuphead\\Shoot\\Diagonal Down\\"));
@@ -48,9 +48,9 @@ namespace me
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_aim_diagonal_up", L"..\\content\\BossFight\\Cuphead\\Aim\\Diagonal Up\\"));
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_aim_down", L"..\\content\\BossFight\\Cuphead\\Aim\\Down\\"));
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_aim_diagonal_down", L"..\\content\\BossFight\\Cuphead\\Aim\\Diagonal Down\\"));
-		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_duck_down", L"..\\content\\BossFight\\Cuphead\\Duck\\Down\\")); 
-		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_duck_idle", L"..\\content\\BossFight\\Cuphead\\Duck\\Idle\\")); 
-		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_duck_shoot", L"..\\content\\BossFight\\Cuphead\\Duck\\Shoot\\")); 
+		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_duck_down", L"..\\content\\BossFight\\Cuphead\\Duck\\Down\\"));
+		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_duck_idle", L"..\\content\\BossFight\\Cuphead\\Duck\\Idle\\"));
+		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_duck_shoot", L"..\\content\\BossFight\\Cuphead\\Duck\\Shoot\\"));
 		mAnimator->GetAnim(L"CupHead_stage_anim_run")->SetDuration(0.05f);
 		mAnimator->GetAnim(L"CupHead_stage_anim_jump")->SetDuration(0.05f);
 		mAnimator->GetAnim(L"CupHead_stage_anim_shoot_straight_run")->SetDuration(0.05f);

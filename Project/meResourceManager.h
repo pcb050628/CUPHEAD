@@ -1,6 +1,7 @@
 #pragma once
 #include "DEFAULT.h"
 #include "meResource.h"
+#include "meTexture.h"
 #include "meAnimation.h"
 
 namespace me
@@ -31,6 +32,23 @@ namespace me
 				resource->SetPath(path);
 				mResources.insert(std::make_pair(resource->GetName(), resource));
 				return dynamic_cast<T*>(resource);
+			}
+			else
+				return nullptr;
+		}
+
+		static Animation* Load(const std::wstring& name, const std::wstring& path, eTextureType type)
+		{
+			Animation* resource = ResourceManager::Find<Animation>(name);
+			if (resource != nullptr)
+				return dynamic_cast<Animation*>(resource);
+
+			resource = new Animation(name);
+			if (resource->Load(path))
+			{
+				resource->SetPath(path);
+				mResources.insert(std::make_pair(resource->GetName(), resource));
+				return dynamic_cast<Animation*>(resource);
 			}
 			else
 				return nullptr;
