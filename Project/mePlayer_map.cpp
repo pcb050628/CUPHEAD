@@ -14,7 +14,6 @@ namespace me
 	void Player_map::Init()
 	{
 		GameObject::Init();
-		AddComponent<Controller>(enums::eComponentType::Controller)->SetType(enums::eControlType::map);
 
 		mAnimator = AddComponent<Animator>(L"CupHead_map_anim");
 		mAnimator->AddAnim(ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_front_idle", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(0, 0), 16, 4));

@@ -2,13 +2,15 @@ E:\project_api\CUPHEAD\Project\meAnimation.cpp;E:\project_api\CUPHEAD\Project\x6
 E:\project_api\CUPHEAD\Project\meAnimator.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meAnimator.obj
 E:\project_api\CUPHEAD\Project\meBoss.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meBoss.obj
 E:\project_api\CUPHEAD\Project\meBossFightScene.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meBossFightScene.obj
+E:\project_api\CUPHEAD\Project\meBoxCollider.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meBoxCollider.obj
 E:\project_api\CUPHEAD\Project\meCamera.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meCamera.obj
+E:\project_api\CUPHEAD\Project\meColliderManager.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meColliderManager.obj
+E:\project_api\CUPHEAD\Project\meGoopy_Le_Grande_Boss.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meGoopy_Le_Grande_Boss.obj
 E:\project_api\CUPHEAD\Project\meGoopy_Le_Grande_Stage.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meGoopy_Le_Grande_Stage.obj
 E:\project_api\CUPHEAD\Project\meMath.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meMath.obj
 E:\project_api\CUPHEAD\Project\meApplication.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meApplication.obj
 E:\project_api\CUPHEAD\Project\Client.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\Client.obj
 E:\project_api\CUPHEAD\Project\meComponent.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meComponent.obj
-E:\project_api\CUPHEAD\Project\meController.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meController.obj
 E:\project_api\CUPHEAD\Project\meEntity.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meEntity.obj
 E:\project_api\CUPHEAD\Project\meGameObject.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meGameObject.obj
 E:\project_api\CUPHEAD\Project\meKeyInput.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meKeyInput.obj

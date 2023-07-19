@@ -36,6 +36,28 @@ namespace me
 			isPlay = true;
 		}
 
+		virtual void PlayAnim(const std::wstring& name, bool flip)
+		{
+			std::wstring _name = name;
+
+			if (flip)
+				_name += L"_L";
+			else
+				_name += L"_R";
+
+			auto iter = mAnims.find(_name);
+			if (iter != mAnims.end() && mCurPlayAnim != iter->second)
+				mCurPlayAnim = iter->second;
+			/*else if(iter == mAnims.end())
+			{
+				iter = mAnims.find(name);
+				if (iter != mAnims.end() && mCurPlayAnim != iter->second)
+					mCurPlayAnim = iter->second;
+			}*/
+
+			isPlay = true;
+		}
+
 		virtual void PlayAnim(const std::wstring& name, float duration)
 		{
 			auto iter = mAnims.find(name);
@@ -54,6 +76,17 @@ namespace me
 				mNextAnims.push(iter->second);
 			}
 		}
+
+		/*virtual void NextPlayAnimConnect(const std::wstring& name)
+		{
+			auto iter = mAnims.find(name);
+			if (iter != mAnims.end() && iter->second != mCurPlayAnim)
+			{
+				int idx = mCurPlayAnim->GetIdx();
+				mCurPlayAnim = iter->second;
+				mCurPlayAnim->SetIdx(idx);
+			}
+		}*/
 
 		virtual void StopPlay()
 		{

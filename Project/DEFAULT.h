@@ -36,7 +36,6 @@ namespace me
 			Transform,
 			SpriteRenderer,
 			BoxCollider,
-			Controller,
 			Animator
 		};
 

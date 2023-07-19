@@ -1,1 +1,21 @@
-﻿  Client.vcxproj -> C:\Users\chanb\Documents\GitHub\CUPHEAD\Project\x64\Debug\Client.exe
+﻿  meAnimation.cpp
+E:\project_api\CUPHEAD\Project\meAnimation.cpp(62,32): warning C4244: '=': 'UINT'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+E:\project_api\CUPHEAD\Project\meAnimation.cpp(75,76): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+E:\project_api\CUPHEAD\Project\meAnimation.cpp(75,36): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+E:\project_api\CUPHEAD\Project\meAnimation.cpp(74,84): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+E:\project_api\CUPHEAD\Project\meAnimation.cpp(74,31): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+E:\project_api\CUPHEAD\Project\meAnimation.cpp(106,16): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+E:\project_api\CUPHEAD\Project\meAnimation.cpp(106,8): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+E:\project_api\CUPHEAD\Project\meAnimation.cpp(105,50): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+E:\project_api\CUPHEAD\Project\meAnimation.cpp(105,22): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+E:\project_api\CUPHEAD\Project\meAnimation.cpp(103,33): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+E:\project_api\CUPHEAD\Project\meAnimation.cpp(103,15): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+E:\project_api\CUPHEAD\Project\meAnimation.cpp(102,65): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+E:\project_api\CUPHEAD\Project\meAnimation.cpp(102,31): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+E:\project_api\CUPHEAD\Project\meAnimation.cpp(123,16): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+E:\project_api\CUPHEAD\Project\meAnimation.cpp(123,8): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+E:\project_api\CUPHEAD\Project\meAnimation.cpp(122,50): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+E:\project_api\CUPHEAD\Project\meAnimation.cpp(122,22): warning C4244: '인수': 'float'에서 'INT'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+  mePlayer_stage.cpp
+  코드를 생성하고 있습니다...
+  Client.vcxproj -> E:\project_api\CUPHEAD\Project\x64\Debug\Client.exe

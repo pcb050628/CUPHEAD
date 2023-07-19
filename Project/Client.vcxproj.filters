@@ -40,9 +40,6 @@
     <Filter Include="Engine\GameObject\Component\SpriteRenderer">
       <UniqueIdentifier>{35c4c8e2-ac86-4ac1-9c93-0257c707981e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\GameObject\Component\Controller">
-      <UniqueIdentifier>{9b4a6110-3c20-43ec-ac63-0a0d601c8900}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\SceneManager">
       <UniqueIdentifier>{452c6fb7-e638-43f0-af17-1b09f42f6aa0}</UniqueIdentifier>
     </Filter>
@@ -156,9 +153,6 @@
     <ClInclude Include="meSpriteRenderer.h">
       <Filter>Engine\GameObject\Component\SpriteRenderer</Filter>
     </ClInclude>
-    <ClInclude Include="meController.h">
-      <Filter>Engine\GameObject\Component\Controller</Filter>
-    </ClInclude>
     <ClInclude Include="meSceneManager.h">
       <Filter>Engine\SceneManager</Filter>
     </ClInclude>
@@ -264,9 +258,6 @@
     </ClCompile>
     <ClCompile Include="meSpriteRenderer.cpp">
       <Filter>Engine\GameObject\Component\SpriteRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="meController.cpp">
-      <Filter>Engine\GameObject\Component\Controller</Filter>
     </ClCompile>
     <ClCompile Include="meSceneManager.cpp">
       <Filter>Engine\SceneManager</Filter>

@@ -48,6 +48,9 @@ namespace me
 		virtual void SetSheetCount(int count) { mSheetCount = count; }
 		virtual void SetUnit(float unit) { mUnitX = unit; }
 		virtual void SetDuration(float duration) { mDuration = duration; }
+		virtual void SetIdx(int idx) { mIdx = idx; }
+
+		virtual int GetIdx() { return mIdx; }
 
 		virtual Texture* GetSheet() { return mSheet; }
 		virtual float GetDuration() { return mDuration; }

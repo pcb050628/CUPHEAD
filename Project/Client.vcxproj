@@ -139,7 +139,6 @@
     <ClInclude Include="meColliderManager.h" />
     <ClInclude Include="meComponent.h" />
     <ClInclude Include="COMPONENTS.h" />
-    <ClInclude Include="meController.h" />
     <ClInclude Include="DEFAULT.h" />
     <ClInclude Include="meEntity.h" />
     <ClInclude Include="framework.h" />
@@ -180,7 +179,6 @@
     <ClCompile Include="meApplication.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="meComponent.cpp" />
-    <ClCompile Include="meController.cpp" />
     <ClCompile Include="meEntity.cpp" />
     <ClCompile Include="meGameObject.cpp" />
     <ClCompile Include="meKeyInput.cpp" />

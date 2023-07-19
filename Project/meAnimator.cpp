@@ -32,12 +32,6 @@ namespace me
 	{
 		static float prevTime = 0;
 
-		math::Vector2 flipValue = math::Vector2::One;
-		if (isFlipX)
-			flipValue.x = -1;
-		if (isFlipY)
-			flipValue.y = -1;
-
 		if (mCurPlayAnim != nullptr && !mCurPlayAnim->IsComplete())
 		{
 			Transform* tr = GetOwner()->GetComponent<Transform>(L"defaultTransform");
@@ -46,7 +40,7 @@ namespace me
 			if (mAffectCamera)
 				pos = Camera::AffectCameraPos(pos);
 
-			mCurPlayAnim->Render(hdc, pos + mOffset, mScale * flipValue);
+			mCurPlayAnim->Render(hdc, pos + mOffset, mScale);
 
 			if (!mCurPlayAnim->IsComplete() && prevTime + mCurPlayAnim->GetDuration() /** Time::GetDeltaTime()*/ < Time::GetTime() && isPlay)
 			{

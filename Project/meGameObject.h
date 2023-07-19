@@ -30,11 +30,8 @@ namespace me
 			case me::enums::eComponentType::SpriteRenderer:
 				name = L"defaultSpriteRenderer";
 				break;
-			case me::enums::eComponentType::Collider:
+			case me::enums::eComponentType::BoxCollider:
 				name = L"defaultCollider";
-				break;
-			case me::enums::eComponentType::Controller:
-				name = L"defaultController";
 				break;
 			case me::enums::eComponentType::Animator:
 				name = L"defaultAnimator";

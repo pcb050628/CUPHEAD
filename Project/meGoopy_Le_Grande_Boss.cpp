@@ -2,7 +2,7 @@
 
 namespace me
 {
-	Goopy_Le_Grande_Boss::Goopy_Le_Grande_Boss(const std::wstring& name)
+	Goopy_Le_Grande_Boss::Goopy_Le_Grande_Boss(const std::wstring& name) : Boss(name)
 	{
 	}
 	Goopy_Le_Grande_Boss::~Goopy_Le_Grande_Boss()
