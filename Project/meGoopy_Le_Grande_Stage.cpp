@@ -13,10 +13,10 @@ namespace me
 	{
 		BossFightScene::Init();
 
-		/*GameObject* bg_far_forest = AddGameObj(enums::eLayer::Background, L"stage_backgroung_far_forest");
+		GameObject* bg_far_forest = AddGameObj(enums::eLayer::Background, L"stage_backgroung_far_forest");
 		SpriteRenderer* far_forest_sr = bg_far_forest->AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
-		far_forest_sr->SetImage(ResourceManager::Load<Texture>(L"Goopy_Le_backgroung_far_forest", L"..\\content\\BossFight\\Cuphead\\Idle\\cuphead_idle_0004.bmp"));
-		far_forest_sr->SetScale(math::Vector2(1, 1.4f));*/
+		far_forest_sr->SetImage(ResourceManager::Load<Texture>(L"Goopy_Le_backgroung_far_forest", L"..\\content\\BossFight\\Goopy Le Grande\\Background\\slime_bg_bg_far_forest.bmp"));
+		far_forest_sr->SetScale(math::Vector2(1, 1.4f));
 
 		/*GameObject* bg_evergreen = AddGameObj(enums::eLayer::Background, L"stage_backgroung_evergreen");
 		SpriteRenderer* evergreen_sr = bg_evergreen->AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
