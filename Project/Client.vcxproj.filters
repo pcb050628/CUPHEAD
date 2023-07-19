@@ -97,6 +97,15 @@
     <Filter Include="Engine\ResourceManager\Resource\Animation">
       <UniqueIdentifier>{97c3aae5-ef8d-4e1e-90e6-743a4d255060}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObject\Boss\Goopy Le Grande_Boss">
+      <UniqueIdentifier>{fd371d01-59c2-47b1-88e8-ada3b41a2a61}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Component\BoxCollider">
+      <UniqueIdentifier>{a01a5f04-1909-4b62-bc52-74a250c28b68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ColliderManager">
+      <UniqueIdentifier>{58653b13-0dfb-4c90-9aa8-c1da5f0e8728}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -201,6 +210,15 @@
     <ClInclude Include="meAnimation.h">
       <Filter>Engine\ResourceManager\Resource\Animation</Filter>
     </ClInclude>
+    <ClInclude Include="meGoopy_Le_Grande_Boss.h">
+      <Filter>Engine\GameObject\Boss\Goopy Le Grande_Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="meBoxCollider.h">
+      <Filter>Engine\GameObject\Component\BoxCollider</Filter>
+    </ClInclude>
+    <ClInclude Include="meColliderManager.h">
+      <Filter>Engine\ColliderManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -297,6 +315,15 @@
     </ClCompile>
     <ClCompile Include="meAnimation.cpp">
       <Filter>Engine\ResourceManager\Resource\Animation</Filter>
+    </ClCompile>
+    <ClCompile Include="meGoopy_Le_Grande_Boss.cpp">
+      <Filter>Engine\GameObject\Boss\Goopy Le Grande_Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="meBoxCollider.cpp">
+      <Filter>Engine\GameObject\Component\BoxCollider</Filter>
+    </ClCompile>
+    <ClCompile Include="meColliderManager.cpp">
+      <Filter>Engine\ColliderManager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

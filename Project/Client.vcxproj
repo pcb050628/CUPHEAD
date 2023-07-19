@@ -134,7 +134,9 @@
     <ClInclude Include="Client.h" />
     <ClInclude Include="meBoss.h" />
     <ClInclude Include="meBossFightScene.h" />
+    <ClInclude Include="meBoxCollider.h" />
     <ClInclude Include="meCamera.h" />
+    <ClInclude Include="meColliderManager.h" />
     <ClInclude Include="meComponent.h" />
     <ClInclude Include="COMPONENTS.h" />
     <ClInclude Include="meController.h" />
@@ -142,6 +144,7 @@
     <ClInclude Include="meEntity.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="meGameObject.h" />
+    <ClInclude Include="meGoopy_Le_Grande_Boss.h" />
     <ClInclude Include="meGoopy_Le_Grande_Stage.h" />
     <ClInclude Include="meKeyInput.h" />
     <ClInclude Include="meLayer.h" />
@@ -168,7 +171,10 @@
     <ClCompile Include="meAnimator.cpp" />
     <ClCompile Include="meBoss.cpp" />
     <ClCompile Include="meBossFightScene.cpp" />
+    <ClCompile Include="meBoxCollider.cpp" />
     <ClCompile Include="meCamera.cpp" />
+    <ClCompile Include="meColliderManager.cpp" />
+    <ClCompile Include="meGoopy_Le_Grande_Boss.cpp" />
     <ClCompile Include="meGoopy_Le_Grande_Stage.cpp" />
     <ClCompile Include="meMath.cpp" />
     <ClCompile Include="meApplication.cpp" />

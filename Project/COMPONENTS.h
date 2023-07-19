@@ -4,3 +4,4 @@
 #include "meSpriteRenderer.h"
 #include "meController.h"
 #include "meAnimator.h"
+#include "meBoxCollider.h"

@@ -6,6 +6,7 @@ namespace me
 {
 	Player_stage::Player_stage(const std::wstring& name) : GameObject(name)
 		, mAnimator(nullptr)
+		, mState(Player_state::Idle)
 		, mIsAim(false)
 		, mIsRun(false)
 		, mIsDuck(false)
@@ -29,6 +30,7 @@ namespace me
 		GameObject::Init();
 
 		AddComponent<Controller>(enums::eComponentType::Controller)->SetType(enums::eControlType::stage);
+		AddComponent<BoxCollider>(enums::eComponentType::BoxCollider);
 
 		mAnimator = AddComponent<Animator>(L"CupHead_stage_anim");
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_idle", L"..\\content\\BossFight\\Cuphead\\Idle\\"));
@@ -61,6 +63,22 @@ namespace me
 	void Player_stage::Update()
 	{
 		GameObject::Update();
+
+		switch (mState)
+		{
+		case me::Player_stage::Player_state::Idle:
+			break;
+		case me::Player_stage::Player_state::Aim:
+			break;
+		case me::Player_stage::Player_state::Run:
+			break;
+		case me::Player_stage::Player_state::Duck:
+			break;
+		case me::Player_stage::Player_state::Shooting:
+			break;
+		case me::Player_stage::Player_state::Jumping:
+			break;
+		}
 
 		if (KeyInput::GetKey(KeyCode::LeftArrow) && KeyInput::GetKeyUp(KeyCode::RightArrow))
 		{
@@ -213,5 +231,24 @@ namespace me
 	void Player_stage::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
+	}
+	void Player_stage::Idle()
+	{
+	}
+	void Player_stage::Aim()
+	{
+	}
+	void Player_stage::Run()
+	{
+		
+	}
+	void Player_stage::Duck()
+	{
+	}
+	void Player_stage::Shooting()
+	{
+	}
+	void Player_stage::Jumping()
+	{
 	}
 }

@@ -5,6 +5,7 @@
 #include <functional>
 #include <string>
 #include <queue>
+#include <bitset>
 
 #include "framework.h"
 #include "meMath.h"
@@ -34,7 +35,7 @@ namespace me
 		{
 			Transform,
 			SpriteRenderer,
-			Collider,
+			BoxCollider,
 			Controller,
 			Animator
 		};
