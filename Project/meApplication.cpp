@@ -1,5 +1,6 @@
 #include "meApplication.h"
 #include "meSceneManager.h"
+#include "meColliderManager.h"
 #include "meCamera.h"
 
 me::Application::Application()
@@ -56,6 +57,7 @@ void me::Application::Init(HWND hwnd)
 	KeyInput::Init();
 	Camera::Init();
 	SceneManager::Init();
+	ColliderManager::Init();
 }
 
 void me::Application::Run()
@@ -70,6 +72,7 @@ void me::Application::Update()
 	KeyInput::Update();
 	Camera::Update();
 	SceneManager::Update();
+	ColliderManager::Update();
 }
 
 void me::Application::Render()

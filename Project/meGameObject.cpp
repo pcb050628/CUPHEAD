@@ -5,6 +5,7 @@ namespace me
 {
 	GameObject::GameObject(const std::wstring& name) : Entity(name)
 		,tag()
+		, mColliderCount(0)
 	{
 		AddComponent<Transform>(L"defaultTransform");
 	}
@@ -12,11 +13,9 @@ namespace me
 	{
 		if (mComponents.size() > 0)
 		{
-			auto iter = mComponents.begin();
-
-			for (int i = 0; i < mComponents.size(); i++, iter++)
+			for (auto comp : mComponents)
 			{
-				delete iter->second;
+				delete comp;
 			}
 		}
 		mComponents.clear();
@@ -24,33 +23,37 @@ namespace me
 
 	void GameObject::Init()
 	{
-		auto iter = mComponents.begin();
-
-		for (int i = 0; i < mComponents.size(); i++, iter++)
+		for (auto comp : mComponents)
 		{
-			iter->second->Init();
+			comp->Init();
 		}
 	}
 
 	void GameObject::Update()
 	{
-		auto iter = mComponents.begin();
-
-		for (int i = 0; i < mComponents.size(); i++, iter++)
+		for (auto comp : mComponents)
 		{
-			if (iter->second->GetActivate())
-				iter->second->Update();
+			if (comp->GetActivate())
+				comp->Update();
 		}
 	}
 
 	void GameObject::Render(HDC hdc)
 	{
-		auto iter = mComponents.begin();
-
-		for (int i = 0; i < mComponents.size(); i++, iter++)
+		for (auto comp : mComponents)
 		{
-			if (iter->second->GetActivate())
-				iter->second->Render(hdc);
+			if (comp->GetActivate())
+				comp->Render(hdc);
 		}
+	}
+
+	void GameObject::OnCollisionEnter(BoxCollider* other)
+	{
+	}
+	void GameObject::OnCollisionStay(BoxCollider* other)
+	{
+	}
+	void GameObject::OnCollisionExit(BoxCollider* other)
+	{
 	}
 }

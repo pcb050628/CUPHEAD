@@ -5,17 +5,10 @@
 namespace me
 {
 	Player_stage::Player_stage(const std::wstring& name) : GameObject(name)
+		, HP(5)
 		, mAnimator(nullptr)
 		, mState(Player_state::Idle)
-		, mIsAim(false)
-		, mIsRun(false)
-		, mIsDuck(false)
-		, mIsShooting(false)
-		, mIsJumping(false)
-		, mIsLookUp(false)
-		, mIsLookDiagonalUp(false)
-		, mIsLookDown(false)
-		, mIsLookDiagonalDown(false)
+		, mGroundCheckBox(nullptr)
 		, mJumpStartHeight(0)
 		, mJumpMaxHeight(100.f)
 
@@ -30,6 +23,9 @@ namespace me
 		GameObject::Init();
 
 		AddComponent<BoxCollider>(enums::eComponentType::BoxCollider);
+		mGroundCheckBox = AddComponent<BoxCollider>(L"GroundCheckBox");
+		mGroundCheckBox->SetOffset(math::Vector2(0, 85.f));
+		mGroundCheckBox->SetSize(math::Vector2(100.f, 20.f));
 
 		mAnimator = AddComponent<Animator>(L"CupHead_stage_anim");
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_idle_R", L"..\\content\\BossFight\\Cuphead\\Idle_R\\"));
@@ -194,13 +190,17 @@ namespace me
 			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
 			mState = Player_state::Jumping;
 		}
+		else if (KeyInput::GetKeyDown(KeyCode::DownArrow))
+			mState = Player_state::Duck;
 		else if (KeyInput::GetKeyUp(KeyCode::RightArrow) && KeyInput::GetKeyUp(KeyCode::LeftArrow))
 			mState = Player_state::Idle;
 	}
 
 	void Player_stage::Duck()
 	{
-		if (KeyInput::GetKeyDown(KeyCode::X))
+		if (KeyInput::GetKeyUp(KeyCode::DownArrow))
+			mState = Player_state::Idle;
+		 else if (KeyInput::GetKeyDown(KeyCode::X))
 			mAnimator->PlayAnim(L"CupHead_stage_anim_duck_shoot", mAnimator->GetFlipX());
 		else if (KeyInput::GetKeyDown(KeyCode::Z))
 		{
@@ -211,8 +211,6 @@ namespace me
 			mState = Player_state::Aim;
 		else if (KeyInput::GetKeyUp(KeyCode::DownArrow) && (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)))
 			mState = Player_state::Run;
-		else if (KeyInput::GetKeyUp(KeyCode::DownArrow))
-			mState = Player_state::Idle;
 		else
 			mAnimator->PlayAnim(L"CupHead_stage_anim_duck_idle", mAnimator->GetFlipX());
 	}

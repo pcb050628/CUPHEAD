@@ -31,19 +31,13 @@ namespace me
 		void Jumping();
 
 	private:
+		int HP;
+
 		Animator* mAnimator;
 
 		Player_state mState;
 
-		bool mIsAim;
-		bool mIsRun;
-		bool mIsDuck;
-		bool mIsShooting;
-		bool mIsJumping;
-		bool mIsLookUp;
-		bool mIsLookDiagonalUp;
-		bool mIsLookDown;
-		bool mIsLookDiagonalDown;
+		BoxCollider* mGroundCheckBox;
 		float mJumpMaxHeight;
 		float mJumpStartHeight;
 	};

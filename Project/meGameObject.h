@@ -17,6 +17,10 @@ namespace me
 
 		virtual enums::eGameObjType GetTag() { return tag; }
 
+		virtual void OnCollisionEnter(BoxCollider* other);
+		virtual void OnCollisionStay(BoxCollider* other);
+		virtual void OnCollisionExit(BoxCollider* other);
+		
 		template <typename T>
 		T* AddComponent(enums::eComponentType type)
 		{
@@ -39,7 +43,7 @@ namespace me
 			}
 
 			T* tmp = new T(this, name);
-			mComponents.insert(std::make_pair(tmp->GetName(), tmp));
+			mComponents.push_back(tmp);
 
 			return tmp;
 		}
@@ -48,7 +52,7 @@ namespace me
 		T* AddComponent(const std::wstring& name)
 		{
 			T* tmp = new T(this, name);
-			mComponents.insert(std::make_pair(tmp->GetName(), tmp));
+			mComponents.push_back(tmp);
 
 			return tmp;
 		}
@@ -57,13 +61,12 @@ namespace me
 		T* GetComponent()
 		{
 			T* tmp = nullptr;
-			auto iter = mComponents.begin();
 			
 			if (mComponents.size() > 0)
 			{
-				for (int count = 0; count < mComponents.size(); count++, iter++)
+				for (int i = 0; i < mComponents.size(); i++)
 				{
-					tmp = dynamic_cast<T*>(iter->second);
+					tmp = dynamic_cast<T*>(mComponents[i]);
 					if (tmp != nullptr)
 						return tmp;
 				}
@@ -75,23 +78,43 @@ namespace me
 		template <typename T>
 		T* GetComponent(const std::wstring& name)
 		{
-			T* tmp = nullptr;
-
-			auto iter = mComponents.find(name);
-
-			if (iter != mComponents.end())
+			if (mComponents.size() > 0)
 			{
-				tmp = dynamic_cast<T*>(iter->second);
-				return tmp;
+				for (int i = 0; i < mComponents.size(); i++)
+				{
+					if (mComponents[i]->GetName() == name)
+						return dynamic_cast<T*>(mComponents[i]);
+				}
 			}
 			else
 				return nullptr;
 		}
 
+		int GetColliderCount() { return mColliderCount; }
+		void ColliderCountIncrease() { mColliderCount += 1; }
+
+		std::vector<BoxCollider*> GetCollider() 
+		{
+			if (mComponents.size() > 0 && mColliderCount > 0)
+			{
+				std::vector<BoxCollider*> tmp = {};
+				for (int i = 0; i < mComponents.size(); i++)
+				{
+					if (dynamic_cast<BoxCollider*>(mComponents[i]) != nullptr)
+					{
+						tmp.push_back(dynamic_cast<BoxCollider*>(mComponents[i]));
+					}
+				}
+
+				return tmp;
+			}
+		}
+
 	private:
 		enums::eGameObjType tag;
 
-		std::map<std::wstring, Component*> mComponents = {};
+		std::vector<Component*> mComponents = {};
+		int mColliderCount;
 	};
 }
 

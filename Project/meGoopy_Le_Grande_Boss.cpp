@@ -10,11 +10,18 @@ namespace me
 	}
 	void Goopy_Le_Grande_Boss::Init()
 	{
+		Boss::Init();
+
+		mAnimator = AddComponent<Animator>(enums::eComponentType::Animator);
+
+
 	}
 	void Goopy_Le_Grande_Boss::Update()
 	{
+		Boss::Update();
 	}
 	void Goopy_Le_Grande_Boss::Render(HDC hdc)
 	{
+		Boss::Render(hdc);
 	}
 }

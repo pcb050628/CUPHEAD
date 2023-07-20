@@ -13,14 +13,25 @@ namespace me
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
+		void OnCollisionEnter(BoxCollider* other);
+		void OnCollisionStay(BoxCollider* other);
+		void OnCollisionExit(BoxCollider* other);
+
 		void SetPos(math::Vector2 pos) { mPos = pos; }
-		void SetScale(math::Vector2 scale) { mScale= scale; }
+		void SetOffset(math::Vector2 offset) { mOffset = offset; }
+		void SetSize(math::Vector2 scale) { mSize= scale; }
 		math::Vector2 GetPos() { return mPos; }
-		math::Vector2 GetScale() { return mScale; }
+		math::Vector2 GetOffset() { return mOffset; }
+		math::Vector2 GetSize() { return mSize; }
+
+		bool GetIsCollision() { return isCollision; }
 
 	private:
 		math::Vector2 mPos;
-		math::Vector2 mScale;
+		math::Vector2 mOffset;
+		math::Vector2 mSize;
+
+		bool isCollision;
 	};
 }
 

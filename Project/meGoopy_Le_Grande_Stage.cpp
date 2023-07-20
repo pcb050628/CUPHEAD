@@ -22,6 +22,7 @@ namespace me
 		far_forest_sr->SetImage(ResourceManager::Load<Texture>(L"Goopy_Le_background_far_forest", L"..\\content\\BossFight\\Goopy Le Grande\\Background\\slime_bg_bg_far_forest.bmp"));
 		far_forest_sr->SetScale(math::Vector2(1, 1.4f));
 
+		AddGameObj(enums::eLayer::Enemy, L"teset")->AddComponent<BoxCollider>(enums::eComponentType::BoxCollider)->SetOffset(math::Vector2(-100.f, 0));
 	}
 	void Goopy_Le_Grande_Stage::Update()
 	{

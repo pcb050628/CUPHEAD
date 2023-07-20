@@ -14,6 +14,9 @@ namespace me
 		virtual void Render(HDC hdc) override;
 
 	private:
+		float HP;
+
+		Animator* mAnimator;
 
 	};
 }

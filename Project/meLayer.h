@@ -18,36 +18,42 @@ namespace me
 		GameObject* AddGameObj(std::wstring name)
 		{
 			GameObject* tmp = new GameObject(name);
-			mGameObjs.insert(std::make_pair(name, tmp)); 
+			mGameObjs.push_back(tmp);
 			return tmp;
 		}
 
 		Player_map* AddPlayer_map(std::wstring name)
 		{
 			Player_map* tmp = new Player_map(name);
-			mGameObjs.insert(std::make_pair(name, tmp));
+			mGameObjs.push_back(tmp);
 			return tmp;
 		}
 
 		Player_stage* AddPlayer_stage(std::wstring name)
 		{
 			Player_stage* tmp = new Player_stage(name);
-			mGameObjs.insert(std::make_pair(name, tmp));
+			mGameObjs.push_back(tmp);
 			return tmp;
 		}
 
 		GameObject* GetGameObj(std::wstring name)
 		{
-			std::map<std::wstring, GameObject*>::iterator iter = mGameObjs.find(name);
+			GameObject* tmp = nullptr;
 
-			if (iter == mGameObjs.end())
-				return nullptr;
+			for (int i = 0; i < mGameObjs.size(); i++)
+			{
+				tmp = mGameObjs[i];
+				if (tmp->GetName() == name)
+					return tmp;
+			}
 
-			return iter->second;
+			return nullptr;
 		}
 
+		std::vector<GameObject*>& GetGameObjects() { return mGameObjs; }
+
 	private:
-		std::map<std::wstring, GameObject*> mGameObjs = {};
+		std::vector<GameObject*> mGameObjs = {};
 	};
 }
 

@@ -24,6 +24,8 @@ namespace me
 		virtual Player_map* AddPlayer_map(std::wstring name);
 		virtual Player_stage* AddPlayer_stage(std::wstring name);
 
+		virtual Layer& GetLayer(enums::eLayer type) { return mLayers[(int)type]; }
+
 	private:
 		std::vector<Layer> mLayers;
 	};

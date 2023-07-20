@@ -7,34 +7,25 @@ namespace me
 	}
 	Layer::~Layer()
 	{
-		if (mGameObjs.size() > 0)
+		for (auto gobj : mGameObjs)
 		{
-			std::map<std::wstring, GameObject*>::iterator iter = mGameObjs.begin();
-
-			while (iter != mGameObjs.end())
-			{
-				delete iter++->second;
-			}
+			delete gobj;
 		}
 		mGameObjs.clear();
 	}
 
 	void Layer::Update()
 	{
-		std::map<std::wstring, GameObject*>::iterator iter = mGameObjs.begin();
-
-		while (iter != mGameObjs.end())
+		for (auto gobj : mGameObjs)
 		{
-			iter++->second->Update();
+			gobj->Update();
 		}
 	}
 	void Layer::Render(HDC hdc)
 	{
-		std::map<std::wstring, GameObject*>::iterator iter = mGameObjs.begin();
-
-		while (iter != mGameObjs.end())
+		for (auto gobj : mGameObjs)
 		{
-			iter++->second->Render(hdc);
+			gobj->Render(hdc);
 		}
 	}
 }

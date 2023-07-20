@@ -9,7 +9,7 @@ namespace me
 		, mIdx(0)
 		, mSheet(NULL), mStartPoint(math::Vector2::Zero), mUnitX(0)
 		, mSheetCount(0), mSheetSliceUnit(0)
-		, mDuration(0.08f)
+		, mDuration(0.085f)
 		, mComplete(false)
 		, mLoop(true)
 	{
