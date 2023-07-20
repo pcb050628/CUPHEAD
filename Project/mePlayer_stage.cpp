@@ -78,6 +78,17 @@ namespace me
 		else if (KeyInput::GetKeyDown(KeyCode::LeftArrow) && KeyInput::GetKeyUp(KeyCode::RightArrow))
 			mAnimator->SetFlipX(true);
 
+		if (mState != Player_state::Aim && mState != Player_state::Duck)
+		{
+			Transform* tr = GetComponent<Transform>();
+
+			if (KeyInput::GetKey(KeyCode::RightArrow))
+				tr->SetPos(math::Vector2(tr->GetPos().x + 200.f * Time::GetDeltaTime(), tr->GetPos().y));
+
+			if (KeyInput::GetKey(KeyCode::LeftArrow))
+				tr->SetPos(math::Vector2(tr->GetPos().x - 200.f * Time::GetDeltaTime(), tr->GetPos().y));
+		}
+
 		switch (mState)
 		{
 		case me::Player_stage::Player_state::Idle:
@@ -100,10 +111,12 @@ namespace me
 			break;
 		}
 	}
+
 	void Player_stage::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
 	}
+
 	void Player_stage::Idle()
 	{
 		mAnimator->PlayAnim(L"CupHead_stage_anim_idle", mAnimator->GetFlipX());
@@ -122,24 +135,88 @@ namespace me
 		else if (KeyInput::GetKeyDown(KeyCode::X))
 			mState = Player_state::Shooting;
 	}
+
 	void Player_stage::Aim()
 	{
-
+		if (KeyInput::GetKeyUp(KeyCode::C) && (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)))
+			mState = Player_state::Run;
+		else if (KeyInput::GetKeyUp(KeyCode::C))
+			mState = Player_state::Idle;
+		else if (KeyInput::GetKeyDown(KeyCode::X))
+		{
+			if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::UpArrow))
+				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_diagonal_up", mAnimator->GetFlipX());
+			else if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::DownArrow))
+				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_diagonal_down", mAnimator->GetFlipX());
+			else if (KeyInput::GetKeyDown(KeyCode::UpArrow))
+				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_up", mAnimator->GetFlipX());
+			else if (KeyInput::GetKeyDown(KeyCode::DownArrow))
+				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_down", mAnimator->GetFlipX());
+			else
+				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_straight", mAnimator->GetFlipX());
+		}
+		else if (KeyInput::GetKeyDown(KeyCode::Z))
+		{
+			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
+			mState = Player_state::Jumping;
+		}
+		else
+		{
+			if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::UpArrow))
+				mAnimator->PlayAnim(L"CupHead_stage_anim_aim_diagonal_up", mAnimator->GetFlipX());
+			else if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::DownArrow))
+				mAnimator->PlayAnim(L"CupHead_stage_anim_aim_diagonal_down", mAnimator->GetFlipX());
+			else if (KeyInput::GetKeyDown(KeyCode::UpArrow))
+				mAnimator->PlayAnim(L"CupHead_stage_anim_aim_up", mAnimator->GetFlipX());
+			else if (KeyInput::GetKeyDown(KeyCode::DownArrow))
+				mAnimator->PlayAnim(L"CupHead_stage_anim_aim_down", mAnimator->GetFlipX());
+			else
+				mAnimator->PlayAnim(L"CupHead_stage_anim_aim_straight", mAnimator->GetFlipX());
+		}
 	}
+
 	void Player_stage::Run()
 	{
-		if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::UpArrow))
-			mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_diagonal_up", mAnimator->GetFlipX());
+		if (KeyInput::GetKeyDown(KeyCode::X))
+		{
+			if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::UpArrow))
+				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_diagonal_up_run", mAnimator->GetFlipX());
+			else if (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow))
+				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_straight_run", mAnimator->GetFlipX());
+			else
+				mState = Player_state::Shooting;
+		}
 		else
 			mAnimator->PlayAnim(L"CupHead_stage_anim_run", mAnimator->GetFlipX());
 
-		if (KeyInput::GetKeyUp(KeyCode::RightArrow) && KeyInput::GetKeyUp(KeyCode::LeftArrow))
+		if (KeyInput::GetKeyDown(KeyCode::Z))
+		{
+			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
+			mState = Player_state::Jumping;
+		}
+		else if (KeyInput::GetKeyUp(KeyCode::RightArrow) && KeyInput::GetKeyUp(KeyCode::LeftArrow))
 			mState = Player_state::Idle;
 	}
+
 	void Player_stage::Duck()
 	{
-
+		if (KeyInput::GetKeyDown(KeyCode::X))
+			mAnimator->PlayAnim(L"CupHead_stage_anim_duck_shoot", mAnimator->GetFlipX());
+		else if (KeyInput::GetKeyDown(KeyCode::Z))
+		{
+			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
+			mState = Player_state::Jumping;
+		}
+		else if (KeyInput::GetKeyDown(KeyCode::C))
+			mState = Player_state::Aim;
+		else if (KeyInput::GetKeyUp(KeyCode::DownArrow) && (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)))
+			mState = Player_state::Run;
+		else if (KeyInput::GetKeyUp(KeyCode::DownArrow))
+			mState = Player_state::Idle;
+		else
+			mAnimator->PlayAnim(L"CupHead_stage_anim_duck_idle", mAnimator->GetFlipX());
 	}
+
 	void Player_stage::Shooting()
 	{
 		if (KeyInput::GetKeyDown(KeyCode::UpArrow))
@@ -147,7 +224,12 @@ namespace me
 		else
 			mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_straight", mAnimator->GetFlipX());
 
-		if (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow))
+		if(KeyInput::GetKeyDown(KeyCode::Z))
+		{
+			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
+			mState = Player_state::Jumping;
+		}
+		else if (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow))
 			mState = Player_state::Run;
 		else if (KeyInput::GetKeyDown(KeyCode::C))
 			mState = Player_state::Aim;
@@ -156,6 +238,7 @@ namespace me
 		else if (KeyInput::GetKeyUp(KeyCode::X))
 			mState = Player_state::Idle;
 	}
+
 	void Player_stage::Jumping()
 	{
 		mAnimator->PlayAnim(L"CupHead_stage_anim_jump", mAnimator->GetFlipX());
@@ -165,10 +248,10 @@ namespace me
 
 		if (KeyInput::GetKeyDown(KeyCode::X))
 		{
-
+			// shoot
 		}
 
-		if (mJumpMaxHeight >= abs(mJumpStartHeight - tr->GetPos().y))
+		if (mJumpMaxHeight <= abs(mJumpStartHeight - tr->GetPos().y))
 		{
 			if (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow))
 				mState = Player_state::Run;
