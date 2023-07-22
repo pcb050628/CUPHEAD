@@ -13,7 +13,7 @@ namespace me
 			Run,
 			Duck,
 			Shooting,
-			Jumping,
+			Jump,
 		};
 
 		Player_stage(const std::wstring& name);
@@ -28,7 +28,7 @@ namespace me
 		void Run();
 		void Duck();
 		void Shooting();
-		void Jumping();
+		void Jump();
 
 	private:
 		int HP;
@@ -38,6 +38,9 @@ namespace me
 		Player_state mState;
 
 		BoxCollider* mGroundCheckBox;
+		bool mIsGround;
+
+		bool mIsJumping;
 		float mJumpMaxHeight;
 		float mJumpStartHeight;
 	};

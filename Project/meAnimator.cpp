@@ -30,8 +30,6 @@ namespace me
 	}
 	void Animator::Render(HDC hdc)
 	{
-		static float prevTime = 0;
-
 		if (mCurPlayAnim != nullptr && !mCurPlayAnim->IsComplete())
 		{
 			Transform* tr = GetOwner()->GetComponent<Transform>(L"defaultTransform");
@@ -42,19 +40,29 @@ namespace me
 
 			mCurPlayAnim->Render(hdc, pos + mOffset, mScale);
 
-			if (!mCurPlayAnim->IsComplete() && prevTime + mCurPlayAnim->GetDuration() /** Time::GetDeltaTime()*/ < Time::GetTime() && isPlay)
+			if (isPlay)
 			{
-				prevTime = Time::GetTime();
-				mCurPlayAnim->Next();
-			}
-
-			if (mCurPlayAnim != nullptr && mCurPlayAnim->IsComplete())
-			{
-				mCurPlayAnim->Reset();
-				if(!mCurPlayAnim->IsLoop() && mNextAnims.size() > 0)
+				if (!mCurPlayAnim->IsComplete() && mCurPlayAnim->GetPrevTime() + mCurPlayAnim->GetDuration() < Time::GetTime())
 				{
-					mCurPlayAnim = mNextAnims.front();
-					mNextAnims.pop();
+					mCurPlayAnim->SetPrevTime(Time::GetTime());
+					mCurPlayAnim->Next();
+
+					if (!mCurPlayAnim->IsLoop() && mCurPlayAnim->IsComplete())
+					{
+						isPlay = false;
+						mCurPlayAnim->SetIdx(mCurPlayAnim->GetIdx() - 1);
+					}
+				}
+
+				if (mCurPlayAnim != nullptr && mCurPlayAnim->IsComplete())
+				{
+					if(!mCurPlayAnim->IsLoop() && mNextAnims.size() > 0)
+					{
+						mCurPlayAnim = mNextAnims.front();
+						mNextAnims.pop();
+					}
+					else if(mCurPlayAnim->IsLoop())
+						mCurPlayAnim->Reset();
 				}
 			}
 		}

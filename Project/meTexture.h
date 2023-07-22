@@ -5,11 +5,11 @@ namespace me
 {
 	enum class eTextureType
 	{
-		bmp,
 		png,
+		bmp,
 		none
 	};
-
+	
 	class Texture : public Resource
 	{
 	public:

@@ -44,7 +44,7 @@ namespace me
 				return dynamic_cast<Animation*>(resource);
 
 			resource = new Animation(name);
-			if (resource->Load(path))
+			if (resource->Load(path, type))
 			{
 				resource->SetPath(path);
 				mResources.insert(std::make_pair(resource->GetName(), resource));

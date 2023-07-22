@@ -17,6 +17,15 @@ namespace me
 
 		Player_stage* GetPlayer() { return mPlayer; }
 		Boss* GetBoss() { return mBoss; }
+		
+		template <typename T>
+		T* AddBoss(const std::wstring& name)
+		{
+			T* tmp = new T(name);
+			Scene::AddBoss(tmp);
+			tmp->Init();
+			return tmp;
+		} 
 
 	private:
 		Boss*			mBoss;

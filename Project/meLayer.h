@@ -3,6 +3,7 @@
 #include "meGameObject.h"
 #include "mePlayer_map.h"
 #include "mePlayer_stage.h"
+#include "meBoss.h"
 
 namespace me
 {	
@@ -34,6 +35,11 @@ namespace me
 			Player_stage* tmp = new Player_stage(name);
 			mGameObjs.push_back(tmp);
 			return tmp;
+		}
+
+		void AddBoss(Boss* boss)
+		{
+			mGameObjs.push_back(boss);
 		}
 
 		GameObject* GetGameObj(std::wstring name)

@@ -24,8 +24,8 @@ namespace me
 		{
 			Background,
 			Map,
-			Enemy,
 			Player,
+			Enemy,
 			UI,
 			ScreenFx,
 			End
@@ -46,5 +46,6 @@ namespace me
 			player,
 			door
 		};
+
 	}
 }

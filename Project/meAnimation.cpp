@@ -47,6 +47,7 @@ namespace me
 			return true;
 		}
 	}
+
 	bool Animation::Load(const std::wstring& name, const std::wstring& SheetsPath, math::Vector2 startp, int sliceUnit, int image_count)
 	{
 		mSheet = ResourceManager::Load<Texture>(name, SheetsPath.c_str());
@@ -61,6 +62,38 @@ namespace me
 			mStartPoint = startp;
 			mUnitX = mSheet->GetWidth() / sliceUnit;
 
+			return true;
+		}
+	}
+
+	bool Animation::Load(const std::wstring& path, eTextureType type)
+	{
+		WIN32_FIND_DATA findFileData;
+		HANDLE hFind = {};
+
+		if(type == eTextureType::bmp)
+			hFind = FindFirstFile((path + L"*.bmp").c_str(), &findFileData);
+		else if (type == eTextureType::png)
+			hFind = FindFirstFile((path + L"*.png").c_str(), &findFileData);
+
+		if (hFind == INVALID_HANDLE_VALUE)
+			return false;
+		else
+		{
+			mType = enums::eAnimType::Folder;
+
+			std::wstring FullPath = path + findFileData.cFileName;
+			Texture* image = ResourceManager::Load<Texture>(findFileData.cFileName, FullPath.c_str());
+			mTextures.push_back(image);
+
+			while (FindNextFile(hFind, &findFileData) != 0)
+			{
+				std::wstring FullPath = path + findFileData.cFileName;
+				Texture* image = ResourceManager::Load<Texture>(findFileData.cFileName, FullPath.c_str());
+				mTextures.push_back(image);
+			}
+
+			FindClose(hFind);
 			return true;
 		}
 	}

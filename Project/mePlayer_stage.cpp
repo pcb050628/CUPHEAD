@@ -9,8 +9,9 @@ namespace me
 		, mAnimator(nullptr)
 		, mState(Player_state::Idle)
 		, mGroundCheckBox(nullptr)
+		, mIsGround(false)
 		, mJumpStartHeight(0)
-		, mJumpMaxHeight(100.f)
+		, mJumpMaxHeight(200.f)
 
 	{
 
@@ -24,10 +25,11 @@ namespace me
 
 		AddComponent<BoxCollider>(enums::eComponentType::BoxCollider);
 		mGroundCheckBox = AddComponent<BoxCollider>(L"GroundCheckBox");
-		mGroundCheckBox->SetOffset(math::Vector2(0, 85.f));
+		mGroundCheckBox->SetOffset(math::Vector2(0, 60.f));
 		mGroundCheckBox->SetSize(math::Vector2(100.f, 20.f));
 
 		mAnimator = AddComponent<Animator>(L"CupHead_stage_anim");
+		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_intro", L"..\\content\\BossFight\\Cuphead\\Intros\\Regular\\"));
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_idle_R", L"..\\content\\BossFight\\Cuphead\\Idle_R\\"));
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_idle_L", L"..\\content\\BossFight\\Cuphead\\Idle_L\\"));
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_run_R", L"..\\content\\BossFight\\Cuphead\\Run\\Normal_R\\"));
@@ -61,7 +63,7 @@ namespace me
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_aim_diagonal_down_R", L"..\\content\\BossFight\\Cuphead\\Aim\\Diagonal Down_R\\"));
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_aim_diagonal_down_L", L"..\\content\\BossFight\\Cuphead\\Aim\\Diagonal Down_L\\"));
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_duck_idle_R", L"..\\content\\BossFight\\Cuphead\\Duck\\Idle_R\\"));
-		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_duck_idle_L", L"..\\content\\BossFight\\Cuphead\\Duck\\Idle_R\\"));
+		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_duck_idle_L", L"..\\content\\BossFight\\Cuphead\\Duck\\Idle_L\\"));
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_duck_shoot_R", L"..\\content\\BossFight\\Cuphead\\Duck\\Shoot_R\\"));
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_duck_shoot_L", L"..\\content\\BossFight\\Cuphead\\Duck\\Shoot_L\\"));
 	}
@@ -74,6 +76,11 @@ namespace me
 		else if (KeyInput::GetKeyDown(KeyCode::LeftArrow) && KeyInput::GetKeyUp(KeyCode::RightArrow))
 			mAnimator->SetFlipX(true);
 
+		if (mGroundCheckBox->GetIsCollision())
+			mIsGround = true;
+		else
+			mIsGround = false;
+
 		if (mState != Player_state::Aim && mState != Player_state::Duck)
 		{
 			Transform* tr = GetComponent<Transform>();
@@ -84,6 +91,13 @@ namespace me
 			if (KeyInput::GetKey(KeyCode::LeftArrow))
 				tr->SetPos(math::Vector2(tr->GetPos().x - 200.f * Time::GetDeltaTime(), tr->GetPos().y));
 		}
+
+		if (!mIsGround && !mIsJumping)
+		{
+			Transform* tr = GetComponent<Transform>();
+			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y + 200.f * Time::GetDeltaTime()));
+		}
+
 
 		switch (mState)
 		{
@@ -102,8 +116,8 @@ namespace me
 		case me::Player_stage::Player_state::Shooting:
 			Shooting();
 			break;
-		case me::Player_stage::Player_state::Jumping:
-			Jumping();
+		case me::Player_stage::Player_state::Jump:
+			Jump();
 			break;
 		}
 	}
@@ -122,7 +136,8 @@ namespace me
 		else if (KeyInput::GetKeyDown(KeyCode::Z))
 		{
 			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
-			mState = Player_state::Jumping;
+			mState = Player_state::Jump;
+			mIsJumping = true;
 		}
 		else if (KeyInput::GetKeyDown(KeyCode::C))
 			mState = Player_state::Aim;
@@ -154,7 +169,8 @@ namespace me
 		else if (KeyInput::GetKeyDown(KeyCode::Z))
 		{
 			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
-			mState = Player_state::Jumping;
+			mState = Player_state::Jump;
+			mIsJumping = true;
 		}
 		else
 		{
@@ -188,7 +204,8 @@ namespace me
 		if (KeyInput::GetKeyDown(KeyCode::Z))
 		{
 			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
-			mState = Player_state::Jumping;
+			mState = Player_state::Jump;
+			mIsJumping = true;
 		}
 		else if (KeyInput::GetKeyDown(KeyCode::DownArrow))
 			mState = Player_state::Duck;
@@ -200,15 +217,16 @@ namespace me
 	{
 		if (KeyInput::GetKeyUp(KeyCode::DownArrow))
 			mState = Player_state::Idle;
-		 else if (KeyInput::GetKeyDown(KeyCode::X))
+		else if (KeyInput::GetKeyDown(KeyCode::C))
+			mState = Player_state::Aim;
+		else if (KeyInput::GetKeyDown(KeyCode::X))
 			mAnimator->PlayAnim(L"CupHead_stage_anim_duck_shoot", mAnimator->GetFlipX());
 		else if (KeyInput::GetKeyDown(KeyCode::Z))
 		{
 			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
-			mState = Player_state::Jumping;
+			mState = Player_state::Jump;
+			mIsJumping = true;
 		}
-		else if (KeyInput::GetKeyDown(KeyCode::C))
-			mState = Player_state::Aim;
 		else if (KeyInput::GetKeyUp(KeyCode::DownArrow) && (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)))
 			mState = Player_state::Run;
 		else
@@ -225,7 +243,8 @@ namespace me
 		if(KeyInput::GetKeyDown(KeyCode::Z))
 		{
 			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
-			mState = Player_state::Jumping;
+			mState = Player_state::Jump;
+			mIsJumping = true;
 		}
 		else if (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow))
 			mState = Player_state::Run;
@@ -237,19 +256,27 @@ namespace me
 			mState = Player_state::Idle;
 	}
 
-	void Player_stage::Jumping()
+	void Player_stage::Jump()
 	{
-		mAnimator->PlayAnim(L"CupHead_stage_anim_jump", mAnimator->GetFlipX());
 		Transform* tr = GetComponent<Transform>();
+		mAnimator->PlayAnim(L"CupHead_stage_anim_jump", mAnimator->GetFlipX());
 
-		tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y - 200.f * Time::GetDeltaTime()));
-
-		if (KeyInput::GetKeyDown(KeyCode::X))
+		if(mIsJumping)
 		{
-			// shoot
+			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y - 300.f * Time::GetDeltaTime()));
+
+			if (KeyInput::GetKeyDown(KeyCode::X))
+			{
+				// shoot
+			}
 		}
 
 		if (mJumpMaxHeight <= abs(mJumpStartHeight - tr->GetPos().y))
+		{
+			mIsJumping = false;
+		}
+
+		if (mIsGround)
 		{
 			if (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow))
 				mState = Player_state::Run;

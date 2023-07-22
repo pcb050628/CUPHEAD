@@ -14,6 +14,7 @@ namespace me
 	}
 
 	class Texture;
+	enum class eTextureType;
 
 	class Animation : public Resource
 	{
@@ -23,6 +24,7 @@ namespace me
 
 		virtual bool Load(const std::wstring& path) override;
 		virtual bool Load(const std::wstring& name, const std::wstring& SheetsPath, math::Vector2 startp, int sliceUnit, int image_count);
+		virtual bool Load(const std::wstring& path, eTextureType type);
 
 		virtual void Render(HDC hdc, math::Vector2 pos, math::Vector2 scale);
 
@@ -54,6 +56,8 @@ namespace me
 
 		virtual Texture* GetSheet() { return mSheet; }
 		virtual float GetDuration() { return mDuration; }
+		virtual float GetPrevTime() { return prevTime; }
+		virtual void SetPrevTime(float time) { prevTime = time; }
 
 	private:
 		enums::eAnimType mType;
@@ -68,6 +72,8 @@ namespace me
 		float mUnitX;
 
 		float mDuration;
+		float prevTime;
+
 		bool mComplete;
 		bool mLoop;
 	};

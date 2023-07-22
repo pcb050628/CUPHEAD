@@ -70,4 +70,8 @@ namespace me
 		return p;
 	}
 
+	void Scene::AddBoss(Boss* boss)
+	{
+		mLayers[(int)enums::eLayer::Enemy].AddBoss(boss);
+	}
 }
