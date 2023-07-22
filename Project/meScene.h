@@ -18,7 +18,7 @@ namespace me
 		void Update() override;
 		void Render(HDC hdc) override;
 
-		virtual GameObject* AddGameObj(enums::eLayer layerType, std::wstring name);
+		virtual GameObject* AddGameObj(enums::eLayer layerType, std::wstring name, enums::eGameObjType type);
 		virtual GameObject* GetGameObj(enums::eLayer layerType, std::wstring name);
 
 		virtual Player_map* AddPlayer_map(std::wstring name);

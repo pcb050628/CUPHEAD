@@ -1,6 +1,2 @@
-﻿  meGoopy_Le_Grande_Boss.cpp
-E:\project_api\CUPHEAD\Project\meGoopy_Le_Grande_Boss.cpp(33,150): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-E:\project_api\CUPHEAD\Project\meGoopy_Le_Grande_Boss.cpp(33,111): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-E:\project_api\CUPHEAD\Project\meGoopy_Le_Grande_Boss.cpp(33,72): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-E:\project_api\CUPHEAD\Project\meGoopy_Le_Grande_Boss.cpp(33,33): warning C4244: '인수': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  mePlayer_stage.cpp
   Client.vcxproj -> E:\project_api\CUPHEAD\Project\x64\Debug\Client.exe

@@ -8,14 +8,14 @@ namespace me
 	class GameObject : public Entity
 	{
 	public:
-		GameObject(const std::wstring& name);
+		GameObject(const std::wstring& name, enums::eGameObjType type);
 		virtual ~GameObject() override;
 
 		virtual void Init() override;
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
-		virtual enums::eGameObjType GetTag() { return tag; }
+		virtual enums::eGameObjType GetTag() { return type; }
 
 		virtual void OnCollisionEnter(BoxCollider* other);
 		virtual void OnCollisionStay(BoxCollider* other);
@@ -111,7 +111,7 @@ namespace me
 		}
 
 	private:
-		enums::eGameObjType tag;
+		enums::eGameObjType type;
 
 		std::vector<Component*> mComponents = {};
 		int mColliderCount;

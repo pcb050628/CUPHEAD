@@ -36,6 +36,7 @@ namespace me
 		{
 			if (mTexture->GetType() == eTextureType::bmp)
 			{
+				//SetStretchBltMode(hdc, STRETCH_HALFTONE);
 				TransparentBlt(hdc, pos.x - (mTexture->GetWidth() * mScale.x * mFlipX / 2), pos.y - (mTexture->GetHeight() * mScale.y / 2)
 					, mTexture->GetWidth() * mScale.x * mFlipX, mTexture->GetHeight() * mScale.y
 					, mTexture->GetHdc(), 0, 0, mTexture->GetWidth(), mTexture->GetHeight(), RGB(255, 0, 255));
@@ -57,16 +58,5 @@ namespace me
 				);
 			}
 		}
-
-		wchar_t bufferx[50] = {};
-		wchar_t buffery[50] = {};
-
-		swprintf_s(bufferx, L"x : %f", pos.x);
-		swprintf_s(buffery, L"y : %f", pos.y);
-		int strLen1 = wcsnlen_s(bufferx, 50);
-		int strLen2 = wcsnlen_s(buffery, 50);
-
-		TextOut(hdc, 10, 50, bufferx, strLen1);
-		TextOut(hdc, 10, 100, buffery, strLen2);
 	}
 }

@@ -24,7 +24,7 @@ namespace me
 		math::Vector2 GetOffset() { return mOffset; }
 		math::Vector2 GetSize() { return mSize; }
 
-		bool GetIsCollision() { return isCollision; }
+		GameObject* GetCollidedGobj();
 
 	private:
 		math::Vector2 mPos;
@@ -32,6 +32,7 @@ namespace me
 		math::Vector2 mSize;
 
 		bool isCollision;
+		GameObject* CollidedObjcet;
 	};
 }
 

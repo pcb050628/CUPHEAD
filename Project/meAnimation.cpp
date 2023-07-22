@@ -104,7 +104,7 @@ namespace me
 		{
 			if (mTextures[mIdx]->GetType() == eTextureType::bmp)
 			{
-				TransparentBlt(hdc, pos.x - (mTextures[mIdx]->GetWidth() * scale.x / 2), pos.y - (mTextures[mIdx]->GetHeight() * scale.y / 2)
+				TransparentBlt(hdc, pos.x - (mTextures[mIdx]->GetWidth() * scale.x), pos.y - (mTextures[mIdx]->GetHeight() * scale.y)
 					, mTextures[mIdx]->GetWidth() * scale.x, mTextures[mIdx]->GetHeight() * scale.y
 					, mTextures[mIdx]->GetHdc(), 0, 0, mTextures[mIdx]->GetWidth(), mTextures[mIdx]->GetHeight(), RGB(255, 0, 255));
 			}

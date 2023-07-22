@@ -44,9 +44,9 @@ namespace me
 		}
 	}
 
-	GameObject* Scene::AddGameObj(enums::eLayer layerType, std::wstring name)
+	GameObject* Scene::AddGameObj(enums::eLayer layerType, std::wstring name, enums::eGameObjType type)
 	{
-		GameObject* obj = mLayers[(int)layerType].AddGameObj(name);
+		GameObject* obj = mLayers[(int)layerType].AddGameObj(name, type);
 		obj->Init();
 		return obj;
 	}

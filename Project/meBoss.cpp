@@ -4,7 +4,7 @@
 
 namespace me
 {
-	Boss::Boss(const std::wstring& name) : GameObject(name)
+	Boss::Boss(const std::wstring& name) : GameObject(name, enums::eGameObjType::enemy)
 	{
 	}
 	Boss::~Boss()

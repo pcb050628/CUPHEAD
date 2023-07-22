@@ -3,8 +3,8 @@
 
 namespace me
 {
-	GameObject::GameObject(const std::wstring& name) : Entity(name)
-		,tag()
+	GameObject::GameObject(const std::wstring& name, enums::eGameObjType type) : Entity(name)
+		, type(type)
 		, mColliderCount(0)
 	{
 		AddComponent<Transform>(L"defaultTransform");

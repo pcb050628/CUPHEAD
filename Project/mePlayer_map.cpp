@@ -4,7 +4,7 @@
 
 namespace me
 {
-	Player_map::Player_map(const std::wstring& name) : GameObject(name)
+	Player_map::Player_map(const std::wstring& name) : GameObject(name, enums::eGameObjType::player)
 		, mAnimator(nullptr)
 	{
 	}

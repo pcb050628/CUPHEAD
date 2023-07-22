@@ -50,6 +50,7 @@ namespace me
 	void BoxCollider::OnCollisionEnter(BoxCollider* other)
 	{
 		GetOwner()->OnCollisionEnter(other);
+		CollidedObjcet = other->GetOwner();
 		isCollision = true;
 	}
 	void BoxCollider::OnCollisionStay(BoxCollider* other)
@@ -59,6 +60,15 @@ namespace me
 	void BoxCollider::OnCollisionExit(BoxCollider* other)
 	{
 		GetOwner()->OnCollisionExit(other);
+		CollidedObjcet = nullptr;
 		isCollision = false;
+	}
+
+	GameObject* BoxCollider::GetCollidedGobj()
+	{
+		if (CollidedObjcet != nullptr)
+			return CollidedObjcet;
+		else
+			return nullptr;
 	}
 }

@@ -15,9 +15,11 @@ namespace me
 	{
 		Boss::Init();
 
+		AddComponent<BoxCollider>(enums::eComponentType::BoxCollider);
+
 		mAnimator = AddComponent<Animator>(enums::eComponentType::Animator);
 
-		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"Goopy Le Grande_intro", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Intro\\"));
+		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"Goopy Le Grande_intro", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Punch_L\\"));
 		mAnimator->PlayAnim(L"Goopy Le Grande_intro");
 	}
 	void Goopy_Le_Grande_Boss::Update()

@@ -16,9 +16,9 @@ namespace me
 		void Update();
 		void Render(HDC hdc);
 
-		GameObject* AddGameObj(std::wstring name)
+		GameObject* AddGameObj(std::wstring name, enums::eGameObjType type)
 		{
-			GameObject* tmp = new GameObject(name);
+			GameObject* tmp = new GameObject(name, type);
 			mGameObjs.push_back(tmp);
 			return tmp;
 		}

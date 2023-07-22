@@ -4,14 +4,14 @@
 
 namespace me
 {
-	Player_stage::Player_stage(const std::wstring& name) : GameObject(name)
+	Player_stage::Player_stage(const std::wstring& name) : GameObject(name, enums::eGameObjType::player)
 		, HP(5)
 		, mAnimator(nullptr)
 		, mState(Player_state::Idle)
 		, mGroundCheckBox(nullptr)
 		, mIsGround(false)
 		, mJumpStartHeight(0)
-		, mJumpMaxHeight(200.f)
+		, mJumpMaxHeight(300.f)
 
 	{
 
@@ -25,8 +25,8 @@ namespace me
 
 		AddComponent<BoxCollider>(enums::eComponentType::BoxCollider);
 		mGroundCheckBox = AddComponent<BoxCollider>(L"GroundCheckBox");
-		mGroundCheckBox->SetOffset(math::Vector2(0, 60.f));
-		mGroundCheckBox->SetSize(math::Vector2(100.f, 20.f));
+		mGroundCheckBox->SetOffset(math::Vector2(0, 75.f));
+		mGroundCheckBox->SetSize(math::Vector2(100.f, 5.f));
 
 		mAnimator = AddComponent<Animator>(L"CupHead_stage_anim");
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_intro", L"..\\content\\BossFight\\Cuphead\\Intros\\Regular\\"));
@@ -66,6 +66,8 @@ namespace me
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_duck_idle_L", L"..\\content\\BossFight\\Cuphead\\Duck\\Idle_L\\"));
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_duck_shoot_R", L"..\\content\\BossFight\\Cuphead\\Duck\\Shoot_R\\"));
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_duck_shoot_L", L"..\\content\\BossFight\\Cuphead\\Duck\\Shoot_L\\"));
+
+		mAnimator->SetOffset(math::Vector2(50.f, 70.f));
 	}
 	void Player_stage::Update()
 	{
@@ -76,7 +78,8 @@ namespace me
 		else if (KeyInput::GetKeyDown(KeyCode::LeftArrow) && KeyInput::GetKeyUp(KeyCode::RightArrow))
 			mAnimator->SetFlipX(true);
 
-		if (mGroundCheckBox->GetIsCollision())
+		if (mGroundCheckBox->GetCollidedGobj() != nullptr 
+			&& mGroundCheckBox->GetCollidedGobj()->GetTag() == enums::eGameObjType::floor)
 			mIsGround = true;
 		else
 			mIsGround = false;
@@ -95,7 +98,7 @@ namespace me
 		if (!mIsGround && !mIsJumping)
 		{
 			Transform* tr = GetComponent<Transform>();
-			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y + 200.f * Time::GetDeltaTime()));
+			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y + 500.f * Time::GetDeltaTime()));
 		}
 
 
@@ -263,7 +266,7 @@ namespace me
 
 		if(mIsJumping)
 		{
-			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y - 300.f * Time::GetDeltaTime()));
+			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y - 500.f * Time::GetDeltaTime()));
 
 			if (KeyInput::GetKeyDown(KeyCode::X))
 			{
