@@ -103,6 +103,9 @@
     <Filter Include="Engine\ColliderManager">
       <UniqueIdentifier>{58653b13-0dfb-4c90-9aa8-c1da5f0e8728}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObject\Component\Rigidbody">
+      <UniqueIdentifier>{69581da9-c924-4936-b391-c5446ff55a29}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -213,6 +216,9 @@
     <ClInclude Include="meColliderManager.h">
       <Filter>Engine\ColliderManager</Filter>
     </ClInclude>
+    <ClInclude Include="meRigidbody.h">
+      <Filter>Engine\GameObject\Component\Rigidbody</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -315,6 +321,9 @@
     </ClCompile>
     <ClCompile Include="meColliderManager.cpp">
       <Filter>Engine\ColliderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="meRigidbody.cpp">
+      <Filter>Engine\GameObject\Component\Rigidbody</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

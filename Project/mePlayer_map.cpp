@@ -30,10 +30,21 @@ namespace me
 	{
 		GameObject::Update();
 
-		if (KeyInput::GetKeyDown(KeyCode::LeftArrow))
+		if (KeyInput::GetKeyDown(KeyCode::LeftArrow) && KeyInput::GetKeyUp(KeyCode::RightArrow))
 			mAnimator->SetFlipX(true);
-		if (KeyInput::GetKeyDown(KeyCode::RightArrow))
+		if (KeyInput::GetKeyDown(KeyCode::RightArrow) && KeyInput::GetKeyUp(KeyCode::LeftArrow))
 			mAnimator->SetFlipX(false);
+
+		Transform* tr = GetComponent<Transform>();
+
+		if (KeyInput::GetKey(KeyCode::UpArrow))
+			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y - (100.f * Time::GetDeltaTime())));
+		if (KeyInput::GetKey(KeyCode::DownArrow))					   
+			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y + (100.f * Time::GetDeltaTime())));
+		if (KeyInput::GetKey(KeyCode::RightArrow))
+			tr->SetPos(math::Vector2(tr->GetPos().x + (100.f * Time::GetDeltaTime()), tr->GetPos().y));
+		if (KeyInput::GetKey(KeyCode::LeftArrow))	   
+			tr->SetPos(math::Vector2(tr->GetPos().x - (100.f * Time::GetDeltaTime()), tr->GetPos().y));
 
 		if (KeyInput::GetKey(KeyCode::UpArrow))
 		{

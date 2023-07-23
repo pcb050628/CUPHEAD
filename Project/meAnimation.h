@@ -59,6 +59,8 @@ namespace me
 		virtual float GetPrevTime() { return prevTime; }
 		virtual void SetPrevTime(float time) { prevTime = time; }
 
+		virtual enums::eAnimType GetType() { return mType; }
+
 	private:
 		enums::eAnimType mType;
 

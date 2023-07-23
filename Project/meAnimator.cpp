@@ -38,7 +38,21 @@ namespace me
 			if (mAffectCamera)
 				pos = Camera::AffectCameraPos(pos);
 
-			mCurPlayAnim->Render(hdc, pos + mOffset, mScale);
+			if (mCurPlayAnim->GetType() == enums::eAnimType::Sheet && mCurPlayAnim->GetSheet()->GetType() == eTextureType::png)
+			{
+				math::Vector2 flipV = {};
+
+				if (isFlipX)
+					flipV = math::Vector2(-1, 1);
+				else
+					flipV = math::Vector2(1, 1);
+
+				mCurPlayAnim->Render(hdc, pos + mOffset, mScale * flipV);
+			}
+			else
+			{
+				mCurPlayAnim->Render(hdc, pos + mOffset, mScale);
+			}
 
 			if (isPlay)
 			{

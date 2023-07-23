@@ -36,7 +36,8 @@ namespace me
 			Transform,
 			SpriteRenderer,
 			BoxCollider,
-			Animator
+			Animator,
+			Rigidbody,
 		};
 
 		enum class eGameObjType

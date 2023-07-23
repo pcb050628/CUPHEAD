@@ -30,6 +30,9 @@ namespace me
 	void WorldMapScene::Update()
 	{
 		Scene::Update();
+
+		if (KeyInput::GetKeyDown(KeyCode::H))
+			SceneManager::LoadScene(L"test");
 	}
 	void WorldMapScene::Render(HDC hdc)
 	{

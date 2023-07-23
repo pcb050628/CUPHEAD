@@ -151,6 +151,7 @@
     <ClInclude Include="meMainScene.h" />
     <ClInclude Include="mePlayer_map.h" />
     <ClInclude Include="mePlayer_stage.h" />
+    <ClInclude Include="meRigidbody.h" />
     <ClInclude Include="meTexture.h" />
     <ClInclude Include="meResource.h" />
     <ClInclude Include="meTItleScene.h" />
@@ -186,6 +187,7 @@
     <ClCompile Include="meMainScene.cpp" />
     <ClCompile Include="mePlayer_map.cpp" />
     <ClCompile Include="mePlayer_stage.cpp" />
+    <ClCompile Include="meRigidbody.cpp" />
     <ClCompile Include="meTexture.cpp" />
     <ClCompile Include="meResource.cpp" />
     <ClCompile Include="meResourceManager.cpp" />
