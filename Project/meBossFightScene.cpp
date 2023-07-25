@@ -2,6 +2,7 @@
 #include "COMPONENTS.h"
 #include "meResourceManager.h"
 #include "meSceneManager.h"
+#include "meColliderManager.h"
 
 namespace me
 {
@@ -16,6 +17,10 @@ namespace me
 	void BossFightScene::Init()
 	{
 		Scene::Init();
+
+		ColliderManager::CollisionLayerCheck(enums::eLayer::Player, enums::eLayer::floor, true);
+		ColliderManager::CollisionLayerCheck(enums::eLayer::Player, enums::eLayer::Enemy, true);
+		ColliderManager::CollisionLayerCheck(enums::eLayer::Bullet, enums::eLayer::Enemy, true);
 
 		mPlayer = AddPlayer_stage(L"CupHead_stage");
 	}

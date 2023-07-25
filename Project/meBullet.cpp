@@ -33,8 +33,10 @@ namespace me
 		if (flip)
 			dir = -1;
 
+		mDirection.normalize();
+
 		Transform* tr = GetComponent<Transform>();
-		tr->SetPos(tr->GetPos() + ((mDirection * dir) * 600 * Time::GetDeltaTime()));
+		tr->SetPos(tr->GetPos() + ((mDirection * math::Vector2(dir, 1)) * 600 * Time::GetDeltaTime()));
 	}
 	void Bullet::Render(HDC hdc)
 	{

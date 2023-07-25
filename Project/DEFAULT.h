@@ -24,6 +24,7 @@ namespace me
 		{
 			Background,
 			Map,
+			floor,
 			Player,
 			Bullet,
 			Enemy,

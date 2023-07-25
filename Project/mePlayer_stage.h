@@ -34,7 +34,7 @@ namespace me
 		void Shooting();
 		void Jump();
 
-		void SpawnBullet(math::Vector2 dir = math::Vector2(1, 0));
+		void SpawnBullet(math::Vector2 pos, math::Vector2 dir = math::Vector2(1, 0));
 
 	private:
 		int HP;
@@ -43,6 +43,7 @@ namespace me
 		float shootPrevTime;
 
 		Animator* mAnimator;
+		Transform* mTransform;
 
 		Player_state mState;
 
