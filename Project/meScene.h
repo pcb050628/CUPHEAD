@@ -35,6 +35,11 @@ namespace me
 
 		virtual Layer& GetLayer(enums::eLayer type) { return mLayers[(int)type]; }
 
+		bool Destroy(GameObject* gobj, enums::eLayer layerType)
+		{
+			return mLayers[(int)layerType].Destroy(gobj);
+		}
+
 	private:
 		std::vector<Layer> mLayers;
 	};

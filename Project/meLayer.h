@@ -66,6 +66,20 @@ namespace me
 
 		std::vector<GameObject*>& GetGameObjects() { return mGameObjs; }
 
+		bool Destroy(GameObject* gobj)
+		{
+			for (GameObject* obj : mGameObjs)
+			{
+				if (obj == gobj)
+				{
+					delete obj;
+					return true;;
+				}
+			}
+
+			return false;
+		}
+
 	private:
 		std::vector<GameObject*> mGameObjs = {};
 	};

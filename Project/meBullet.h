@@ -13,6 +13,10 @@ namespace me
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
+		virtual void OnCollisionEnter(BoxCollider* other);
+		virtual void OnCollisionStay(BoxCollider* other);
+		virtual void OnCollisionExit(BoxCollider* other);
+
 		void SetDirection(math::Vector2 dir) { mDirection = dir; }
 		math::Vector2 GetDirection() { return mDirection; }
 

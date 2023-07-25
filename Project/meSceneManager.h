@@ -25,6 +25,11 @@ namespace me
 			return dynamic_cast<T*>(gobj);
 		}
 
+		static bool Destroy(GameObject* gobj, enums::eLayer layerType)
+		{
+			return mCurScene->Destroy(gobj, layerType);
+		}
+
 	private:
 		static Scene* mCurScene;
 		static std::map<std::wstring, Scene*> mScenes;

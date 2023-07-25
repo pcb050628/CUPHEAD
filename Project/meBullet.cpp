@@ -1,5 +1,6 @@
 #include "meBullet.h"
 #include "meResourceManager.h"
+#include "meSceneManager.h"
 
 namespace me
 {
@@ -38,5 +39,15 @@ namespace me
 	void Bullet::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
+	}
+	void Bullet::OnCollisionEnter(BoxCollider* other)
+	{
+		SceneManager::Destroy(this, enums::eLayer::Bullet);
+	}
+	void Bullet::OnCollisionStay(BoxCollider* other)
+	{
+	}
+	void Bullet::OnCollisionExit(BoxCollider* other)
+	{
 	}
 }
