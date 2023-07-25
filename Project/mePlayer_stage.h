@@ -39,6 +39,9 @@ namespace me
 	private:
 		int HP;
 
+		float shootDelay;
+		float shootPrevTime;
+
 		Animator* mAnimator;
 
 		Player_state mState;

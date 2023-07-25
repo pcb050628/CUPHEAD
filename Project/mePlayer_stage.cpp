@@ -8,9 +8,12 @@ namespace me
 {
 	Player_stage::Player_stage(const std::wstring& name) : GameObject(name, enums::eGameObjType::player)
 		, HP(5)
+		, shootDelay(0.2f)
+		, shootPrevTime(0)
 		, mAnimator(nullptr)
 		, mState(Player_state::Idle)
 		, mIsGround(false)
+		, mIsJumping(false)
 		, mJumpStartHeight(0)
 		, mJumpMaxHeight(300.f)
 
@@ -336,6 +339,10 @@ namespace me
 	}
 	void Player_stage::SpawnBullet()
 	{
-		SceneManager::Instantiate<Bullet>(enums::eLayer::Bullet, GetComponent<Transform>()->GetPos());
+		if (shootPrevTime + shootDelay < Time::GetTime())
+		{
+			SceneManager::Instantiate<Bullet>(enums::eLayer::Bullet, GetComponent<Transform>()->GetPos());
+			shootPrevTime = Time::GetTime();
+		}
 	}
 }
