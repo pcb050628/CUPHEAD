@@ -29,10 +29,7 @@ namespace me
 		far_forest_sr->SetImage(ResourceManager::Load<Texture>(L"Goopy_Le_background_far_forest", L"..\\content\\BossFight\\Goopy Le Grande\\Background\\slime_bg_bg_far_forest.bmp"));
 		far_forest_sr->SetScale(math::Vector2(1, 1.4f));
 
-		/*Animator* Anim = AddGameObj(enums::eLayer::Player, L"bullet")->AddComponent<Animator>(enums::eComponentType::Animator); 
-		Anim->AddAnim(ResourceManager::Load<Animation>(L"bulletidle", L"..\\content\\BossFight\\Cuphead\\Bullet\\Idle\\"));
-		Anim->PlayAnim(L"bulletidle");
-		Anim->GetAnim(L"bulletidle")->SetLoop(false);*/
+		/**/
 
 		Floor* floor = AddGameObj<Floor>(enums::eLayer::Background, L"floor_Collider");
 

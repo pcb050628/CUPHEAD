@@ -25,9 +25,9 @@ namespace me
 			Background,
 			Map,
 			Player,
+			Bullet,
 			Enemy,
 			UI,
-			ScreenFx,
 			End
 		};
 
@@ -48,7 +48,8 @@ namespace me
 			floor,
 			npc,
 			enemy,
-			player
+			player,
+			bullet,
 		};
 
 	}

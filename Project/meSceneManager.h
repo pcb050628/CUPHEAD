@@ -17,6 +17,14 @@ namespace me
 		static T* CreateScene(std::wstring name);
 		static Scene* LoadScene(std::wstring name);
 
+		template <typename T>
+		static T* Instantiate(enums::eLayer layerType, math::Vector2 pos = math::Vector2::Zero, const std::wstring& name = L"object")
+		{
+			GameObject* gobj = mCurScene->AddGameObj<T>(layerType, name);
+			gobj->GetComponent<Transform>()->SetPos(pos);
+			return dynamic_cast<T*>(gobj);
+		}
+
 	private:
 		static Scene* mCurScene;
 		static std::map<std::wstring, Scene*> mScenes;

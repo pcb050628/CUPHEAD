@@ -34,6 +34,8 @@ namespace me
 		void Shooting();
 		void Jump();
 
+		void SpawnBullet();
+
 	private:
 		int HP;
 

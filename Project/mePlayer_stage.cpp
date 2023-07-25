@@ -1,6 +1,8 @@
 #include "mePlayer_stage.h"
 #include "COMPONENTS.h"
+#include "meSceneManager.h"
 #include "meResourceManager.h"
+#include "meBullet.h"
 
 namespace me
 {
@@ -91,6 +93,8 @@ namespace me
 			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y + 500.f * Time::GetDeltaTime()));
 		}
 
+		if (KeyInput::GetKeyPressed(KeyCode::V))
+			SpawnBullet();
 
 		switch (mState)
 		{
@@ -302,5 +306,9 @@ namespace me
 			else
 				mState = Player_state::Idle;
 		}
+	}
+	void Player_stage::SpawnBullet()
+	{
+		SceneManager::Instantiate<Bullet>(enums::eLayer::Bullet, GetComponent<Transform>()->GetPos());
 	}
 }

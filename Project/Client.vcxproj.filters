@@ -109,6 +109,9 @@
     <Filter Include="Engine\GameObject\Floor">
       <UniqueIdentifier>{5ed6d5de-1edb-4601-9fd4-7dcec056cd5f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObject\Player\Bullet">
+      <UniqueIdentifier>{8e888882-2a3d-4668-8078-dda18af074aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -225,6 +228,9 @@
     <ClInclude Include="meFloor.h">
       <Filter>Engine\GameObject\Floor</Filter>
     </ClInclude>
+    <ClInclude Include="meBullet.h">
+      <Filter>Engine\GameObject\Player\Bullet</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -333,6 +339,9 @@
     </ClCompile>
     <ClCompile Include="meFloor.cpp">
       <Filter>Engine\GameObject\Floor</Filter>
+    </ClCompile>
+    <ClCompile Include="meBullet.cpp">
+      <Filter>Engine\GameObject\Player\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
