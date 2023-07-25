@@ -34,7 +34,7 @@ namespace me
 		void Shooting();
 		void Jump();
 
-		void SpawnBullet();
+		void SpawnBullet(math::Vector2 dir = math::Vector2(1, 0));
 
 	private:
 		int HP;

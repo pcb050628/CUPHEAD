@@ -337,11 +337,13 @@ namespace me
 				mState = Player_state::Idle;
 		}
 	}
-	void Player_stage::SpawnBullet()
+	void Player_stage::SpawnBullet(math::Vector2 dir)
 	{
 		if (shootPrevTime + shootDelay < Time::GetTime())
 		{
-			SceneManager::Instantiate<Bullet>(enums::eLayer::Bullet, GetComponent<Transform>()->GetPos());
+			Bullet* b = SceneManager::Instantiate<Bullet>(enums::eLayer::Bullet, GetComponent<Transform>()->GetPos());
+			b->SetDirection(dir);
+			b->SetFlip(GetComponent<Animator>()->GetFlipX());
 			shootPrevTime = Time::GetTime();
 		}
 	}

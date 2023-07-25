@@ -34,7 +34,7 @@ namespace me
 			dir = -1;
 
 		Transform* tr = GetComponent<Transform>();
-		tr->SetPos(tr->GetPos() + (mDirection * 600 * Time::GetDeltaTime() * dir));
+		tr->SetPos(tr->GetPos() + ((mDirection * dir) * 600 * Time::GetDeltaTime()));
 	}
 	void Bullet::Render(HDC hdc)
 	{
