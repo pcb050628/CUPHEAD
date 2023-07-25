@@ -1,6 +1,3 @@
-﻿  meBullet.cpp
+﻿  mePlayer_stage.cpp
 C:\Users\chanb\Documents\GitHub\CUPHEAD\Project\meMath.h(39,27): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  mePlayer_stage.cpp
-C:\Users\chanb\Documents\GitHub\CUPHEAD\Project\meMath.h(39,27): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  코드를 생성하고 있습니다...
   Client.vcxproj -> C:\Users\chanb\Documents\GitHub\CUPHEAD\Project\x64\Debug\Client.exe

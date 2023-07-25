@@ -93,9 +93,6 @@ namespace me
 			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y + 500.f * Time::GetDeltaTime()));
 		}
 
-		if (KeyInput::GetKeyPressed(KeyCode::V))
-			SpawnBullet();
-
 		switch (mState)
 		{
 		case me::Player_stage::Player_state::Idle:
@@ -169,15 +166,30 @@ namespace me
 		else if (KeyInput::GetKeyDown(KeyCode::X))
 		{
 			if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::UpArrow))
+			{
 				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_diagonal_up", mAnimator->GetFlipX());
+				SpawnBullet();
+			}
 			else if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::DownArrow))
+			{
 				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_diagonal_down", mAnimator->GetFlipX());
+				SpawnBullet();
+			}
 			else if (KeyInput::GetKeyDown(KeyCode::UpArrow))
+			{
 				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_up", mAnimator->GetFlipX());
+				SpawnBullet();
+			}
 			else if (KeyInput::GetKeyDown(KeyCode::DownArrow))
+			{
 				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_down", mAnimator->GetFlipX());
+				SpawnBullet();
+			}
 			else
+			{
 				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_straight", mAnimator->GetFlipX());
+				SpawnBullet();
+			}
 		}
 		else if (KeyInput::GetKeyDown(KeyCode::Z))
 		{
@@ -206,9 +218,15 @@ namespace me
 		if (KeyInput::GetKeyDown(KeyCode::X))
 		{
 			if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::UpArrow))
+			{
 				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_diagonal_up_run", mAnimator->GetFlipX());
+				SpawnBullet();
+			}
 			else if (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow))
+			{
 				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_straight_run", mAnimator->GetFlipX());
+				SpawnBullet();
+			}
 			else
 				mState = Player_state::Shooting;
 		}
@@ -235,7 +253,10 @@ namespace me
 		else if (KeyInput::GetKeyDown(KeyCode::C))
 			mState = Player_state::Aim;
 		else if (KeyInput::GetKeyDown(KeyCode::X))
+		{
 			mAnimator->PlayAnim(L"CupHead_stage_anim_duck_shoot", mAnimator->GetFlipX());
+			SpawnBullet();
+		}
 		else if (KeyInput::GetKeyDown(KeyCode::Z))
 		{
 			mIsGround = false;
@@ -252,9 +273,15 @@ namespace me
 	void Player_stage::Shooting()
 	{
 		if (KeyInput::GetKeyDown(KeyCode::UpArrow))
+		{
 			mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_up", mAnimator->GetFlipX());
+			SpawnBullet();
+		}
 		else
+		{
 			mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_straight", mAnimator->GetFlipX());
+			SpawnBullet();
+		}
 
 		if(KeyInput::GetKeyDown(KeyCode::Z))
 		{
@@ -281,16 +308,16 @@ namespace me
 		if(mIsJumping)
 		{
 			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y - 500.f * Time::GetDeltaTime()));
-
-			if (KeyInput::GetKeyDown(KeyCode::X))
-			{
-				// shoot
-			}
 		}
 
 		if (mJumpMaxHeight <= abs(mJumpStartHeight - tr->GetPos().y) || mIsGround)
 		{
 			mIsJumping = false;
+		}
+
+		if (KeyInput::GetKeyDown(KeyCode::X))
+		{
+			SpawnBullet();
 		}
 
 		if (mIsGround)
