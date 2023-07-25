@@ -13,9 +13,9 @@ namespace me
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
-		void OnCollisionEnter(BoxCollider* other);
-		void OnCollisionStay(BoxCollider* other);
-		void OnCollisionExit(BoxCollider* other);
+		virtual void OnCollisionEnter(BoxCollider* other);
+		virtual void OnCollisionStay(BoxCollider* other);
+		virtual void OnCollisionExit(BoxCollider* other);
 
 		void SetPos(math::Vector2 pos) { mPos = pos; }
 		void SetOffset(math::Vector2 offset) { mOffset = offset; }

@@ -8,7 +8,6 @@ namespace me
 		, HP(5)
 		, mAnimator(nullptr)
 		, mState(Player_state::Idle)
-		, mGroundCheckBox(nullptr)
 		, mIsGround(false)
 		, mJumpStartHeight(0)
 		, mJumpMaxHeight(300.f)
@@ -23,10 +22,9 @@ namespace me
 	{
 		GameObject::Init();
 
-		AddComponent<BoxCollider>(enums::eComponentType::BoxCollider);
-		mGroundCheckBox = AddComponent<BoxCollider>(L"GroundCheckBox");
-		mGroundCheckBox->SetOffset(math::Vector2(0, 75.f));
-		mGroundCheckBox->SetSize(math::Vector2(100.f, 5.f));
+		BoxCollider* collider = AddComponent<BoxCollider>(enums::eComponentType::BoxCollider);
+		collider->SetSize(collider->GetSize() + math::Vector2(0, 30));
+		collider->SetOffset(math::Vector2(0, 10.f));
 
 		mAnimator = AddComponent<Animator>(L"CupHead_stage_anim");
 		mAnimator->AddAnim(ResourceManager::Load<Animation>(L"CupHead_stage_anim_intro", L"..\\content\\BossFight\\Cuphead\\Intros\\Regular\\"));
@@ -76,12 +74,6 @@ namespace me
 		else if (KeyInput::GetKeyDown(KeyCode::LeftArrow) && KeyInput::GetKeyUp(KeyCode::RightArrow))
 			mAnimator->SetFlipX(true);
 
-		if (mGroundCheckBox->GetCollidedGobj() != nullptr 
-			&& mGroundCheckBox->GetCollidedGobj()->GetTag() == enums::eGameObjType::floor)
-			mIsGround = true;
-		else
-			mIsGround = false;
-
 		if (mState != Player_state::Aim && mState != Player_state::Duck)
 		{
 			Transform* tr = GetComponent<Transform>();
@@ -93,7 +85,7 @@ namespace me
 				tr->SetPos(math::Vector2(tr->GetPos().x - 200.f * Time::GetDeltaTime(), tr->GetPos().y));
 		}
 
-		if (!mIsGround && !mIsJumping)
+		if (!mIsGround&& !mIsJumping)
 		{
 			Transform* tr = GetComponent<Transform>();
 			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y + 500.f * Time::GetDeltaTime()));
@@ -128,6 +120,21 @@ namespace me
 		GameObject::Render(hdc);
 	}
 
+	void Player_stage::OnCollisionEnter(BoxCollider* other)
+	{
+		if (other->GetOwner()->GetTag() == enums::eGameObjType::floor)
+			mIsGround = true;
+	}
+
+	void Player_stage::OnCollisionStay(BoxCollider* other)
+	{
+	}
+
+	void Player_stage::OnCollisionExit(BoxCollider* other)
+	{
+
+	}
+
 	void Player_stage::Idle()
 	{
 		mAnimator->PlayAnim(L"CupHead_stage_anim_idle", mAnimator->GetFlipX());
@@ -136,6 +143,7 @@ namespace me
 			mState = Player_state::Run;
 		else if (KeyInput::GetKeyDown(KeyCode::Z))
 		{
+			mIsGround = false;
 			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
 			mState = Player_state::Jump;
 			mIsJumping = true;
@@ -169,6 +177,7 @@ namespace me
 		}
 		else if (KeyInput::GetKeyDown(KeyCode::Z))
 		{
+			mIsGround = false;
 			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
 			mState = Player_state::Jump;
 			mIsJumping = true;
@@ -204,6 +213,7 @@ namespace me
 
 		if (KeyInput::GetKeyDown(KeyCode::Z))
 		{
+			mIsGround = false;
 			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
 			mState = Player_state::Jump;
 			mIsJumping = true;
@@ -224,6 +234,7 @@ namespace me
 			mAnimator->PlayAnim(L"CupHead_stage_anim_duck_shoot", mAnimator->GetFlipX());
 		else if (KeyInput::GetKeyDown(KeyCode::Z))
 		{
+			mIsGround = false;
 			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
 			mState = Player_state::Jump;
 			mIsJumping = true;
@@ -243,6 +254,7 @@ namespace me
 
 		if(KeyInput::GetKeyDown(KeyCode::Z))
 		{
+			mIsGround = false;
 			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
 			mState = Player_state::Jump;
 			mIsJumping = true;
@@ -272,7 +284,7 @@ namespace me
 			}
 		}
 
-		if (mJumpMaxHeight <= abs(mJumpStartHeight - tr->GetPos().y))
+		if (mJumpMaxHeight <= abs(mJumpStartHeight - tr->GetPos().y) || mIsGround)
 		{
 			mIsJumping = false;
 		}

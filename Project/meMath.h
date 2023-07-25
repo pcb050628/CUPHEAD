@@ -1,4 +1,5 @@
 #pragma once
+#include <cmath>
 
 namespace me::math
 {
@@ -48,6 +49,16 @@ namespace me::math
 			return *this;
 		}
 
+		bool operator==(const Vector2& other)
+		{
+			return (x == other.x && y == other.y);
+		}
+
+		bool operator!=(const Vector2& other)
+		{
+			return (x != other.x && y != other.y);
+		}
+
 		void operator+=(const Vector2& other)
 		{
 			x += other.x;
@@ -58,11 +69,6 @@ namespace me::math
 		{
 			x -= other.x;
 			y -= other.y;
-		}
-
-		bool operator==(const Vector2& other)
-		{
-			return x == other.x && y == other.y;
 		}
 
 		Vector2& operator-()

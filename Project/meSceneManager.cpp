@@ -18,7 +18,7 @@ namespace me
 		CreateScene<TitleScene>(L"title");
 		CreateScene<MainScene>(L"main");
 		CreateScene<WorldMapScene>(L"overWorld");
-		CreateScene<Goopy_Le_Grande_Stage>(L"test");
+		mCurScene = CreateScene<Goopy_Le_Grande_Stage>(L"test");
 	}
 
 	void SceneManager::Update()

@@ -23,6 +23,10 @@ namespace me
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
+		virtual void OnCollisionEnter(BoxCollider* other) override;
+		virtual void OnCollisionStay(BoxCollider* other) override;
+		virtual void OnCollisionExit(BoxCollider* other) override;
+
 		void Idle();
 		void Aim();
 		void Run();
@@ -37,9 +41,7 @@ namespace me
 
 		Player_state mState;
 
-		BoxCollider* mGroundCheckBox;
 		bool mIsGround;
-
 		bool mIsJumping;
 		float mJumpMaxHeight;
 		float mJumpStartHeight;

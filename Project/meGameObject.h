@@ -8,7 +8,7 @@ namespace me
 	class GameObject : public Entity
 	{
 	public:
-		GameObject(const std::wstring& name, enums::eGameObjType type);
+		GameObject(const std::wstring& name, enums::eGameObjType type = enums::eGameObjType::obj);
 		virtual ~GameObject() override;
 
 		virtual void Init() override;

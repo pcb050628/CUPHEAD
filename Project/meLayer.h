@@ -16,6 +16,14 @@ namespace me
 		void Update();
 		void Render(HDC hdc);
 
+		template <typename T>
+		T* AddGameObj(const std::wstring& name)
+		{
+			GameObject* tmp = new T(name);
+			mGameObjs.push_back(tmp);
+			return dynamic_cast<T*>(tmp);
+		}
+
 		GameObject* AddGameObj(std::wstring name, enums::eGameObjType type)
 		{
 			GameObject* tmp = new GameObject(name, type);

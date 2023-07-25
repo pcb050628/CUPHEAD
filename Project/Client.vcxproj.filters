@@ -106,6 +106,9 @@
     <Filter Include="Engine\GameObject\Component\Rigidbody">
       <UniqueIdentifier>{69581da9-c924-4936-b391-c5446ff55a29}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObject\Floor">
+      <UniqueIdentifier>{5ed6d5de-1edb-4601-9fd4-7dcec056cd5f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -219,6 +222,9 @@
     <ClInclude Include="meRigidbody.h">
       <Filter>Engine\GameObject\Component\Rigidbody</Filter>
     </ClInclude>
+    <ClInclude Include="meFloor.h">
+      <Filter>Engine\GameObject\Floor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -324,6 +330,9 @@
     </ClCompile>
     <ClCompile Include="meRigidbody.cpp">
       <Filter>Engine\GameObject\Component\Rigidbody</Filter>
+    </ClCompile>
+    <ClCompile Include="meFloor.cpp">
+      <Filter>Engine\GameObject\Floor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

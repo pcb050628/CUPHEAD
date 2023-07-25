@@ -142,6 +142,7 @@
     <ClInclude Include="DEFAULT.h" />
     <ClInclude Include="meEntity.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="meFloor.h" />
     <ClInclude Include="meGameObject.h" />
     <ClInclude Include="meGoopy_Le_Grande_Boss.h" />
     <ClInclude Include="meGoopy_Le_Grande_Stage.h" />
@@ -174,6 +175,7 @@
     <ClCompile Include="meBoxCollider.cpp" />
     <ClCompile Include="meCamera.cpp" />
     <ClCompile Include="meColliderManager.cpp" />
+    <ClCompile Include="meFloor.cpp" />
     <ClCompile Include="meGoopy_Le_Grande_Boss.cpp" />
     <ClCompile Include="meGoopy_Le_Grande_Stage.cpp" />
     <ClCompile Include="meMath.cpp" />

@@ -21,6 +21,14 @@ namespace me
 		virtual GameObject* AddGameObj(enums::eLayer layerType, std::wstring name, enums::eGameObjType type);
 		virtual GameObject* GetGameObj(enums::eLayer layerType, std::wstring name);
 
+		template <typename T>
+		T* AddGameObj(enums::eLayer layerType, const std::wstring& name)
+		{
+			GameObject* obj = mLayers[(int)layerType].AddGameObj<T>(name);
+			obj->Init();
+			return dynamic_cast<T*>(obj);
+		}
+
 		virtual Player_map* AddPlayer_map(std::wstring name);
 		virtual Player_stage* AddPlayer_stage(std::wstring name);
 		virtual void AddBoss(Boss* boss);

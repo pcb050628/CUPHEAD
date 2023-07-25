@@ -43,6 +43,7 @@ namespace me
 		enum class eGameObjType
 		{
 			none,
+			obj,
 			background,
 			floor,
 			npc,

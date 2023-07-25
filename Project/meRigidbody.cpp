@@ -20,7 +20,7 @@ namespace me
 
 		mVelocity += mAccelation * Time::GetDeltaTime();
 
-		if (!(mVelocity == math::Vector2::Zero))
+		if (mVelocity != math::Vector2::Zero)
 		{
 			math::Vector2 friction = -mVelocity;
 			friction = friction.normalize() * mFirction * mMass * Time::GetDeltaTime();
