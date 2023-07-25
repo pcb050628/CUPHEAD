@@ -111,7 +111,14 @@ namespace me
 			}
 		}
 
+		std::vector<Component*> GetAllComponent() { return mComponents; }
+
+		void SetActive(bool value) { Activate = value; }
+		bool GetActive() { return Activate; }
+
 	private:
+		bool Activate;
+
 		enums::eGameObjType type;
 
 		std::vector<Component*> mComponents = {};

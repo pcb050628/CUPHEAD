@@ -19,8 +19,14 @@ namespace me
 		CircleCollider* collider = AddComponent<CircleCollider>(enums::eComponentType::Collider);
 
 		renderer = AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
-		LeftImage = ResourceManager::Load<Texture>(L"bullet_L", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_L_0008.bmp");
-		RightImage = ResourceManager::Load<Texture>(L"bullet_R", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_R_0008.bmp");
+		LeftImage = ResourceManager::Load<Texture>(L"bullet_L", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_L.bmp");
+		RightImage = ResourceManager::Load<Texture>(L"bullet_R", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_R.bmp");
+		UpImage = ResourceManager::Load<Texture>(L"bullet_Up", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_up.bmp");
+		DownImage = ResourceManager::Load<Texture>(L"bullet_Down", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_down.bmp");
+		DiagonalUpLeftImage = ResourceManager::Load<Texture>(L"bullet_diagonal_up_L", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\idle_diagonal_up_L.bmp");
+		DiagonalUpRightImage = ResourceManager::Load<Texture>(L"bullet_diagonal_up_R", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_diagonal_up_R.bmp");
+		DiagonalDownLeftImage = ResourceManager::Load<Texture>(L"bullet_diagonal_down_L", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_diagonal_down_L.bmp");
+		DiagonalDownRightImage = ResourceManager::Load<Texture>(L"bullet_diagonal_down_R", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_diagonal_down_R.bmp");
 
 		/*Animator* Anim = AddComponent<Animator>(enums::eComponentType::Animator);
 		Anim->AddAnim(ResourceManager::Load<Animation>(L"bulletidle_R", L"..\\content\\BossFight\\Cuphead\\Bullet\\Idle_R\\"));
@@ -36,64 +42,9 @@ namespace me
 		GameObject::Update();
 
 		float dir = 1;
-		if (mDirection.y == 1)
-		{
-			if (flip)
-			{
-				dir = -1;
-				renderer->SetImage(DiagonalDownLefttImage);
-				CircleCollider* collider = GetComponent<CircleCollider>();
-				collider->SetOffset(math::Vector2(-52.5f, 0));
-			}
-			else
-			{
-				renderer->SetImage(DiagonalDownRightImage);
-				CircleCollider* collider = GetComponent<CircleCollider>();
-				collider->SetOffset(math::Vector2(52.5f, 0));
-			}
 
-			if (mDirection.x == 0)
-			{
-				renderer->SetImage(DownImage);
-			}
-		}
-		else if (mDirection.y == -1)
-		{
-			if (flip)
-			{
-				dir = -1;
-				renderer->SetImage(DiagonalUpLefttImage);
-				CircleCollider* collider = GetComponent<CircleCollider>();
-				collider->SetOffset(math::Vector2(-52.5f, 0));
-			}
-			else
-			{
-				renderer->SetImage(DiagonalUpRightImage);
-				CircleCollider* collider = GetComponent<CircleCollider>();
-				collider->SetOffset(math::Vector2(52.5f, 0));
-			}
-
-			if (mDirection.x == 0)
-			{
-				renderer->SetImage(UpImage);
-			}
-		}
-		else
-		{
-			if (flip)
-			{
-				dir = -1;
-				renderer->SetImage(LeftImage);
-				CircleCollider* collider = GetComponent<CircleCollider>();
-				collider->SetOffset(math::Vector2(-52.5f, 0));
-			}
-			else
-			{
-				renderer->SetImage(RightImage);
-				CircleCollider* collider = GetComponent<CircleCollider>();
-				collider->SetOffset(math::Vector2(52.5f, 0));
-			}
-		}
+		if (flip)
+			dir = -1;
 
 		mDirection.normalize();
 
@@ -104,14 +55,15 @@ namespace me
 	{
 		GameObject::Render(hdc);
 	}
-	void Bullet::OnCollisionEnter(BoxCollider* other)
+	void Bullet::OnCollisionEnter(Collider* other)
 	{
-		SceneManager::Destroy(this, enums::eLayer::Bullet);
+		SetActive(false);
+		// 콜라이더 충돌이 된 상태로 제자리에서 멈추기 때문에 콜라이더 매니저에서 충돌체크를 할때 충돌상황으로 나옴
 	}
-	void Bullet::OnCollisionStay(BoxCollider* other)
+	void Bullet::OnCollisionStay(Collider* other)
 	{
 	}
-	void Bullet::OnCollisionExit(BoxCollider* other)
+	void Bullet::OnCollisionExit(Collider* other)
 	{
 	}
 }

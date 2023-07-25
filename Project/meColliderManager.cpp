@@ -124,8 +124,9 @@ namespace me
 			{
 				left->OnCollisionExit(right);
 				right->OnCollisionExit(left);
-				iter->second = false;
 			}
+
+			iter->second = false;
 		}
 	}
 

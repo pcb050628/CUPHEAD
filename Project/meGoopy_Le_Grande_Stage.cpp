@@ -29,7 +29,8 @@ namespace me
 		far_forest_sr->SetImage(ResourceManager::Load<Texture>(L"Goopy_Le_background_far_forest", L"..\\content\\BossFight\\Goopy Le Grande\\Background\\slime_bg_bg_far_forest.bmp"));
 		far_forest_sr->SetScale(math::Vector2(1, 1.4f));
 
-		/**/
+		GameObject* testObj = AddGameObj(enums::eLayer::Enemy, L"test", enums::eGameObjType::enemy);
+		testObj->AddComponent<BoxCollider>(enums::eComponentType::Collider);
 
 		Floor* floor = AddGameObj<Floor>(enums::eLayer::Background, L"floor_Collider");
 

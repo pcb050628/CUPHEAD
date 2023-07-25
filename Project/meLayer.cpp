@@ -18,14 +18,16 @@ namespace me
 	{
 		for (auto gobj : mGameObjs)
 		{
-			gobj->Update();
+			if (gobj->GetActive())
+				gobj->Update();
 		}
 	}
 	void Layer::Render(HDC hdc)
 	{
 		for (auto gobj : mGameObjs)
 		{
-			gobj->Render(hdc);
+			if(gobj->GetActive())
+				gobj->Render(hdc);
 		}
 	}
 }

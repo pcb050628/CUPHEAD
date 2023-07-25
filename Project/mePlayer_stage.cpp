@@ -257,19 +257,19 @@ namespace me
 	{
 		if (KeyInput::GetKeyUp(KeyCode::DownArrow))
 			mState = Player_state::Idle;
-		else if (KeyInput::GetKeyDown(KeyCode::C))
-			mState = Player_state::Aim;
-		else if (KeyInput::GetKeyDown(KeyCode::X))
-		{
-			mAnimator->PlayAnim(L"CupHead_stage_anim_duck_shoot", mAnimator->GetFlipX());
-			SpawnBullet(mTransform->GetPos() + math::Vector2(0, 20.f));
-		}
 		else if (KeyInput::GetKeyDown(KeyCode::Z))
 		{
 			mIsGround = false;
 			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
 			mState = Player_state::Jump;
 			mIsJumping = true;
+		}
+		else if (KeyInput::GetKeyDown(KeyCode::C))
+			mState = Player_state::Aim;
+		else if (KeyInput::GetKeyDown(KeyCode::X))
+		{
+			mAnimator->PlayAnim(L"CupHead_stage_anim_duck_shoot", mAnimator->GetFlipX());
+			SpawnBullet(mTransform->GetPos() + math::Vector2(0, 20.f));
 		}
 		else if (KeyInput::GetKeyUp(KeyCode::DownArrow) && (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)))
 			mState = Player_state::Run;
@@ -346,8 +346,8 @@ namespace me
 		if (shootPrevTime + shootDelay < Time::GetTime())
 		{
 			Bullet* b = SceneManager::Instantiate<Bullet>(enums::eLayer::Bullet, pos);
-			b->SetDirection(dir);
 			b->SetFlip(GetComponent<Animator>()->GetFlipX());
+			b->SetDirection(dir);
 			shootPrevTime = Time::GetTime();
 		}
 	}

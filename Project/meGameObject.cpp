@@ -6,6 +6,7 @@ namespace me
 	GameObject::GameObject(const std::wstring& name, enums::eGameObjType type) : Entity(name)
 		, type(type)
 		, mColliderCount(0)
+		, Activate(true)
 	{
 		AddComponent<Transform>(L"defaultTransform");
 	}
