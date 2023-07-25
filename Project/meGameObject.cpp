@@ -47,13 +47,13 @@ namespace me
 		}
 	}
 
-	void GameObject::OnCollisionEnter(BoxCollider* other)
+	void GameObject::OnCollisionEnter(Collider* other)
 	{
 	}
-	void GameObject::OnCollisionStay(BoxCollider* other)
+	void GameObject::OnCollisionStay(Collider* other)
 	{
 	}
-	void GameObject::OnCollisionExit(BoxCollider* other)
+	void GameObject::OnCollisionExit(Collider* other)
 	{
 	}
 }

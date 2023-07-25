@@ -23,9 +23,9 @@ namespace me
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
-		virtual void OnCollisionEnter(BoxCollider* other) override;
-		virtual void OnCollisionStay(BoxCollider* other) override;
-		virtual void OnCollisionExit(BoxCollider* other) override;
+		virtual void OnCollisionEnter(Collider* other) override;
+		virtual void OnCollisionStay(Collider* other) override;
+		virtual void OnCollisionExit(Collider* other) override;
 
 		void Idle();
 		void Aim();

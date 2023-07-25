@@ -12,7 +12,7 @@ namespace me
 	{
 		GameObject::Init();
 
-		BoxCollider* floor_col = AddComponent<BoxCollider>(enums::eComponentType::BoxCollider);
+		BoxCollider* floor_col = AddComponent<BoxCollider>(enums::eComponentType::Collider);
 		floor_col->SetOffset(math::Vector2(0, 300.f));
 		floor_col->SetSize(math::Vector2(1600, 50.f));
 	}
@@ -25,12 +25,14 @@ namespace me
 		GameObject::Render(hdc);
 	}
 
-	void Floor::OnCollisionEnter(BoxCollider* other)
+	void Floor::OnCollisionEnter(Collider* other)
 	{
 		if (other->GetOwner()->GetTag() == enums::eGameObjType::player)
 		{			
 			BoxCollider* box = GetComponent<BoxCollider>();
-			if (box->GetPos().y - box->GetSize().y / 2 < other->GetPos().y + other->GetSize().y / 2)
+			BoxCollider* otherBox = dynamic_cast<BoxCollider*>(other);
+
+			if (box->GetPos().y - box->GetSize().y / 2 < otherBox->GetPos().y + otherBox->GetSize().y / 2)
 			{
 				Transform* tr = other->GetOwner()->GetComponent<Transform>();
 				/*float len = fabs(other->GetSize().y / 2 + box->GetSize().y / 2);
@@ -44,10 +46,10 @@ namespace me
 			}
 		}
 	}
-	void Floor::OnCollisionStay(BoxCollider* other)
+	void Floor::OnCollisionStay(Collider* other)
 	{
 	}
-	void Floor::OnCollisionExit(BoxCollider* other)
+	void Floor::OnCollisionExit(Collider* other)
 	{
 	}
 }

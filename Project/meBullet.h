@@ -27,6 +27,15 @@ namespace me
 		math::Vector2 mDirection;
 		bool flip;
 
+		SpriteRenderer* renderer;
+		Texture* LeftImage;
+		Texture* RightImage;
+		Texture* DiagonalUpLefttImage;
+		Texture* DiagonalUpRightImage;
+		Texture* DiagonalDownLefttImage;
+		Texture* DiagonalDownRightImage;
+		Texture* UpImage;
+		Texture* DownImage;
 	};
 }
 

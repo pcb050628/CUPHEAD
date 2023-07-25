@@ -137,6 +137,8 @@
     <ClInclude Include="meBoxCollider.h" />
     <ClInclude Include="meBullet.h" />
     <ClInclude Include="meCamera.h" />
+    <ClInclude Include="meCircleCollider.h" />
+    <ClInclude Include="meCollider.h" />
     <ClInclude Include="meColliderManager.h" />
     <ClInclude Include="meComponent.h" />
     <ClInclude Include="COMPONENTS.h" />
@@ -176,6 +178,8 @@
     <ClCompile Include="meBoxCollider.cpp" />
     <ClCompile Include="meBullet.cpp" />
     <ClCompile Include="meCamera.cpp" />
+    <ClCompile Include="meCircleCollider.cpp" />
+    <ClCompile Include="meCollider.cpp" />
     <ClCompile Include="meColliderManager.cpp" />
     <ClCompile Include="meFloor.cpp" />
     <ClCompile Include="meGoopy_Le_Grande_Boss.cpp" />

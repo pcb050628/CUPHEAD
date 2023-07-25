@@ -36,9 +36,15 @@ namespace me
 		{
 			Transform,
 			SpriteRenderer,
-			BoxCollider,
+			Collider,
 			Animator,
 			Rigidbody,
+		};
+
+		enum class eColliderType
+		{
+			Circle,
+			Box,
 		};
 
 		enum class eGameObjType

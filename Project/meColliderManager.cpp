@@ -1,5 +1,6 @@
 #include "meColliderManager.h"
 #include "meSceneManager.h"
+#include "meCircleCollider.h"
 #include "meScene.h"
 
 namespace me
@@ -52,6 +53,7 @@ namespace me
 
 		mLayerMatrix[row][col] = enable;
 	}
+
 	void ColliderManager::LayerCollision(Scene* scene, enums::eLayer left, enums::eLayer right)
 	{
 		Layer& leftLayer = scene->GetLayer(left);
@@ -65,9 +67,9 @@ namespace me
 			if (leftObj->GetColliderCount() == 0)
 				continue;
 
-			std::vector<BoxCollider*> leftCols = leftObj->GetCollider();
+			std::vector<Collider*> leftCols = leftObj->GetCollider();
 
-			for (BoxCollider* leftCol : leftCols)
+			for (Collider* leftCol : leftCols)
 			{
 				for (GameObject* rightObj : rightGobjs)
 				{
@@ -76,9 +78,9 @@ namespace me
 					if (leftObj == rightObj) 
 						continue;
 
-					std::vector<BoxCollider*> rightCols = rightObj->GetCollider();
+					std::vector<Collider*> rightCols = rightObj->GetCollider();
 
-					for (BoxCollider* rightCol : rightCols)
+					for (Collider* rightCol : rightCols)
 					{
 						ColliderCollision(leftCol, rightCol);
 					}
@@ -87,7 +89,7 @@ namespace me
 		}
 	}
 
-	void ColliderManager::ColliderCollision(BoxCollider* left, BoxCollider* right)
+	void ColliderManager::ColliderCollision(Collider* left, Collider* right)
 	{
 		ColliderId id = {};
  		id.left = (UINT)left;
@@ -127,18 +129,67 @@ namespace me
 		}
 	}
 
-	bool ColliderManager::Intersect(BoxCollider* left, BoxCollider* right)
+	bool ColliderManager::Intersect(Collider* left, Collider* right)
 	{
-		math::Vector2 leftPos = left->GetPos();
-		math::Vector2 leftSize = left->GetSize();
-
-		math::Vector2 rightPos = right->GetPos();
-		math::Vector2 rightSize = right->GetSize();
-
-		if ((fabs(leftPos.x - rightPos.x) < fabs(leftSize.x / 2.f + rightSize.x / 2.f))
-			&& (fabs(leftPos.y - rightPos.y) < fabs(leftSize.y / 2.f + rightSize.y / 2.f)))
+		if (left->GetType() == enums::eColliderType::Box && right->GetType() == enums::eColliderType::Box)
 		{
-			return true;
+			math::Vector2 leftPos = dynamic_cast<BoxCollider*>(left)->GetPos();
+			math::Vector2 leftSize = dynamic_cast<BoxCollider*>(left)->GetSize();
+
+			math::Vector2 rightPos = dynamic_cast<BoxCollider*>(right)->GetPos();
+			math::Vector2 rightSize = dynamic_cast<BoxCollider*>(right)->GetSize();
+
+			if ((fabs(leftPos.x - rightPos.x) < fabs(leftSize.x / 2.f + rightSize.x / 2.f))
+				&& (fabs(leftPos.y - rightPos.y) < fabs(leftSize.y / 2.f + rightSize.y / 2.f)))
+			{
+				return true;
+			}
+		}
+		else if (left->GetType() == enums::eColliderType::Circle && right->GetType() == enums::eColliderType::Circle)
+		{
+			math::Vector2 leftPos = dynamic_cast<CircleCollider*>(left)->GetPos();
+			float leftVerRadius = dynamic_cast<CircleCollider*>(left)->GetVerticalRadius();
+			float leftHorRadius = dynamic_cast<CircleCollider*>(left)->GetHorizontalRadius();
+
+			math::Vector2 rightPos = dynamic_cast<CircleCollider*>(right)->GetPos();
+			float rightVerRadius = dynamic_cast<CircleCollider*>(right)->GetVerticalRadius();
+			float rightHorRadius = dynamic_cast<CircleCollider*>(right)->GetHorizontalRadius();
+
+			if ((fabs(leftPos.x - rightPos.x) < fabs(leftVerRadius + rightVerRadius))
+				&& (fabs(leftPos.y - rightPos.y) < fabs(leftHorRadius + rightHorRadius)))
+			{
+				return true;
+			}
+		}
+		else if(left->GetType() == enums::eColliderType::Box)
+		{
+			math::Vector2 leftPos = dynamic_cast<BoxCollider*>(left)->GetPos();
+			math::Vector2 leftSize = dynamic_cast<BoxCollider*>(left)->GetSize();
+
+			math::Vector2 rightPos = dynamic_cast<CircleCollider*>(right)->GetPos();
+			float rightVerRadius = dynamic_cast<CircleCollider*>(right)->GetVerticalRadius();
+			float rightHorRadius = dynamic_cast<CircleCollider*>(right)->GetHorizontalRadius();
+
+			if ((fabs(leftPos.x - rightPos.x) < fabs(leftSize.x / 2.f + rightVerRadius))
+				&& (fabs(leftPos.y - rightPos.y) < fabs(leftSize.y / 2.f + rightHorRadius)))
+			{
+				return true;
+			}
+		}
+		else if (left->GetType() == enums::eColliderType::Circle)
+		{
+			math::Vector2 leftPos = dynamic_cast<CircleCollider*>(left)->GetPos();
+			float leftVerRadius = dynamic_cast<CircleCollider*>(left)->GetVerticalRadius();
+			float leftHorRadius = dynamic_cast<CircleCollider*>(left)->GetHorizontalRadius();
+
+			math::Vector2 rightPos = dynamic_cast<BoxCollider*>(right)->GetPos();
+			math::Vector2 rightSize = dynamic_cast<BoxCollider*>(right)->GetSize();
+
+			if ((fabs(leftPos.x - rightPos.x) < fabs(leftVerRadius + rightSize.x / 2.f))
+				&& (fabs(leftPos.y - rightPos.y) < fabs(leftHorRadius + rightSize.y / 2.f)))
+			{
+				return true;
+			}
 		}
 
 		return false;

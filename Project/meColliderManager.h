@@ -1,6 +1,6 @@
 #pragma once
 #include "DEFAULT.h"
-#include "meBoxCollider.h"
+#include "meCollider.h"
 
 namespace me
 {	
@@ -25,8 +25,8 @@ namespace me
 
 		static void CollisionLayerCheck(enums::eLayer left, enums::eLayer right, bool enable);
 		static void LayerCollision(class Scene* scene, enums::eLayer left, enums::eLayer right);
-		static void ColliderCollision(BoxCollider* left, BoxCollider* right);
-		static bool Intersect(BoxCollider* left, BoxCollider* right);
+		static void ColliderCollision(Collider* left, Collider* right);
+		static bool Intersect(Collider* left, Collider* right);
 
 	private:
 		static std::map<UINT64, bool> mCollisionMap;

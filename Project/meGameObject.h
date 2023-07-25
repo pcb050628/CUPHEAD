@@ -17,9 +17,9 @@ namespace me
 
 		virtual enums::eGameObjType GetTag() { return type; }
 
-		virtual void OnCollisionEnter(BoxCollider* other);
-		virtual void OnCollisionStay(BoxCollider* other);
-		virtual void OnCollisionExit(BoxCollider* other);
+		virtual void OnCollisionEnter(Collider* other);
+		virtual void OnCollisionStay(Collider* other);
+		virtual void OnCollisionExit(Collider* other);
 		
 		template <typename T>
 		T* AddComponent(enums::eComponentType type)
@@ -34,7 +34,7 @@ namespace me
 			case me::enums::eComponentType::SpriteRenderer:
 				name = L"defaultSpriteRenderer";
 				break;
-			case me::enums::eComponentType::BoxCollider:
+			case me::enums::eComponentType::Collider:
 				name = L"defaultCollider";
 				break;
 			case me::enums::eComponentType::Animator:
@@ -93,16 +93,17 @@ namespace me
 		int GetColliderCount() { return mColliderCount; }
 		void ColliderCountIncrease() { mColliderCount += 1; }
 
-		std::vector<BoxCollider*> GetCollider() 
+		
+		std::vector<Collider*> GetCollider() 
 		{
 			if (mComponents.size() > 0 && mColliderCount > 0)
 			{
-				std::vector<BoxCollider*> tmp = {};
+				std::vector<Collider*> tmp = {};
 				for (int i = 0; i < mComponents.size(); i++)
 				{
-					if (dynamic_cast<BoxCollider*>(mComponents[i]) != nullptr)
+					if (dynamic_cast<Collider*>(mComponents[i]) != nullptr)
 					{
-						tmp.push_back(dynamic_cast<BoxCollider*>(mComponents[i]));
+						tmp.push_back(dynamic_cast<Collider*>(mComponents[i]));
 					}
 				}
 

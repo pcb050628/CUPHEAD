@@ -16,22 +16,84 @@ namespace me
 	{
 		GameObject::Init();
 
-		BoxCollider* collider = AddComponent<BoxCollider>(enums::eComponentType::BoxCollider); 
-		collider->SetSize(math::Vector2(100, 30));
-		
-		Animator* Anim = AddComponent<Animator>(enums::eComponentType::Animator);
-		Anim->AddAnim(ResourceManager::Load<Animation>(L"bulletidle", L"..\\content\\BossFight\\Cuphead\\Bullet\\Idle\\"));
-		Anim->GetAnim(L"bulletidle")->SetLoop(false);
+		CircleCollider* collider = AddComponent<CircleCollider>(enums::eComponentType::Collider);
+
+		renderer = AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
+		LeftImage = ResourceManager::Load<Texture>(L"bullet_L", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_L_0008.bmp");
+		RightImage = ResourceManager::Load<Texture>(L"bullet_R", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_R_0008.bmp");
+
+		/*Animator* Anim = AddComponent<Animator>(enums::eComponentType::Animator);
+		Anim->AddAnim(ResourceManager::Load<Animation>(L"bulletidle_R", L"..\\content\\BossFight\\Cuphead\\Bullet\\Idle_R\\"));
+		Anim->AddAnim(ResourceManager::Load<Animation>(L"bulletidle_L", L"..\\content\\BossFight\\Cuphead\\Bullet\\Idle_L\\"));
+		Anim->GetAnim(L"bulletidle_R")->SetLoop(false);
+		Anim->GetAnim(L"bulletidle_L")->SetLoop(false);
+		Anim->GetAnim(L"bulletidle_R")->SetDuration(0.1f);
+		Anim->GetAnim(L"bulletidle_L")->SetDuration(0.1f);
+		GetComponent<Animator>()->PlayAnim(L"bulletidle", flip);*/
 	}
 	void Bullet::Update()
 	{
 		GameObject::Update();
 
-		GetComponent<Animator>()->PlayAnim(L"bulletIdle", flip);
-
 		float dir = 1;
-		if (flip)
-			dir = -1;
+		if (mDirection.y == 1)
+		{
+			if (flip)
+			{
+				dir = -1;
+				renderer->SetImage(DiagonalDownLefttImage);
+				CircleCollider* collider = GetComponent<CircleCollider>();
+				collider->SetOffset(math::Vector2(-52.5f, 0));
+			}
+			else
+			{
+				renderer->SetImage(DiagonalDownRightImage);
+				CircleCollider* collider = GetComponent<CircleCollider>();
+				collider->SetOffset(math::Vector2(52.5f, 0));
+			}
+
+			if (mDirection.x == 0)
+			{
+				renderer->SetImage(DownImage);
+			}
+		}
+		else if (mDirection.y == -1)
+		{
+			if (flip)
+			{
+				dir = -1;
+				renderer->SetImage(DiagonalUpLefttImage);
+				CircleCollider* collider = GetComponent<CircleCollider>();
+				collider->SetOffset(math::Vector2(-52.5f, 0));
+			}
+			else
+			{
+				renderer->SetImage(DiagonalUpRightImage);
+				CircleCollider* collider = GetComponent<CircleCollider>();
+				collider->SetOffset(math::Vector2(52.5f, 0));
+			}
+
+			if (mDirection.x == 0)
+			{
+				renderer->SetImage(UpImage);
+			}
+		}
+		else
+		{
+			if (flip)
+			{
+				dir = -1;
+				renderer->SetImage(LeftImage);
+				CircleCollider* collider = GetComponent<CircleCollider>();
+				collider->SetOffset(math::Vector2(-52.5f, 0));
+			}
+			else
+			{
+				renderer->SetImage(RightImage);
+				CircleCollider* collider = GetComponent<CircleCollider>();
+				collider->SetOffset(math::Vector2(52.5f, 0));
+			}
+		}
 
 		mDirection.normalize();
 

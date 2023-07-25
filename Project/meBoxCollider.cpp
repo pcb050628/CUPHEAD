@@ -5,29 +5,26 @@
 namespace me
 {
 	BoxCollider::BoxCollider(GameObject* gobj, const std::wstring& name) 
-		: Component(enums::eComponentType::BoxCollider, gobj, name)
-		, mPos(gobj->GetComponent<Transform>()->GetPos())
-		, mOffset(math::Vector2::Zero)
+		: Collider(gobj, name, enums::eColliderType::Box)
 		, mSize(gobj->GetComponent<Transform>()->GetScale())
 	{
-		gobj->ColliderCountIncrease();
 	}
 	BoxCollider::~BoxCollider()
 	{
 	}
 	void BoxCollider::Init()
 	{
+		Collider::Init();
 	}
 	void BoxCollider::Update()
 	{
-		mPos = GetOwner()->GetComponent<Transform>()->GetPos() + mOffset;
-		mPos = Camera::AffectCameraPos(mPos);
+		Collider::Update();
 	}
 	void BoxCollider::Render(HDC hdc)
 	{
 		HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
 		HPEN pen;
-		if(isCollision)
+		if(GetCollision())
 			pen = CreatePen(PS_SOLID, 0, RGB(255, 0, 0));
 		else
 			pen = CreatePen(PS_SOLID, 0, RGB(0, 255, 0));
@@ -35,11 +32,13 @@ namespace me
 		HBRUSH oldB = (HBRUSH)SelectObject(hdc, brush);
 		HPEN oldP = (HPEN)SelectObject(hdc, pen);
 
+		math::Vector2 pos = GetPos();
+
 		Rectangle(hdc
-			, mPos.x - mSize.x / 2
-			, mPos.y - mSize.y / 2
-			, mPos.x + mSize.x / 2
-			, mPos.y + mSize.y / 2);
+			, pos.x - mSize.x / 2
+			, pos.y - mSize.y / 2
+			, pos.x + mSize.x / 2
+			, pos.y + mSize.y / 2);
 
 		SelectObject(hdc, oldB);
 		SelectObject(hdc, oldP);
@@ -47,28 +46,16 @@ namespace me
 		DeleteObject(brush);
 		DeleteObject(pen);
 	}
-	void BoxCollider::OnCollisionEnter(BoxCollider* other)
+	void BoxCollider::OnCollisionEnter(Collider* other)
 	{
-		GetOwner()->OnCollisionEnter(other);
-		CollidedObjcet = other->GetOwner();
-		isCollision = true;
+		Collider::OnCollisionEnter(other);
 	}
-	void BoxCollider::OnCollisionStay(BoxCollider* other)
+	void BoxCollider::OnCollisionStay(Collider* other)
 	{
-		GetOwner()->OnCollisionStay(other);
+		Collider::OnCollisionStay(other);
 	}
-	void BoxCollider::OnCollisionExit(BoxCollider* other)
+	void BoxCollider::OnCollisionExit(Collider* other)
 	{
-		GetOwner()->OnCollisionExit(other);
-		CollidedObjcet = nullptr;
-		isCollision = false;
-	}
-
-	GameObject* BoxCollider::GetCollidedGobj()
-	{
-		if (CollidedObjcet != nullptr)
-			return CollidedObjcet;
-		else
-			return nullptr;
+		Collider::OnCollisionExit(other);
 	}
 }

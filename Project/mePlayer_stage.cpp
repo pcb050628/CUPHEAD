@@ -29,7 +29,7 @@ namespace me
 
 		mTransform = GetComponent<Transform>();
 
-		BoxCollider* collider = AddComponent<BoxCollider>(enums::eComponentType::BoxCollider);
+		BoxCollider* collider = AddComponent<BoxCollider>(enums::eComponentType::Collider);
 		collider->SetSize(collider->GetSize() + math::Vector2(0, 30));
 		collider->SetOffset(math::Vector2(0, 10.f));
 
@@ -126,17 +126,17 @@ namespace me
 		GameObject::Render(hdc);
 	}
 
-	void Player_stage::OnCollisionEnter(BoxCollider* other)
+	void Player_stage::OnCollisionEnter(Collider* other)
 	{
 		if (other->GetOwner()->GetTag() == enums::eGameObjType::floor)
 			mIsGround = true;
 	}
 
-	void Player_stage::OnCollisionStay(BoxCollider* other)
+	void Player_stage::OnCollisionStay(Collider* other)
 	{
 	}
 
-	void Player_stage::OnCollisionExit(BoxCollider* other)
+	void Player_stage::OnCollisionExit(Collider* other)
 	{
 
 	}
@@ -247,6 +247,8 @@ namespace me
 		}
 		else if (KeyInput::GetKeyDown(KeyCode::DownArrow))
 			mState = Player_state::Duck;
+		else if (KeyInput::GetKeyDown(KeyCode::C))
+			mState = Player_state::Aim;
 		else if (KeyInput::GetKeyUp(KeyCode::RightArrow) && KeyInput::GetKeyUp(KeyCode::LeftArrow))
 			mState = Player_state::Idle;
 	}

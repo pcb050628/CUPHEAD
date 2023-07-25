@@ -97,9 +97,6 @@
     <Filter Include="Engine\GameObject\Boss\Goopy Le Grande_Boss">
       <UniqueIdentifier>{fd371d01-59c2-47b1-88e8-ada3b41a2a61}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\GameObject\Component\BoxCollider">
-      <UniqueIdentifier>{a01a5f04-1909-4b62-bc52-74a250c28b68}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\ColliderManager">
       <UniqueIdentifier>{58653b13-0dfb-4c90-9aa8-c1da5f0e8728}</UniqueIdentifier>
     </Filter>
@@ -111,6 +108,15 @@
     </Filter>
     <Filter Include="Engine\GameObject\Player\Bullet">
       <UniqueIdentifier>{8e888882-2a3d-4668-8078-dda18af074aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Component\Collider">
+      <UniqueIdentifier>{a90d8cd6-8b74-4e93-a74b-78bd726967c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Component\Collider\BoxCollider">
+      <UniqueIdentifier>{a01a5f04-1909-4b62-bc52-74a250c28b68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Component\Collider\CircleCollider">
+      <UniqueIdentifier>{2d57c84b-7483-4809-8a01-149fd6b5ce51}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -216,9 +222,6 @@
     <ClInclude Include="meGoopy_Le_Grande_Boss.h">
       <Filter>Engine\GameObject\Boss\Goopy Le Grande_Boss</Filter>
     </ClInclude>
-    <ClInclude Include="meBoxCollider.h">
-      <Filter>Engine\GameObject\Component\BoxCollider</Filter>
-    </ClInclude>
     <ClInclude Include="meColliderManager.h">
       <Filter>Engine\ColliderManager</Filter>
     </ClInclude>
@@ -230,6 +233,15 @@
     </ClInclude>
     <ClInclude Include="meBullet.h">
       <Filter>Engine\GameObject\Player\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="meCollider.h">
+      <Filter>Engine\GameObject\Component\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="meBoxCollider.h">
+      <Filter>Engine\GameObject\Component\Collider\BoxCollider</Filter>
+    </ClInclude>
+    <ClInclude Include="meCircleCollider.h">
+      <Filter>Engine\GameObject\Component\Collider\CircleCollider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -329,7 +341,7 @@
       <Filter>Engine\GameObject\Boss\Goopy Le Grande_Boss</Filter>
     </ClCompile>
     <ClCompile Include="meBoxCollider.cpp">
-      <Filter>Engine\GameObject\Component\BoxCollider</Filter>
+      <Filter>Engine\GameObject\Component\Collider\BoxCollider</Filter>
     </ClCompile>
     <ClCompile Include="meColliderManager.cpp">
       <Filter>Engine\ColliderManager</Filter>
@@ -342,6 +354,12 @@
     </ClCompile>
     <ClCompile Include="meBullet.cpp">
       <Filter>Engine\GameObject\Player\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="meCollider.cpp">
+      <Filter>Engine\GameObject\Component\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="meCircleCollider.cpp">
+      <Filter>Engine\GameObject\Component\Collider\CircleCollider</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

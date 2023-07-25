@@ -1,9 +1,9 @@
 #pragma once
-#include "meComponent.h"
+#include "meCollider.h"
 
 namespace me
 {	
-	class BoxCollider : public Component
+	class BoxCollider : public Collider
 	{
 	public:
 		BoxCollider(GameObject* gobj, const std::wstring& name);
@@ -13,26 +13,16 @@ namespace me
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
-		virtual void OnCollisionEnter(BoxCollider* other);
-		virtual void OnCollisionStay(BoxCollider* other);
-		virtual void OnCollisionExit(BoxCollider* other);
+		virtual void OnCollisionEnter(Collider* other);
+		virtual void OnCollisionStay(Collider* other);
+		virtual void OnCollisionExit(Collider* other);
 
-		void SetPos(math::Vector2 pos) { mPos = pos; }
-		void SetOffset(math::Vector2 offset) { mOffset = offset; }
 		void SetSize(math::Vector2 scale) { mSize= scale; }
-		math::Vector2 GetPos() { return mPos; }
-		math::Vector2 GetOffset() { return mOffset; }
 		math::Vector2 GetSize() { return mSize; }
 
-		GameObject* GetCollidedGobj();
-
 	private:
-		math::Vector2 mPos;
-		math::Vector2 mOffset;
 		math::Vector2 mSize;
 
-		bool isCollision;
-		GameObject* CollidedObjcet;
 	};
 }
 

@@ -15,7 +15,7 @@ namespace me
 	{
 		Boss::Init();
 
-		AddComponent<BoxCollider>(enums::eComponentType::BoxCollider);
+		AddComponent<BoxCollider>(enums::eComponentType::Collider);
 
 		mAnimator = AddComponent<Animator>(enums::eComponentType::Animator);
 
