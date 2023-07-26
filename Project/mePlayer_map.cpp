@@ -16,14 +16,14 @@ namespace me
 		GameObject::Init();
 
 		mAnimator = AddComponent<Animator>(L"CupHead_map_anim");
-		mAnimator->AddAnim(ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_front_idle", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(0, 0), 16, 4));
-		mAnimator->AddAnim(ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_back_idle", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(0, 565.625f), 16, 2));
-		mAnimator->AddAnim(ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_horizontal_idle", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(0, 339.375f), 16, 2));
-		mAnimator->AddAnim(ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_front_walk", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(412.25f, 0), 16, 12));
-		mAnimator->AddAnim(ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_diagonal_front_walk", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(309.1875f, 113.125f), 16, 12));
-		mAnimator->AddAnim(ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_horizontal_walk", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(309.1875f, 339.375f), 16, 11));
-		mAnimator->AddAnim(ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_diagonal_back_walk", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(412.25f, 452.5f), 16, 12));
-		mAnimator->AddAnim(ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_back_walk", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(0, 678.75f), 16, 13));
+		mAnimator->AddAnim(*ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_front_idle", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(0, 0), 16, 4));
+		mAnimator->AddAnim(*ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_back_idle", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(0, 565.625f), 16, 2));
+		mAnimator->AddAnim(*ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_horizontal_idle", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(0, 339.375f), 16, 2));
+		mAnimator->AddAnim(*ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_front_walk", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(412.25f, 0), 16, 12));
+		mAnimator->AddAnim(*ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_diagonal_front_walk", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(309.1875f, 113.125f), 16, 12));
+		mAnimator->AddAnim(*ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_horizontal_walk", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(309.1875f, 339.375f), 16, 11));
+		mAnimator->AddAnim(*ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_diagonal_back_walk", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(412.25f, 452.5f), 16, 12));
+		mAnimator->AddAnim(*ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_back_walk", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(0, 678.75f), 16, 13));
 		mAnimator->PlayAnim(L"CupHead_map_anim_back_idle");
 	}
 	void Player_map::Update()

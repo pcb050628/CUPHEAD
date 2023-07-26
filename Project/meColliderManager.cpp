@@ -132,6 +132,9 @@ namespace me
 
 	bool ColliderManager::Intersect(Collider* left, Collider* right)
 	{
+		if (!left->GetActivate() || !right->GetActivate())
+			return false;
+
 		if (left->GetType() == enums::eColliderType::Box && right->GetType() == enums::eColliderType::Box)
 		{
 			math::Vector2 leftPos = dynamic_cast<BoxCollider*>(left)->GetPos();

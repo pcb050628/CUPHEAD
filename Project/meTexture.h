@@ -24,6 +24,9 @@ namespace me
 		UINT GetWidth() { return mWidth; }
 		UINT GetHeight() { return mHeight; }
 
+		void SetOffset(math::Vector2 offset) { mOffset = offset; }
+		math::Vector2 GetOffset() { return mOffset; }
+
 		eTextureType GetType() { return mType; }
 
 	private:
@@ -36,5 +39,6 @@ namespace me
 
 		UINT	mWidth;
 		UINT	mHeight;
+		math::Vector2 mOffset;
 	};
 }

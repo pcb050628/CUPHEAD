@@ -24,7 +24,7 @@ namespace me
 		GameObject* title_character = AddGameObj(enums::eLayer::Background, L"title_character", enums::eGameObjType::background);
 		title_character->GetComponent<Transform>()->SetPos(math::Vector2(0, 75));
 		Animator* title_char_anim = title_character->AddComponent<Animator>(enums::eComponentType::Animator);
-		title_char_anim->AddAnim(ResourceManager::Load<Animation>(L"title_character", L"..\\content\\title screen\\Cuphead and Mugman\\"));
+		title_char_anim->AddAnim(*ResourceManager::Load<Animation>(L"title_character", L"..\\content\\title screen\\Cuphead and Mugman\\"));
 		title_char_anim->PlayAnim(L"title_character");
 		title_char_anim->GetCurAnim()->SetDuration(0.04f);
 	}

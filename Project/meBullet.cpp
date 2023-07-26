@@ -28,6 +28,8 @@ namespace me
 		DiagonalDownLeftImage = ResourceManager::Load<Texture>(L"bullet_diagonal_down_L", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_diagonal_down_L.bmp");
 		DiagonalDownRightImage = ResourceManager::Load<Texture>(L"bullet_diagonal_down_R", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_diagonal_down_R.bmp");
 
+		
+
 		/*Animator* Anim = AddComponent<Animator>(enums::eComponentType::Animator);
 		Anim->AddAnim(ResourceManager::Load<Animation>(L"bulletidle_R", L"..\\content\\BossFight\\Cuphead\\Bullet\\Idle_R\\"));
 		Anim->AddAnim(ResourceManager::Load<Animation>(L"bulletidle_L", L"..\\content\\BossFight\\Cuphead\\Bullet\\Idle_L\\"));
@@ -57,8 +59,12 @@ namespace me
 	}
 	void Bullet::OnCollisionEnter(Collider* other)
 	{
+		for (Component* comp : GetAllComponent())
+		{
+			comp->SetActivate(false);
+		}
+
 		SetActive(false);
-		// 콜라이더 충돌이 된 상태로 제자리에서 멈추기 때문에 콜라이더 매니저에서 충돌체크를 할때 충돌상황으로 나옴
 	}
 	void Bullet::OnCollisionStay(Collider* other)
 	{

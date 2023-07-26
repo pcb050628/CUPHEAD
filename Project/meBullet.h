@@ -25,18 +25,24 @@ namespace me
 				if (flip)
 				{
 					renderer->SetImage(DiagonalDownLeftImage);
+					DiagonalDownLeftImage->SetOffset(math::Vector2(0, -50));
 					CircleCollider* collider = GetComponent<CircleCollider>();
 					collider->SetOffset(math::Vector2(-52.5f, 0));
 				}
 				else
 				{
 					renderer->SetImage(DiagonalDownRightImage);
+					DiagonalDownRightImage->SetOffset(math::Vector2(0, -50));
 					CircleCollider* collider = GetComponent<CircleCollider>();
 					collider->SetOffset(math::Vector2(52.5f, 0));
 				}
 
 				if (mDirection.x == 0)
 				{
+					if (flip)
+						DownImage->SetOffset(math::Vector2(-50, 0));
+					else
+						DownImage->SetOffset(math::Vector2(50, 0));
 					renderer->SetImage(DownImage);
 				}
 			}
@@ -45,18 +51,24 @@ namespace me
 				if (flip)
 				{
 					renderer->SetImage(DiagonalUpLeftImage);
+					DiagonalUpLeftImage->SetOffset(math::Vector2(0, 50));
 					CircleCollider* collider = GetComponent<CircleCollider>();
 					collider->SetOffset(math::Vector2(-52.5f, 0));
 				}
 				else
 				{
 					renderer->SetImage(DiagonalUpRightImage);
+					DiagonalUpRightImage->SetOffset(math::Vector2(0, 50));
 					CircleCollider* collider = GetComponent<CircleCollider>();
 					collider->SetOffset(math::Vector2(52.5f, 0));
 				}
 
 				if (mDirection.x == 0)
 				{
+					if (flip)
+						UpImage->SetOffset(math::Vector2(-50, 0));
+					else
+						UpImage->SetOffset(math::Vector2(50, 0));
 					renderer->SetImage(UpImage);
 				}
 			}

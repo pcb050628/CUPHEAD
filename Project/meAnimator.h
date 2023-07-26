@@ -22,17 +22,19 @@ namespace me
 		virtual void SetFlipX(bool value) { isFlipX = value; }
 		virtual void SetFlipY(bool value) { isFlipY = value; }
 
-		virtual void AddAnim(Animation* anim)
+		virtual void AddAnim(Animation anim)
 		{
-			mAnims.insert(std::make_pair(anim->GetName(), anim));
+			auto iter = mAnims.find(anim.GetName());
+			if(iter == mAnims.end())
+				mAnims.insert(std::make_pair(anim.GetName(), anim));
 		}
 
 		virtual void PlayAnim(const std::wstring& name)
 		{
 			auto iter = mAnims.find(name);
-			if (iter != mAnims.end() && mCurPlayAnim != iter->second)
+			if (iter != mAnims.end() && mCurPlayAnim != &iter->second)
 			{
-				mCurPlayAnim = iter->second;
+				mCurPlayAnim = &iter->second;
 				isPlay = true;
 				mCurPlayAnim->Reset();
 			}
@@ -48,9 +50,9 @@ namespace me
 				_name += L"_R";
 
 			auto iter = mAnims.find(_name);
-			if (iter != mAnims.end() && mCurPlayAnim != iter->second)
+			if (iter != mAnims.end() && mCurPlayAnim != &iter->second)
 			{
-				mCurPlayAnim = iter->second;
+				mCurPlayAnim = &iter->second;
 				isPlay = true;
 				mCurPlayAnim->Reset();
 			}
@@ -59,9 +61,9 @@ namespace me
 		virtual void PlayAnim(const std::wstring& name, float duration)
 		{
 			auto iter = mAnims.find(name);
-			if (iter != mAnims.end() && mCurPlayAnim != iter->second)
+			if (iter != mAnims.end() && mCurPlayAnim != &iter->second)
 			{
-				mCurPlayAnim = iter->second;
+				mCurPlayAnim = &iter->second;
 				isPlay = true;
 				mCurPlayAnim->Reset();
 				mCurPlayAnim->SetDuration(duration);
@@ -73,7 +75,7 @@ namespace me
 			auto iter = mAnims.find(name);
 			if (iter != mAnims.end())
 			{
-				mNextAnims.push(iter->second);
+				mNextAnims.push(&iter->second);
 			}
 		}
 
@@ -88,7 +90,7 @@ namespace me
 			if (iter == mAnims.end())
 				return nullptr;
 			else
-				return iter->second;
+				return &iter->second;
 		}
 
 		virtual Animation* GetCurAnim() { return mCurPlayAnim; }
@@ -97,7 +99,7 @@ namespace me
 		virtual bool GetFlipY() { return isFlipY; }
 
 	private:
-		std::map<std::wstring, Animation*> mAnims;
+		std::map<std::wstring, Animation> mAnims;
 		Animation* mCurPlayAnim;
 
 		std::queue<Animation*> mNextAnims;
