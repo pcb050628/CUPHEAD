@@ -13,9 +13,16 @@ namespace me
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
-	private:
-		float HP;
+		virtual void Phase1() override;
+		virtual void Phase2() override;
+		virtual void Phase3() override;
+		virtual void Death() override;
 
+		void Jump();
+		void Punch();
+		void Smash();
+
+	private:
 		Animator* mAnimator;
 
 	};

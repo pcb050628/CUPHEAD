@@ -1,7 +1,3 @@
-﻿  meGoopy_Le_Grande_Boss.cpp
+﻿  meBullet.cpp
 C:\Users\chanb\Documents\GitHub\CUPHEAD\Project\meMath.h(39,27): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-  meWorldMapScene.cpp
-C:\Users\chanb\Documents\GitHub\CUPHEAD\Project\meMath.h(39,27): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\chanb\Documents\GitHub\CUPHEAD\Project\meWorldMapScene.cpp(23,71): warning C4129: 'c': 문자 이스케이프 시퀀스를 인식할 수 없습니다.
-  코드를 생성하고 있습니다...
   Client.vcxproj -> C:\Users\chanb\Documents\GitHub\CUPHEAD\Project\x64\Debug\Client.exe

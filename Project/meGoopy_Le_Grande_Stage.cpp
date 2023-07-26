@@ -18,7 +18,7 @@ namespace me
 
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Background, enums::eLayer::Player, true);
 
-		//AddBoss<Goopy_Le_Grande_Boss>(L"Goopy Le Grande");
+		AddBoss<Goopy_Le_Grande_Boss>(L"Goopy Le Grande");
 
 		GameObject* bg_evergreen = AddGameObj(enums::eLayer::Background, L"1_stage_backgroung_evergreen", enums::eGameObjType::background);
 		SpriteRenderer* evergreen_sr = bg_evergreen->AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
@@ -29,8 +29,8 @@ namespace me
 		far_forest_sr->SetImage(ResourceManager::Load<Texture>(L"Goopy_Le_background_far_forest", L"..\\content\\BossFight\\Goopy Le Grande\\Background\\slime_bg_bg_far_forest.bmp"));
 		far_forest_sr->SetScale(math::Vector2(1, 1.4f));
 
-		GameObject* testObj = AddGameObj(enums::eLayer::Enemy, L"test", enums::eGameObjType::enemy);
-		testObj->AddComponent<BoxCollider>(enums::eComponentType::Collider);
+		/*GameObject* testObj = AddGameObj(enums::eLayer::Enemy, L"test", enums::eGameObjType::enemy);
+		testObj->AddComponent<BoxCollider>(enums::eComponentType::Collider);*/
 
 		Floor* floor = AddGameObj<Floor>(enums::eLayer::Background, L"floor_Collider");
 

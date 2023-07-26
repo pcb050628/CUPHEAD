@@ -65,6 +65,12 @@ namespace me
 		}
 
 		SetActive(false);
+
+		if (other->GetOwner()->GetTag() == enums::eGameObjType::enemy)
+		{
+			if(dynamic_cast<Boss*>(other->GetOwner()) != nullptr)
+				dynamic_cast<Boss*>(other->GetOwner())->SetHP(dynamic_cast<Boss*>(other->GetOwner())->GetHP() - 4);
+		}
 	}
 	void Bullet::OnCollisionStay(Collider* other)
 	{

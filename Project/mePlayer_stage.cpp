@@ -11,6 +11,7 @@ namespace me
 		, shootDelay(0.2f)
 		, shootPrevTime(0)
 		, mAnimator(nullptr)
+		, mTransform(nullptr)
 		, mState(Player_state::Idle)
 		, mIsGround(false)
 		, mIsJumping(false)
@@ -86,16 +87,16 @@ namespace me
 			Transform* tr = GetComponent<Transform>();
 
 			if (KeyInput::GetKey(KeyCode::RightArrow))
-				tr->SetPos(math::Vector2(tr->GetPos().x + 200.f * Time::GetDeltaTime(), tr->GetPos().y));
+				tr->SetPos(math::Vector2(tr->GetPos().x + 350.f * Time::GetDeltaTime(), tr->GetPos().y));
 
 			if (KeyInput::GetKey(KeyCode::LeftArrow))
-				tr->SetPos(math::Vector2(tr->GetPos().x - 200.f * Time::GetDeltaTime(), tr->GetPos().y));
+				tr->SetPos(math::Vector2(tr->GetPos().x - 350.f * Time::GetDeltaTime(), tr->GetPos().y));
 		}
 
 		if (!mIsGround&& !mIsJumping)
 		{
 			Transform* tr = GetComponent<Transform>();
-			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y + 500.f * Time::GetDeltaTime()));
+			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y + 700.f * Time::GetDeltaTime()));
 		}
 
 		switch (mState)
@@ -314,7 +315,7 @@ namespace me
 
 		if(mIsJumping)
 		{
-			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y - 500.f * Time::GetDeltaTime()));
+			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y - 700.f * Time::GetDeltaTime()));
 		}
 
 		if (mJumpMaxHeight <= abs(mJumpStartHeight - tr->GetPos().y) || mIsGround)
