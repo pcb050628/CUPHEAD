@@ -35,4 +35,7 @@ namespace me
 	{
 		Scene::Render(hdc);
 	}
+	void BossFightScene::Clear()
+	{
+	}
 }

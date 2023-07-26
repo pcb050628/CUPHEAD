@@ -40,7 +40,7 @@ namespace me
 			return mLayers[(int)layerType].Destroy(gobj);
 		}
 
-
+		virtual void Clear();
 
 	private:
 		std::vector<Layer> mLayers;

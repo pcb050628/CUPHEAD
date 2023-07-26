@@ -13,6 +13,8 @@ namespace me
 		void Update() override;
 		void Render(HDC hdc) override;
 
+		virtual void Clear() override;
+
 	private:
 
 	};

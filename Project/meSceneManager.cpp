@@ -52,7 +52,9 @@ namespace me
 		if (iter == mScenes.end())
 			return nullptr;
 
+		mCurScene->Clear();
 		mCurScene = iter->second;
+		mCurScene->Init();
 		return iter->second;
 	}
 }

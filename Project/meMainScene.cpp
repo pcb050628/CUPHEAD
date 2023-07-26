@@ -37,4 +37,7 @@ namespace me
 	{
 		Scene::Render(hdc);
 	}
+	void MainScene::Clear()
+	{
+	}
 }

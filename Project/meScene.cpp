@@ -74,4 +74,7 @@ namespace me
 	{
 		mLayers[(int)enums::eLayer::Enemy].AddBoss(boss);
 	}
+	void Scene::Clear()
+	{
+	}
 }

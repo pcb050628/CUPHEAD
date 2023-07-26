@@ -41,4 +41,7 @@ namespace me
 	{
 		Scene::Render(hdc);
 	}
+	void TitleScene::Clear()
+	{
+	}
 }

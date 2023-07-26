@@ -38,4 +38,7 @@ namespace me
 	{
 		Scene::Render(hdc);
 	}
+	void WorldMapScene::Clear()
+	{
+	}
 }
