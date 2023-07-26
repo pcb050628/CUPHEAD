@@ -64,6 +64,8 @@ namespace me
 	private:
 		enums::eAnimType mType;
 
+		math::Vector2 mOffset;
+
 		std::vector<Texture*> mTextures;
 		int mIdx;
 

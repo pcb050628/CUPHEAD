@@ -49,15 +49,6 @@
     <Filter Include="Engine\SceneManager\Scene\Layer">
       <UniqueIdentifier>{9122579b-0947-40c2-a263-044abce3f4cd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\ResourceManager">
-      <UniqueIdentifier>{c67f88c3-fc95-4e5a-8e93-cd61bba81af9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\ResourceManager\Resource">
-      <UniqueIdentifier>{18cf9636-1661-4ae3-83ed-c2ce41feb7f0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\ResourceManager\Resource\Texture">
-      <UniqueIdentifier>{aea1dea4-ac72-4ffe-b33c-49a50b1cafa3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\SceneManager\Scene\TitleScene">
       <UniqueIdentifier>{08000fe8-3980-41af-b586-58ff3d9d12ad}</UniqueIdentifier>
     </Filter>
@@ -91,9 +82,6 @@
     <Filter Include="Engine\GameObject\Player\Player_stage">
       <UniqueIdentifier>{1500ace7-220b-4234-8741-c41bb9cca66c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\ResourceManager\Resource\Animation">
-      <UniqueIdentifier>{97c3aae5-ef8d-4e1e-90e6-743a4d255060}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\GameObject\Boss\Goopy Le Grande_Boss">
       <UniqueIdentifier>{fd371d01-59c2-47b1-88e8-ada3b41a2a61}</UniqueIdentifier>
     </Filter>
@@ -117,6 +105,18 @@
     </Filter>
     <Filter Include="Engine\GameObject\Component\Collider\CircleCollider">
       <UniqueIdentifier>{2d57c84b-7483-4809-8a01-149fd6b5ce51}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ResourceManager">
+      <UniqueIdentifier>{c67f88c3-fc95-4e5a-8e93-cd61bba81af9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ResourceManager\Resource">
+      <UniqueIdentifier>{18cf9636-1661-4ae3-83ed-c2ce41feb7f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ResourceManager\Resource\Texture">
+      <UniqueIdentifier>{aea1dea4-ac72-4ffe-b33c-49a50b1cafa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ResourceManager\Resource\Animation">
+      <UniqueIdentifier>{97c3aae5-ef8d-4e1e-90e6-743a4d255060}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

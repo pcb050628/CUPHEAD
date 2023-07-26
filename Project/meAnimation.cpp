@@ -104,16 +104,19 @@ namespace me
 		{
 			if (mTextures[mIdx]->GetType() == eTextureType::bmp)
 			{
-				TransparentBlt(hdc, pos.x - (mTextures[mIdx]->GetWidth() * scale.x / 2), pos.y - (mTextures[mIdx]->GetHeight() * scale.y / 2)
-					, mTextures[mIdx]->GetWidth() * scale.x, mTextures[mIdx]->GetHeight() * scale.y
+				TransparentBlt(hdc
+					, pos.x - (mTextures[mIdx]->GetWidth() * scale.x / 2) + mOffset.x
+					, pos.y - (mTextures[mIdx]->GetHeight() * scale.y / 2) + mOffset.y
+					, mTextures[mIdx]->GetWidth() * scale.x
+					, mTextures[mIdx]->GetHeight() * scale.y
 					, mTextures[mIdx]->GetHdc(), 0, 0, mTextures[mIdx]->GetWidth(), mTextures[mIdx]->GetHeight(), RGB(255, 0, 255));
 			}
 			else if (mTextures[mIdx]->GetType() == eTextureType::png)
 			{
 				Gdiplus::Graphics graphics(hdc);
 				Gdiplus::Rect rect = { 
-					(INT)(pos.x - ((mTextures[mIdx]->GetWidth() * scale.x) / 2))
-					, (INT)(pos.y - ((mTextures[mIdx]->GetHeight() * scale.y) / 2))
+					(INT)(pos.x - ((mTextures[mIdx]->GetWidth() * scale.x) / 2) + mOffset.x)
+					, (INT)(pos.y - ((mTextures[mIdx]->GetHeight() * scale.y) / 2) + mOffset.y)
 					, (INT)(mTextures[mIdx]->GetWidth() * scale.x)
 					, (INT)(mTextures[mIdx]->GetHeight() * scale.y) 
 				};
@@ -132,7 +135,9 @@ namespace me
 		{
 			if (mSheet->GetType() == eTextureType::bmp)
 			{
-				TransparentBlt(hdc, pos.x - ((mUnitX * scale.x) / 2), pos.y - ((mUnitX * scale.y) / 2)
+				TransparentBlt(hdc
+					, pos.x - ((mUnitX * scale.x) / 2) + mOffset.x
+					, pos.y - ((mUnitX * scale.y) / 2) + mOffset.y
 					, mUnitX * scale.x, mUnitX * scale.y
 					, mSheet->GetHdc()
 					, mIdx * mUnitX + mStartPoint.x, mStartPoint.y
@@ -142,8 +147,8 @@ namespace me
 			{
 				Gdiplus::Graphics graphics(hdc);
 				Gdiplus::Rect rect = { 
-					(INT)((pos.x - ((mUnitX * scale.x) / 2)))
-					, (INT)((pos.y - ((mUnitX * scale.y) / 2)))
+					(INT)((pos.x - ((mUnitX * scale.x) / 2)) + mOffset.x)
+					, (INT)((pos.y - ((mUnitX * scale.y) / 2)) + mOffset.y)
 					, (INT)(mUnitX * scale.x)
 					, (INT)(mUnitX * scale.y) 
 				};

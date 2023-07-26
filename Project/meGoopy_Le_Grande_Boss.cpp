@@ -21,6 +21,7 @@ namespace me
 		mAnimator = AddComponent<Animator>(enums::eComponentType::Animator);
 
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_intro", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Intro\\"));
+		mAnimator->SetOffset(math::Vector2(-50, -50));
 		mAnimator->PlayAnim(L"Goopy Le Grande_intro");
 	}
 	void Goopy_Le_Grande_Boss::Update()

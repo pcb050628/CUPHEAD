@@ -20,7 +20,7 @@ namespace me
 		void SetDirection(math::Vector2 dir) 
 		{ 
 			mDirection = dir;
-			if (mDirection.y == 1)
+			/*if (mDirection.y == 1)
 			{
 				if (flip)
 				{
@@ -86,7 +86,7 @@ namespace me
 					CircleCollider* collider = GetComponent<CircleCollider>();
 					collider->SetOffset(math::Vector2(52.5f, 0));
 				}
-			}
+			}*/
 		}
 		math::Vector2 GetDirection() { return mDirection; }
 

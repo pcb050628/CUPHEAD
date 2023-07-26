@@ -27,6 +27,9 @@ namespace me
 	void BossFightScene::Update()
 	{
 		Scene::Update();
+
+		if (KeyInput::GetKeyPressed(KeyCode::Space))
+			mPlayer->GetComponent<Transform>()->SetPos(math::Vector2(0, 0));
 	}
 	void BossFightScene::Render(HDC hdc)
 	{

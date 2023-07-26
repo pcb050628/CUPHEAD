@@ -18,7 +18,7 @@ namespace me
 
 		CircleCollider* collider = AddComponent<CircleCollider>(enums::eComponentType::Collider);
 
-		renderer = AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
+		/*renderer = AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
 		LeftImage = ResourceManager::Load<Texture>(L"bullet_L", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_L.bmp");
 		RightImage = ResourceManager::Load<Texture>(L"bullet_R", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_R.bmp");
 		UpImage = ResourceManager::Load<Texture>(L"bullet_Up", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_up.bmp");
@@ -26,18 +26,18 @@ namespace me
 		DiagonalUpLeftImage = ResourceManager::Load<Texture>(L"bullet_diagonal_up_L", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\idle_diagonal_up_L.bmp");
 		DiagonalUpRightImage = ResourceManager::Load<Texture>(L"bullet_diagonal_up_R", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_diagonal_up_R.bmp");
 		DiagonalDownLeftImage = ResourceManager::Load<Texture>(L"bullet_diagonal_down_L", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_diagonal_down_L.bmp");
-		DiagonalDownRightImage = ResourceManager::Load<Texture>(L"bullet_diagonal_down_R", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_diagonal_down_R.bmp");
+		DiagonalDownRightImage = ResourceManager::Load<Texture>(L"bullet_diagonal_down_R", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_diagonal_down_R.bmp");*/
 
 		
 
-		/*Animator* Anim = AddComponent<Animator>(enums::eComponentType::Animator);
-		Anim->AddAnim(ResourceManager::Load<Animation>(L"bulletidle_R", L"..\\content\\BossFight\\Cuphead\\Bullet\\Idle_R\\"));
-		Anim->AddAnim(ResourceManager::Load<Animation>(L"bulletidle_L", L"..\\content\\BossFight\\Cuphead\\Bullet\\Idle_L\\"));
+		Animator* Anim = AddComponent<Animator>(enums::eComponentType::Animator);
+		Anim->AddAnim(*ResourceManager::Load<Animation>(L"bulletidle_R", L"..\\content\\BossFight\\Cuphead\\Bullet\\Idle_R\\"));
+		Anim->AddAnim(*ResourceManager::Load<Animation>(L"bulletidle_L", L"..\\content\\BossFight\\Cuphead\\Bullet\\Idle_L\\"));
 		Anim->GetAnim(L"bulletidle_R")->SetLoop(false);
 		Anim->GetAnim(L"bulletidle_L")->SetLoop(false);
-		Anim->GetAnim(L"bulletidle_R")->SetDuration(0.1f);
-		Anim->GetAnim(L"bulletidle_L")->SetDuration(0.1f);
-		GetComponent<Animator>()->PlayAnim(L"bulletidle", flip);*/
+		Anim->GetAnim(L"bulletidle_R")->SetDuration(0.3f);
+		Anim->GetAnim(L"bulletidle_L")->SetDuration(0.3f);
+		Anim->PlayAnim(L"bulletidle", flip);
 	}
 	void Bullet::Update()
 	{
@@ -52,6 +52,8 @@ namespace me
 
 		Transform* tr = GetComponent<Transform>();
 		tr->SetPos(tr->GetPos() + ((mDirection * math::Vector2(dir, 1)) * 600 * Time::GetDeltaTime()));
+
+		GetComponent<Animator>()->PlayAnim(L"bulletidle", flip);
 	}
 	void Bullet::Render(HDC hdc)
 	{
