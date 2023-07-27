@@ -7,6 +7,7 @@ namespace me
 		, type(type)
 		, mColliderCount(0)
 		, Activate(true)
+		, mState(ObjState::Active)
 	{
 		AddComponent<Transform>(L"defaultTransform");
 	}

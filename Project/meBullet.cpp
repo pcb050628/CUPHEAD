@@ -5,6 +5,7 @@
 namespace me
 {
 	Bullet::Bullet(const std::wstring& name) : GameObject(name, enums::eGameObjType::bullet)
+		, mAnimator(nullptr)
 		, mDirection(math::Vector2(1, 0))
 		, flip(false)
 	{
@@ -17,27 +18,34 @@ namespace me
 		GameObject::Init();
 
 		CircleCollider* collider = AddComponent<CircleCollider>(enums::eComponentType::Collider);
-
-		/*renderer = AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
-		LeftImage = ResourceManager::Load<Texture>(L"bullet_L", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_L.bmp");
-		RightImage = ResourceManager::Load<Texture>(L"bullet_R", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_R.bmp");
-		UpImage = ResourceManager::Load<Texture>(L"bullet_Up", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_up.bmp");
-		DownImage = ResourceManager::Load<Texture>(L"bullet_Down", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_down.bmp");
-		DiagonalUpLeftImage = ResourceManager::Load<Texture>(L"bullet_diagonal_up_L", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\idle_diagonal_up_L.bmp");
-		DiagonalUpRightImage = ResourceManager::Load<Texture>(L"bullet_diagonal_up_R", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_diagonal_up_R.bmp");
-		DiagonalDownLeftImage = ResourceManager::Load<Texture>(L"bullet_diagonal_down_L", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_diagonal_down_L.bmp");
-		DiagonalDownRightImage = ResourceManager::Load<Texture>(L"bullet_diagonal_down_R", L"..\\content\\BossFight\\Cuphead\\Bullet\\BulletImage\\Idle_diagonal_down_R.bmp");*/
-
 		
+		LeftAnim = ResourceManager::Load<Animation>(L"bullet_anim_straight_L", L"..//content\\BossFight\\Cuphead\\Bullet\\Left\\");
+		RightAnim = ResourceManager::Load<Animation>(L"bullet_anim_straight_R", L"..//content\\BossFight\\Cuphead\\Bullet\\Right\\");
+		UpAnim = ResourceManager::Load<Animation>(L"bullet_anim_up", L"..//content\\BossFight\\Cuphead\\Bullet\\Up\\");
+		DownAnim = ResourceManager::Load<Animation>(L"bullet_anim_down", L"..//content\\BossFight\\Cuphead\\Bullet\\Down\\");
+		DiagonalUpLeftAnim = ResourceManager::Load<Animation>(L"bullet_anim_diagonal_up_L", L"..//content\\BossFight\\Cuphead\\Bullet\\Diagonal Up\\Left\\");
+		DiagonalUpRightAnim = ResourceManager::Load<Animation>(L"bullet_anim_diagonal_up_R", L"..//content\\BossFight\\Cuphead\\Bullet\\Diagonal Up\\Right\\");
+		DiagonalDownLeftAnim = ResourceManager::Load<Animation>(L"bullet_anim_diagonal_down_L", L"..//content\\BossFight\\Cuphead\\Bullet\\Diagonal Down\\Left\\");
+		DiagonalDownRightAnim = ResourceManager::Load<Animation>(L"bullet_anim_diagonal_down_R", L"..//content\\BossFight\\Cuphead\\Bullet\\Diagonal Down\\Right\\");
 
-		Animator* Anim = AddComponent<Animator>(enums::eComponentType::Animator);
-		Anim->AddAnim(*ResourceManager::Load<Animation>(L"bulletidle_R", L"..\\content\\BossFight\\Cuphead\\Bullet\\Idle_R\\"));
-		Anim->AddAnim(*ResourceManager::Load<Animation>(L"bulletidle_L", L"..\\content\\BossFight\\Cuphead\\Bullet\\Idle_L\\"));
-		Anim->GetAnim(L"bulletidle_R")->SetLoop(false);
-		Anim->GetAnim(L"bulletidle_L")->SetLoop(false);
-		Anim->GetAnim(L"bulletidle_R")->SetDuration(0.3f);
-		Anim->GetAnim(L"bulletidle_L")->SetDuration(0.3f);
-		Anim->PlayAnim(L"bulletidle", flip);
+		mAnimator = AddComponent<Animator>(enums::eComponentType::Animator);
+		mAnimator->AddAnim(*LeftAnim);
+		mAnimator->AddAnim(*RightAnim);
+		mAnimator->AddAnim(*UpAnim);
+		mAnimator->AddAnim(*DownAnim);
+		mAnimator->AddAnim(*DiagonalUpLeftAnim);
+		mAnimator->AddAnim(*DiagonalUpRightAnim);
+		mAnimator->AddAnim(*DiagonalDownLeftAnim);
+		mAnimator->AddAnim(*DiagonalDownRightAnim);
+
+		LeftAnim->SetLoop(false);
+		RightAnim->SetLoop(false);
+		UpAnim->SetLoop(false);
+		DownAnim->SetLoop(false);
+		DiagonalUpLeftAnim->SetLoop(false);
+		DiagonalUpRightAnim->SetLoop(false);
+		DiagonalDownLeftAnim->SetLoop(false);
+		DiagonalDownRightAnim->SetLoop(false);
 	}
 	void Bullet::Update()
 	{
@@ -61,23 +69,19 @@ namespace me
 	}
 	void Bullet::OnCollisionEnter(Collider* other)
 	{
-		for (Component* comp : GetAllComponent())
-		{
-			comp->SetActivate(false);
-		}
-
-		SetActive(false);
-
 		if (other->GetOwner()->GetTag() == enums::eGameObjType::enemy)
 		{
 			if(dynamic_cast<Boss*>(other->GetOwner()) != nullptr)
 				dynamic_cast<Boss*>(other->GetOwner())->SetHP(dynamic_cast<Boss*>(other->GetOwner())->GetHP() - 4);
 		}
+		
+		SetActive(false);
 	}
 	void Bullet::OnCollisionStay(Collider* other)
 	{
 	}
 	void Bullet::OnCollisionExit(Collider* other)
 	{
+		SceneManager::Destroy(this);
 	}
 }

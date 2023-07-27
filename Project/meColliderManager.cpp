@@ -132,7 +132,7 @@ namespace me
 
 	bool ColliderManager::Intersect(Collider* left, Collider* right)
 	{
-		if (!left->GetActivate() || !right->GetActivate())
+		if (!right->GetActivate() || !right->GetOwner()->GetActive() || !left->GetActivate() || !left->GetOwner()->GetActive())
 			return false;
 
 		if (left->GetType() == enums::eColliderType::Box && right->GetType() == enums::eColliderType::Box)

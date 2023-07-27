@@ -25,9 +25,9 @@ namespace me
 			return dynamic_cast<T*>(gobj);
 		}
 
-		static bool Destroy(GameObject* gobj, enums::eLayer layerType)
+		static void Destroy(GameObject* gobj)
 		{
-			return mCurScene->Destroy(gobj, layerType);
+			gobj->SetState(GameObject::ObjState::Dead);
 		}
 
 	private:

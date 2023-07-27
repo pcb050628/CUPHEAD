@@ -7,7 +7,16 @@ namespace me
 {
 	class GameObject : public Entity
 	{
+		friend class SceneManager;
 	public:
+		enum class ObjState
+		{
+			Active,
+			Pause,
+			Dead,
+			End,
+		};
+
 		GameObject(const std::wstring& name, enums::eGameObjType type = enums::eGameObjType::obj);
 		virtual ~GameObject() override;
 
@@ -90,11 +99,11 @@ namespace me
 				return nullptr;
 		}
 
-		int GetColliderCount() { return mColliderCount; }
-		void ColliderCountIncrease() { mColliderCount += 1; }
+		virtual int GetColliderCount() { return mColliderCount; }
+		virtual void ColliderCountIncrease() { mColliderCount += 1; }
 
 		
-		std::vector<Collider*> GetCollider() 
+		virtual std::vector<Collider*> GetCollider() 
 		{
 			if (mComponents.size() > 0 && mColliderCount > 0)
 			{
@@ -111,12 +120,18 @@ namespace me
 			}
 		}
 
-		std::vector<Component*> GetAllComponent() { return mComponents; }
+		virtual std::vector<Component*> GetAllComponent() { return mComponents; }
 
-		void SetActive(bool value) { Activate = value; }
-		bool GetActive() { return Activate; }
+		virtual void SetActive(bool value) { Activate = value; }
+		virtual bool GetActive() { return Activate; }
+
+		virtual ObjState GetObjState() { return mState; }
 
 	private:
+		void SetState(ObjState state) { mState = state; }
+
+	private:
+		ObjState mState;
 		bool Activate;
 
 		enums::eGameObjType type;

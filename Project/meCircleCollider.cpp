@@ -51,8 +51,10 @@ namespace me
 	}
 	void CircleCollider::OnCollisionStay(Collider* other)
 	{
+		Collider::OnCollisionStay(other);
 	}
 	void CircleCollider::OnCollisionExit(Collider* other)
 	{
+		Collider::OnCollisionExit(other);
 	}
 }

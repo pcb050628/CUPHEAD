@@ -29,5 +29,19 @@ namespace me
 			if(gobj->GetActive())
 				gobj->Render(hdc);
 		}
+
+		for (std::vector<GameObject*>::iterator iter = mGameObjs.begin();
+			iter != mGameObjs.end();
+			)
+		{
+			if ((*iter)->GetObjState() == GameObject::ObjState::Dead)
+			{
+				iter = mGameObjs.erase(iter);
+			}
+			else
+			{
+				iter++;
+			}
+		}
 	}
 }

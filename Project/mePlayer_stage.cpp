@@ -4,6 +4,15 @@
 #include "meResourceManager.h"
 #include "meBullet.h"
 
+#define COLLIDER_DEFAULT_SIZE_X 100.f
+#define COLLIDER_DEFAULT_SIZE_Y 130.f
+#define COLLIDER_DEFAULT_OFFSET_X 0
+#define COLLIDER_DEFAULT_OFFSET_Y 10.f
+#define COLLIDER_DUCK_SIZE_X 100.f
+#define COLLIDER_DUCK_SIZE_Y 60.f
+#define COLLIDER_DUCK_OFFSET_X 0
+#define COLLIDER_DUCK_OFFSET_Y 30.f
+
 namespace me
 {
 	Player_stage::Player_stage(const std::wstring& name) : GameObject(name, enums::eGameObjType::player)
@@ -11,7 +20,9 @@ namespace me
 		, shootDelay(0.2f)
 		, shootPrevTime(0)
 		, mAnimator(nullptr)
+		, mShootAnim(nullptr)
 		, mTransform(nullptr)
+		, mCollider(nullptr)
 		, mState(Player_state::Idle)
 		, mIsGround(false)
 		, mIsJumping(false)
@@ -30,9 +41,13 @@ namespace me
 
 		mTransform = GetComponent<Transform>();
 
-		BoxCollider* collider = AddComponent<BoxCollider>(enums::eComponentType::Collider);
-		collider->SetSize(collider->GetSize() + math::Vector2(0, 30));
-		collider->SetOffset(math::Vector2(0, 10.f));
+		mCollider = AddComponent<BoxCollider>(enums::eComponentType::Collider);
+		mCollider->SetSize(math::Vector2(COLLIDER_DEFAULT_SIZE_X, COLLIDER_DEFAULT_SIZE_Y));
+		mCollider->SetOffset(math::Vector2(COLLIDER_DEFAULT_OFFSET_X, COLLIDER_DEFAULT_OFFSET_Y));
+
+		mShootAnim = AddComponent<Animator>(L"bullet_spawn");
+		mShootAnim->AddAnim(*ResourceManager::Load(L"bullet_anim_spawn_R", L"..\\content\\BossFight\\CupHead\\Bullet\\Spawn\\Right\\", eTextureType::png));
+		mShootAnim->AddAnim(*ResourceManager::Load(L"bullet_anim_spawn_L", L"..\\content\\BossFight\\CupHead\\Bullet\\Spawn\\Left\\", eTextureType::png));
 
 		mAnimator = AddComponent<Animator>(L"CupHead_stage_anim");
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_intro", L"..\\content\\BossFight\\Cuphead\\Intros\\Regular\\"));
@@ -42,8 +57,10 @@ namespace me
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_run_L", L"..\\content\\BossFight\\Cuphead\\Run\\Normal_L\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_jump_R", L"..\\content\\BossFight\\Cuphead\\Jump\\Right\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_jump_L", L"..\\content\\BossFight\\Cuphead\\Jump\\Left\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_hit_ground", L"..\\content\\BossFight\\Cuphead\\Hit\\Ground\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_hit_air", L"..\\content\\BossFight\\Cuphead\\Hit\\Air\\"));
+		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_hit_ground_R", L"..\\content\\BossFight\\Cuphead\\Hit\\Ground\\Right\\"));
+		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_hit_ground_L", L"..\\content\\BossFight\\Cuphead\\Hit\\Ground\\Left\\"));
+		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_hit_air_R", L"..\\content\\BossFight\\Cuphead\\Hit\\Air\\Right\\"));
+		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_hit_air_L", L"..\\content\\BossFight\\Cuphead\\Hit\\Air\\Left\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_shoot_straight_R", L"..\\content\\BossFight\\Cuphead\\Shoot\\Straight_R\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_shoot_straight_L", L"..\\content\\BossFight\\Cuphead\\Shoot\\Straight_L\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_shoot_straight_run_R", L"..\\content\\BossFight\\Cuphead\\Run\\Shooting\\Straight_R\\"));
@@ -256,24 +273,45 @@ namespace me
 
 	void Player_stage::Duck()
 	{
+		mCollider->SetSize(math::Vector2(COLLIDER_DUCK_SIZE_X, COLLIDER_DUCK_SIZE_Y));
+		mCollider->SetOffset(math::Vector2(COLLIDER_DUCK_OFFSET_X, COLLIDER_DUCK_OFFSET_Y));
+
 		if (KeyInput::GetKeyUp(KeyCode::DownArrow))
+		{
 			mState = Player_state::Idle;
+
+			mCollider->SetSize(math::Vector2(COLLIDER_DEFAULT_SIZE_X, COLLIDER_DEFAULT_SIZE_Y));
+			mCollider->SetOffset(math::Vector2(COLLIDER_DEFAULT_OFFSET_X, COLLIDER_DEFAULT_OFFSET_Y));
+		}
 		else if (KeyInput::GetKeyDown(KeyCode::Z))
 		{
 			mIsGround = false;
 			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
 			mState = Player_state::Jump;
 			mIsJumping = true;
+
+			mCollider->SetSize(math::Vector2(COLLIDER_DEFAULT_SIZE_X, COLLIDER_DEFAULT_SIZE_Y));
+			mCollider->SetOffset(math::Vector2(COLLIDER_DEFAULT_OFFSET_X, COLLIDER_DEFAULT_OFFSET_Y));
 		}
 		else if (KeyInput::GetKeyDown(KeyCode::C))
+		{
 			mState = Player_state::Aim;
+
+			mCollider->SetSize(math::Vector2(COLLIDER_DEFAULT_SIZE_X, COLLIDER_DEFAULT_SIZE_Y));
+			mCollider->SetOffset(math::Vector2(COLLIDER_DEFAULT_OFFSET_X, COLLIDER_DEFAULT_OFFSET_Y));
+		}
 		else if (KeyInput::GetKeyDown(KeyCode::X))
 		{
 			mAnimator->PlayAnim(L"CupHead_stage_anim_duck_shoot", mAnimator->GetFlipX());
 			SpawnBullet(mTransform->GetPos() + math::Vector2(0, 20.f));
 		}
 		else if (KeyInput::GetKeyUp(KeyCode::DownArrow) && (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)))
+		{
 			mState = Player_state::Run;
+
+			mCollider->SetSize(math::Vector2(COLLIDER_DEFAULT_SIZE_X, COLLIDER_DEFAULT_SIZE_Y));
+			mCollider->SetOffset(math::Vector2(COLLIDER_DEFAULT_OFFSET_X, COLLIDER_DEFAULT_OFFSET_Y));
+		}
 		else
 			mAnimator->PlayAnim(L"CupHead_stage_anim_duck_idle", mAnimator->GetFlipX());
 	}
@@ -347,7 +385,7 @@ namespace me
 		if (shootPrevTime + shootDelay < Time::GetTime())
 		{
 			Bullet* b = SceneManager::Instantiate<Bullet>(enums::eLayer::Bullet, pos);
-			b->SetFlip(GetComponent<Animator>()->GetFlipX());
+			b->SetFlip(mAnimator->GetFlipX());
 			b->SetDirection(dir);
 			shootPrevTime = Time::GetTime();
 		}

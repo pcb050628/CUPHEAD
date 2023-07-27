@@ -29,8 +29,16 @@ namespace me
 		far_forest_sr->SetImage(ResourceManager::Load<Texture>(L"Goopy_Le_background_far_forest", L"..\\content\\BossFight\\Goopy Le Grande\\Background\\slime_bg_bg_far_forest.bmp"));
 		far_forest_sr->SetScale(math::Vector2(1, 1.4f));
 
-		/*GameObject* testObj = AddGameObj(enums::eLayer::Enemy, L"test", enums::eGameObjType::enemy);
-		testObj->AddComponent<BoxCollider>(enums::eComponentType::Collider);*/
+		GameObject* bg_forest = AddGameObj(enums::eLayer::Background, L"2_stage_backgroung_bg_bg_forest", enums::eGameObjType::background);
+		SpriteRenderer* forest_sr = bg_forest->AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
+		forest_sr->SetImage(ResourceManager::Load<Texture>(L"Goopy_Le_background_forest", L"..\\content\\BossFight\\Goopy Le Grande\\Background\\slime_bg_bg_forest.bmp"));
+		forest_sr->SetScale(math::Vector2(1, 1.4f));
+
+		GameObject* bg_main_ground = AddGameObj(enums::eLayer::Background, L"3_stage_backgroung_bg_mg_main_ground", enums::eGameObjType::background);
+		bg_main_ground->GetComponent<Transform>()->SetPos(bg_main_ground->GetComponent<Transform>()->GetPos() + math::Vector2(0, 80.f));
+		SpriteRenderer* main_ground_sr = bg_main_ground->AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
+		main_ground_sr->SetImage(ResourceManager::Load<Texture>(L"Goopy_Le_background_main_ground", L"..\\content\\BossFight\\Goopy Le Grande\\Background\\slime_bg_mg_main_ground.bmp"));
+		//main_ground_sr->SetScale(math::Vector2());
 
 		Floor* floor = AddGameObj<Floor>(enums::eLayer::Background, L"floor_Collider");
 

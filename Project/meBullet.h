@@ -13,80 +13,68 @@ namespace me
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
-		virtual void OnCollisionEnter(Collider* other);
-		virtual void OnCollisionStay(Collider* other);
-		virtual void OnCollisionExit(Collider* other);
+		virtual void OnCollisionEnter(Collider* other) override;
+		virtual void OnCollisionStay(Collider* other) override;
+		virtual void OnCollisionExit(Collider* other) override;
 
 		void SetDirection(math::Vector2 dir) 
 		{ 
 			mDirection = dir;
-			/*if (mDirection.y == 1)
+			if (mDirection.y == 1)
 			{
 				if (flip)
 				{
-					renderer->SetImage(DiagonalDownLeftImage);
-					DiagonalDownLeftImage->SetOffset(math::Vector2(0, -50));
+					mAnimator->PlayAnim(L"bullet_anim_diagonal_down", flip);
 					CircleCollider* collider = GetComponent<CircleCollider>();
 					collider->SetOffset(math::Vector2(-52.5f, 0));
 				}
 				else
 				{
-					renderer->SetImage(DiagonalDownRightImage);
-					DiagonalDownRightImage->SetOffset(math::Vector2(0, -50));
+					mAnimator->PlayAnim(L"bullet_anim_diagonal_down", flip);
 					CircleCollider* collider = GetComponent<CircleCollider>();
 					collider->SetOffset(math::Vector2(52.5f, 0));
 				}
 
 				if (mDirection.x == 0)
 				{
-					if (flip)
-						DownImage->SetOffset(math::Vector2(-50, 0));
-					else
-						DownImage->SetOffset(math::Vector2(50, 0));
-					renderer->SetImage(DownImage);
+					mAnimator->PlayAnim(L"bullet_anim_down");
 				}
 			}
 			else if (mDirection.y == -1)
 			{
 				if (flip)
 				{
-					renderer->SetImage(DiagonalUpLeftImage);
-					DiagonalUpLeftImage->SetOffset(math::Vector2(0, 50));
+					mAnimator->PlayAnim(L"bullet_anim_diagonal_up", flip);
 					CircleCollider* collider = GetComponent<CircleCollider>();
 					collider->SetOffset(math::Vector2(-52.5f, 0));
 				}
 				else
 				{
-					renderer->SetImage(DiagonalUpRightImage);
-					DiagonalUpRightImage->SetOffset(math::Vector2(0, 50));
+					mAnimator->PlayAnim(L"bullet_anim_diagonal_up", flip);
 					CircleCollider* collider = GetComponent<CircleCollider>();
 					collider->SetOffset(math::Vector2(52.5f, 0));
 				}
 
 				if (mDirection.x == 0)
 				{
-					if (flip)
-						UpImage->SetOffset(math::Vector2(-50, 0));
-					else
-						UpImage->SetOffset(math::Vector2(50, 0));
-					renderer->SetImage(UpImage);
+					mAnimator->PlayAnim(L"bullet_anim_up");
 				}
 			}
 			else
 			{
 				if (flip)
 				{
-					renderer->SetImage(LeftImage);
+					mAnimator->PlayAnim(L"bullet_anim_straight", flip);
 					CircleCollider* collider = GetComponent<CircleCollider>();
 					collider->SetOffset(math::Vector2(-52.5f, 0));
 				}
 				else
 				{
-					renderer->SetImage(RightImage);
+					mAnimator->PlayAnim(L"bullet_anim_straight", flip);
 					CircleCollider* collider = GetComponent<CircleCollider>();
 					collider->SetOffset(math::Vector2(52.5f, 0));
 				}
-			}*/
+			}
 		}
 		math::Vector2 GetDirection() { return mDirection; }
 
@@ -97,15 +85,16 @@ namespace me
 		math::Vector2 mDirection;
 		bool flip;
 
-		SpriteRenderer* renderer;
-		Texture* LeftImage;
-		Texture* RightImage;
-		Texture* DiagonalUpLeftImage;
-		Texture* DiagonalUpRightImage;
-		Texture* DiagonalDownLeftImage;
-		Texture* DiagonalDownRightImage;
-		Texture* UpImage;
-		Texture* DownImage;
+		Animator* mAnimator;
+
+		Animation* LeftAnim;
+		Animation* RightAnim;
+		Animation* DiagonalUpLeftAnim;
+		Animation* DiagonalUpRightAnim;
+		Animation* DiagonalDownLeftAnim;
+		Animation* DiagonalDownRightAnim;
+		Animation* UpAnim;
+		Animation* DownAnim;
 	};
 }
 

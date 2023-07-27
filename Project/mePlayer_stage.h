@@ -14,6 +14,7 @@ namespace me
 			Duck,
 			Shooting,
 			Jump,
+			Hit,
 		};
 
 		Player_stage(const std::wstring& name);
@@ -43,7 +44,9 @@ namespace me
 		float shootPrevTime;
 
 		Animator* mAnimator;
+		Animator* mShootAnim;
 		Transform* mTransform;
+		BoxCollider* mCollider;
 
 		Player_state mState;
 
