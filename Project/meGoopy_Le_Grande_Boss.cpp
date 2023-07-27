@@ -21,8 +21,20 @@ namespace me
 		mAnimator = AddComponent<Animator>(enums::eComponentType::Animator);
 
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_intro", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Intro\\"));
-		mAnimator->SetOffset(math::Vector2(-50, -50));
-		mAnimator->PlayAnim(L"Goopy Le Grande_intro");
+		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_air_down_L", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Air Down_L\\"));
+		//mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_air_down_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Air Down_R\\"));
+		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_air_up_L", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Air Up_L\\"));
+		//mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_air_up_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Air Up_R\\"));
+		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_jump_L", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Jump_L\\"));
+		//mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_jump_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Jump_R\\"));
+		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_punch_L", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Punch_L\\"));
+		//mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_punch_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Punch_R\\"));
+		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_transition_to_ph2", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Transition To Ph2_L\\"));
+		mAnimator->GetAnim(L"Goopy Le Grande_intro")->SetOffset(math::Vector2(-75, -75));
+		mAnimator->GetAnim(L"Goopy Le Grande_intro")->SetLoop(false);
+		mAnimator->GetAnim(L"Goopy Le Grande_punch_L")->SetLoop(false);
+		mAnimator->PlayAnim(L"Goopy Le Grande_punch_L");
+		//mAnimator->NextPlayAnim(L"Goopy Le Grande_punch_L");
 	}
 	void Goopy_Le_Grande_Boss::Update()
 	{

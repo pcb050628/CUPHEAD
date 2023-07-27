@@ -51,6 +51,7 @@ namespace me
 		virtual void SetUnit(float unit) { mUnitX = unit; }
 		virtual void SetDuration(float duration) { mDuration = duration; }
 		virtual void SetIdx(int idx) { mIdx = idx; }
+		virtual void SetOffset(math::Vector2 offset) { mOffset = offset; }
 
 		virtual int GetIdx() { return mIdx; }
 
@@ -58,6 +59,7 @@ namespace me
 		virtual float GetDuration() { return mDuration; }
 		virtual float GetPrevTime() { return prevTime; }
 		virtual void SetPrevTime(float time) { prevTime = time; }
+		virtual math::Vector2 GetOffset() { return mOffset; }
 
 		virtual enums::eAnimType GetType() { return mType; }
 
