@@ -67,6 +67,7 @@ namespace me
 	{
 		Player_stage* p = mLayers[(int)enums::eLayer::Player].AddPlayer_stage(name);
 		p->Init();
+		p->GetComponent<Transform>()->SetPos(math::Vector2(-300, 0));
 		return p;
 	}
 
@@ -74,6 +75,7 @@ namespace me
 	{
 		mLayers[(int)enums::eLayer::Enemy].AddBoss(boss);
 	}
+
 	void Scene::Clear()
 	{
 	}

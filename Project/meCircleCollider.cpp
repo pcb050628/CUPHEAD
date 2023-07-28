@@ -4,8 +4,8 @@ namespace me
 {
 	CircleCollider::CircleCollider(GameObject* gobj, const std::wstring& name)
 		: Collider(gobj, name, enums::eColliderType::Circle)
-		, mVerticalRadius(20.f)
-		, mHorizontalRadius(20.f)
+		, mVerticalRadius(12.f)
+		, mHorizontalRadius(12.f)
 	{
 	}
 	CircleCollider::~CircleCollider()

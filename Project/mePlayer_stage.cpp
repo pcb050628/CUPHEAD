@@ -17,7 +17,7 @@ namespace me
 {
 	Player_stage::Player_stage(const std::wstring& name) : GameObject(name, enums::eGameObjType::player)
 		, HP(5)
-		, shootDelay(0.2f)
+		, shootDelay(0.1f)
 		, shootPrevTime(0)
 		, mAnimator(nullptr)
 		, mShootAnim(nullptr)
@@ -80,7 +80,7 @@ namespace me
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_aim_up_R", L"..\\content\\BossFight\\Cuphead\\Aim\\Up_R\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_aim_up_L", L"..\\content\\BossFight\\Cuphead\\Aim\\Up_L\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_aim_diagonal_up_R", L"..\\content\\BossFight\\Cuphead\\Aim\\Diagonal Up_R\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_aim_diagonal_up_R", L"..\\content\\BossFight\\Cuphead\\Aim\\Diagonal Up_L\\"));
+		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_aim_diagonal_up_L", L"..\\content\\BossFight\\Cuphead\\Aim\\Diagonal Up_L\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_aim_down_R", L"..\\content\\BossFight\\Cuphead\\Aim\\Down_R\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_aim_down_L", L"..\\content\\BossFight\\Cuphead\\Aim\\Down_L\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_aim_diagonal_down_R", L"..\\content\\BossFight\\Cuphead\\Aim\\Diagonal Down_R\\"));
@@ -136,6 +136,9 @@ namespace me
 		case me::Player_stage::Player_state::Jump:
 			Jump();
 			break;
+		case me::Player_stage::Player_state::Hit:
+			Hit();
+			break;
 		}
 	}
 
@@ -163,7 +166,9 @@ namespace me
 	{
 		mAnimator->PlayAnim(L"CupHead_stage_anim_idle", mAnimator->GetFlipX());
 
-		if (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow))
+		if (mIsHit)
+			mState = Player_state::Hit;
+		else if (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow))
 			mState = Player_state::Run;
 		else if (KeyInput::GetKeyDown(KeyCode::Z))
 		{
@@ -182,7 +187,9 @@ namespace me
 
 	void Player_stage::Aim()
 	{
-		if (KeyInput::GetKeyUp(KeyCode::C) && (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)))
+		if (mIsHit)
+			mState = Player_state::Hit;
+		else if (KeyInput::GetKeyUp(KeyCode::C) && (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)))
 			mState = Player_state::Run;
 		else if (KeyInput::GetKeyUp(KeyCode::C))
 			mState = Player_state::Idle;
@@ -191,27 +198,27 @@ namespace me
 			if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::UpArrow))
 			{
 				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_diagonal_up", mAnimator->GetFlipX());
-				SpawnBullet(mTransform->GetPos(), math::Vector2(1, -1));
+				SpawnBullet(math::Vector2(1, -1));
 			}
 			else if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::DownArrow))
 			{
 				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_diagonal_down", mAnimator->GetFlipX());
-				SpawnBullet(mTransform->GetPos(), math::Vector2(1, 1));
+				SpawnBullet(math::Vector2(1, 1));
 			}
 			else if (KeyInput::GetKeyDown(KeyCode::UpArrow))
 			{
 				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_up", mAnimator->GetFlipX());
-				SpawnBullet(mTransform->GetPos(), math::Vector2(0, -1));
+				SpawnBullet(math::Vector2(0, -1));
 			}
 			else if (KeyInput::GetKeyDown(KeyCode::DownArrow))
 			{
 				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_down", mAnimator->GetFlipX());
-				SpawnBullet(mTransform->GetPos(), math::Vector2(0, 1));
+				SpawnBullet(math::Vector2(0, 1));
 			}
 			else
 			{
 				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_straight", mAnimator->GetFlipX());
-				SpawnBullet(mTransform->GetPos());
+				SpawnBullet();
 			}
 		}
 		else if (KeyInput::GetKeyDown(KeyCode::Z))
@@ -243,12 +250,12 @@ namespace me
 			if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::UpArrow))
 			{
 				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_diagonal_up_run", mAnimator->GetFlipX());
-				SpawnBullet(mTransform->GetPos(), math::Vector2(1, -1));
+				SpawnBullet(math::Vector2(1, -1));
 			}
 			else if (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow))
 			{
 				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_straight_run", mAnimator->GetFlipX());
-				SpawnBullet(mTransform->GetPos());
+				SpawnBullet();
 			}
 			else
 				mState = Player_state::Shooting;
@@ -256,7 +263,9 @@ namespace me
 		else
 			mAnimator->PlayAnim(L"CupHead_stage_anim_run", mAnimator->GetFlipX());
 
-		if (KeyInput::GetKeyDown(KeyCode::Z))
+		if (mIsHit)
+			mState = Player_state::Hit;
+		else if (KeyInput::GetKeyDown(KeyCode::Z))
 		{
 			mIsGround = false;
 			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
@@ -276,7 +285,9 @@ namespace me
 		mCollider->SetSize(math::Vector2(COLLIDER_DUCK_SIZE_X, COLLIDER_DUCK_SIZE_Y));
 		mCollider->SetOffset(math::Vector2(COLLIDER_DUCK_OFFSET_X, COLLIDER_DUCK_OFFSET_Y));
 
-		if (KeyInput::GetKeyUp(KeyCode::DownArrow))
+		if (mIsHit)
+			mState = Player_state::Hit;
+		else if (KeyInput::GetKeyUp(KeyCode::DownArrow))
 		{
 			mState = Player_state::Idle;
 
@@ -303,7 +314,7 @@ namespace me
 		else if (KeyInput::GetKeyDown(KeyCode::X))
 		{
 			mAnimator->PlayAnim(L"CupHead_stage_anim_duck_shoot", mAnimator->GetFlipX());
-			SpawnBullet(mTransform->GetPos() + math::Vector2(0, 20.f));
+			SpawnBullet();
 		}
 		else if (KeyInput::GetKeyUp(KeyCode::DownArrow) && (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)))
 		{
@@ -318,18 +329,9 @@ namespace me
 
 	void Player_stage::Shooting()
 	{
-		if (KeyInput::GetKeyDown(KeyCode::UpArrow))
-		{
-			mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_up", mAnimator->GetFlipX());
-			SpawnBullet(mTransform->GetPos(), math::Vector2(0, -1));
-		}
-		else
-		{
-			mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_straight", mAnimator->GetFlipX());
-			SpawnBullet(mTransform->GetPos());
-		}
-
-		if(KeyInput::GetKeyDown(KeyCode::Z))
+		if (mIsHit)
+			mState = Player_state::Hit;
+		else if(KeyInput::GetKeyDown(KeyCode::Z))
 		{
 			mIsGround = false;
 			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
@@ -344,6 +346,17 @@ namespace me
 			mState = Player_state::Duck;
 		else if (KeyInput::GetKeyUp(KeyCode::X))
 			mState = Player_state::Idle;
+
+		if (KeyInput::GetKeyDown(KeyCode::UpArrow))
+		{
+			mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_up", mAnimator->GetFlipX());
+			SpawnBullet(math::Vector2(0, -1));
+		}
+		else
+		{
+			mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_straight", mAnimator->GetFlipX());
+			SpawnBullet();
+		}
 	}
 
 	void Player_stage::Jump()
@@ -363,7 +376,12 @@ namespace me
 
 		if (KeyInput::GetKeyDown(KeyCode::X))
 		{
-			SpawnBullet(mTransform->GetPos());
+			SpawnBullet();
+		}
+
+		if (mIsHit)
+		{
+			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_air", mAnimator->GetFlipX());
 		}
 
 		if (mIsGround)
@@ -380,13 +398,63 @@ namespace me
 				mState = Player_state::Idle;
 		}
 	}
-	void Player_stage::SpawnBullet(math::Vector2 pos, math::Vector2 dir)
+	void Player_stage::Hit()
+	{
+		if(mIsGround)
+			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_ground", mAnimator->GetFlipX());
+
+		if (mAnimator->GetCurAnim()->IsComplete())
+		{
+			if (KeyInput::GetKeyDown(KeyCode::Z))
+			{
+				mIsGround = false;
+				mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
+				mState = Player_state::Jump;
+				mIsJumping = true;
+			}
+			else if (KeyInput::GetKeyDown(KeyCode::C))
+				mState = Player_state::Aim;
+			else if (KeyInput::GetKeyDown(KeyCode::DownArrow))
+				mState = Player_state::Duck;
+			else if (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow))
+				mState = Player_state::Run;
+			else if (KeyInput::GetKeyDown(KeyCode::X))
+				mState = Player_state::Shooting;
+			else
+				mState = Player_state::Idle;
+		}
+	}
+
+	void Player_stage::SpawnBullet(math::Vector2 dir)
 	{
 		if (shootPrevTime + shootDelay < Time::GetTime())
 		{
-			Bullet* b = SceneManager::Instantiate<Bullet>(enums::eLayer::Bullet, pos);
-			b->SetFlip(mAnimator->GetFlipX());
-			b->SetDirection(dir);
+			math::Vector2 comPos = mTransform->GetPos();
+
+			if (dir.y == 1)
+			{
+				comPos.y += 30.f;
+			}
+			else if (dir.y == -1)
+			{
+				comPos.y -= 30.f;
+			}
+
+			if (dir.x == 0)
+			{
+				if (mAnimator->GetFlipX())
+					comPos.x += mTransform->GetScale().x / 2;
+				else
+					comPos.x -= mTransform->GetScale().x / 2;
+			}
+
+			if (mAnimator->GetFlipX())
+				comPos = math::Vector2(comPos.x - mTransform->GetScale().x / 4, comPos.y);
+			else
+				comPos = math::Vector2(comPos.x + mTransform->GetScale().x / 4, comPos.y);
+
+			Bullet* b = SceneManager::Instantiate<Bullet>(enums::eLayer::Bullet, comPos);
+			b->SetDirection(dir, mAnimator->GetFlipX());
 			shootPrevTime = Time::GetTime();
 		}
 	}

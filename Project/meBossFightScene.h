@@ -21,11 +21,12 @@ namespace me
 		Boss* GetBoss() { return mBoss; }
 		
 		template <typename T>
-		T* AddBoss(const std::wstring& name)
+		T* AddBoss(const std::wstring& name, math::Vector2 pos)
 		{
 			T* tmp = new T(name);
 			Scene::AddBoss(tmp);
 			tmp->Init();
+			tmp->GetComponent<Transform>()->SetPos(pos);
 			return tmp;
 		} 
 

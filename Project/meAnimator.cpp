@@ -61,7 +61,8 @@ namespace me
 					mCurPlayAnim->SetPrevTime(Time::GetTime());
 					mCurPlayAnim->Next();
 
-					if (!mCurPlayAnim->IsLoop() && mCurPlayAnim->IsComplete() && mNextAnims.size() < 0)
+
+					if (!mCurPlayAnim->IsLoop() && mCurPlayAnim->IsComplete() && mNextAnims.size() < 1)
 					{
 						isPlay = false;
 						mCurPlayAnim->SetIdx(mCurPlayAnim->GetIdx() - 1);

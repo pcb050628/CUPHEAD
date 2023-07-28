@@ -25,9 +25,9 @@ namespace me
 			Background,
 			Map,
 			floor,
+			Enemy,
 			Player,
 			Bullet,
-			Enemy,
 			UI,
 			End
 		};

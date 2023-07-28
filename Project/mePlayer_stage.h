@@ -34,8 +34,9 @@ namespace me
 		void Duck();
 		void Shooting();
 		void Jump();
+		void Hit();
 
-		void SpawnBullet(math::Vector2 pos, math::Vector2 dir = math::Vector2(1, 0));
+		void SpawnBullet(math::Vector2 dir = math::Vector2(1, 0));
 
 	private:
 		int HP;
@@ -51,6 +52,10 @@ namespace me
 		Player_state mState;
 
 		bool mIsGround;
+
+		bool mIsHit;
+		float mInvincibleTime;
+
 		bool mIsJumping;
 		float mJumpMaxHeight;
 		float mJumpStartHeight;

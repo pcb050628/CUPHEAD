@@ -17,9 +17,10 @@ namespace me
 		virtual void OnCollisionStay(Collider* other) override;
 		virtual void OnCollisionExit(Collider* other) override;
 
-		void SetDirection(math::Vector2 dir) 
+		void SetDirection(math::Vector2 dir, bool value) 
 		{ 
 			mDirection = dir;
+			flip = value;
 			if (mDirection.y == 1)
 			{
 				if (flip)
@@ -38,6 +39,11 @@ namespace me
 				if (mDirection.x == 0)
 				{
 					mAnimator->PlayAnim(L"bullet_anim_down");
+
+					if (flip)
+						DownAnim->SetOffset(math::Vector2(-52.5f, 0));
+					else
+						DownAnim->SetOffset(math::Vector2(52.5f, 0));
 				}
 			}
 			else if (mDirection.y == -1)
@@ -58,6 +64,10 @@ namespace me
 				if (mDirection.x == 0)
 				{
 					mAnimator->PlayAnim(L"bullet_anim_up");
+					if(flip)
+						UpAnim->SetOffset(math::Vector2(-52.5f, 0));
+					else
+						UpAnim->SetOffset(math::Vector2(52.5f, 0));
 				}
 			}
 			else

@@ -118,6 +118,9 @@
     <Filter Include="Engine\ResourceManager\Resource\Animation">
       <UniqueIdentifier>{97c3aae5-ef8d-4e1e-90e6-743a4d255060}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObject\Wall">
+      <UniqueIdentifier>{33a879b9-1c6f-4fbb-b872-d42adc9afb22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">

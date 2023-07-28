@@ -25,6 +25,9 @@ namespace me
 	private:
 		Animator* mAnimator;
 
+		BoxCollider* mMainCollider;
+		BoxCollider* mPunchCollider;
+		BoxCollider* mSmashCollider;
 	};
 }
 

@@ -19,6 +19,7 @@ namespace me
 
 		CircleCollider* collider = AddComponent<CircleCollider>(enums::eComponentType::Collider);
 		
+		
 		LeftAnim = ResourceManager::Load<Animation>(L"bullet_anim_straight_L", L"..//content\\BossFight\\Cuphead\\Bullet\\Left\\");
 		RightAnim = ResourceManager::Load<Animation>(L"bullet_anim_straight_R", L"..//content\\BossFight\\Cuphead\\Bullet\\Right\\");
 		UpAnim = ResourceManager::Load<Animation>(L"bullet_anim_up", L"..//content\\BossFight\\Cuphead\\Bullet\\Up\\");
@@ -46,6 +47,11 @@ namespace me
 		DiagonalUpRightAnim->SetLoop(false);
 		DiagonalDownLeftAnim->SetLoop(false);
 		DiagonalDownRightAnim->SetLoop(false);
+
+		DiagonalUpLeftAnim->SetOffset(math::Vector2(-52.5f, 0));
+		DiagonalUpRightAnim->SetOffset(math::Vector2(52.5f, 0));
+		DiagonalDownLeftAnim->SetOffset(math::Vector2(-52.5f, 0));
+		DiagonalDownRightAnim->SetOffset(math::Vector2(52.5f, 0));
 	}
 	void Bullet::Update()
 	{
@@ -59,7 +65,7 @@ namespace me
 		mDirection.normalize();
 
 		Transform* tr = GetComponent<Transform>();
-		tr->SetPos(tr->GetPos() + ((mDirection * math::Vector2(dir, 1)) * 600 * Time::GetDeltaTime()));
+		tr->SetPos(tr->GetPos() + ((mDirection * math::Vector2(dir, 1)) * 1000 * Time::GetDeltaTime()));
 
 		GetComponent<Animator>()->PlayAnim(L"bulletidle", flip);
 	}

@@ -15,6 +15,8 @@ namespace me
 	{
 		GameObject::Init();
 
+		AddComponent<BoxCollider>(enums::eComponentType::Collider);
+
 		mAnimator = AddComponent<Animator>(L"CupHead_map_anim");
 		mAnimator->AddAnim(*ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_front_idle", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(0, 0), 16, 4));
 		mAnimator->AddAnim(*ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_back_idle", L"..\\content\\overWorld\\Cuphead Overworld.png", math::Vector2(0, 565.625f), 16, 2));
@@ -82,5 +84,15 @@ namespace me
 	void Player_map::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
+	}
+	void Player_map::OnCollisionEnter(Collider* other)
+	{
+	}
+	void Player_map::OnCollisionStay(Collider* other)
+	{
+
+	}
+	void Player_map::OnCollisionExit(Collider* other)
+	{
 	}
 }
