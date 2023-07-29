@@ -32,18 +32,20 @@ namespace me
 
 		virtual bool IsComplete() {
 			if (mTextures.size() > 0 && mIdx >= mTextures.size())
-				return true;
+				mComplete = true;
 			else if (mSheet != nullptr && mSheetCount <= mIdx)
-				return true;
+				mComplete = true;
 
-			return false;
+			return mComplete;
 		}
+
+		virtual void SetComplete(bool value) { mComplete = value; }
 
 		virtual bool IsLoop() { return mLoop; }
 		virtual void SetLoop(bool value) { mLoop = value; }
 
 		virtual void Next() { mIdx += 1; }
-		virtual void Reset() { mIdx = 0; }
+		virtual void Reset() { mIdx = 0; mComplete = false; }
 
 		virtual void SetSpriteSheet(Texture* texture) { mSheet = texture; }
 		virtual void SetAnimType(enums::eAnimType type) { mType = type; }

@@ -54,6 +54,7 @@ namespace me
 		bool mIsGround;
 
 		bool mIsHit;
+		float mHitStartTime; // 수정해야하는 부분
 		float mInvincibleTime;
 
 		bool mIsJumping;

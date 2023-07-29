@@ -89,6 +89,12 @@ namespace me
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_duck_idle_L", L"..\\content\\BossFight\\Cuphead\\Duck\\Idle_L\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_duck_shoot_R", L"..\\content\\BossFight\\Cuphead\\Duck\\Shoot_R\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_duck_shoot_L", L"..\\content\\BossFight\\Cuphead\\Duck\\Shoot_L\\"));
+
+		mAnimator->GetAnim(L"CupHead_stage_anim_hit_air_R")->SetLoop(false);
+		mAnimator->GetAnim(L"CupHead_stage_anim_hit_air_L")->SetLoop(false);
+		mAnimator->GetAnim(L"CupHead_stage_anim_hit_ground_R")->SetLoop(false);
+		mAnimator->GetAnim(L"CupHead_stage_anim_hit_ground_L")->SetLoop(false);
+
 	}
 	void Player_stage::Update()
 	{
@@ -151,6 +157,12 @@ namespace me
 	{
 		if (other->GetOwner()->GetTag() == enums::eGameObjType::floor)
 			mIsGround = true;
+
+		if (other->GetOwner()->GetTag() == enums::eGameObjType::enemy && !mIsHit)
+		{
+			mIsHit = true;
+			mHitStartTime = Time::GetTime();
+		}
 	}
 
 	void Player_stage::OnCollisionStay(Collider* other)
@@ -362,9 +374,22 @@ namespace me
 	void Player_stage::Jump()
 	{
 		Transform* tr = GetComponent<Transform>();
-		mAnimator->PlayAnim(L"CupHead_stage_anim_jump", mAnimator->GetFlipX());
 
-		if(mIsJumping)
+		if (mIsHit)
+		{
+			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_air", mAnimator->GetFlipX());
+		}
+		else
+		{
+			mAnimator->PlayAnim(L"CupHead_stage_anim_jump", mAnimator->GetFlipX());
+
+			if (KeyInput::GetKeyDown(KeyCode::X))
+			{
+				SpawnBullet();
+			}
+		}
+
+		if (mIsJumping)
 		{
 			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y - 700.f * Time::GetDeltaTime()));
 		}
@@ -372,16 +397,6 @@ namespace me
 		if (mJumpMaxHeight <= abs(mJumpStartHeight - tr->GetPos().y) || mIsGround)
 		{
 			mIsJumping = false;
-		}
-
-		if (KeyInput::GetKeyDown(KeyCode::X))
-		{
-			SpawnBullet();
-		}
-
-		if (mIsHit)
-		{
-			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_air", mAnimator->GetFlipX());
 		}
 
 		if (mIsGround)
@@ -398,6 +413,7 @@ namespace me
 				mState = Player_state::Idle;
 		}
 	}
+
 	void Player_stage::Hit()
 	{
 		if(mIsGround)
@@ -405,6 +421,8 @@ namespace me
 
 		if (mAnimator->GetCurAnim()->IsComplete())
 		{
+			mIsHit = false;
+
 			if (KeyInput::GetKeyDown(KeyCode::Z))
 			{
 				mIsGround = false;

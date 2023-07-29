@@ -30,7 +30,7 @@ namespace me
 	}
 	void Animator::Render(HDC hdc)
 	{
-		if (mCurPlayAnim != nullptr && !mCurPlayAnim->IsComplete())
+		if (mCurPlayAnim != nullptr /*&& !mCurPlayAnim->IsComplete()*/)
 		{
 			Transform* tr = GetOwner()->GetComponent<Transform>(L"defaultTransform");
 			math::Vector2 pos = tr->GetPos();
@@ -66,6 +66,7 @@ namespace me
 					{
 						isPlay = false;
 						mCurPlayAnim->SetIdx(mCurPlayAnim->GetIdx() - 1);
+						mCurPlayAnim->SetComplete(true);
 					}
 				}
 			}
