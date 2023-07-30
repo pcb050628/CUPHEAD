@@ -105,7 +105,7 @@ namespace me
 		else if (KeyInput::GetKeyDown(KeyCode::LeftArrow) && KeyInput::GetKeyUp(KeyCode::RightArrow))
 			mAnimator->SetFlipX(true);
 
-		if (mState != Player_state::Aim && mState != Player_state::Duck)
+		if (mState != Player_state::Aim && mState != Player_state::Duck && !mIsHit)
 		{
 			Transform* tr = GetComponent<Transform>();
 
@@ -122,7 +122,7 @@ namespace me
 			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y + 700.f * Time::GetDeltaTime()));
 		}
 
-		switch (mState)
+		switch (mState) // 피격 상태를 정해진 시간을 체크해서 끝나는걸로 변경하기
 		{
 		case me::Player_stage::Player_state::Idle:
 			Idle();
@@ -179,7 +179,10 @@ namespace me
 		mAnimator->PlayAnim(L"CupHead_stage_anim_idle", mAnimator->GetFlipX());
 
 		if (mIsHit)
+		{
 			mState = Player_state::Hit;
+			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_ground", mAnimator->GetFlipX());
+		}
 		else if (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow))
 			mState = Player_state::Run;
 		else if (KeyInput::GetKeyDown(KeyCode::Z))
@@ -200,7 +203,10 @@ namespace me
 	void Player_stage::Aim()
 	{
 		if (mIsHit)
+		{
 			mState = Player_state::Hit;
+			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_ground", mAnimator->GetFlipX());
+		}
 		else if (KeyInput::GetKeyUp(KeyCode::C) && (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)))
 			mState = Player_state::Run;
 		else if (KeyInput::GetKeyUp(KeyCode::C))
@@ -276,7 +282,10 @@ namespace me
 			mAnimator->PlayAnim(L"CupHead_stage_anim_run", mAnimator->GetFlipX());
 
 		if (mIsHit)
+		{
 			mState = Player_state::Hit;
+			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_ground", mAnimator->GetFlipX());
+		}
 		else if (KeyInput::GetKeyDown(KeyCode::Z))
 		{
 			mIsGround = false;
@@ -298,7 +307,10 @@ namespace me
 		mCollider->SetOffset(math::Vector2(COLLIDER_DUCK_OFFSET_X, COLLIDER_DUCK_OFFSET_Y));
 
 		if (mIsHit)
+		{
 			mState = Player_state::Hit;
+			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_ground", mAnimator->GetFlipX());
+		}
 		else if (KeyInput::GetKeyUp(KeyCode::DownArrow))
 		{
 			mState = Player_state::Idle;
@@ -342,7 +354,10 @@ namespace me
 	void Player_stage::Shooting()
 	{
 		if (mIsHit)
+		{
 			mState = Player_state::Hit;
+			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_ground", mAnimator->GetFlipX());
+		}
 		else if(KeyInput::GetKeyDown(KeyCode::Z))
 		{
 			mIsGround = false;
@@ -373,10 +388,9 @@ namespace me
 
 	void Player_stage::Jump()
 	{
-		Transform* tr = GetComponent<Transform>();
-
 		if (mIsHit)
 		{
+			mState = Player_state::Hit;
 			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_air", mAnimator->GetFlipX());
 		}
 		else
@@ -391,10 +405,10 @@ namespace me
 
 		if (mIsJumping)
 		{
-			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y - 700.f * Time::GetDeltaTime()));
+			mTransform->SetPos(math::Vector2(mTransform->GetPos().x, mTransform->GetPos().y - 700.f * Time::GetDeltaTime()));
 		}
 
-		if (mJumpMaxHeight <= abs(mJumpStartHeight - tr->GetPos().y) || mIsGround)
+		if (mJumpMaxHeight <= abs(mJumpStartHeight - mTransform->GetPos().y) || mIsGround)
 		{
 			mIsJumping = false;
 		}
@@ -416,8 +430,15 @@ namespace me
 
 	void Player_stage::Hit()
 	{
-		if(mIsGround)
-			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_ground", mAnimator->GetFlipX());
+		if (mIsJumping)
+		{
+			mTransform->SetPos(math::Vector2(mTransform->GetPos().x, mTransform->GetPos().y - 700.f * Time::GetDeltaTime()));
+
+			if (mJumpMaxHeight <= abs(mJumpStartHeight - mTransform->GetPos().y) || mIsGround)
+			{
+				mIsJumping = false;
+			}
+		}
 
 		if (mAnimator->GetCurAnim()->IsComplete())
 		{

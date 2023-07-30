@@ -55,6 +55,7 @@ namespace me
 
 		bool mIsHit;
 		float mHitStartTime; // 수정해야하는 부분
+		float mHitHoldingTime; // 피격 유지 시간
 		float mInvincibleTime;
 
 		bool mIsJumping;
