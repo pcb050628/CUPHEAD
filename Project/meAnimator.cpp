@@ -61,8 +61,7 @@ namespace me
 					mCurPlayAnim->SetPrevTime(Time::GetTime());
 					mCurPlayAnim->Next();
 
-
-					if (!mCurPlayAnim->IsLoop() && mCurPlayAnim->IsComplete() && mNextAnims.size() < 1)
+					if (!mCurPlayAnim->IsLoop() && mCurPlayAnim->IsComplete() && nullptr == mNextAnims)
 					{
 						isPlay = false;
 						mCurPlayAnim->SetIdx(mCurPlayAnim->GetIdx() - 1);
@@ -71,15 +70,17 @@ namespace me
 				}
 			}
 
-			if (mCurPlayAnim != nullptr && mCurPlayAnim->IsComplete())
+			if (mCurPlayAnim->IsComplete())
 			{
-				if (!mCurPlayAnim->IsLoop() && mNextAnims.size() > 0)
-				{
-					mCurPlayAnim = mNextAnims.front();
-					mNextAnims.pop();
-				}
-				else if (mCurPlayAnim->IsLoop())
+				if (mCurPlayAnim->IsLoop())
 					mCurPlayAnim->Reset();
+				
+				
+				if (nullptr != mNextAnims)
+				{
+					mCurPlayAnim = mNextAnims;
+					mNextAnims = nullptr;
+				}
 			}
 		}
 	}

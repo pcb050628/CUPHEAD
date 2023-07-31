@@ -75,7 +75,23 @@ namespace me
 			auto iter = mAnims.find(name);
 			if (iter != mAnims.end())
 			{
-				mNextAnims.push(&iter->second);
+				mNextAnims = &iter->second;
+			}
+		}
+
+		virtual void NextPlayAnim(const std::wstring& name, bool flip)
+		{
+			std::wstring _name = name;
+
+			if (flip)
+				_name += L"_L";
+			else
+				_name += L"_R";
+
+			auto iter = mAnims.find(_name);
+			if (iter != mAnims.end())
+			{
+				mNextAnims = &iter->second;
 			}
 		}
 
@@ -102,7 +118,7 @@ namespace me
 		std::map<std::wstring, Animation> mAnims;
 		Animation* mCurPlayAnim;
 
-		std::queue<Animation*> mNextAnims;
+		Animation* mNextAnims;
 
 		math::Vector2 mScale;
 		math::Vector2 mOffset;

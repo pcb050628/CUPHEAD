@@ -23,8 +23,13 @@ namespace me
 		, mShootAnim(nullptr)
 		, mTransform(nullptr)
 		, mCollider(nullptr)
-		, mState(Player_state::Idle)
+		, mCurState(Player_state::Idle)
+		, mPrevState(Player_state::none)
 		, mIsGround(false)
+		, mIsHit(false)
+		, mHitStartTime(0)
+		, mHitHoldingTime(0.1f)
+		, mInvincibleTime(1.f)
 		, mIsJumping(false)
 		, mJumpStartHeight(0)
 		, mJumpMaxHeight(300.f)
@@ -94,7 +99,6 @@ namespace me
 		mAnimator->GetAnim(L"CupHead_stage_anim_hit_air_L")->SetLoop(false);
 		mAnimator->GetAnim(L"CupHead_stage_anim_hit_ground_R")->SetLoop(false);
 		mAnimator->GetAnim(L"CupHead_stage_anim_hit_ground_L")->SetLoop(false);
-
 	}
 	void Player_stage::Update()
 	{
@@ -105,7 +109,14 @@ namespace me
 		else if (KeyInput::GetKeyDown(KeyCode::LeftArrow) && KeyInput::GetKeyUp(KeyCode::RightArrow))
 			mAnimator->SetFlipX(true);
 
-		if (mState != Player_state::Aim && mState != Player_state::Duck && !mIsHit)
+		if(KeyInput::GetKeyDown(KeyCode::Z) && mIsGround)
+		{
+			mIsJumping = true;
+			mIsGround = false;
+			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
+		}
+
+		if (mCurState != Player_state::Aim && mCurState != Player_state::Duck && !mIsHit)
 		{
 			Transform* tr = GetComponent<Transform>();
 
@@ -122,7 +133,7 @@ namespace me
 			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y + 700.f * Time::GetDeltaTime()));
 		}
 
-		switch (mState) // 피격 상태를 정해진 시간을 체크해서 끝나는걸로 변경하기
+		switch (mCurState) // 피격 상태를 정해진 시간을 체크해서 끝나는걸로 변경하기
 		{
 		case me::Player_stage::Player_state::Idle:
 			Idle();
@@ -158,7 +169,7 @@ namespace me
 		if (other->GetOwner()->GetTag() == enums::eGameObjType::floor)
 			mIsGround = true;
 
-		if (other->GetOwner()->GetTag() == enums::eGameObjType::enemy && !mIsHit)
+		if (other->GetOwner()->GetTag() == enums::eGameObjType::enemy && !mIsHit && (mHitStartTime + mInvincibleTime < Time::GetTime()))
 		{
 			mIsHit = true;
 			mHitStartTime = Time::GetTime();
@@ -167,6 +178,11 @@ namespace me
 
 	void Player_stage::OnCollisionStay(Collider* other)
 	{
+		if (other->GetOwner()->GetTag() == enums::eGameObjType::enemy && !mIsHit && (mHitStartTime + mInvincibleTime < Time::GetTime()))
+		{
+			mIsHit = true;
+			mHitStartTime = Time::GetTime();
+		}
 	}
 
 	void Player_stage::OnCollisionExit(Collider* other)
@@ -176,129 +192,238 @@ namespace me
 
 	void Player_stage::Idle()
 	{
-		mAnimator->PlayAnim(L"CupHead_stage_anim_idle", mAnimator->GetFlipX());
-
 		if (mIsHit)
 		{
-			mState = Player_state::Hit;
+			mCurState = Player_state::Hit;
 			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_ground", mAnimator->GetFlipX());
+			return;
 		}
 		else if (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow))
-			mState = Player_state::Run;
-		else if (KeyInput::GetKeyDown(KeyCode::Z))
 		{
-			mIsGround = false;
-			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
-			mState = Player_state::Jump;
-			mIsJumping = true;
+			mCurState = Player_state::Run;
+		}
+		else if (mIsJumping)
+		{
+			mCurState = Player_state::Jump;
 		}
 		else if (KeyInput::GetKeyDown(KeyCode::C))
-			mState = Player_state::Aim;
+		{
+			mCurState = Player_state::Aim;
+		}
 		else if (KeyInput::GetKeyDown(KeyCode::DownArrow))
-			mState = Player_state::Duck;
+		{
+			mCurState = Player_state::Duck;
+		}
 		else if (KeyInput::GetKeyDown(KeyCode::X))
-			mState = Player_state::Shooting;
+		{
+			mCurState = Player_state::Shooting;
+		}
+
+		if (mPrevState == Player_state::Hit)
+		{
+			mAnimator->NextPlayAnim(L"CupHead_stage_anim_idle", mAnimator->GetFlipX());
+			//return;
+		}
+		else if(mCurState == Player_state::Idle && mPrevState != Player_state::Hit)
+		{
+			mAnimator->PlayAnim(L"CupHead_stage_anim_idle", mAnimator->GetFlipX());
+		}
+
+		mPrevState = Player_state::Idle;
 	}
 
 	void Player_stage::Aim()
 	{
 		if (mIsHit)
 		{
-			mState = Player_state::Hit;
+			mCurState = Player_state::Hit;
 			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_ground", mAnimator->GetFlipX());
+			return;
 		}
 		else if (KeyInput::GetKeyUp(KeyCode::C) && (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)))
-			mState = Player_state::Run;
+		{
+			mCurState = Player_state::Run;
+		}
 		else if (KeyInput::GetKeyUp(KeyCode::C))
-			mState = Player_state::Idle;
+		{
+			mCurState = Player_state::Idle;
+		}
 		else if (KeyInput::GetKeyDown(KeyCode::X))
 		{
-			if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::UpArrow))
+			if (mPrevState == Player_state::Hit && !mAnimator->GetCurAnim()->IsComplete())
 			{
-				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_diagonal_up", mAnimator->GetFlipX());
-				SpawnBullet(math::Vector2(1, -1));
-			}
-			else if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::DownArrow))
-			{
-				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_diagonal_down", mAnimator->GetFlipX());
-				SpawnBullet(math::Vector2(1, 1));
-			}
-			else if (KeyInput::GetKeyDown(KeyCode::UpArrow))
-			{
-				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_up", mAnimator->GetFlipX());
-				SpawnBullet(math::Vector2(0, -1));
-			}
-			else if (KeyInput::GetKeyDown(KeyCode::DownArrow))
-			{
-				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_down", mAnimator->GetFlipX());
-				SpawnBullet(math::Vector2(0, 1));
+				if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::UpArrow))
+				{
+					mAnimator->NextPlayAnim(L"CupHead_stage_anim_shoot_diagonal_up", mAnimator->GetFlipX());
+					SpawnBullet(math::Vector2(1, -1));
+				}
+				else if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::DownArrow))
+				{
+					mAnimator->NextPlayAnim(L"CupHead_stage_anim_shoot_diagonal_down", mAnimator->GetFlipX());
+					SpawnBullet(math::Vector2(1, 1));
+				}
+				else if (KeyInput::GetKeyDown(KeyCode::UpArrow))
+				{
+					mAnimator->NextPlayAnim(L"CupHead_stage_anim_shoot_up", mAnimator->GetFlipX());
+					SpawnBullet(math::Vector2(0, -1));
+				}
+				else if (KeyInput::GetKeyDown(KeyCode::DownArrow))
+				{
+					mAnimator->NextPlayAnim(L"CupHead_stage_anim_shoot_down", mAnimator->GetFlipX());
+					SpawnBullet(math::Vector2(0, 1));
+				}
+				else
+				{
+					mAnimator->NextPlayAnim(L"CupHead_stage_anim_shoot_straight", mAnimator->GetFlipX());
+					SpawnBullet();
+				}
+
+				//return;
 			}
 			else
 			{
-				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_straight", mAnimator->GetFlipX());
-				SpawnBullet();
+				if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::UpArrow))
+				{
+					mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_diagonal_up", mAnimator->GetFlipX());
+					SpawnBullet(math::Vector2(1, -1));
+				}
+				else if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::DownArrow))
+				{
+					mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_diagonal_down", mAnimator->GetFlipX());
+					SpawnBullet(math::Vector2(1, 1));
+				}
+				else if (KeyInput::GetKeyDown(KeyCode::UpArrow))
+				{
+					mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_up", mAnimator->GetFlipX());
+					SpawnBullet(math::Vector2(0, -1));
+				}
+				else if (KeyInput::GetKeyDown(KeyCode::DownArrow))
+				{
+					mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_down", mAnimator->GetFlipX());
+					SpawnBullet(math::Vector2(0, 1));
+				}
+				else
+				{
+					mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_straight", mAnimator->GetFlipX());
+					SpawnBullet();
+				}
 			}
 		}
-		else if (KeyInput::GetKeyDown(KeyCode::Z))
+		else if (mIsJumping)
 		{
-			mIsGround = false;
-			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
-			mState = Player_state::Jump;
-			mIsJumping = true;
+			mCurState = Player_state::Jump;
 		}
 		else
 		{
-			if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::UpArrow))
-				mAnimator->PlayAnim(L"CupHead_stage_anim_aim_diagonal_up", mAnimator->GetFlipX());
-			else if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::DownArrow))
-				mAnimator->PlayAnim(L"CupHead_stage_anim_aim_diagonal_down", mAnimator->GetFlipX());
-			else if (KeyInput::GetKeyDown(KeyCode::UpArrow))
-				mAnimator->PlayAnim(L"CupHead_stage_anim_aim_up", mAnimator->GetFlipX());
-			else if (KeyInput::GetKeyDown(KeyCode::DownArrow))
-				mAnimator->PlayAnim(L"CupHead_stage_anim_aim_down", mAnimator->GetFlipX());
+			if (mPrevState == Player_state::Hit && !mAnimator->GetCurAnim()->IsComplete())
+			{
+				if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::UpArrow))
+					mAnimator->NextPlayAnim(L"CupHead_stage_anim_aim_diagonal_up", mAnimator->GetFlipX());
+				else if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::DownArrow))
+					mAnimator->NextPlayAnim(L"CupHead_stage_anim_aim_diagonal_down", mAnimator->GetFlipX());
+				else if (KeyInput::GetKeyDown(KeyCode::UpArrow))
+					mAnimator->NextPlayAnim(L"CupHead_stage_anim_aim_up", mAnimator->GetFlipX());
+				else if (KeyInput::GetKeyDown(KeyCode::DownArrow))
+					mAnimator->NextPlayAnim(L"CupHead_stage_anim_aim_down", mAnimator->GetFlipX());
+				else
+					mAnimator->PlayAnim(L"CupHead_stage_anim_aim_straight", mAnimator->GetFlipX());
+
+				//return;
+			}
 			else
-				mAnimator->PlayAnim(L"CupHead_stage_anim_aim_straight", mAnimator->GetFlipX());
+			{
+				if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::UpArrow))
+					mAnimator->PlayAnim(L"CupHead_stage_anim_aim_diagonal_up", mAnimator->GetFlipX());
+				else if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::DownArrow))
+					mAnimator->PlayAnim(L"CupHead_stage_anim_aim_diagonal_down", mAnimator->GetFlipX());
+				else if (KeyInput::GetKeyDown(KeyCode::UpArrow))
+					mAnimator->PlayAnim(L"CupHead_stage_anim_aim_up", mAnimator->GetFlipX());
+				else if (KeyInput::GetKeyDown(KeyCode::DownArrow))
+					mAnimator->PlayAnim(L"CupHead_stage_anim_aim_down", mAnimator->GetFlipX());
+				else
+					mAnimator->PlayAnim(L"CupHead_stage_anim_aim_straight", mAnimator->GetFlipX());
+			}
 		}
+
+		mPrevState = Player_state::Aim;
 	}
 
 	void Player_stage::Run()
 	{
-		if (KeyInput::GetKeyDown(KeyCode::X))
-		{
-			if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::UpArrow))
-			{
-				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_diagonal_up_run", mAnimator->GetFlipX());
-				SpawnBullet(math::Vector2(1, -1));
-			}
-			else if (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow))
-			{
-				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_straight_run", mAnimator->GetFlipX());
-				SpawnBullet();
-			}
-			else
-				mState = Player_state::Shooting;
-		}
-		else
-			mAnimator->PlayAnim(L"CupHead_stage_anim_run", mAnimator->GetFlipX());
-
 		if (mIsHit)
 		{
-			mState = Player_state::Hit;
+			mCurState = Player_state::Hit;
 			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_ground", mAnimator->GetFlipX());
+			return;
 		}
-		else if (KeyInput::GetKeyDown(KeyCode::Z))
+		else if (mIsJumping)
 		{
-			mIsGround = false;
-			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
-			mState = Player_state::Jump;
-			mIsJumping = true;
+			mCurState = Player_state::Jump;
 		}
 		else if (KeyInput::GetKeyDown(KeyCode::DownArrow))
-			mState = Player_state::Duck;
+		{
+			mCurState = Player_state::Duck;
+		}
 		else if (KeyInput::GetKeyDown(KeyCode::C))
-			mState = Player_state::Aim;
+		{
+			mCurState = Player_state::Aim;
+		}
 		else if (KeyInput::GetKeyUp(KeyCode::RightArrow) && KeyInput::GetKeyUp(KeyCode::LeftArrow))
-			mState = Player_state::Idle;
+		{
+			mCurState = Player_state::Idle;
+		}
+
+		if (mPrevState == Player_state::Hit && !mAnimator->GetCurAnim()->IsComplete())
+		{
+			if (KeyInput::GetKeyDown(KeyCode::X))
+			{
+				if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::UpArrow))
+				{
+					mAnimator->NextPlayAnim(L"CupHead_stage_anim_shoot_diagonal_up_run", mAnimator->GetFlipX());
+					SpawnBullet(math::Vector2(1, -1));
+				}
+				else if (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow))
+				{
+					mAnimator->NextPlayAnim(L"CupHead_stage_anim_shoot_straight_run", mAnimator->GetFlipX());
+					SpawnBullet();
+				}
+				else
+				{
+					mCurState = Player_state::Shooting;
+				}
+			}
+			else
+			{
+				mAnimator->NextPlayAnim(L"CupHead_stage_anim_run", mAnimator->GetFlipX());
+			}
+			//return;
+		}
+		else
+		{
+			if (KeyInput::GetKeyDown(KeyCode::X))
+			{
+				if ((KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)) && KeyInput::GetKeyDown(KeyCode::UpArrow))
+				{
+					mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_diagonal_up_run", mAnimator->GetFlipX());
+					SpawnBullet(math::Vector2(1, -1));
+				}
+				else if (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow))
+				{
+					mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_straight_run", mAnimator->GetFlipX());
+					SpawnBullet();
+				}
+				else
+				{
+					mCurState = Player_state::Shooting;
+				}
+			}
+			else
+			{
+				mAnimator->PlayAnim(L"CupHead_stage_anim_run", mAnimator->GetFlipX());
+			}
+		}
+
+		mPrevState = Player_state::Run;
 	}
 
 	void Player_stage::Duck()
@@ -308,90 +433,135 @@ namespace me
 
 		if (mIsHit)
 		{
-			mState = Player_state::Hit;
+			mCurState = Player_state::Hit;
 			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_ground", mAnimator->GetFlipX());
-		}
-		else if (KeyInput::GetKeyUp(KeyCode::DownArrow))
-		{
-			mState = Player_state::Idle;
 
 			mCollider->SetSize(math::Vector2(COLLIDER_DEFAULT_SIZE_X, COLLIDER_DEFAULT_SIZE_Y));
 			mCollider->SetOffset(math::Vector2(COLLIDER_DEFAULT_OFFSET_X, COLLIDER_DEFAULT_OFFSET_Y));
+			return;
 		}
-		else if (KeyInput::GetKeyDown(KeyCode::Z))
+		else if (mIsJumping)
 		{
-			mIsGround = false;
-			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
-			mState = Player_state::Jump;
-			mIsJumping = true;
+			mCurState = Player_state::Jump;
+		}
+		else if (KeyInput::GetKeyUp(KeyCode::DownArrow))
+		{
+			mCurState = Player_state::Idle;
 
 			mCollider->SetSize(math::Vector2(COLLIDER_DEFAULT_SIZE_X, COLLIDER_DEFAULT_SIZE_Y));
 			mCollider->SetOffset(math::Vector2(COLLIDER_DEFAULT_OFFSET_X, COLLIDER_DEFAULT_OFFSET_Y));
 		}
 		else if (KeyInput::GetKeyDown(KeyCode::C))
 		{
-			mState = Player_state::Aim;
+			mCurState = Player_state::Aim;
 
 			mCollider->SetSize(math::Vector2(COLLIDER_DEFAULT_SIZE_X, COLLIDER_DEFAULT_SIZE_Y));
 			mCollider->SetOffset(math::Vector2(COLLIDER_DEFAULT_OFFSET_X, COLLIDER_DEFAULT_OFFSET_Y));
 		}
 		else if (KeyInput::GetKeyDown(KeyCode::X))
 		{
-			mAnimator->PlayAnim(L"CupHead_stage_anim_duck_shoot", mAnimator->GetFlipX());
-			SpawnBullet();
+			if (mPrevState == Player_state::Hit && !mAnimator->GetCurAnim()->IsComplete())
+			{
+				mAnimator->NextPlayAnim(L"CupHead_stage_anim_duck_shoot", mAnimator->GetFlipX());
+				SpawnBullet();
+			}
+			else
+			{
+				mAnimator->PlayAnim(L"CupHead_stage_anim_duck_shoot", mAnimator->GetFlipX());
+				SpawnBullet();
+			}
 		}
 		else if (KeyInput::GetKeyUp(KeyCode::DownArrow) && (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)))
 		{
-			mState = Player_state::Run;
+			mCurState = Player_state::Run;
 
 			mCollider->SetSize(math::Vector2(COLLIDER_DEFAULT_SIZE_X, COLLIDER_DEFAULT_SIZE_Y));
 			mCollider->SetOffset(math::Vector2(COLLIDER_DEFAULT_OFFSET_X, COLLIDER_DEFAULT_OFFSET_Y));
 		}
 		else
-			mAnimator->PlayAnim(L"CupHead_stage_anim_duck_idle", mAnimator->GetFlipX());
+		{
+			if (mPrevState == Player_state::Hit && !mAnimator->GetCurAnim()->IsComplete())
+			{
+				mAnimator->NextPlayAnim(L"CupHead_stage_anim_duck_idle", mAnimator->GetFlipX());
+				mPrevState = Player_state::Duck;
+				return;
+			}
+			else
+				mAnimator->PlayAnim(L"CupHead_stage_anim_duck_idle", mAnimator->GetFlipX());
+		}
+
+		mPrevState = Player_state::Duck;
 	}
 
 	void Player_stage::Shooting()
 	{
 		if (mIsHit)
 		{
-			mState = Player_state::Hit;
+			mCurState = Player_state::Hit;
 			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_ground", mAnimator->GetFlipX());
+			return;
 		}
-		else if(KeyInput::GetKeyDown(KeyCode::Z))
+		else if (mIsJumping)
 		{
-			mIsGround = false;
-			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
-			mState = Player_state::Jump;
-			mIsJumping = true;
+			mCurState = Player_state::Jump;
 		}
 		else if (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow))
-			mState = Player_state::Run;
-		else if (KeyInput::GetKeyDown(KeyCode::C))
-			mState = Player_state::Aim;
-		else if (KeyInput::GetKeyDown(KeyCode::DownArrow))
-			mState = Player_state::Duck;
-		else if (KeyInput::GetKeyUp(KeyCode::X))
-			mState = Player_state::Idle;
-
-		if (KeyInput::GetKeyDown(KeyCode::UpArrow))
 		{
-			mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_up", mAnimator->GetFlipX());
-			SpawnBullet(math::Vector2(0, -1));
+			mCurState = Player_state::Run;
+		}
+		else if (KeyInput::GetKeyDown(KeyCode::C))
+		{
+			mCurState = Player_state::Aim;
+		}
+		else if (KeyInput::GetKeyDown(KeyCode::DownArrow))
+		{
+			mCurState = Player_state::Duck;
+		}
+		else if (KeyInput::GetKeyUp(KeyCode::X))
+		{
+			mCurState = Player_state::Idle;
+		}
+
+		if (mPrevState == Player_state::Hit && !mAnimator->GetCurAnim()->IsComplete())
+		{
+			if (KeyInput::GetKeyDown(KeyCode::UpArrow))
+			{
+				mAnimator->NextPlayAnim(L"CupHead_stage_anim_shoot_up", mAnimator->GetFlipX());
+				SpawnBullet(math::Vector2(0, -1));
+			}
+			else
+			{
+				mAnimator->NextPlayAnim(L"CupHead_stage_anim_shoot_straight", mAnimator->GetFlipX());
+				SpawnBullet();
+			}
+
+			mPrevState = Player_state::Shooting;
+			return;
 		}
 		else
 		{
-			mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_straight", mAnimator->GetFlipX());
-			SpawnBullet();
+			if (KeyInput::GetKeyDown(KeyCode::UpArrow))
+			{
+				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_up", mAnimator->GetFlipX());
+				SpawnBullet(math::Vector2(0, -1));
+			}
+			else
+			{
+				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_straight", mAnimator->GetFlipX());
+				SpawnBullet();
+			}
 		}
+
+		mPrevState = Player_state::Shooting;
 	}
 
 	void Player_stage::Jump()
 	{
 		if (mIsHit)
 		{
-			mState = Player_state::Hit;
+			mCurState = Player_state::Hit;
 			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_air", mAnimator->GetFlipX());
+			return;
 		}
 		else
 		{
@@ -416,52 +586,44 @@ namespace me
 		if (mIsGround)
 		{
 			if (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow))
-				mState = Player_state::Run;
+				mCurState = Player_state::Run;
 			else if (KeyInput::GetKeyDown(KeyCode::C))
-				mState = Player_state::Aim;
+				mCurState = Player_state::Aim;
 			else if (KeyInput::GetKeyDown(KeyCode::DownArrow))
-				mState = Player_state::Duck;
+				mCurState = Player_state::Duck;
 			else if (KeyInput::GetKeyDown(KeyCode::X))
-				mState = Player_state::Shooting;
+				mCurState = Player_state::Shooting;
 			else
-				mState = Player_state::Idle;
+				mCurState = Player_state::Idle;
 		}
+
+		mPrevState = Player_state::Jump;
 	}
 
 	void Player_stage::Hit()
 	{
-		if (mIsJumping)
+		if (mHitStartTime + mHitHoldingTime < Time::GetTime())
 		{
-			mTransform->SetPos(math::Vector2(mTransform->GetPos().x, mTransform->GetPos().y - 700.f * Time::GetDeltaTime()));
-
-			if (mJumpMaxHeight <= abs(mJumpStartHeight - mTransform->GetPos().y) || mIsGround)
-			{
-				mIsJumping = false;
-			}
+			mIsHit = false;
 		}
 
 		if (mAnimator->GetCurAnim()->IsComplete())
 		{
-			mIsHit = false;
-
-			if (KeyInput::GetKeyDown(KeyCode::Z))
-			{
-				mIsGround = false;
-				mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
-				mState = Player_state::Jump;
-				mIsJumping = true;
-			}
+			if (mIsJumping)
+				mCurState = Player_state::Jump;
 			else if (KeyInput::GetKeyDown(KeyCode::C))
-				mState = Player_state::Aim;
+				mCurState = Player_state::Aim;
 			else if (KeyInput::GetKeyDown(KeyCode::DownArrow))
-				mState = Player_state::Duck;
+				mCurState = Player_state::Duck;
 			else if (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow))
-				mState = Player_state::Run;
+				mCurState = Player_state::Run;
 			else if (KeyInput::GetKeyDown(KeyCode::X))
-				mState = Player_state::Shooting;
+				mCurState = Player_state::Shooting;
 			else
-				mState = Player_state::Idle;
+				mCurState = Player_state::Idle;
 		}
+
+		mPrevState = Player_state::Hit;
 	}
 
 	void Player_stage::SpawnBullet(math::Vector2 dir)

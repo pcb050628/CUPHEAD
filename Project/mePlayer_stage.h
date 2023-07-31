@@ -8,6 +8,7 @@ namespace me
 	public:
 		enum class Player_state
 		{
+			none,
 			Idle,
 			Aim,
 			Run,
@@ -49,7 +50,8 @@ namespace me
 		Transform* mTransform;
 		BoxCollider* mCollider;
 
-		Player_state mState;
+		Player_state mCurState;
+		Player_state mPrevState;
 
 		bool mIsGround;
 
