@@ -48,7 +48,6 @@ namespace me
 		mAnimator->GetAnim(L"Goopy Le Grande_intro")->SetOffset(math::Vector2(-90, -90));
 		mAnimator->GetAnim(L"Goopy Le Grande_punch_L")->SetOffset(math::Vector2(0, -10));
 		mAnimator->GetAnim(L"Goopy Le Grande_intro")->SetLoop(false);
-		//mAnimator->GetAnim(L"Goopy Le Grande_punch_L")->SetLoop(false);
 		mAnimator->GetAnim(L"Goopy Le Grande_transition_to_ph2_first")->SetLoop(false);
 		mAnimator->GetAnim(L"Goopy Le Grande_transition_to_ph2_second")->SetLoop(false);
 		mAnimator->GetAnim(L"Goopy Le Grande_transition_to_ph2_third")->SetLoop(false);

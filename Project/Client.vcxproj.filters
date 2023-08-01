@@ -109,17 +109,23 @@
     <Filter Include="Engine\ResourceManager">
       <UniqueIdentifier>{c67f88c3-fc95-4e5a-8e93-cd61bba81af9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\ResourceManager\Resource">
-      <UniqueIdentifier>{18cf9636-1661-4ae3-83ed-c2ce41feb7f0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\ResourceManager\Resource\Texture">
-      <UniqueIdentifier>{aea1dea4-ac72-4ffe-b33c-49a50b1cafa3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\ResourceManager\Resource\Animation">
-      <UniqueIdentifier>{97c3aae5-ef8d-4e1e-90e6-743a4d255060}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\GameObject\Wall">
       <UniqueIdentifier>{33a879b9-1c6f-4fbb-b872-d42adc9afb22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Resource">
+      <UniqueIdentifier>{18cf9636-1661-4ae3-83ed-c2ce41feb7f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Resource\Texture">
+      <UniqueIdentifier>{aea1dea4-ac72-4ffe-b33c-49a50b1cafa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Resource\Animation">
+      <UniqueIdentifier>{97c3aae5-ef8d-4e1e-90e6-743a4d255060}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Resource\Sound">
+      <UniqueIdentifier>{691d1e8b-45b5-4856-961a-9925046cba86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\SoundManager">
+      <UniqueIdentifier>{ccd9a56c-5963-47e2-a755-e7c2349c2797}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -178,13 +184,13 @@
       <Filter>Engine\GameObject\Component</Filter>
     </ClInclude>
     <ClInclude Include="meResource.h">
-      <Filter>Engine\ResourceManager\Resource</Filter>
+      <Filter>Engine\Resource</Filter>
     </ClInclude>
     <ClInclude Include="meResourceManager.h">
       <Filter>Engine\ResourceManager</Filter>
     </ClInclude>
     <ClInclude Include="meTexture.h">
-      <Filter>Engine\ResourceManager\Resource\Texture</Filter>
+      <Filter>Engine\Resource\Texture</Filter>
     </ClInclude>
     <ClInclude Include="meTItleScene.h">
       <Filter>Engine\SceneManager\Scene\TitleScene</Filter>
@@ -220,7 +226,7 @@
       <Filter>Engine\GameObject\Player\Player_stage</Filter>
     </ClInclude>
     <ClInclude Include="meAnimation.h">
-      <Filter>Engine\ResourceManager\Resource\Animation</Filter>
+      <Filter>Engine\Resource\Animation</Filter>
     </ClInclude>
     <ClInclude Include="meGoopy_Le_Grande_Boss.h">
       <Filter>Engine\GameObject\Boss\Goopy Le Grande_Boss</Filter>
@@ -245,6 +251,12 @@
     </ClInclude>
     <ClInclude Include="meCircleCollider.h">
       <Filter>Engine\GameObject\Component\Collider\CircleCollider</Filter>
+    </ClInclude>
+    <ClInclude Include="meSound.h">
+      <Filter>Engine\Resource\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="meSoundManager.h">
+      <Filter>Engine\SoundManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -296,13 +308,13 @@
       <Filter>Engine\SceneManager</Filter>
     </ClCompile>
     <ClCompile Include="meResource.cpp">
-      <Filter>Engine\ResourceManager\Resource</Filter>
+      <Filter>Engine\Resource</Filter>
     </ClCompile>
     <ClCompile Include="meResourceManager.cpp">
       <Filter>Engine\ResourceManager</Filter>
     </ClCompile>
     <ClCompile Include="meTexture.cpp">
-      <Filter>Engine\ResourceManager\Resource\Texture</Filter>
+      <Filter>Engine\Resource\Texture</Filter>
     </ClCompile>
     <ClCompile Include="meMath.cpp">
       <Filter>Engine\DefaultHeader</Filter>
@@ -338,7 +350,7 @@
       <Filter>Engine\GameObject\Player\Player_stage</Filter>
     </ClCompile>
     <ClCompile Include="meAnimation.cpp">
-      <Filter>Engine\ResourceManager\Resource\Animation</Filter>
+      <Filter>Engine\Resource\Animation</Filter>
     </ClCompile>
     <ClCompile Include="meGoopy_Le_Grande_Boss.cpp">
       <Filter>Engine\GameObject\Boss\Goopy Le Grande_Boss</Filter>
@@ -363,6 +375,12 @@
     </ClCompile>
     <ClCompile Include="meCircleCollider.cpp">
       <Filter>Engine\GameObject\Component\Collider\CircleCollider</Filter>
+    </ClCompile>
+    <ClCompile Include="meSound.cpp">
+      <Filter>Engine\Resource\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="meSoundManager.cpp">
+      <Filter>Engine\SoundManager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

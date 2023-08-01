@@ -23,6 +23,7 @@ E:\project_api\CUPHEAD\Project\meMainScene.cpp;E:\project_api\CUPHEAD\Project\x6
 E:\project_api\CUPHEAD\Project\mePlayer_map.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\mePlayer_map.obj
 E:\project_api\CUPHEAD\Project\mePlayer_stage.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\mePlayer_stage.obj
 E:\project_api\CUPHEAD\Project\meRigidbody.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meRigidbody.obj
+E:\project_api\CUPHEAD\Project\meSoundManager.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meSoundManager.obj
 E:\project_api\CUPHEAD\Project\meTexture.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meTexture.obj
 E:\project_api\CUPHEAD\Project\meResource.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meResource.obj
 E:\project_api\CUPHEAD\Project\meResourceManager.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meResourceManager.obj
@@ -33,3 +34,4 @@ E:\project_api\CUPHEAD\Project\meTime.cpp;E:\project_api\CUPHEAD\Project\x64\Deb
 E:\project_api\CUPHEAD\Project\meTItleScene.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meTItleScene.obj
 E:\project_api\CUPHEAD\Project\meTransform.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meTransform.obj
 E:\project_api\CUPHEAD\Project\meWorldMapScene.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meWorldMapScene.obj
+E:\project_api\CUPHEAD\Project\meSound.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meSound.obj

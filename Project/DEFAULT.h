@@ -6,11 +6,19 @@
 #include <string>
 #include <queue>
 #include <bitset>
+#include <assert.h>
 
 #include "framework.h"
 #include "meMath.h"
 #include "meTime.h"
 #include "meKeyInput.h"
+
+#include <mmsystem.h>
+#include <dsound.h>
+#include <dinput.h>
+
+#pragma comment(lib, "winmm.lib")
+#pragma comment(lib, "dsound.lib")
 
 
 namespace me

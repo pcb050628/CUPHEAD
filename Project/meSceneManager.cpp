@@ -18,7 +18,9 @@ namespace me
 		CreateScene<TitleScene>(L"title");
 		CreateScene<MainScene>(L"main");
 		CreateScene<WorldMapScene>(L"overWorld");
-		mCurScene = CreateScene<Goopy_Le_Grande_Stage>(L"test");
+		CreateScene<Goopy_Le_Grande_Stage>(L"test");
+
+		LoadScene(L"test");
 	}
 
 	void SceneManager::Update()
@@ -54,7 +56,7 @@ namespace me
 
 		mCurScene->Clear();
 		mCurScene = iter->second;
-		mCurScene->Init();
+		//mCurScene->Init();
 		return iter->second;
 	}
 }

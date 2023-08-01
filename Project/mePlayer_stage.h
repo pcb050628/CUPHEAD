@@ -1,5 +1,6 @@
 #pragma once
 #include "meGameObject.h"
+#include "meSound.h"
 
 namespace me
 {
@@ -45,10 +46,14 @@ namespace me
 		float shootDelay;
 		float shootPrevTime;
 
+		Animator* mShootAnim_R;
+		Animator* mShootAnim_L;
 		Animator* mAnimator;
-		Animator* mShootAnim;
 		Transform* mTransform;
 		BoxCollider* mCollider;
+
+		Sound* jumpSound;
+		Sound* shootSound;
 
 		Player_state mCurState;
 		Player_state mPrevState;
@@ -56,8 +61,8 @@ namespace me
 		bool mIsGround;
 
 		bool mIsHit;
-		float mHitStartTime; // 수정해야하는 부분
-		float mHitHoldingTime; // 피격 유지 시간
+		float mHitStartTime;
+		float mHitHoldingTime;
 		float mInvincibleTime;
 
 		bool mIsJumping;

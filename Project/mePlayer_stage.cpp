@@ -20,7 +20,6 @@ namespace me
 		, shootDelay(0.1f)
 		, shootPrevTime(0)
 		, mAnimator(nullptr)
-		, mShootAnim(nullptr)
 		, mTransform(nullptr)
 		, mCollider(nullptr)
 		, mCurState(Player_state::Idle)
@@ -50,9 +49,14 @@ namespace me
 		mCollider->SetSize(math::Vector2(COLLIDER_DEFAULT_SIZE_X, COLLIDER_DEFAULT_SIZE_Y));
 		mCollider->SetOffset(math::Vector2(COLLIDER_DEFAULT_OFFSET_X, COLLIDER_DEFAULT_OFFSET_Y));
 
-		mShootAnim = AddComponent<Animator>(L"bullet_spawn");
-		mShootAnim->AddAnim(*ResourceManager::Load(L"bullet_anim_spawn_R", L"..\\content\\BossFight\\CupHead\\Bullet\\Spawn\\Right\\", eTextureType::png));
-		mShootAnim->AddAnim(*ResourceManager::Load(L"bullet_anim_spawn_L", L"..\\content\\BossFight\\CupHead\\Bullet\\Spawn\\Left\\", eTextureType::png));
+		mShootAnim_R = AddComponent<Animator>(L"bullet_spawn_R");
+		mShootAnim_L = AddComponent<Animator>(L"bullet_spawn_L");
+		mShootAnim_R->AddAnim(*ResourceManager::Load(L"bullet_anim_spawn_R", L"..\\content\\BossFight\\CupHead\\Bullet\\Spawn\\Right\\", eTextureType::png));
+		mShootAnim_L->AddAnim(*ResourceManager::Load(L"bullet_anim_spawn_L", L"..\\content\\BossFight\\CupHead\\Bullet\\Spawn\\Left\\", eTextureType::png));
+		mShootAnim_R->GetAnim(L"bullet_anim_spawn_R")->SetDuration(0.05f);
+		mShootAnim_L->GetAnim(L"bullet_anim_spawn_L")->SetDuration(0.05f);
+		mShootAnim_R->SetOffset(mShootAnim_R->GetOffset() + math::Vector2(60, 0));
+		mShootAnim_L->SetOffset(mShootAnim_L->GetOffset() + math::Vector2(-60 , 0));
 
 		mAnimator = AddComponent<Animator>(L"CupHead_stage_anim");
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_intro", L"..\\content\\BossFight\\Cuphead\\Intros\\Regular\\"));
@@ -118,13 +122,24 @@ namespace me
 
 		if (mCurState != Player_state::Aim && mCurState != Player_state::Duck && !mIsHit)
 		{
-			Transform* tr = GetComponent<Transform>();
-
 			if (KeyInput::GetKey(KeyCode::RightArrow))
-				tr->SetPos(math::Vector2(tr->GetPos().x + 350.f * Time::GetDeltaTime(), tr->GetPos().y));
+				mTransform->SetPos(math::Vector2(mTransform->GetPos().x + 350.f * Time::GetDeltaTime(), mTransform->GetPos().y));
 
 			if (KeyInput::GetKey(KeyCode::LeftArrow))
-				tr->SetPos(math::Vector2(tr->GetPos().x - 350.f * Time::GetDeltaTime(), tr->GetPos().y));
+				mTransform->SetPos(math::Vector2(mTransform->GetPos().x - 350.f * Time::GetDeltaTime(), mTransform->GetPos().y));
+		}
+
+		if (KeyInput::GetKeyUp(KeyCode::X) || mIsHit)
+		{
+			mShootAnim_R->StopPlay();
+			mShootAnim_L->StopPlay();
+		}
+		else 
+		{
+			if (mAnimator->GetFlipX())
+				mShootAnim_R->StopPlay();
+			else
+				mShootAnim_L->StopPlay();
 		}
 
 		if (!mIsGround&& !mIsJumping)
@@ -133,7 +148,7 @@ namespace me
 			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y + 700.f * Time::GetDeltaTime()));
 		}
 
-		switch (mCurState) // 피격 상태를 정해진 시간을 체크해서 끝나는걸로 변경하기
+		switch (mCurState)
 		{
 		case me::Player_stage::Player_state::Idle:
 			Idle();
@@ -649,10 +664,19 @@ namespace me
 					comPos.x -= mTransform->GetScale().x / 2;
 			}
 
+			if (mCurState == Player_state::Duck)
+				comPos.y += 30.f;
+
 			if (mAnimator->GetFlipX())
+			{
 				comPos = math::Vector2(comPos.x - mTransform->GetScale().x / 4, comPos.y);
+				//mShootAnim_L->PlayAnim(L"bullet_anim_spawn_L");
+			}
 			else
+			{
 				comPos = math::Vector2(comPos.x + mTransform->GetScale().x / 4, comPos.y);
+				//mShootAnim_R->PlayAnim(L"bullet_anim_spawn_R");
+			}
 
 			Bullet* b = SceneManager::Instantiate<Bullet>(enums::eLayer::Bullet, comPos);
 			b->SetDirection(dir, mAnimator->GetFlipX());

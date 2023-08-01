@@ -156,6 +156,7 @@
     <ClInclude Include="mePlayer_map.h" />
     <ClInclude Include="mePlayer_stage.h" />
     <ClInclude Include="meRigidbody.h" />
+    <ClInclude Include="meSoundManager.h" />
     <ClInclude Include="meTexture.h" />
     <ClInclude Include="meResource.h" />
     <ClInclude Include="meTItleScene.h" />
@@ -166,6 +167,7 @@
     <ClInclude Include="meScene.h" />
     <ClInclude Include="meSceneManager.h" />
     <ClInclude Include="meSpriteRenderer.h" />
+    <ClInclude Include="meSound.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="meTime.h" />
     <ClInclude Include="meTransform.h" />
@@ -196,6 +198,7 @@
     <ClCompile Include="mePlayer_map.cpp" />
     <ClCompile Include="mePlayer_stage.cpp" />
     <ClCompile Include="meRigidbody.cpp" />
+    <ClCompile Include="meSoundManager.cpp" />
     <ClCompile Include="meTexture.cpp" />
     <ClCompile Include="meResource.cpp" />
     <ClCompile Include="meResourceManager.cpp" />
@@ -206,6 +209,7 @@
     <ClCompile Include="meTItleScene.cpp" />
     <ClCompile Include="meTransform.cpp" />
     <ClCompile Include="meWorldMapScene.cpp" />
+    <ClCompile Include="meSound.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Client.rc" />

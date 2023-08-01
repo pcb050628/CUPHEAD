@@ -27,6 +27,9 @@ namespace me
 		title_char_anim->AddAnim(*ResourceManager::Load<Animation>(L"title_character", L"..\\content\\title screen\\Cuphead and Mugman\\"));
 		title_char_anim->PlayAnim(L"title_character");
 		title_char_anim->GetCurAnim()->SetDuration(0.04f);
+
+		bgm = ResourceManager::Load<Sound>(L"title_song", L"..\\content\\BossFight\\Cuphead\\Sound\\AudioClip\\MUS_Intro_DontDealWithDevil_Vocal.wav");
+		bgm->Play(true);
 	}
 	void TitleScene::Update()
 	{
@@ -43,5 +46,6 @@ namespace me
 	}
 	void TitleScene::Clear()
 	{
+		bgm->Stop(true);
 	}
 }

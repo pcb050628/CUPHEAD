@@ -2,6 +2,7 @@
 #include "meSceneManager.h"
 #include "meColliderManager.h"
 #include "meCamera.h"
+#include "meSoundManager.h"
 
 me::Application::Application()
 	: mHwnd(NULL)
@@ -56,8 +57,9 @@ void me::Application::Init(HWND hwnd)
 	Time::Init();
 	KeyInput::Init();
 	Camera::Init();
-	SceneManager::Init();
 	ColliderManager::Init();
+	SoundManager::Init();
+	SceneManager::Init();
 }
 
 void me::Application::Run()

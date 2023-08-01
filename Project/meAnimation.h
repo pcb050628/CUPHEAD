@@ -65,6 +65,9 @@ namespace me
 
 		virtual enums::eAnimType GetType() { return mType; }
 
+		virtual void SetAlpha(float value) { alpha = value; }
+		virtual float GetAlpha() { return alpha; }
+
 	private:
 		enums::eAnimType mType;
 
@@ -72,6 +75,8 @@ namespace me
 
 		std::vector<Texture*> mTextures;
 		int mIdx;
+
+		float alpha;
 
 		Texture* mSheet;
 		int mSheetCount;

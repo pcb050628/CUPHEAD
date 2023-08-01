@@ -18,6 +18,7 @@ namespace me
 
 		virtual void SetScale(math::Vector2 scale) { mScale = scale; }
 		virtual void SetOffset(math::Vector2 offset) { mOffset = offset; }
+		math::Vector2 GetOffset() { return mOffset; }
 
 		virtual void SetFlipX(bool value) { isFlipX = value; }
 		virtual void SetFlipY(bool value) { isFlipY = value; }
@@ -97,6 +98,7 @@ namespace me
 
 		virtual void StopPlay()
 		{
+			mCurPlayAnim = nullptr;
 			isPlay = false;
 		}
 
