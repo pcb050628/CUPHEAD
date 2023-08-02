@@ -37,9 +37,8 @@ namespace me
 	T* SceneManager::CreateScene(std::wstring name)
 	{
 		Scene* tmp = new T(name);
-		tmp->Init();
-
 		mScenes.insert(std::make_pair(tmp->GetName(), tmp));
+		tmp->Init();
 
 		if (mCurScene == nullptr)
 			mCurScene = tmp;

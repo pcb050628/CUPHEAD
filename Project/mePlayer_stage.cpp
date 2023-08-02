@@ -33,7 +33,7 @@ namespace me
 		, mJumpStartHeight(0)
 		, mJumpMaxHeight(300.f)
 		, mIsDash(false)
-		, mDashMaxDist(200.f)
+		, mDashMaxDist(300.f)
 
 	{
 
@@ -160,6 +160,8 @@ namespace me
 		{
 			Transform* tr = GetComponent<Transform>();
 			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y + 700.f * Time::GetDeltaTime()));
+			mPrevState = mCurState;
+			mCurState = Player_state::Jump;
 		}
 
 		switch (mCurState)
@@ -201,20 +203,17 @@ namespace me
 		if (other->GetOwner()->GetTag() == enums::eGameObjType::floor)
 			mIsGround = true;
 
-		if (other->GetOwner()->GetTag() == enums::eGameObjType::enemy && !mIsHit && (mHitStartTime + mInvincibleTime < Time::GetTime()))
-		{
-			mIsHit = true;
-			mHitStartTime = Time::GetTime();
-		}
+		if (other->GetOwner()->GetTag() == enums::eGameObjType::enemy)
+			GetHit();
+
+		if (other->GetOwner()->GetTag() == enums::eGameObjType::wall)
+			mIsDash = false;
 	}
 
 	void Player_stage::OnCollisionStay(Collider* other)
 	{
-		if (other->GetOwner()->GetTag() == enums::eGameObjType::enemy && !mIsHit && (mHitStartTime + mInvincibleTime < Time::GetTime()))
-		{
-			mIsHit = true;
-			mHitStartTime = Time::GetTime();
-		}
+		if (other->GetOwner()->GetTag() == enums::eGameObjType::enemy)
+			GetHit();
 	}
 
 	void Player_stage::OnCollisionExit(Collider* other)
@@ -276,7 +275,7 @@ namespace me
 			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_ground", mAnimator->GetFlipX());
 			return;
 		}
-		else if (KeyInput::GetKeyUp(KeyCode::C) && mIsDash)
+		else if (mIsDash)
 		{
 			mCurState = Player_state::Dash;
 		}
@@ -701,7 +700,7 @@ namespace me
 			return;
 		}
 
-		if (fabs(mDashStartPoint - mTransform->GetPos().x) > mDashMaxDist)
+		if ((fabs(mDashStartPoint - mTransform->GetPos().x) > mDashMaxDist) || !mIsDash)
 		{
 			mIsDash = false;
 
@@ -722,7 +721,7 @@ namespace me
 
 			mPrevState = Player_state::Dash;
 		}
-		else
+		else if(mIsDash)
 		{
 			mAnimator->PlayAnim(L"CupHead_stage_anim_dash", mDashFlip);
 
@@ -777,6 +776,14 @@ namespace me
 			Bullet* b = SceneManager::Instantiate<Bullet>(enums::eLayer::Bullet, comPos);
 			b->SetDirection(dir, mAnimator->GetFlipX());
 			shootPrevTime = Time::GetTime();
+		}
+	}
+	void Player_stage::GetHit()
+	{
+		if (!mIsHit && (mHitStartTime + mInvincibleTime < Time::GetTime()))
+		{
+			mIsHit = true;
+			mHitStartTime = Time::GetTime();
 		}
 	}
 }

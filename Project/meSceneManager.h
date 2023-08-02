@@ -25,6 +25,19 @@ namespace me
 			return dynamic_cast<T*>(gobj);
 		}
 
+		template <typename T>
+		static T* Instantiate(const std::wstring& sceneName, enums::eLayer layerType, math::Vector2 pos = math::Vector2::Zero, const std::wstring& name = L"object")
+		{
+			std::map<std::wstring, Scene*>::iterator iter = mScenes.find(sceneName);
+
+			if (iter == mScenes.end())
+				return nullptr;
+
+			GameObject* gobj = iter->second->AddGameObj<T>(layerType, name);
+			gobj->GetComponent<Transform>()->SetPos(pos);
+			return dynamic_cast<T*>(gobj);
+		}
+
 		static void Destroy(GameObject* gobj)
 		{
 			gobj->SetState(GameObject::ObjState::Dead);

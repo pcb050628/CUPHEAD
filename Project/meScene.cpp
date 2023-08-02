@@ -1,5 +1,6 @@
 #include "meScene.h"
 #include "COMPONENTS.h"
+#include "meColliderManager.h"
 #include "mePlayer_map.h"
 #include "mePlayer_stage.h"
 
@@ -21,6 +22,9 @@ namespace me
 		{
 			mLayers.push_back(Layer());
 		}
+
+		ColliderManager::CollisionLayerCheck(enums::eLayer::Sensor, enums::eLayer::Enemy, true);
+		ColliderManager::CollisionLayerCheck(enums::eLayer::Sensor, enums::eLayer::Player, true);
 
 		// screenfx 추가 코드 - 프레임드랍이 너무 심함
 		/*GameObject* scfx = mLayers[(int)enums::eLayer::ScreenFx].AddGameObj(L"scrrenFx");

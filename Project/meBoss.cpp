@@ -43,6 +43,15 @@ namespace me
 	{
 		GameObject::Render(hdc);
 	}
+	void Boss::OnCollisionEnter(Collider* other)
+	{
+	}
+	void Boss::OnCollisionStay(Collider* other)
+	{
+	}
+	void Boss::OnCollisionExit(Collider* other)
+	{
+	}
 	void Boss::Intro()
 	{
 	}

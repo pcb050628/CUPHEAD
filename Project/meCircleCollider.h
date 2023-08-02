@@ -20,6 +20,9 @@ namespace me
 		virtual float GetVerticalRadius() { return mVerticalRadius; }
 		virtual float GetHorizontalRadius() { return mHorizontalRadius; }
 
+		virtual void SetVerticalRadius(float value) { mVerticalRadius = value; }
+		virtual void SetHorizontalRadius(float value) { mHorizontalRadius = value; }
+
 	private:
 		float mVerticalRadius;
 		float mHorizontalRadius;

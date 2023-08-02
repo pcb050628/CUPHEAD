@@ -42,6 +42,8 @@ namespace me
 
 		void SpawnBullet(math::Vector2 dir = math::Vector2(1, 0));
 
+		void GetHit();
+
 	private:
 		int HP;
 

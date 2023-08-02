@@ -127,6 +127,9 @@
     <Filter Include="Engine\GameObject\Player\Player_stage\Bullet">
       <UniqueIdentifier>{8e888882-2a3d-4668-8078-dda18af074aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObject\Boss\Goopy Le Grande_Boss\Sensor">
+      <UniqueIdentifier>{fcfef898-5579-420b-9818-fa4759259691}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -261,6 +264,9 @@
     <ClInclude Include="meWall.h">
       <Filter>Engine\GameObject\Wall</Filter>
     </ClInclude>
+    <ClInclude Include="meSensor.h">
+      <Filter>Engine\GameObject\Boss\Goopy Le Grande_Boss\Sensor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -387,6 +393,9 @@
     </ClCompile>
     <ClCompile Include="meWall.cpp">
       <Filter>Engine\GameObject\Wall</Filter>
+    </ClCompile>
+    <ClCompile Include="meSensor.cpp">
+      <Filter>Engine\GameObject\Boss\Goopy Le Grande_Boss\Sensor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
