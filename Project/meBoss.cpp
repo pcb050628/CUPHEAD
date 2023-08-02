@@ -6,6 +6,7 @@ namespace me
 {
 	Boss::Boss(const std::wstring& name) : GameObject(name, enums::eGameObjType::enemy)
 		, mHP(500)
+		, mState(BossPhase_state::intro)
 	{
 	}
 	Boss::~Boss()
@@ -21,6 +22,9 @@ namespace me
 
 		switch (mState)
 		{
+		case me::BossPhase_state::intro:
+			Intro();
+			break;
 		case me::BossPhase_state::phase1:
 			Phase1();
 			break;
@@ -38,6 +42,9 @@ namespace me
 	void Boss::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
+	}
+	void Boss::Intro()
+	{
 	}
 	void Boss::Phase1()
 	{

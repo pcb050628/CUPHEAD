@@ -9,7 +9,7 @@ namespace me
 	{
 		'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L','M','N','O','P',
 		'Q','R','S','T','U','V','W','X','Y','Z',
-		VK_SPACE, VK_RETURN, VK_UP, VK_DOWN, VK_RIGHT, VK_LEFT, VK_ESCAPE
+		VK_SPACE, VK_LSHIFT, VK_RETURN, VK_UP, VK_DOWN, VK_RIGHT, VK_LEFT, VK_ESCAPE
 	};
 
 	KeyInput::KeyInput()

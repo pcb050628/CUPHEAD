@@ -17,6 +17,7 @@ namespace me
 			Shooting,
 			Jump,
 			Hit,
+			Dash,
 		};
 
 		Player_stage(const std::wstring& name);
@@ -37,6 +38,7 @@ namespace me
 		void Shooting();
 		void Jump();
 		void Hit();
+		void Dash();
 
 		void SpawnBullet(math::Vector2 dir = math::Vector2(1, 0));
 
@@ -54,6 +56,8 @@ namespace me
 
 		Sound* jumpSound;
 		Sound* shootSound;
+		Sound* hitSound;
+		Sound* dashSound;
 
 		Player_state mCurState;
 		Player_state mPrevState;
@@ -68,5 +72,10 @@ namespace me
 		bool mIsJumping;
 		float mJumpMaxHeight;
 		float mJumpStartHeight;
+
+		bool mIsDash;
+		float mDashStartPoint;
+		float mDashMaxDist;
+		bool mDashFlip;
 	};
 }

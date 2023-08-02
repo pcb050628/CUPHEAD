@@ -5,6 +5,7 @@ namespace me
 {
 	enum class BossPhase_state
 	{
+		intro,
 		phase1,
 		phase2,
 		phase3,
@@ -21,6 +22,7 @@ namespace me
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
+		virtual void Intro();
 		virtual void Phase1();
 		virtual void Phase2();
 		virtual void Phase3();

@@ -32,6 +32,8 @@ namespace me
 		, mIsJumping(false)
 		, mJumpStartHeight(0)
 		, mJumpMaxHeight(300.f)
+		, mIsDash(false)
+		, mDashMaxDist(200.f)
 
 	{
 
@@ -98,6 +100,8 @@ namespace me
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_duck_idle_L", L"..\\content\\BossFight\\Cuphead\\Duck\\Idle_L\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_duck_shoot_R", L"..\\content\\BossFight\\Cuphead\\Duck\\Shoot_R\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_duck_shoot_L", L"..\\content\\BossFight\\Cuphead\\Duck\\Shoot_L\\"));
+		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_dash_R", L"..\\content\\BossFight\\Cuphead\\Dash\\Ground\\Right\\"));
+		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_dash_L", L"..\\content\\BossFight\\Cuphead\\Dash\\Ground\\Left\\"));
 
 		mAnimator->GetAnim(L"CupHead_stage_anim_hit_air_R")->SetLoop(false);
 		mAnimator->GetAnim(L"CupHead_stage_anim_hit_air_L")->SetLoop(false);
@@ -108,10 +112,13 @@ namespace me
 	{
 		GameObject::Update();
 
-		if (KeyInput::GetKeyDown(KeyCode::RightArrow) && KeyInput::GetKeyUp(KeyCode::LeftArrow))
-			mAnimator->SetFlipX(false);
-		else if (KeyInput::GetKeyDown(KeyCode::LeftArrow) && KeyInput::GetKeyUp(KeyCode::RightArrow))
-			mAnimator->SetFlipX(true);
+		if (!mIsDash)
+		{
+			if (KeyInput::GetKeyDown(KeyCode::RightArrow) && KeyInput::GetKeyUp(KeyCode::LeftArrow))
+				mAnimator->SetFlipX(false);
+			else if (KeyInput::GetKeyDown(KeyCode::LeftArrow) && KeyInput::GetKeyUp(KeyCode::RightArrow))
+				mAnimator->SetFlipX(true);
+		}
 
 		if(KeyInput::GetKeyDown(KeyCode::Z) && mIsGround)
 		{
@@ -120,7 +127,14 @@ namespace me
 			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
 		}
 
-		if (mCurState != Player_state::Aim && mCurState != Player_state::Duck && !mIsHit)
+		if (KeyInput::GetKeyPressed(KeyCode::LSHIFT) && !mIsDash && !mIsHit)
+		{
+			mIsDash = true;
+			mDashFlip = mAnimator->GetFlipX();
+			mDashStartPoint = mTransform->GetPos().x;
+		}
+
+		if (mCurState != Player_state::Aim && mCurState != Player_state::Duck && !mIsHit && !mIsDash)
 		{
 			if (KeyInput::GetKey(KeyCode::RightArrow))
 				mTransform->SetPos(math::Vector2(mTransform->GetPos().x + 350.f * Time::GetDeltaTime(), mTransform->GetPos().y));
@@ -142,7 +156,7 @@ namespace me
 				mShootAnim_L->StopPlay();
 		}
 
-		if (!mIsGround&& !mIsJumping)
+		if (!mIsGround && !mIsJumping && !mIsDash)
 		{
 			Transform* tr = GetComponent<Transform>();
 			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y + 700.f * Time::GetDeltaTime()));
@@ -170,6 +184,9 @@ namespace me
 			break;
 		case me::Player_stage::Player_state::Hit:
 			Hit();
+			break;
+		case me::Player_stage::Player_state::Dash:
+			Dash();
 			break;
 		}
 	}
@@ -213,6 +230,10 @@ namespace me
 			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_ground", mAnimator->GetFlipX());
 			return;
 		}
+		else if (mIsDash)
+		{
+			mCurState = Player_state::Dash;
+		}
 		else if (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow))
 		{
 			mCurState = Player_state::Run;
@@ -254,6 +275,10 @@ namespace me
 			mCurState = Player_state::Hit;
 			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_ground", mAnimator->GetFlipX());
 			return;
+		}
+		else if (KeyInput::GetKeyUp(KeyCode::C) && mIsDash)
+		{
+			mCurState = Player_state::Dash;
 		}
 		else if (KeyInput::GetKeyUp(KeyCode::C) && (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)))
 		{
@@ -371,6 +396,10 @@ namespace me
 			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_ground", mAnimator->GetFlipX());
 			return;
 		}
+		else if (mIsDash)
+		{
+			mCurState = Player_state::Dash;
+		}
 		else if (mIsJumping)
 		{
 			mCurState = Player_state::Jump;
@@ -455,6 +484,10 @@ namespace me
 			mCollider->SetOffset(math::Vector2(COLLIDER_DEFAULT_OFFSET_X, COLLIDER_DEFAULT_OFFSET_Y));
 			return;
 		}
+		else if (mIsDash)
+		{
+			mCurState = Player_state::Dash;
+		}
 		else if (mIsJumping)
 		{
 			mCurState = Player_state::Jump;
@@ -515,6 +548,10 @@ namespace me
 			mCurState = Player_state::Hit;
 			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_ground", mAnimator->GetFlipX());
 			return;
+		}
+		else if (mIsDash)
+		{
+			mCurState = Player_state::Dash;
 		}
 		else if (mIsJumping)
 		{
@@ -587,6 +624,13 @@ namespace me
 				SpawnBullet();
 			}
 		}
+		
+		if (mIsDash)
+		{
+			mCurState = Player_state::Dash;
+			mIsJumping = false;
+			return;
+		}
 
 		if (mIsJumping)
 		{
@@ -639,6 +683,58 @@ namespace me
 		}
 
 		mPrevState = Player_state::Hit;
+	}
+
+	void Player_stage::Dash()
+	{
+		if (mIsHit)
+		{
+			mIsDash = false;
+			mCurState = Player_state::Hit;
+			mPrevState = Player_state::Dash;
+
+			if(mIsGround)
+				mAnimator->PlayAnim(L"CupHead_stage_anim_hit_ground", mAnimator->GetFlipX());
+			else
+				mAnimator->PlayAnim(L"CupHead_stage_anim_hit_air", mAnimator->GetFlipX());
+
+			return;
+		}
+
+		if (fabs(mDashStartPoint - mTransform->GetPos().x) > mDashMaxDist)
+		{
+			mIsDash = false;
+
+			if(mIsHit)
+				mCurState = Player_state::Hit;
+			else if (mIsJumping)
+				mCurState = Player_state::Jump;
+			else if (KeyInput::GetKeyDown(KeyCode::C))
+				mCurState = Player_state::Aim;
+			else if (KeyInput::GetKeyDown(KeyCode::DownArrow))
+				mCurState = Player_state::Duck;
+			else if (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow))
+				mCurState = Player_state::Run;
+			else if (KeyInput::GetKeyDown(KeyCode::X))
+				mCurState = Player_state::Shooting;
+			else
+				mCurState = Player_state::Idle;
+
+			mPrevState = Player_state::Dash;
+		}
+		else
+		{
+			mAnimator->PlayAnim(L"CupHead_stage_anim_dash", mDashFlip);
+
+			math::Vector2 nPos;
+
+			if (mDashFlip)
+				nPos = math::Vector2(mTransform->GetPos().x - 700.f * Time::GetDeltaTime(), mTransform->GetPos().y);
+			else
+				nPos = math::Vector2(mTransform->GetPos().x + 700.f * Time::GetDeltaTime(), mTransform->GetPos().y);
+
+			mTransform->SetPos(nPos);
+		}
 	}
 
 	void Player_stage::SpawnBullet(math::Vector2 dir)

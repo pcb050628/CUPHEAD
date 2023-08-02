@@ -7,6 +7,10 @@ namespace me
 
 	Goopy_Le_Grande_Boss::Goopy_Le_Grande_Boss(const std::wstring& name) : Boss(name)
 		, mAnimator(nullptr)
+		, mFlip(false)
+		, mMainCollider(nullptr)
+		, mPunchCollider(nullptr)
+		, mSmashCollider(nullptr)
 	{
 	}
 	Goopy_Le_Grande_Boss::~Goopy_Le_Grande_Boss()
@@ -28,7 +32,7 @@ namespace me
 		mSmashCollider = AddComponent<BoxCollider>(L"Smash");
 
 		//mMainCollider->SetActivate(false);
-		//mPunchCollider->SetActivate(false);
+		mPunchCollider->SetActivate(false);
 		mSmashCollider->SetActivate(false);
 
 		mAnimator = AddComponent<Animator>(enums::eComponentType::Animator);
@@ -56,10 +60,19 @@ namespace me
 	void Goopy_Le_Grande_Boss::Update()
 	{
 		Boss::Update();
+
+		
 	}
 	void Goopy_Le_Grande_Boss::Render(HDC hdc)
 	{
 		Boss::Render(hdc);
+	}
+
+	void Goopy_Le_Grande_Boss::Intro()
+	{
+		mAnimator->PlayAnim(L"Goopy Le Grande_intro");
+		if (mAnimator->GetCurAnim()->IsComplete())
+			SetState(me::BossPhase_state::phase1);
 	}
 
 	void Goopy_Le_Grande_Boss::Phase1()

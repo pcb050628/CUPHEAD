@@ -94,9 +94,6 @@
     <Filter Include="Engine\GameObject\Floor">
       <UniqueIdentifier>{5ed6d5de-1edb-4601-9fd4-7dcec056cd5f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\GameObject\Player\Bullet">
-      <UniqueIdentifier>{8e888882-2a3d-4668-8078-dda18af074aa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\GameObject\Component\Collider">
       <UniqueIdentifier>{a90d8cd6-8b74-4e93-a74b-78bd726967c9}</UniqueIdentifier>
     </Filter>
@@ -126,6 +123,9 @@
     </Filter>
     <Filter Include="Engine\SoundManager">
       <UniqueIdentifier>{ccd9a56c-5963-47e2-a755-e7c2349c2797}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Player\Player_stage\Bullet">
+      <UniqueIdentifier>{8e888882-2a3d-4668-8078-dda18af074aa}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -241,7 +241,7 @@
       <Filter>Engine\GameObject\Floor</Filter>
     </ClInclude>
     <ClInclude Include="meBullet.h">
-      <Filter>Engine\GameObject\Player\Bullet</Filter>
+      <Filter>Engine\GameObject\Player\Player_stage\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="meCollider.h">
       <Filter>Engine\GameObject\Component\Collider</Filter>
@@ -257,6 +257,9 @@
     </ClInclude>
     <ClInclude Include="meSoundManager.h">
       <Filter>Engine\SoundManager</Filter>
+    </ClInclude>
+    <ClInclude Include="meWall.h">
+      <Filter>Engine\GameObject\Wall</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -368,7 +371,7 @@
       <Filter>Engine\GameObject\Floor</Filter>
     </ClCompile>
     <ClCompile Include="meBullet.cpp">
-      <Filter>Engine\GameObject\Player\Bullet</Filter>
+      <Filter>Engine\GameObject\Player\Player_stage\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="meCollider.cpp">
       <Filter>Engine\GameObject\Component\Collider</Filter>
@@ -381,6 +384,9 @@
     </ClCompile>
     <ClCompile Include="meSoundManager.cpp">
       <Filter>Engine\SoundManager</Filter>
+    </ClCompile>
+    <ClCompile Include="meWall.cpp">
+      <Filter>Engine\GameObject\Wall</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

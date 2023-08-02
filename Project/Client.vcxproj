@@ -160,6 +160,7 @@
     <ClInclude Include="meTexture.h" />
     <ClInclude Include="meResource.h" />
     <ClInclude Include="meTItleScene.h" />
+    <ClInclude Include="meWall.h" />
     <ClInclude Include="meWorldMapScene.h" />
     <ClInclude Include="OBJECTS.h" />
     <ClInclude Include="Resource.h" />
@@ -208,6 +209,7 @@
     <ClCompile Include="meTime.cpp" />
     <ClCompile Include="meTItleScene.cpp" />
     <ClCompile Include="meTransform.cpp" />
+    <ClCompile Include="meWall.cpp" />
     <ClCompile Include="meWorldMapScene.cpp" />
     <ClCompile Include="meSound.cpp" />
   </ItemGroup>

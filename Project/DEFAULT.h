@@ -61,7 +61,7 @@ namespace me
 			obj,
 			background,
 			floor,
-			npc,
+			wall,
 			enemy,
 			player,
 			bullet,

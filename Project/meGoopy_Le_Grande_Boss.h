@@ -13,6 +13,7 @@ namespace me
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
+		virtual void Intro() override;
 		virtual void Phase1() override;
 		virtual void Phase2() override;
 		virtual void Phase3() override;
@@ -28,6 +29,8 @@ namespace me
 		BoxCollider* mMainCollider;
 		BoxCollider* mPunchCollider;
 		BoxCollider* mSmashCollider;
+
+		bool mFlip;
 	};
 }
 

@@ -3,6 +3,7 @@
 #include "meResourceManager.h"
 #include "meSceneManager.h"
 #include "meColliderManager.h"
+#include "meWall.h"
 
 namespace me
 {
@@ -21,6 +22,12 @@ namespace me
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Player, enums::eLayer::floor, true);
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Player, enums::eLayer::Enemy, true);
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Bullet, enums::eLayer::Enemy, true);
+
+		Wall* wall_1 = AddGameObj<Wall>(enums::eLayer::Background, L"Wall_1");
+		Wall* wall_2 = AddGameObj<Wall>(enums::eLayer::Background, L"Wall_2");
+
+		wall_1->GetComponent<Transform>()->SetPos(wall_1->GetComponent<Transform>()->GetPos() - math::Vector2(670, 0));
+		wall_2->GetComponent<Transform>()->SetPos(wall_2->GetComponent<Transform>()->GetPos() + math::Vector2(670, 0));
 
 		mPlayer = AddPlayer_stage(L"CupHead_stage");
 	}
