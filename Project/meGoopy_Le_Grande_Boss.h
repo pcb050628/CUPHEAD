@@ -1,6 +1,7 @@
 #pragma once
 #include "meBoss.h"
 #include "meSensor.h"
+#include "meSound.h"
 
 namespace me
 {	
@@ -49,6 +50,7 @@ namespace me
 		float PunchHoldingTime;
 		float startTime;
 		float punchCooldown;
+		Sound* stretchSound;
 
 		BoxCollider* mSmashCollider;
 
@@ -57,6 +59,10 @@ namespace me
 		bool mIsJumping;
 		float mJumpMaxHeight;
 		float mJumpStartPoint;
+		Sound* smallJumpSound;
+		Sound* smallLandSound;
+		Sound* bigJumpSound;
+		Sound* bigLandSound;
 
 		bool mFlip;
 	};

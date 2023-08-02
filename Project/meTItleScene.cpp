@@ -28,7 +28,7 @@ namespace me
 		title_char_anim->PlayAnim(L"title_character");
 		title_char_anim->GetCurAnim()->SetDuration(0.04f);
 
-		bgm = ResourceManager::Load<Sound>(L"title_song", L"..\\content\\BossFight\\Cuphead\\Sound\\AudioClip\\Title\\MUS_Intro_DontDealWithDevil_Vocal.wav");
+		bgm = ResourceManager::Load<Sound>(L"title_song", L"..\\content\\Sound\\AudioClip\\Title\\MUS_Intro_DontDealWithDevil_Vocal.wav");
 		bgm->Play(true);
 	}
 	void TitleScene::Update()

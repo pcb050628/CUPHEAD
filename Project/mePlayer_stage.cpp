@@ -107,6 +107,11 @@ namespace me
 		mAnimator->GetAnim(L"CupHead_stage_anim_hit_air_L")->SetLoop(false);
 		mAnimator->GetAnim(L"CupHead_stage_anim_hit_ground_R")->SetLoop(false);
 		mAnimator->GetAnim(L"CupHead_stage_anim_hit_ground_L")->SetLoop(false);
+
+		jumpSound = ResourceManager::Load<Sound>(L"CupHead_stage_sound_jump", L"..\\content\\Sound\\AudioClip\\BossFightScene\\Player_stage\\sfx_player_jump_01.wav");
+		shootSound = ResourceManager::Load<Sound>(L"CupHead_stage_sound_shoot", L"..\\content\\Sound\\AudioClip\\BossFightScene\\Player_stage\\sfx_player_spreadshot_fire_loop_002.wav");
+		hitSound = ResourceManager::Load<Sound>(L"CupHead_stage_sound_hit", L"..\\content\\Sound\\AudioClip\\BossFightScene\\Player_stage\\sfx_player_hit_03.wav");
+		dashSound = ResourceManager::Load<Sound>(L"CupHead_stage_sound_dash", L"..\\content\\Sound\\AudioClip\\BossFightScene\\Player_stage\\sfx_player_dash_03.wav");
 	}
 	void Player_stage::Update()
 	{
