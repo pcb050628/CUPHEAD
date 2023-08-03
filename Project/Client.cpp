@@ -4,6 +4,7 @@
 #include "framework.h"
 #include "Client.h"
 #include "meApplication.h"
+#include "meResourceManager.h"
 
 #define MAX_LOADSTRING 100
 
@@ -30,6 +31,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
+    _CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF); // 출력에서 메모리 누수 찾아줌
+    //_CrtSetBreakAlloc(); //생성될때 강제 메모리해제 시켜줌
 
     // TODO: 여기에 코드를 입력합니다.
 
@@ -68,7 +71,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         }        
     }
 
-
+    app.Release();
+    me::ResourceManager::Release();
 
     return (int) msg.wParam;
 }

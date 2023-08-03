@@ -16,6 +16,8 @@ namespace me
 		void Update();
 		void Render();
 
+		void Release();
+
 		HWND GetHwnd() { return mHwnd; }
 		HDC GetHDC() { return mHdc; }
 

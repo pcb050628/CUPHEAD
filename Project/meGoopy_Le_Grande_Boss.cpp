@@ -140,6 +140,7 @@ namespace me
 	{
 		if (GetHP() <= 1064 && mIsGround)
 		{
+			mPunchCollider->SetActive(false);
 			TransitionToPh2();
 			return;
 		}
@@ -160,6 +161,7 @@ namespace me
 		}
 		else
 		{
+			mPunchCollider->SetActive(false);
 			if (!mIsJumping && mIsGround)
 			{	
 				mJumpStartPoint = mTransform->GetPos().y;

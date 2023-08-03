@@ -20,7 +20,7 @@ namespace me
 		Collider::Update();
 	}
 	void CircleCollider::Render(HDC hdc)
-	{
+	{/*
 		HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
 		HPEN pen;
 		if (GetCollision())
@@ -43,7 +43,7 @@ namespace me
 		SelectObject(hdc, oldP);
 
 		DeleteObject(brush);
-		DeleteObject(pen);
+		DeleteObject(pen);*/
 	}
 	void CircleCollider::OnCollisionEnter(Collider* other)
 	{

@@ -72,6 +72,14 @@ namespace me
 				return nullptr;
 		}
 
+		static void Release()
+		{
+			for (auto iter : mResources)
+			{
+				delete iter.second;
+			}
+		}
+
 	private:
 		static std::map<std::wstring, Resource*> mResources;
 	};

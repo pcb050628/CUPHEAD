@@ -26,7 +26,7 @@ namespace me
 		GameObject* bg_far_forest = AddGameObj(enums::eLayer::Background, L"0_stage_backgroung_far_forest", enums::eGameObjType::background);
 		SpriteRenderer* far_forest_sr = bg_far_forest->AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
 		far_forest_sr->SetImage(ResourceManager::Load<Texture>(L"Goopy_Le_background_far_forest", L"..\\content\\BossFight\\Goopy Le Grande\\Background\\slime_bg_bg_far_forest.bmp"));
-		////far_forest_sr->SetScale(math::Vector2(1, 1.4f));
+		far_forest_sr->SetScale(math::Vector2(1, 1.4f));
 
 		//GameObject* bg_forest = AddGameObj(enums::eLayer::Background, L"2_stage_backgroung_bg_bg_forest", enums::eGameObjType::background);
 		//SpriteRenderer* forest_sr = bg_forest->AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);

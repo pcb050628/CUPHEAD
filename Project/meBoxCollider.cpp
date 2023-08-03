@@ -21,7 +21,7 @@ namespace me
 		Collider::Update();
 	}
 	void BoxCollider::Render(HDC hdc)
-	{
+	{/*
 		HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
 		HPEN pen;
 		if(GetCollision())
@@ -44,7 +44,7 @@ namespace me
 		SelectObject(hdc, oldP);
 
 		DeleteObject(brush);
-		DeleteObject(pen);
+		DeleteObject(pen);*/
 	}
 	void BoxCollider::OnCollisionEnter(Collider* other)
 	{

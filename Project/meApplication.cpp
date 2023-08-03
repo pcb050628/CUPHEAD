@@ -86,3 +86,7 @@ void me::Application::Render()
 
 	BitBlt(mHdc, 0, 0, mWidth, mHeight, mBackHdc, 0, 0, SRCCOPY);
 }
+
+void me::Application::Release()
+{
+}
