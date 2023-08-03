@@ -29,6 +29,12 @@ namespace me
 		mDist = mLookPos - (mResolution / 2);
 	}
 
+	void Camera::Reset()
+	{
+		mTarget = nullptr;
+		mLookPos = math::Vector2::Zero;
+	}
+
 	math::Vector2 Camera::AffectCameraPos(math::Vector2& pos)
 	{
 		return pos - mDist;

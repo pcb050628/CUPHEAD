@@ -8,6 +8,7 @@ namespace me
 	public:
 		static void Init();
 		static void Update();
+		static void Reset();
 
 		static void SetTarget(class GameObject* target) { mTarget = target; }
 

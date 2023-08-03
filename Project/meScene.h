@@ -15,6 +15,7 @@ namespace me
 		virtual ~Scene() override;
 
 		void Init() override;
+		virtual void Setting();
 		void Update() override;
 		void Render(HDC hdc) override;
 

@@ -49,8 +49,8 @@ void me::Application::Init(HWND hwnd)
 
 	GetClientRect(mHwnd, &tmp);
 
-	me::CLIENT_WIDTH = static_cast<float>(tmp.right);
-	me::CLIENT_HEIGHT = static_cast<float>(tmp.bottom);
+	me::CLIENT_WIDTH = (float)tmp.right;
+	me::CLIENT_HEIGHT = (float)tmp.bottom;
 
 	math::Vector2::Client_Size = math::Vector2(CLIENT_WIDTH, CLIENT_HEIGHT);
 

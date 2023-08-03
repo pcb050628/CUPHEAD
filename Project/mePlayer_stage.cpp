@@ -16,7 +16,7 @@
 namespace me
 {
 	Player_stage::Player_stage(const std::wstring& name) : GameObject(name, enums::eGameObjType::player)
-		, HP(5)
+		, HP(3)
 		, shootDelay(0.1f)
 		, shootPrevTime(0)
 		, mAnimator(nullptr)
@@ -24,7 +24,7 @@ namespace me
 		, mCollider(nullptr)
 		, mCurState(Player_state::Idle)
 		, mPrevState(Player_state::none)
-		, mIsGround(false)
+		, mIsGround(true)
 		, mIsHit(false)
 		, mHitStartTime(0)
 		, mHitHoldingTime(0.1f)
@@ -201,6 +201,19 @@ namespace me
 	void Player_stage::Render(HDC hdc)
 	{
 		GameObject::Render(hdc);
+
+		//wchar_t xBuffer[50] = {};
+		//wchar_t yBuffer[50] = {};
+		//float pox = mTransform->GetPos().x;
+		//float poy = mTransform->GetPos().y;
+
+		//swprintf_s(xBuffer, L"fps : %f", pox);
+		//swprintf_s(yBuffer, L"fps : %f", poy);
+		//int xLen = wcsnlen_s(xBuffer, 50);
+		//int yLen = wcsnlen_s(yBuffer, 50);
+
+		//TextOut(hdc, 10, 10, xBuffer, xLen);
+		//TextOut(hdc, 10, 50, yBuffer, yLen);
 	}
 
 	void Player_stage::OnCollisionEnter(Collider* other)
@@ -789,6 +802,7 @@ namespace me
 		{
 			mIsHit = true;
 			mHitStartTime = Time::GetTime();
+			HP -= 1;
 		}
 	}
 }

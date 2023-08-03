@@ -12,6 +12,7 @@ namespace me
 		virtual ~BossFightScene() override;
 
 		void Init() override;
+		void Setting() override;
 		void Update() override;
 		void Render(HDC hdc) override;
 

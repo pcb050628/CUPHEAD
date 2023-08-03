@@ -46,6 +46,7 @@ namespace me
 		virtual void SetHeight(ULONG height) { mHeight = height; }
 		virtual void SetStartPointX(ULONG x) { mStartPointX = x; }
 		virtual void SetStartPointY(ULONG y) { mStartPointY = y; }
+		virtual void SetAffectCamera(bool value) { mAffectCamera = value; }
 		
 	private:
 		Texture* mTexture;

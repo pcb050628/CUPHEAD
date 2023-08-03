@@ -32,6 +32,10 @@ namespace me
 		scfx->GetComponent<Animator>()->SetScale(math::Vector2(1.25f, 1.40625f));*/
 	}
 
+	void Scene::Setting()
+	{
+	}
+
 	void Scene::Update()
 	{
 		for (Layer& lys : mLayers)

@@ -127,7 +127,10 @@
     <Filter Include="Engine\GameObject\Player\Player_stage\Bullet">
       <UniqueIdentifier>{8e888882-2a3d-4668-8078-dda18af074aa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\GameObject\Boss\Goopy Le Grande_Boss\Sensor">
+    <Filter Include="Engine\GameObject\HealthBar">
+      <UniqueIdentifier>{6771179f-a37b-45b3-820a-b19a2d3c259b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameObject\Sensor">
       <UniqueIdentifier>{fcfef898-5579-420b-9818-fa4759259691}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -265,7 +268,10 @@
       <Filter>Engine\GameObject\Wall</Filter>
     </ClInclude>
     <ClInclude Include="meSensor.h">
-      <Filter>Engine\GameObject\Boss\Goopy Le Grande_Boss\Sensor</Filter>
+      <Filter>Engine\GameObject\Sensor</Filter>
+    </ClInclude>
+    <ClInclude Include="meHealthBar.h">
+      <Filter>Engine\GameObject\HealthBar</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -395,7 +401,10 @@
       <Filter>Engine\GameObject\Wall</Filter>
     </ClCompile>
     <ClCompile Include="meSensor.cpp">
-      <Filter>Engine\GameObject\Boss\Goopy Le Grande_Boss\Sensor</Filter>
+      <Filter>Engine\GameObject\Sensor</Filter>
+    </ClCompile>
+    <ClCompile Include="meHealthBar.cpp">
+      <Filter>Engine\GameObject\HealthBar</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

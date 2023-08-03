@@ -53,9 +53,11 @@ namespace me
 		if (iter == mScenes.end())
 			return nullptr;
 
+		Camera::Reset();
+
 		mCurScene->Clear();
 		mCurScene = iter->second;
-		//mCurScene->Init();
+		mCurScene->Setting();
 		return iter->second;
 	}
 }

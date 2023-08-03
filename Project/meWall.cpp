@@ -1,4 +1,5 @@
 #include "meWall.h"
+#include "meSceneManager.h"
 
 me::Wall::Wall(const std::wstring& name) : GameObject(name, enums::eGameObjType::wall)
 	, mCollider(nullptr)
@@ -55,4 +56,8 @@ void me::Wall::OnCollisionStay(Collider* other)
 
 void me::Wall::OnCollisionExit(Collider* other)
 {
+	if (other->GetOwner()->GetTag() == enums::eGameObjType::bullet)
+	{
+		SceneManager::Destroy(other->GetOwner());
+	}
 }

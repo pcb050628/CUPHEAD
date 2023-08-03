@@ -149,6 +149,7 @@
     <ClInclude Include="meGameObject.h" />
     <ClInclude Include="meGoopy_Le_Grande_Boss.h" />
     <ClInclude Include="meGoopy_Le_Grande_Stage.h" />
+    <ClInclude Include="meHealthBar.h" />
     <ClInclude Include="meKeyInput.h" />
     <ClInclude Include="meLayer.h" />
     <ClInclude Include="meMath.h" />
@@ -188,6 +189,7 @@
     <ClCompile Include="meFloor.cpp" />
     <ClCompile Include="meGoopy_Le_Grande_Boss.cpp" />
     <ClCompile Include="meGoopy_Le_Grande_Stage.cpp" />
+    <ClCompile Include="meHealthBar.cpp" />
     <ClCompile Include="meMath.cpp" />
     <ClCompile Include="meApplication.cpp" />
     <ClCompile Include="Client.cpp" />

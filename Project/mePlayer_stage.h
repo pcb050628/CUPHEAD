@@ -44,6 +44,8 @@ namespace me
 
 		void GetHit();
 
+		int GetHP() { return HP; }
+
 	private:
 		int HP;
 

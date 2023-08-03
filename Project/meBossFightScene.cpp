@@ -4,6 +4,7 @@
 #include "meSceneManager.h"
 #include "meColliderManager.h"
 #include "meWall.h"
+#include "meHealthBar.h"
 
 namespace me
 {
@@ -22,6 +23,7 @@ namespace me
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Player, enums::eLayer::floor, true);
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Player, enums::eLayer::Enemy, true);
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Bullet, enums::eLayer::Enemy, true);
+		ColliderManager::CollisionLayerCheck(enums::eLayer::Bullet, enums::eLayer::Background, true);
 
 		Wall* wall_1 = AddGameObj<Wall>(enums::eLayer::Background, L"Wall_1");
 		Wall* wall_2 = AddGameObj<Wall>(enums::eLayer::Background, L"Wall_2");
@@ -30,6 +32,12 @@ namespace me
 		wall_2->GetComponent<Transform>()->SetPos(wall_2->GetComponent<Transform>()->GetPos() + math::Vector2(690, 0));
 
 		mPlayer = AddPlayer_stage(L"CupHead_stage");
+
+		HealthBar* hpbar = AddGameObj<HealthBar>(enums::eLayer::UI, L"hpbar");
+		hpbar->SetPlayer(mPlayer);
+	}
+	void BossFightScene::Setting()
+	{
 	}
 	void BossFightScene::Update()
 	{

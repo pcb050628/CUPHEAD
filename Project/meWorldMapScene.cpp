@@ -24,7 +24,9 @@ namespace me
 		SpriteRenderer* map_sr = map->AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
 		map_sr->SetImage(image_map);
 		map->GetComponent<Transform>()->SetPos(math::Vector2(1060, 420));
-
+	}
+	void WorldMapScene::Setting()
+	{
 		Camera::SetTarget(AddPlayer_map(L"CupHead_map"));
 	}
 	void WorldMapScene::Update()

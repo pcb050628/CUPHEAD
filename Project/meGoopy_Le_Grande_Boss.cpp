@@ -39,7 +39,7 @@ namespace me
 		mPunchCollider->SetOwner(this);
 		mPunchCollider->SetTargetType(enums::eGameObjType::player);
 		mPunchCollider->SetColliderSize(math::Vector2(250, 250));
-		mPunchCollider->SetOffset(math::Vector2(0, -100));
+		mPunchCollider->SetOffset(math::Vector2(0, -130));
 		
 		mPunchSensor = SceneManager::Instantiate<Sensor>(L"test", enums::eLayer::Sensor, mTransform->GetPos(), L"enemySensor");
 		mPunchSensor->SetOwner(this);
@@ -350,7 +350,7 @@ namespace me
 				back = true;
 				startTime = Time::GetTime();
 			}
-			else if (back && fabs(mPunchCollider->GetOffset().x) < 10)
+			else if (back && (fabs(mPunchCollider->GetOffset().x) < 10 || fabs(mPunchCollider->GetOffset().x) > 1000))
 			{
 				back = false;
 			}
@@ -359,6 +359,7 @@ namespace me
 			{
 				mIsPunching = false;
 				mPunchCollider->SetActive(false);
+				mPunchCollider->SetOffset(math::Vector2(0, -130));
 				return;
 			}
 
