@@ -36,6 +36,7 @@ namespace me
 		{
 			if ((*iter)->GetObjState() == GameObject::ObjState::Dead)
 			{
+				delete *iter;
 				iter = mGameObjs.erase(iter);
 			}
 			else

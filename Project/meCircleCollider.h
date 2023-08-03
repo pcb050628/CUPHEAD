@@ -17,15 +17,11 @@ namespace me
 		virtual void OnCollisionStay(Collider* other) override;
 		virtual void OnCollisionExit(Collider* other) override;
 
-		virtual float GetVerticalRadius() { return mVerticalRadius; }
-		virtual float GetHorizontalRadius() { return mHorizontalRadius; }
-
-		virtual void SetVerticalRadius(float value) { mVerticalRadius = value; }
-		virtual void SetHorizontalRadius(float value) { mHorizontalRadius = value; }
+		virtual float GetRadius() { return mRadius; }
+		virtual void SetRadius(float value) { mRadius = value; }
 
 	private:
-		float mVerticalRadius;
-		float mHorizontalRadius;
+		float mRadius;
 
 	};
 }

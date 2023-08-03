@@ -152,15 +152,14 @@ namespace me
 		else if (left->GetType() == enums::eColliderType::Circle && right->GetType() == enums::eColliderType::Circle)
 		{
 			math::Vector2 leftPos = dynamic_cast<CircleCollider*>(left)->GetPos();
-			float leftVerRadius = dynamic_cast<CircleCollider*>(left)->GetVerticalRadius();
-			float leftHorRadius = dynamic_cast<CircleCollider*>(left)->GetHorizontalRadius();
+			float leftRadius = dynamic_cast<CircleCollider*>(left)->GetRadius();
 
 			math::Vector2 rightPos = dynamic_cast<CircleCollider*>(right)->GetPos();
-			float rightVerRadius = dynamic_cast<CircleCollider*>(right)->GetVerticalRadius();
-			float rightHorRadius = dynamic_cast<CircleCollider*>(right)->GetHorizontalRadius();
+			float righRadius = dynamic_cast<CircleCollider*>(right)->GetRadius();
 
-			if ((fabs(leftPos.x - rightPos.x) < fabs(leftVerRadius + rightVerRadius))
-				&& (fabs(leftPos.y - rightPos.y) < fabs(leftHorRadius + rightHorRadius)))
+			float dist = sqrt(pow((leftPos.x - rightPos.x), 2) + pow((leftPos.y - rightPos.y), 2));
+
+			if (dist < fabs(leftRadius + righRadius))
 			{
 				return true;
 			}
@@ -171,11 +170,10 @@ namespace me
 			math::Vector2 leftSize = dynamic_cast<BoxCollider*>(left)->GetSize();
 
 			math::Vector2 rightPos = dynamic_cast<CircleCollider*>(right)->GetPos();
-			float rightVerRadius = dynamic_cast<CircleCollider*>(right)->GetVerticalRadius();
-			float rightHorRadius = dynamic_cast<CircleCollider*>(right)->GetHorizontalRadius();
+			float righRadius = dynamic_cast<CircleCollider*>(right)->GetRadius();
 
-			if ((fabs(leftPos.x - rightPos.x) < fabs(leftSize.x / 2.f + rightVerRadius))
-				&& (fabs(leftPos.y - rightPos.y) < fabs(leftSize.y / 2.f + rightHorRadius)))
+			if ((fabs(leftPos.x - rightPos.x) < fabs(leftSize.x / 2.f + righRadius))
+				&& (fabs(leftPos.y - rightPos.y) < fabs(leftSize.y / 2.f + righRadius)))
 			{
 				return true;
 			}
@@ -183,14 +181,13 @@ namespace me
 		else if (left->GetType() == enums::eColliderType::Circle)
 		{
 			math::Vector2 leftPos = dynamic_cast<CircleCollider*>(left)->GetPos();
-			float leftVerRadius = dynamic_cast<CircleCollider*>(left)->GetVerticalRadius();
-			float leftHorRadius = dynamic_cast<CircleCollider*>(left)->GetHorizontalRadius();
+			float leftRadius = dynamic_cast<CircleCollider*>(left)->GetRadius();
 
 			math::Vector2 rightPos = dynamic_cast<BoxCollider*>(right)->GetPos();
 			math::Vector2 rightSize = dynamic_cast<BoxCollider*>(right)->GetSize();
 
-			if ((fabs(leftPos.x - rightPos.x) < fabs(leftVerRadius + rightSize.x / 2.f))
-				&& (fabs(leftPos.y - rightPos.y) < fabs(leftHorRadius + rightSize.y / 2.f)))
+			if ((fabs(leftPos.x - rightPos.x) < fabs(leftRadius + rightSize.x / 2.f))
+				&& (fabs(leftPos.y - rightPos.y) < fabs(leftRadius + rightSize.y / 2.f)))
 			{
 				return true;
 			}

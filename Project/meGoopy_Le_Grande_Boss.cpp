@@ -32,8 +32,7 @@ namespace me
 		mTransform = GetComponent<Transform>();
 
 		mMainCollider = AddComponent<CircleCollider>(L"Main");
-		mMainCollider->SetVerticalRadius(100);
-		mMainCollider->SetHorizontalRadius(100);
+		mMainCollider->SetRadius(100);
 
 		mPunchCollider = SceneManager::Instantiate<Sensor>(L"test", enums::eLayer::Sensor, mTransform->GetPos(), L"Punch");
 		mPunchCollider->SetOwner(this);
@@ -256,8 +255,7 @@ namespace me
 		}
 
 		SetState(BossPhase_state::phase2);
-		mMainCollider->SetHorizontalRadius(170);
-		mMainCollider->SetVerticalRadius(170);
+		mMainCollider->SetRadius(170);
 		mMainCollider->SetOffset(mMainCollider->GetOffset() + math::Vector2(0, -25));
 
 		mPunchSensor->SetColliderSize(math::Vector2());

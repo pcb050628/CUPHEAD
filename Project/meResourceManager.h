@@ -78,6 +78,8 @@ namespace me
 			{
 				delete iter.second;
 			}
+
+			mResources.clear();
 		}
 
 	private:

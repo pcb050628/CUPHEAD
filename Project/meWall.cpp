@@ -37,7 +37,7 @@ void me::Wall::OnCollisionEnter(Collider* other)
 	}
 	else
 	{
-		dist = (other->GetOwner()->GetComponent<CircleCollider>()->GetHorizontalRadius() / 2) + (GetComponent<BoxCollider>()->GetSize().x / 2);
+		dist = (other->GetOwner()->GetComponent<CircleCollider>()->GetRadius()) + (GetComponent<BoxCollider>()->GetSize().x / 2);
 	}
 
 	if (other->GetOwner()->GetComponent<Transform>()->GetPos().x < GetComponent<Transform>()->GetPos().x)
