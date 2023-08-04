@@ -7,6 +7,7 @@
 #include <queue>
 #include <bitset>
 #include <assert.h>
+#include <algorithm>
 
 #include "framework.h"
 #include "meMath.h"

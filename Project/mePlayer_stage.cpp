@@ -130,6 +130,7 @@ namespace me
 			mIsJumping = true;
 			mIsGround = false;
 			mJumpStartHeight = GetComponent<Transform>()->GetPos().y;
+			jumpSound->Play(false);
 		}
 
 		if (KeyInput::GetKeyPressed(KeyCode::LSHIFT) && !mIsDash && !mIsHit)
@@ -137,6 +138,7 @@ namespace me
 			mIsDash = true;
 			mDashFlip = mAnimator->GetFlipX();
 			mDashStartPoint = mTransform->GetPos().x;
+			dashSound->Play(false);
 		}
 
 		if (mCurState != Player_state::Aim && mCurState != Player_state::Duck && !mIsHit && !mIsDash)
@@ -275,7 +277,6 @@ namespace me
 		if (mPrevState == Player_state::Hit)
 		{
 			mAnimator->NextPlayAnim(L"CupHead_stage_anim_idle", mAnimator->GetFlipX());
-			//return;
 		}
 		else if(mCurState == Player_state::Idle && mPrevState != Player_state::Hit)
 		{
@@ -334,8 +335,6 @@ namespace me
 					mAnimator->NextPlayAnim(L"CupHead_stage_anim_shoot_straight", mAnimator->GetFlipX());
 					SpawnBullet();
 				}
-
-				//return;
 			}
 			else
 			{
@@ -384,8 +383,6 @@ namespace me
 					mAnimator->NextPlayAnim(L"CupHead_stage_anim_aim_down", mAnimator->GetFlipX());
 				else
 					mAnimator->PlayAnim(L"CupHead_stage_anim_aim_straight", mAnimator->GetFlipX());
-
-				//return;
 			}
 			else
 			{
@@ -457,7 +454,7 @@ namespace me
 			{
 				mAnimator->NextPlayAnim(L"CupHead_stage_anim_run", mAnimator->GetFlipX());
 			}
-			//return;
+			
 		}
 		else
 		{
@@ -803,6 +800,7 @@ namespace me
 			mIsHit = true;
 			mHitStartTime = Time::GetTime();
 			HP -= 1;
+			hitSound->Play(false);
 		}
 	}
 }

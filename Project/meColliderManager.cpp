@@ -172,8 +172,12 @@ namespace me
 			math::Vector2 rightPos = dynamic_cast<CircleCollider*>(right)->GetPos();
 			float righRadius = dynamic_cast<CircleCollider*>(right)->GetRadius();
 
-			if ((fabs(leftPos.x - rightPos.x) < fabs(leftSize.x / 2.f + righRadius))
-				&& (fabs(leftPos.y - rightPos.y) < fabs(leftSize.y / 2.f + righRadius)))
+			float closest_x = std::max<float>(leftPos.x - leftSize.x / 2.0f, std::min<float>(rightPos.x, leftPos.x + leftSize.x / 2.0f));
+			float closest_y = std::max<float>(leftPos.y - leftSize.y / 2.0f, std::min<float>(rightPos.y, leftPos.y + leftSize.y / 2.0f));
+
+			float dist = sqrt(pow(fabs(closest_x - rightPos.x), 2) + pow(fabs(closest_y - rightPos.y), 2));
+
+			if (dist < righRadius)
 			{
 				return true;
 			}
@@ -186,8 +190,12 @@ namespace me
 			math::Vector2 rightPos = dynamic_cast<BoxCollider*>(right)->GetPos();
 			math::Vector2 rightSize = dynamic_cast<BoxCollider*>(right)->GetSize();
 
-			if ((fabs(leftPos.x - rightPos.x) < fabs(leftRadius + rightSize.x / 2.f))
-				&& (fabs(leftPos.y - rightPos.y) < fabs(leftRadius + rightSize.y / 2.f)))
+			float closest_x = std::max<float>(rightPos.x - rightSize.x / 2.0f, std::min<float>(leftPos.x, rightPos.x + rightSize.x / 2.0f));
+			float closest_y = std::max<float>(rightPos.y - rightSize.y / 2.0f, std::min<float>(leftPos.y, rightPos.y + rightSize.y / 2.0f));
+
+			float dist = sqrt(pow(fabs(closest_x - leftPos.x), 2) + pow(fabs(closest_y - leftPos.y), 2));
+
+			if (dist < leftRadius)
 			{
 				return true;
 			}
