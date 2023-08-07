@@ -102,6 +102,8 @@ namespace me
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_duck_shoot_L", L"..\\content\\BossFight\\Cuphead\\Duck\\Shoot_L\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_dash_R", L"..\\content\\BossFight\\Cuphead\\Dash\\Ground\\Right\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_dash_L", L"..\\content\\BossFight\\Cuphead\\Dash\\Ground\\Left\\"));
+		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_parry_R", L"..\\content\\BossFight\\Cuphead\\Parry\\Hand\\Right\\"));
+		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_parry_L", L"..\\content\\BossFight\\Cuphead\\Parry\\Hand\\Left\\"));
 
 		mAnimator->GetAnim(L"CupHead_stage_anim_hit_air_R")->SetLoop(false);
 		mAnimator->GetAnim(L"CupHead_stage_anim_hit_air_L")->SetLoop(false);
@@ -154,6 +156,8 @@ namespace me
 		{
 			mShootAnim_R->StopPlay();
 			mShootAnim_L->StopPlay();
+
+			shootSound->Stop(true);
 		}
 		else 
 		{
@@ -364,6 +368,9 @@ namespace me
 					SpawnBullet();
 				}
 			}
+
+			if(!shootSound->GetIsPlaying())
+				shootSound->Play(false);
 		}
 		else if (mIsJumping)
 		{
@@ -449,6 +456,9 @@ namespace me
 				{
 					mCurState = Player_state::Shooting;
 				}
+
+				if (!shootSound->GetIsPlaying())
+					shootSound->Play(false);
 			}
 			else
 			{
@@ -474,6 +484,9 @@ namespace me
 				{
 					mCurState = Player_state::Shooting;
 				}
+
+				if (!shootSound->GetIsPlaying())
+					shootSound->Play(false);
 			}
 			else
 			{
@@ -532,6 +545,9 @@ namespace me
 				mAnimator->PlayAnim(L"CupHead_stage_anim_duck_shoot", mAnimator->GetFlipX());
 				SpawnBullet();
 			}
+
+			if (!shootSound->GetIsPlaying())
+				shootSound->Play(false);
 		}
 		else if (KeyInput::GetKeyUp(KeyCode::DownArrow) && (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow)))
 		{
@@ -601,6 +617,9 @@ namespace me
 				SpawnBullet();
 			}
 
+			if (!shootSound->GetIsPlaying())
+				shootSound->Play(false);
+
 			mPrevState = Player_state::Shooting;
 			return;
 		}
@@ -616,6 +635,9 @@ namespace me
 				mAnimator->PlayAnim(L"CupHead_stage_anim_shoot_straight", mAnimator->GetFlipX());
 				SpawnBullet();
 			}
+
+			if (!shootSound->GetIsPlaying())
+				shootSound->Play(false);
 		}
 
 		mPrevState = Player_state::Shooting;
@@ -636,6 +658,9 @@ namespace me
 			if (KeyInput::GetKeyDown(KeyCode::X))
 			{
 				SpawnBullet();
+				
+				if(!shootSound->GetIsPlaying())
+					shootSound->Play(false);
 			}
 		}
 		

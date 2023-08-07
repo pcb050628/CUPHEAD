@@ -16,10 +16,20 @@ namespace me
 		void SetPosition(float position, bool loop);
 		void SetVolume(float volume);
 		int GetDecibel(float volume);
+		DWORD& GetSoundStatus() { 
+			mSoundBuffer->GetStatus(&mSoundBufferStatus);
+			return mSoundBufferStatus; 
+		}
+
+		bool GetIsPlaying() {
+			mSoundBuffer->GetStatus(&mSoundBufferStatus);
+			return mSoundBufferStatus & DSBSTATUS_PLAYING;
+		}
 
 	private:
 		LPDIRECTSOUNDBUFFER		mSoundBuffer;
 		DSBUFFERDESC			mBufferDesc;
+		DWORD 					mSoundBufferStatus;
 		int mVolume;
 
 	};

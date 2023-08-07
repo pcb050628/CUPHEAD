@@ -77,6 +77,8 @@ namespace me
 		float mJumpMaxHeight;
 		float mJumpStartHeight;
 
+		bool mIsParrying;
+
 		bool mIsDash;
 		float mDashStartPoint;
 		float mDashMaxDist;
