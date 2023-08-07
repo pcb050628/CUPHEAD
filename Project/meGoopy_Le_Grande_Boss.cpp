@@ -1,6 +1,7 @@
 #include "meGoopy_Le_Grande_Boss.h"
 #include "meSceneManager.h"
 #include "meResourceManager.h"
+#include "meQuestionMark.h"
 
 namespace me
 {
@@ -12,7 +13,8 @@ namespace me
 		, mMainCollider(nullptr)
 		, mPunchCollider(nullptr)
 		, startTime(0)
-		, PunchHoldingTime(0.45f)
+		, smallPunchHoldingTime(0.45f)
+		, bigPunchHoldingTime(0.9f)
 		, punchCooldown(5)
 		, mSmashCollider(nullptr)
 		, mIsGround(true)
@@ -74,9 +76,11 @@ namespace me
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_big_jump_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Jump_R\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_big_punch_L", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Punch_L\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_big_punch_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Punch_R\\"));
+		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_big_Death", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Death\\"));
 
 		mAnimator->GetAnim(L"Goopy Le Grande_intro")->SetOffset(math::Vector2(-90, -90));
 		mAnimator->GetAnim(L"Goopy Le Grande_small_punch_L")->SetOffset(math::Vector2(0, -10));
+		mAnimator->GetAnim(L"Goopy Le Grande_big_punch_L")->SetOffset(math::Vector2(0, -10));
 		mAnimator->GetAnim(L"Goopy Le Grande_intro")->SetLoop(false);
 		mAnimator->GetAnim(L"Goopy Le Grande_transition_to_ph2_first")->SetLoop(false);
 		mAnimator->GetAnim(L"Goopy Le Grande_transition_to_ph2_third")->SetLoop(false);
@@ -184,15 +188,26 @@ namespace me
 	{
 		if (GetHP() <= 504)
 		{
-
+			TransitionToPh3();
 		}
 
-		if (mPunchSensor->Sensed() && mIsGround)
+		if (mPunchSensor->Sensed() && mIsGround && !mIsPunching)
+		{
+			if (fabs(startTime - Time::GetTime()) > punchCooldown)
+			{
+				mIsPunching = true;
+				stretch = true;
+				startTime = Time::GetTime();
+			}
+		}
+
+		if (mIsPunching)
 		{
 			Punch();
 		}
 		else
 		{
+			mPunchCollider->SetActive(false);
 			if (!mIsJumping && mIsGround)
 			{
 				mJumpStartPoint = mTransform->GetPos().y;
@@ -214,10 +229,17 @@ namespace me
 	}
 	void Goopy_Le_Grande_Boss::Phase3()
 	{
+		if (GetHP() <= 0)
+		{
+			SetState(BossPhase_state::death);
+			return;
+		}
+
 
 	}
 	void Goopy_Le_Grande_Boss::Death()
 	{
+
 	}
 
 	void Goopy_Le_Grande_Boss::TransitionToPh2()
@@ -230,7 +252,12 @@ namespace me
 		{
 			mAnimator->PlayAnim(L"Goopy Le Grande_transition_to_ph2_first");
 			if (mAnimator->GetCurAnim()->IsComplete())
+			{
 				one = true;
+				SceneManager::Instantiate<QuestionMark>(enums::eLayer::Sensor, mTransform->GetPos() + math::Vector2(150, -100), L"questionMarkOne");
+				SceneManager::Instantiate<QuestionMark>(enums::eLayer::Sensor, mTransform->GetPos() + math::Vector2(0, -200), L"questionMarkTwo");
+				SceneManager::Instantiate<QuestionMark>(enums::eLayer::Sensor, mTransform->GetPos() + math::Vector2(-150, -100), L"questionMarkThree");
+			}
 			else
 				return;
 		}
@@ -239,7 +266,7 @@ namespace me
 		{
 			static int startTime = Time::GetTime();
 			mAnimator->PlayAnim(L"Goopy Le Grande_transition_to_ph2_second");
-			if (fabs(startTime - (int)Time::GetTime()) > 1.5f)
+			if (fabs(startTime - (int)Time::GetTime()) > 3.5f)
 				two = true;
 			else
 				return;
@@ -258,11 +285,13 @@ namespace me
 		mMainCollider->SetRadius(170);
 		mMainCollider->SetOffset(mMainCollider->GetOffset() + math::Vector2(0, -25));
 
-		mPunchSensor->SetColliderSize(math::Vector2());
+		mPunchSensor->SetColliderSize(math::Vector2(500, 150));
+		mPunchCollider->SetOffset(mPunchCollider->GetOffset() + math::Vector2(0, 50));
 	}
 
 	void Goopy_Le_Grande_Boss::TransitionToPh3()
 	{
+
 	}
 
 	void Goopy_Le_Grande_Boss::Jump()
@@ -363,24 +392,58 @@ namespace me
 				return;
 			}
 
-			if (stretch && fabs(startTime - Time::GetTime()) >= PunchHoldingTime)
+			if (stretch && fabs(startTime - Time::GetTime()) >= smallPunchHoldingTime)
 			{
 				if(mFlip)
 					mPunchCollider->SetOffset(mPunchCollider->GetOffset() + math::Vector2(-1200.f * Time::GetDeltaTime(), 0));
 				else
 					mPunchCollider->SetOffset(mPunchCollider->GetOffset() + math::Vector2(1200.f * Time::GetDeltaTime(), 0));
 			}
-			else if(back && fabs(startTime - Time::GetTime()) >= PunchHoldingTime - 1)
+			else if(back && fabs(startTime - Time::GetTime()) >= smallPunchHoldingTime - 1)
 			{
 				if(mFlip)
-					mPunchCollider->SetOffset(mPunchCollider->GetOffset() + math::Vector2(1200.f * Time::GetDeltaTime(), 0));
+					mPunchCollider->SetOffset(mPunchCollider->GetOffset() + math::Vector2(1400.f * Time::GetDeltaTime(), 0));
 				else
-					mPunchCollider->SetOffset(mPunchCollider->GetOffset() + math::Vector2(-1200.f * Time::GetDeltaTime(), 0));
+					mPunchCollider->SetOffset(mPunchCollider->GetOffset() + math::Vector2(-1400.f * Time::GetDeltaTime(), 0));
 			}
 		}
 		else if (GetState() == BossPhase_state::phase2)
 		{
+			mPunchCollider->SetActive(true);
+			mAnimator->PlayAnim(L"Goopy Le Grande_big_punch", mFlip);
+			if (stretch && fabs(mPunchCollider->GetOffset().x) > PunchMaxDist)
+			{
+				stretch = false;
+				back = true;
+				startTime = Time::GetTime();
+			}
+			else if (back && (fabs(mPunchCollider->GetOffset().x) < 10 || fabs(mPunchCollider->GetOffset().x) > 1000))
+			{
+				back = false;
+			}
 
+			if (!stretch && !back)
+			{
+				mIsPunching = false;
+				mPunchCollider->SetActive(false);
+				mPunchCollider->SetOffset(math::Vector2(0, -130));
+				return;
+			}
+
+			if (stretch && fabs(startTime - Time::GetTime()) >= bigPunchHoldingTime)
+			{
+				if (mFlip)
+					mPunchCollider->SetOffset(mPunchCollider->GetOffset() + math::Vector2(-1000.f * Time::GetDeltaTime(), 0));
+				else
+					mPunchCollider->SetOffset(mPunchCollider->GetOffset() + math::Vector2(1000.f * Time::GetDeltaTime(), 0));
+			}
+			else if (back)
+			{
+				if (mFlip)
+					mPunchCollider->SetOffset(mPunchCollider->GetOffset() + math::Vector2(900.f * Time::GetDeltaTime(), 0));
+				else
+					mPunchCollider->SetOffset(mPunchCollider->GetOffset() + math::Vector2(-900.f * Time::GetDeltaTime(), 0));
+			}
 		}
 	}
 	void Goopy_Le_Grande_Boss::Smash()

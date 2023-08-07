@@ -32,6 +32,8 @@ namespace me
 		, mIsJumping(false)
 		, mJumpStartHeight(0)
 		, mJumpMaxHeight(300.f)
+		, mIsParrying(false)
+		, mParryHoldingTime(0.3f)
 		, mIsDash(false)
 		, mDashMaxDist(300.f)
 
@@ -102,13 +104,15 @@ namespace me
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_duck_shoot_L", L"..\\content\\BossFight\\Cuphead\\Duck\\Shoot_L\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_dash_R", L"..\\content\\BossFight\\Cuphead\\Dash\\Ground\\Right\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_dash_L", L"..\\content\\BossFight\\Cuphead\\Dash\\Ground\\Left\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_parry_R", L"..\\content\\BossFight\\Cuphead\\Parry\\Hand\\Right\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_parry_L", L"..\\content\\BossFight\\Cuphead\\Parry\\Hand\\Left\\"));
+		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_parry_R", L"..\\content\\BossFight\\Cuphead\\Parry\\Hand\\Left\\"));
+		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_parry_L", L"..\\content\\BossFight\\Cuphead\\Parry\\Hand\\Right\\"));
 
 		mAnimator->GetAnim(L"CupHead_stage_anim_hit_air_R")->SetLoop(false);
 		mAnimator->GetAnim(L"CupHead_stage_anim_hit_air_L")->SetLoop(false);
 		mAnimator->GetAnim(L"CupHead_stage_anim_hit_ground_R")->SetLoop(false);
 		mAnimator->GetAnim(L"CupHead_stage_anim_hit_ground_L")->SetLoop(false);
+		mAnimator->GetAnim(L"CupHead_stage_anim_parry_R")->SetLoop(false);
+		mAnimator->GetAnim(L"CupHead_stage_anim_parry_L")->SetLoop(false);
 
 		jumpSound = ResourceManager::Load<Sound>(L"CupHead_stage_sound_jump", L"..\\content\\Sound\\AudioClip\\BossFightScene\\Player_stage\\sfx_player_jump_01.wav");
 		shootSound = ResourceManager::Load<Sound>(L"CupHead_stage_sound_shoot", L"..\\content\\Sound\\AudioClip\\BossFightScene\\Player_stage\\sfx_player_spreadshot_fire_loop_002.wav");
@@ -226,18 +230,35 @@ namespace me
 	{
 		if (other->GetOwner()->GetTag() == enums::eGameObjType::floor)
 			mIsGround = true;
-
-		if (other->GetOwner()->GetTag() == enums::eGameObjType::enemy)
-			GetHit();
-
 		if (other->GetOwner()->GetTag() == enums::eGameObjType::wall)
 			mIsDash = false;
+
+		if (mIsParrying && other->GetOwner()->GetIsParryable())
+		{
+			mIsParrying = false;
+			parrySuccess = true;
+			mJumpStartHeight = mTransform->GetPos().y;
+			mIsJumping = true;
+			canParry = true;
+			return;
+		}
+		if (other->GetOwner()->GetTag() == enums::eGameObjType::enemy) // 수정 필요
+			GetHit();
 	}
 
 	void Player_stage::OnCollisionStay(Collider* other)
 	{
-		if (other->GetOwner()->GetTag() == enums::eGameObjType::enemy)
+		if (other->GetOwner()->GetTag() == enums::eGameObjType::enemy) // 수정 필요
 			GetHit();
+
+		if (mIsParrying && other->GetOwner()->GetIsParryable())
+		{
+			mIsParrying = false;
+			parrySuccess = true;
+			mIsJumping = true;
+			mJumpStartHeight = mTransform->GetPos().y;
+			canParry = true;
+		}
 	}
 
 	void Player_stage::OnCollisionExit(Collider* other)
@@ -648,20 +669,33 @@ namespace me
 		if (mIsHit)
 		{
 			mCurState = Player_state::Hit;
+			mPrevState = Player_state::Jump;
 			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_air", mAnimator->GetFlipX());
 			return;
 		}
 		else
 		{
-			mAnimator->PlayAnim(L"CupHead_stage_anim_jump", mAnimator->GetFlipX());
-
-			if (KeyInput::GetKeyDown(KeyCode::X))
+			if (mIsParrying)
+				Parry();
+			else
 			{
-				SpawnBullet();
-				
-				if(!shootSound->GetIsPlaying())
-					shootSound->Play(false);
+				mAnimator->PlayAnim(L"CupHead_stage_anim_jump", mAnimator->GetFlipX());
+
+				if (KeyInput::GetKeyDown(KeyCode::X))
+				{
+					SpawnBullet();
+					
+					if(!shootSound->GetIsPlaying())
+						shootSound->Play(false);
+				}
 			}
+		}
+
+		if (KeyInput::GetKeyPressed(KeyCode::Z) && canParry)
+		{
+			canParry = false;
+			mIsParrying = true;
+			mParryStartTime = Time::GetTime();
 		}
 		
 		if (mIsDash)
@@ -676,13 +710,27 @@ namespace me
 			mTransform->SetPos(math::Vector2(mTransform->GetPos().x, mTransform->GetPos().y - 700.f * Time::GetDeltaTime()));
 		}
 
-		if (mJumpMaxHeight <= abs(mJumpStartHeight - mTransform->GetPos().y) || mIsGround)
+		if (parrySuccess)
 		{
-			mIsJumping = false;
+			if ((mJumpMaxHeight - 50) <= fabs(mJumpStartHeight - mTransform->GetPos().y) || mIsGround || mPrevState == Player_state::Hit)
+			{
+				mIsJumping = false;
+				parrySuccess = false;
+			}
+		}
+		else
+		{
+			if (mJumpMaxHeight <= fabs(mJumpStartHeight - mTransform->GetPos().y) || mIsGround || mPrevState == Player_state::Hit)
+			{
+				mIsJumping = false;
+			}
+
 		}
 
 		if (mIsGround)
 		{
+			canParry = true;
+
 			if (KeyInput::GetKeyDown(KeyCode::RightArrow) || KeyInput::GetKeyDown(KeyCode::LeftArrow))
 				mCurState = Player_state::Run;
 			else if (KeyInput::GetKeyDown(KeyCode::C))
@@ -696,6 +744,24 @@ namespace me
 		}
 
 		mPrevState = Player_state::Jump;
+	}
+
+	void Player_stage::Parry()
+	{
+		if (mIsHit)
+		{
+			mCurState = Player_state::Hit;
+			mIsParrying = false;
+			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_air", mAnimator->GetFlipX());
+			return;
+		}
+		else
+		{
+			mAnimator->PlayAnim(L"CupHead_stage_anim_parry", mAnimator->GetFlipX());
+		}
+
+		if (mIsGround || (fabs(mParryStartTime - Time::GetTime()) > mParryHoldingTime))
+			mIsParrying = false;
 	}
 
 	void Player_stage::Hit()

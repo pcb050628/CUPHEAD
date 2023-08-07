@@ -1,6 +1,7 @@
 #pragma once
 #include "meScene.h"
 #include "meTexture.h"
+#include "meSensor.h"
 
 namespace me
 {
@@ -18,7 +19,8 @@ namespace me
 		virtual void Clear() override;
 
 	private:
-
+		Sensor* GoopyLeGrandeStage;
+		
 	};
 }
 

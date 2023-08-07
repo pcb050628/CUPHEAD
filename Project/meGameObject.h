@@ -127,6 +127,9 @@ namespace me
 
 		virtual ObjState GetObjState() { return mState; }
 
+		void SetParryable(bool value) { IsParryable = value; }
+		bool GetIsParryable() { return IsParryable; }
+
 	private:
 		void SetState(ObjState state) { mState = state; }
 
@@ -135,6 +138,7 @@ namespace me
 		bool Activate;
 
 		enums::eGameObjType type;
+		bool IsParryable = false;
 
 		std::vector<Component*> mComponents = {};
 		int mColliderCount;

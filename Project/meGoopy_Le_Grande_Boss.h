@@ -47,7 +47,8 @@ namespace me
 		bool mIsPunching;
 		bool stretch;
 		bool back;
-		float PunchHoldingTime;
+		float smallPunchHoldingTime;
+		float bigPunchHoldingTime;
 		float startTime;
 		float punchCooldown;
 		Sound* stretchSound;

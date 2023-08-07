@@ -3,6 +3,7 @@
 #include "meResourceManager.h"
 #include "meColliderManager.h"
 #include "meFloor.h"
+#include "meQuestionMark.h"
 
 namespace me
 {
@@ -39,6 +40,8 @@ namespace me
 		main_ground_sr->SetImage(ResourceManager::Load<Texture>(L"Goopy_Le_background_main_ground", L"..\\content\\BossFight\\Goopy Le Grande\\Background\\slime_bg_mg_main_ground.bmp"));
 
 		Floor* floor = AddGameObj<Floor>(enums::eLayer::Background, L"floor_Collider");
+
+		GameObject* parryTest = AddGameObj<QuestionMark>(enums::eLayer::Sensor, L"testSensor");
 	}
 	void Goopy_Le_Grande_Stage::Setting()
 	{

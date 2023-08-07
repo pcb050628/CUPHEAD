@@ -133,6 +133,9 @@
     <Filter Include="Engine\GameObject\Sensor">
       <UniqueIdentifier>{fcfef898-5579-420b-9818-fa4759259691}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\GameObject\Boss\Goopy Le Grande_Boss\QuestionMark">
+      <UniqueIdentifier>{39c16807-fe24-45fe-a56e-b37afef9c260}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -273,6 +276,9 @@
     <ClInclude Include="meHealthBar.h">
       <Filter>Engine\GameObject\HealthBar</Filter>
     </ClInclude>
+    <ClInclude Include="meQuestionMark.h">
+      <Filter>Engine\GameObject\Boss\Goopy Le Grande_Boss\QuestionMark</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -405,6 +411,9 @@
     </ClCompile>
     <ClCompile Include="meHealthBar.cpp">
       <Filter>Engine\GameObject\HealthBar</Filter>
+    </ClCompile>
+    <ClCompile Include="meQuestionMark.cpp">
+      <Filter>Engine\GameObject\Boss\Goopy Le Grande_Boss\QuestionMark</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

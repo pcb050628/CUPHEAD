@@ -37,8 +37,11 @@ namespace me
 		void Duck();
 		void Shooting();
 		void Jump();
+		void Parry();
 		void Hit();
 		void Dash();
+
+		bool isParrySuccess() { return parrySuccess; }
 
 		void SpawnBullet(math::Vector2 dir = math::Vector2(1, 0));
 
@@ -77,7 +80,12 @@ namespace me
 		float mJumpMaxHeight;
 		float mJumpStartHeight;
 
+		bool canParry;
 		bool mIsParrying;
+		float mParryStartTime;
+		float mParryHoldingTime;
+
+		bool parrySuccess;
 
 		bool mIsDash;
 		float mDashStartPoint;
