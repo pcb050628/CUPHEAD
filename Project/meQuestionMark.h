@@ -17,9 +17,12 @@ namespace me
 		virtual void OnCollisionStay(Collider* other);
 		virtual void OnCollisionExit(Collider* other);
 
+		void Disappear();
+
 	private:
 		Animator* mAnimator;
 
+		float time;
 	};
 }
 

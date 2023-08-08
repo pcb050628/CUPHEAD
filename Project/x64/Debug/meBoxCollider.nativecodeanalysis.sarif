@@ -1,0 +1,195 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.36.32537.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///e:/project_api/cuphead/project/meboxcollider.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "dc23365137128a8fba5b622b7e45db75477634e104ba1446c95f770f215bd4bf"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/project_api/cuphead/project/meboxcollider.h"
+          },
+          "hashes": {
+            "sha-256": "b1901e009a4c6fa0c071a03bf053f6b0e196adc7055650bb672b67646f28383c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/project_api/cuphead/project/mecollider.h"
+          },
+          "hashes": {
+            "sha-256": "8caf8542ae2cf8a5b5d71aa1726561bc2dc5dc450635cd29ef63740fe3dd2997"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/project_api/cuphead/project/mecomponent.h"
+          },
+          "hashes": {
+            "sha-256": "a074c3a0e83c091b47055ccbf11746e045379e737d09b08d716a9ca4507fc737"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/project_api/cuphead/project/meentity.h"
+          },
+          "hashes": {
+            "sha-256": "b656c40f7a8a30f17d65a730db0c2535477839dc13d1f4174a898c9bef602bf8"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/project_api/cuphead/project/default.h"
+          },
+          "hashes": {
+            "sha-256": "ded6e9f744ff3d69fdefc5f478473e976eccbbc9d7a8168f3bb8ff9b6dd1bf4b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/project_api/cuphead/project/framework.h"
+          },
+          "hashes": {
+            "sha-256": "45bcbec6f8c948d1be1c3b4817e522ea26614bb7f5a5bbfc7cc2722f8043586e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/project_api/cuphead/project/targetver.h"
+          },
+          "hashes": {
+            "sha-256": "a46c1deecdc9ad92b03cad119ea9eb07a1c2666074ad2c154c8cb943847fe1b0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/project_api/cuphead/project/memath.h"
+          },
+          "hashes": {
+            "sha-256": "56582613a82881b9126641cf752f6071dd58060e284f05f5b9b7bc0739702d8e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/project_api/cuphead/project/metime.h"
+          },
+          "hashes": {
+            "sha-256": "749af2337820a7c9bb75e485784f53e6fc67c217b659a152cdd6c092e69f17f9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/project_api/cuphead/project/mekeyinput.h"
+          },
+          "hashes": {
+            "sha-256": "8996d9849aaea114968b0b46f92ec5c6bf1d3cf7c0e32241c0b497d645cf0386"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/project_api/cuphead/project/megameobject.h"
+          },
+          "hashes": {
+            "sha-256": "c312e7cc11dcf585257b0917e2ba8bd6e4ed4b2230462ac0541a4ad8fe670f6f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/project_api/cuphead/project/components.h"
+          },
+          "hashes": {
+            "sha-256": "113e4f296c6160c377842008a5c9bdb6392246fbd4000b551459900c3ac51da2"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/project_api/cuphead/project/metransform.h"
+          },
+          "hashes": {
+            "sha-256": "5b425fab57feb312626e6921e5cb977313edc2ae8232e0b319e8cfdc0b2c754d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/project_api/cuphead/project/mespriterenderer.h"
+          },
+          "hashes": {
+            "sha-256": "46bdd11b22f2efb9b37a9a6195fb89ee6771f834cdffafad1f73b93a50a3df9a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/project_api/cuphead/project/metexture.h"
+          },
+          "hashes": {
+            "sha-256": "1def35a3032e5965166674fffbd16205f83312b7319ce56e2ee4b3c8d742eec3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/project_api/cuphead/project/meresource.h"
+          },
+          "hashes": {
+            "sha-256": "75378d1ad0815bcd5c9b525d3201e6fa9bebc5020da144735e5f1ccb34cc124a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/project_api/cuphead/project/meanimator.h"
+          },
+          "hashes": {
+            "sha-256": "6c6d61ffb04763caa800a623931e19c993d55a27f3c20eea828d4152df7b4202"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/project_api/cuphead/project/meanimation.h"
+          },
+          "hashes": {
+            "sha-256": "942d3d8eff09a5b066e04f119c7d0029db336d04f67c32d444d45f2a84a7212c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/project_api/cuphead/project/mecirclecollider.h"
+          },
+          "hashes": {
+            "sha-256": "01fd85fc2905fc1462252817917d7666cb83a4a4373c2a23507b5f3ca0a386ea"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///e:/project_api/cuphead/project/mecamera.h"
+          },
+          "hashes": {
+            "sha-256": "e8f19e213be5a7849403e1b4f2030bc09a6eef7084dbec2b46db799b28b63394"
+          }
+        }
+      ]
+    }
+  ]
+}

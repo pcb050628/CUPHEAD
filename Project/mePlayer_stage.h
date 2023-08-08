@@ -65,6 +65,7 @@ namespace me
 		Sound* shootSound;
 		Sound* hitSound;
 		Sound* dashSound;
+		Sound* parrySound;
 
 		Player_state mCurState;
 		Player_state mPrevState;

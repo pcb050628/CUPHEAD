@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DEFECTS>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\project_api\CUPHEAD\Project\</FILEPATH>
+      <FILENAME>meSpriteRenderer.cpp</FILENAME>
+      <LINE>9</LINE>
+      <COLUMN>17</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>'me::SpriteRenderer::mHeight' 변수가 초기화되지 않았습니다. 항상 멤버 변수를 초기화하세요(type.6).</DESCRIPTION>
+    <FUNCTION>me::SpriteRenderer::{ctor}</FUNCTION>
+    <DECORATED>??0SpriteRenderer@me@@QEAA@PEAVGameObject@1@AEBV?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@@Z</DECORATED>
+    <FUNCLINE>9</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>me::SpriteRenderer::mHeight</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\project_api\CUPHEAD\Project\</FILEPATH>
+      <FILENAME>meSpriteRenderer.cpp</FILENAME>
+      <LINE>9</LINE>
+      <COLUMN>17</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>'me::SpriteRenderer::mWidht' 변수가 초기화되지 않았습니다. 항상 멤버 변수를 초기화하세요(type.6).</DESCRIPTION>
+    <FUNCTION>me::SpriteRenderer::{ctor}</FUNCTION>
+    <DECORATED>??0SpriteRenderer@me@@QEAA@PEAVGameObject@1@AEBV?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@@Z</DECORATED>
+    <FUNCLINE>9</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>me::SpriteRenderer::mWidht</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\project_api\CUPHEAD\Project\</FILEPATH>
+      <FILENAME>meSpriteRenderer.cpp</FILENAME>
+      <LINE>9</LINE>
+      <COLUMN>17</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>'me::SpriteRenderer::mStartPointY' 변수가 초기화되지 않았습니다. 항상 멤버 변수를 초기화하세요(type.6).</DESCRIPTION>
+    <FUNCTION>me::SpriteRenderer::{ctor}</FUNCTION>
+    <DECORATED>??0SpriteRenderer@me@@QEAA@PEAVGameObject@1@AEBV?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@@Z</DECORATED>
+    <FUNCLINE>9</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>me::SpriteRenderer::mStartPointY</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+  <DEFECT>
+    <SFA>
+      <FILEPATH>E:\project_api\CUPHEAD\Project\</FILEPATH>
+      <FILENAME>meSpriteRenderer.cpp</FILENAME>
+      <LINE>9</LINE>
+      <COLUMN>17</COLUMN>
+    </SFA>
+    <DEFECTCODE>26495</DEFECTCODE>
+    <DESCRIPTION>'me::SpriteRenderer::mStartPointX' 변수가 초기화되지 않았습니다. 항상 멤버 변수를 초기화하세요(type.6).</DESCRIPTION>
+    <FUNCTION>me::SpriteRenderer::{ctor}</FUNCTION>
+    <DECORATED>??0SpriteRenderer@me@@QEAA@PEAVGameObject@1@AEBV?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@@Z</DECORATED>
+    <FUNCLINE>9</FUNCLINE>
+    <ADDITIONALINFO>
+      <targetSymbol>me::SpriteRenderer::mStartPointX</targetSymbol>
+    </ADDITIONALINFO>
+    <PATH></PATH>
+  </DEFECT>
+</DEFECTS>

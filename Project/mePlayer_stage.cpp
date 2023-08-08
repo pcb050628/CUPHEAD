@@ -118,6 +118,7 @@ namespace me
 		shootSound = ResourceManager::Load<Sound>(L"CupHead_stage_sound_shoot", L"..\\content\\Sound\\AudioClip\\BossFightScene\\Player_stage\\sfx_player_spreadshot_fire_loop_002.wav");
 		hitSound = ResourceManager::Load<Sound>(L"CupHead_stage_sound_hit", L"..\\content\\Sound\\AudioClip\\BossFightScene\\Player_stage\\sfx_player_hit_03.wav");
 		dashSound = ResourceManager::Load<Sound>(L"CupHead_stage_sound_dash", L"..\\content\\Sound\\AudioClip\\BossFightScene\\Player_stage\\sfx_player_dash_03.wav");
+		parrySound = ResourceManager::Load<Sound>(L"CupHead_stage_sound_parry_slap", L"..\\content\\Sound\\AudioClip\\BossFightScene\\Player_stage\\sfx_player_parry_slap_02.wav");
 	}
 	void Player_stage::Update()
 	{
@@ -240,6 +241,7 @@ namespace me
 			mJumpStartHeight = mTransform->GetPos().y;
 			mIsJumping = true;
 			canParry = true;
+			parrySound->Play(false);
 			return;
 		}
 		if (other->GetOwner()->GetTag() == enums::eGameObjType::enemy) // 수정 필요
@@ -258,6 +260,7 @@ namespace me
 			mIsJumping = true;
 			mJumpStartHeight = mTransform->GetPos().y;
 			canParry = true;
+			parrySound->Play(false);
 		}
 	}
 

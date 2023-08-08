@@ -27,6 +27,7 @@ namespace me
 
 		void TransitionToPh2();
 		void TransitionToPh3();
+		void Ph3Intro();
 
 		void Jump();
 		void MoveUp();
@@ -35,25 +36,29 @@ namespace me
 		void Punch();
 
 		void Smash();
+		void TombMove();
 
 	private:
 		Transform* mTransform;
 		Animator* mAnimator;
+		Animator* mPh3IntroAnimator;
 
 		CircleCollider* mMainCollider;
 
+		float attackStartTime;
+		float attackCooldown;
+		Sensor* mPlayerSensor;
+
 		Sensor* mPunchCollider;
-		Sensor* mPunchSensor;
 		bool mIsPunching;
 		bool stretch;
 		bool back;
 		float smallPunchHoldingTime;
 		float bigPunchHoldingTime;
-		float startTime;
-		float punchCooldown;
 		Sound* stretchSound;
 
-		BoxCollider* mSmashCollider;
+		bool mIsSmashing;
+		Sensor* mSmashCollider;
 
 		bool mIsGround;
 
@@ -66,6 +71,12 @@ namespace me
 		Sound* bigLandSound;
 
 		bool mFlip;
+
+		bool phCheckOne;
+		bool phCheckTwo;
+		bool phCheckThree;
+
+		float startTimePh;
 	};
 }
 

@@ -56,8 +56,4 @@ void me::Wall::OnCollisionStay(Collider* other)
 
 void me::Wall::OnCollisionExit(Collider* other)
 {
-	if (other->GetOwner()->GetTag() == enums::eGameObjType::bullet)
-	{
-		SceneManager::Destroy(other->GetOwner());
-	}
 }
