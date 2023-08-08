@@ -40,7 +40,8 @@ namespace me
 
 	private:
 		Transform* mTransform;
-		Animator* mAnimator;
+		Animator* mMainAnimator;
+		Animator* mPh2DustAnimator;
 		Animator* mPh3IntroAnimator;
 
 		CircleCollider* mMainCollider;

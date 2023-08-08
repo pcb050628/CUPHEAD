@@ -8,7 +8,7 @@ namespace me
 #define PunchMaxDist 400
 
 	Goopy_Le_Grande_Boss::Goopy_Le_Grande_Boss(const std::wstring& name) : Boss(name)
-		, mAnimator(nullptr)
+		, mMainAnimator(nullptr)
 		, mFlip(true)
 		, mMainCollider(nullptr)
 		, mPunchCollider(nullptr)
@@ -54,46 +54,50 @@ namespace me
 		mPunchCollider->SetActive(false);
 		mSmashCollider->SetActive(false);
 
-		mAnimator = AddComponent<Animator>(enums::eComponentType::Animator);
+		mMainAnimator = AddComponent<Animator>(enums::eComponentType::Animator);
 
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_intro", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Intro\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_small_air_down_L", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Air Down_L\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_small_air_down_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Air Down_R\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_small_air_up_L", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Air Up_L\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_small_air_up_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Air Up_R\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_small_jump_L", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Jump_L\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_small_jump_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Jump_R\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_small_punch_L", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Punch_L\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_small_punch_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Punch_R\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_transition_to_ph2_first", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Transition To Ph2_L\\First\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_transition_to_ph2_second", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Transition To Ph2_L\\Second\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_transition_to_ph2_third", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Transition To Ph2_L\\Third\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_big_air_down_L", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Air Down_L\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_big_air_down_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Air Down_R\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_big_air_up_L", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Air Up_L\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_big_air_up_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Air Up_R\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_big_jump_L", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Jump_L\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_big_jump_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Jump_R\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_big_punch_L", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Punch_L\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_big_punch_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Punch_R\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_big_death", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Death\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_tomb_move_L", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 3\\Left\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_tomb_move_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 3\\Right\\"));
-		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_tomb_smash", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 3\\Right\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_intro", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Intro\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_small_air_down_L", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Air Down_L\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_small_air_down_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Air Down_R\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_small_air_up_L", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Air Up_L\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_small_air_up_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Air Up_R\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_small_jump_L", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Jump_L\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_small_jump_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Jump_R\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_small_punch_L", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Punch_L\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_small_punch_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Punch_R\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_transition_to_ph2_first", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Transition To Ph2_L\\First\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_transition_to_ph2_second", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Transition To Ph2_L\\Second\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_transition_to_ph2_third", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Transition To Ph2_L\\Third\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_big_air_down_L", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Air Down_L\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_big_air_down_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Air Down_R\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_big_air_up_L", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Air Up_L\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_big_air_up_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Air Up_R\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_big_jump_L", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Jump_L\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_big_jump_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Jump_R\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_big_punch_L", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Punch_L\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_big_punch_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Punch_R\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_big_death", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Death\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_tomb_move_L", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 3\\Left\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_tomb_move_R", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 3\\Right\\"));
+		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_tomb_smash", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 3\\Right\\"));
 
 		mPh3IntroAnimator = AddComponent<Animator>(L"ph3Intro");
 		mPh3IntroAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_tomb_intro", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 3\\Intro\\"));
 
-		mAnimator->GetAnim(L"Goopy Le Grande_intro")->SetOffset(math::Vector2(-90, -90));
-		mAnimator->GetAnim(L"Goopy Le Grande_small_punch_L")->SetOffset(math::Vector2(0, -10));
-		mAnimator->GetAnim(L"Goopy Le Grande_big_punch_L")->SetOffset(math::Vector2(0, -10));
-		mAnimator->GetAnim(L"Goopy Le Grande_intro")->SetLoop(false);
-		mAnimator->GetAnim(L"Goopy Le Grande_transition_to_ph2_first")->SetLoop(false);
-		mAnimator->GetAnim(L"Goopy Le Grande_transition_to_ph2_third")->SetLoop(false);
-		mAnimator->GetAnim(L"Goopy Le Grande_small_jump_L")->SetLoop(false);
-		mAnimator->GetAnim(L"Goopy Le Grande_small_jump_R")->SetLoop(false);
-		mAnimator->GetAnim(L"Goopy Le Grande_big_jump_L")->SetLoop(false);
-		mAnimator->GetAnim(L"Goopy Le Grande_big_jump_R")->SetLoop(false);
+		mPh2DustAnimator = AddComponent<Animator>(L"dustAnimator");
+		mPh2DustAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_ph2_dust", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Dust\\A\\"));
+		mPh2DustAnimator->GetAnim(L"Goopy Le Grande_ph2_dust")->SetDuration(0.05f);
+
+		mMainAnimator->GetAnim(L"Goopy Le Grande_intro")->SetOffset(math::Vector2(-90, -90));
+		mMainAnimator->GetAnim(L"Goopy Le Grande_small_punch_L")->SetOffset(math::Vector2(0, -10));
+		mMainAnimator->GetAnim(L"Goopy Le Grande_big_punch_L")->SetOffset(math::Vector2(0, -10));
+		mMainAnimator->GetAnim(L"Goopy Le Grande_intro")->SetLoop(false);
+		mMainAnimator->GetAnim(L"Goopy Le Grande_transition_to_ph2_first")->SetLoop(false);
+		mMainAnimator->GetAnim(L"Goopy Le Grande_transition_to_ph2_third")->SetLoop(false);
+		mMainAnimator->GetAnim(L"Goopy Le Grande_small_jump_L")->SetLoop(false);
+		mMainAnimator->GetAnim(L"Goopy Le Grande_small_jump_R")->SetLoop(false);
+		mMainAnimator->GetAnim(L"Goopy Le Grande_big_jump_L")->SetLoop(false);
+		mMainAnimator->GetAnim(L"Goopy Le Grande_big_jump_R")->SetLoop(false);
 		mPh3IntroAnimator->GetAnim(L"Goopy Le Grande_tomb_intro")->SetLoop(false);
 		mPh3IntroAnimator->GetAnim(L"Goopy Le Grande_tomb_intro")->SetDuration(0.1f);
 		mPh3IntroAnimator->GetAnim(L"Goopy Le Grande_tomb_intro")->SetOffset(math::Vector2(0, -900));
@@ -153,8 +157,8 @@ namespace me
 
 	void Goopy_Le_Grande_Boss::Intro()
 	{
-		mAnimator->PlayAnim(L"Goopy Le Grande_intro");
-		if (mAnimator->GetCurAnim()->IsComplete())
+		mMainAnimator->PlayAnim(L"Goopy Le Grande_intro");
+		if (mMainAnimator->GetCurAnim()->IsComplete())
 			SetState(me::BossPhase_state::phase1);
 	}
 
@@ -192,8 +196,8 @@ namespace me
 
 			if (mIsGround)
 			{
-				mAnimator->PlayAnim(L"Goopy Le Grande_small_jump", mFlip);
-				if (mAnimator->GetCurAnim()->IsComplete())
+				mMainAnimator->PlayAnim(L"Goopy Le Grande_small_jump", mFlip);
+				if (mMainAnimator->GetCurAnim()->IsComplete())
 				{
 					Jump();
 					mIsGround = false;
@@ -237,8 +241,8 @@ namespace me
 
 			if (mIsGround)
 			{
-				mAnimator->PlayAnim(L"Goopy Le Grande_big_jump", mFlip);
-				if (mAnimator->GetCurAnim()->IsComplete())
+				mMainAnimator->PlayAnim(L"Goopy Le Grande_big_jump", mFlip);
+				if (mMainAnimator->GetCurAnim()->IsComplete())
 				{
 					Jump();
 					mIsGround = false;
@@ -284,8 +288,8 @@ namespace me
 	{		
 		if (!phCheckOne)
 		{
-			mAnimator->PlayAnim(L"Goopy Le Grande_transition_to_ph2_first");
-			if (mAnimator->GetCurAnim()->IsComplete())
+			mMainAnimator->PlayAnim(L"Goopy Le Grande_transition_to_ph2_first");
+			if (mMainAnimator->GetCurAnim()->IsComplete())
 			{
 				phCheckOne = true;
 				SceneManager::Instantiate<QuestionMark>(enums::eLayer::Sensor, mTransform->GetPos() + math::Vector2(150, -100), L"questionMarkOne");
@@ -300,7 +304,7 @@ namespace me
 		{
 			if(startTimePh == -1)
 				startTimePh = Time::GetTime();
-			mAnimator->PlayAnim(L"Goopy Le Grande_transition_to_ph2_second");
+			mMainAnimator->PlayAnim(L"Goopy Le Grande_transition_to_ph2_second");
 			if (fabs(startTimePh - (int)Time::GetTime()) > 3.5f)
 				phCheckTwo = true;
 			else
@@ -309,8 +313,8 @@ namespace me
 
 		if (!phCheckThree)
 		{
-			mAnimator->PlayAnim(L"Goopy Le Grande_transition_to_ph2_third");
-			if (mAnimator->GetCurAnim()->IsComplete())
+			mMainAnimator->PlayAnim(L"Goopy Le Grande_transition_to_ph2_third");
+			if (mMainAnimator->GetCurAnim()->IsComplete())
 				phCheckThree = true;
 			else
 				return;
@@ -337,7 +341,7 @@ namespace me
 			if (startTimePh == -1)
 				startTimePh = Time::GetTime();
 
-			mAnimator->PlayAnim(L"Goopy Le Grande_big_death");
+			mMainAnimator->PlayAnim(L"Goopy Le Grande_big_death");
 			if (fabs(startTimePh - Time::GetTime()) > 3.5f)
 			{
 				phCheckOne = true;
@@ -373,8 +377,10 @@ namespace me
 
 		if (mPh3IntroAnimator->GetCurAnim()->GetOffset() >= math::Vector2(0, -100))
 		{
+			mMainAnimator->SetActivate(false);
 			if (fabs(startTimePh - Time::GetTime()) > 2.f)
 			{
+				mMainAnimator->SetActivate(true);
 				phCheckTwo = true;
 				mPh3IntroAnimator->SetActivate(false);
 				startTimePh = -1;
@@ -415,7 +421,7 @@ namespace me
 				xpos += 300.f * Time::GetDeltaTime();
 			
 			mTransform->SetPos(math::Vector2(xpos, ypos));
-			mAnimator->PlayAnim(L"Goopy Le Grande_small_air_up", mFlip);
+			mMainAnimator->PlayAnim(L"Goopy Le Grande_small_air_up", mFlip);
 		}
 		else if (GetState() == BossPhase_state::phase2)
 		{
@@ -427,7 +433,7 @@ namespace me
 				xpos += 300.f * Time::GetDeltaTime();
 
 			mTransform->SetPos(math::Vector2(xpos, ypos));
-			mAnimator->PlayAnim(L"Goopy Le Grande_big_air_up", mFlip);
+			mMainAnimator->PlayAnim(L"Goopy Le Grande_big_air_up", mFlip);
 		}
 	}
 	void Goopy_Le_Grande_Boss::MoveDown()
@@ -444,7 +450,7 @@ namespace me
 				xpos += 300.f * Time::GetDeltaTime();
 
 			mTransform->SetPos(math::Vector2(xpos, ypos));
-			mAnimator->PlayAnim(L"Goopy Le Grande_small_air_down", mFlip);
+			mMainAnimator->PlayAnim(L"Goopy Le Grande_small_air_down", mFlip);
 		}
 		else if (GetState() == BossPhase_state::phase2)
 		{
@@ -456,7 +462,7 @@ namespace me
 				xpos += 300.f * Time::GetDeltaTime();
 
 			mTransform->SetPos(math::Vector2(xpos, ypos));
-			mAnimator->PlayAnim(L"Goopy Le Grande_big_air_down", mFlip);
+			mMainAnimator->PlayAnim(L"Goopy Le Grande_big_air_down", mFlip);
 		}
 	}
 	void Goopy_Le_Grande_Boss::Punch()
@@ -464,7 +470,7 @@ namespace me
 		if (GetState() == BossPhase_state::phase1)
 		{
 			mPunchCollider->SetActive(true);
-			mAnimator->PlayAnim(L"Goopy Le Grande_small_punch", mFlip);
+			mMainAnimator->PlayAnim(L"Goopy Le Grande_small_punch", mFlip);
 			if (stretch && fabs(mPunchCollider->GetOffset().x) > PunchMaxDist)
 			{
 				stretch = false;
@@ -502,7 +508,7 @@ namespace me
 		else if (GetState() == BossPhase_state::phase2)
 		{
 			mPunchCollider->SetActive(true);
-			mAnimator->PlayAnim(L"Goopy Le Grande_big_punch", mFlip);
+			mMainAnimator->PlayAnim(L"Goopy Le Grande_big_punch", mFlip);
 			if (stretch && fabs(mPunchCollider->GetOffset().x) > PunchMaxDist)
 			{
 				stretch = false;
@@ -543,7 +549,7 @@ namespace me
 	}
 	void Goopy_Le_Grande_Boss::TombMove()
 	{
-		mAnimator->PlayAnim(L"Goopy Le Grande_tomb_move", mFlip);
+		mMainAnimator->PlayAnim(L"Goopy Le Grande_tomb_move", mFlip);
 
 		if(mFlip)
 			mTransform->SetPos(mTransform->GetPos() + math::Vector2(-800 * Time::GetDeltaTime(), 0));

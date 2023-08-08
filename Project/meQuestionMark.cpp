@@ -71,7 +71,5 @@ void me::QuestionMark::OnCollisionExit(Collider* other)
 void me::QuestionMark::Disappear()
 {
 	mAnimator->PlayAnim(L"Question_Mark_Disappear");
-
-	if(mAnimator->GetCurAnim()->IsComplete())
-		SceneManager::Destroy(this);
+	SceneManager::Destroy(this);
 }
