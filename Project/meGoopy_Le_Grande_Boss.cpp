@@ -87,6 +87,7 @@ namespace me
 		mPh2DustAnimator = AddComponent<Animator>(L"dustAnimator");
 		mPh2DustAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_ph2_dust", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 2\\Dust\\A\\"));
 		mPh2DustAnimator->GetAnim(L"Goopy Le Grande_ph2_dust")->SetDuration(0.05f);
+		mPh2DustAnimator->GetAnim(L"Goopy Le Grande_ph2_dust")->SetLoop(false);
 
 		mMainAnimator->GetAnim(L"Goopy Le Grande_intro")->SetOffset(math::Vector2(-90, -90));
 		mMainAnimator->GetAnim(L"Goopy Le Grande_small_punch_L")->SetOffset(math::Vector2(0, -10));
@@ -98,6 +99,7 @@ namespace me
 		mMainAnimator->GetAnim(L"Goopy Le Grande_small_jump_R")->SetLoop(false);
 		mMainAnimator->GetAnim(L"Goopy Le Grande_big_jump_L")->SetLoop(false);
 		mMainAnimator->GetAnim(L"Goopy Le Grande_big_jump_R")->SetLoop(false);
+		mMainAnimator->GetAnim(L"Goopy Le Grande_big_death")->SetOffset(math::Vector2(0, -50));
 		mPh3IntroAnimator->GetAnim(L"Goopy Le Grande_tomb_intro")->SetLoop(false);
 		mPh3IntroAnimator->GetAnim(L"Goopy Le Grande_tomb_intro")->SetDuration(0.1f);
 		mPh3IntroAnimator->GetAnim(L"Goopy Le Grande_tomb_intro")->SetOffset(math::Vector2(0, -900));
@@ -143,7 +145,12 @@ namespace me
 			if (GetState() == BossPhase_state::phase1)
 				smallLandSound->Play(false);
 			else if (GetState() == BossPhase_state::phase2)
+			{
 				bigLandSound->Play(false);
+				mPh2DustAnimator->SetActivate(true);
+				mPh2DustAnimator->GetAnim(L"Goopy Le Grande_ph2_dust")->Reset();
+				mPh2DustAnimator->PlayAnim(L"Goopy Le Grande_ph2_dust");
+			}
 		}
 	}
 
@@ -246,6 +253,7 @@ namespace me
 				{
 					Jump();
 					mIsGround = false;
+					mPh2DustAnimator->SetActivate(false);
 				}
 			}
 			else
@@ -260,14 +268,14 @@ namespace me
 			return;
 		}*/
 
-		if (mPlayerSensor->Sensed())
+		/*if (mPlayerSensor->Sensed())
 		{
 			if (fabs(attackStartTime - Time::GetTime()) > attackCooldown)
 			{
 				mIsSmashing = true;
 				attackStartTime = Time::GetTime();
 			}
-		}
+		}*/
 
 		if (mIsSmashing)
 		{
@@ -362,10 +370,13 @@ namespace me
 
 		SetState(BossPhase_state::phase3);
 
-		mPlayerSensor->SetOffset(math::Vector2(0, 100));
-		mPlayerSensor->SetColliderSize(math::Vector2(100, 100));
+		mMainCollider->SetRadius(120.f);
 
-		mTransform->SetPos(mTransform->GetPos() + math::Vector2(0, -200));
+		mPlayerSensor->SetOffset(math::Vector2(0, 500));
+		mPlayerSensor->SetColliderSize(math::Vector2(100, 100));
+		mPlayerSensor->SetActive(false);
+
+		mTransform->SetPos(mTransform->GetPos() + math::Vector2(0, -150));
 
 		phCheckOne = false;
 		phCheckTwo = false;
@@ -375,10 +386,10 @@ namespace me
 	{
 		mPh3IntroAnimator->PlayAnim(L"Goopy Le Grande_tomb_intro");
 
-		if (mPh3IntroAnimator->GetCurAnim()->GetOffset() >= math::Vector2(0, -100))
+		if (mPh3IntroAnimator->GetCurAnim()->GetOffset() >= math::Vector2(0, -50))
 		{
 			mMainAnimator->SetActivate(false);
-			if (fabs(startTimePh - Time::GetTime()) > 2.f)
+			if (fabs(startTimePh - Time::GetTime()) > 0.8f)
 			{
 				mMainAnimator->SetActivate(true);
 				phCheckTwo = true;
@@ -552,8 +563,8 @@ namespace me
 		mMainAnimator->PlayAnim(L"Goopy Le Grande_tomb_move", mFlip);
 
 		if(mFlip)
-			mTransform->SetPos(mTransform->GetPos() + math::Vector2(-800 * Time::GetDeltaTime(), 0));
+			mTransform->SetPos(mTransform->GetPos() + math::Vector2(-600 * Time::GetDeltaTime(), 0));
 		else
-			mTransform->SetPos(mTransform->GetPos() + math::Vector2(800 * Time::GetDeltaTime(), 0));
+			mTransform->SetPos(mTransform->GetPos() + math::Vector2(600 * Time::GetDeltaTime(), 0));
 	}
 }
