@@ -57,7 +57,7 @@ namespace me
 
 		mCurScene->Clear();
 		mCurScene = iter->second;
-		mCurScene->Setting();
+		//mCurScene->Setting();
 		return iter->second;
 	}
 }

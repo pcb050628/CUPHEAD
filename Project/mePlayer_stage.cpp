@@ -31,6 +31,7 @@ namespace me
 		, mInvincibleTime(1.f)
 		, mIsJumping(false)
 		, mJumpStartHeight(0)
+		, mJumpMinHeight(250.f)
 		, mJumpMaxHeight(300.f)
 		, mIsParrying(false)
 		, mParryHoldingTime(0.3f)
@@ -132,7 +133,7 @@ namespace me
 				mAnimator->SetFlipX(true);
 		}
 
-		if(KeyInput::GetKeyDown(KeyCode::Z) && mIsGround)
+		if(KeyInput::GetKeyPressed(KeyCode::Z) && mIsGround && !mIsJumping)
 		{
 			mIsJumping = true;
 			mIsGround = false;
@@ -146,6 +147,9 @@ namespace me
 			mDashFlip = mAnimator->GetFlipX();
 			mDashStartPoint = mTransform->GetPos().x;
 			dashSound->Play(false);
+
+			mCollider->SetSize(math::Vector2(COLLIDER_DUCK_SIZE_X, COLLIDER_DUCK_SIZE_Y));
+			mCollider->SetOffset(math::Vector2(COLLIDER_DUCK_OFFSET_X, COLLIDER_DUCK_OFFSET_Y));
 		}
 
 		if (mCurState != Player_state::Aim && mCurState != Player_state::Duck && !mIsHit && !mIsDash)
@@ -213,18 +217,18 @@ namespace me
 	{
 		GameObject::Render(hdc);
 
-		//wchar_t xBuffer[50] = {};
-		//wchar_t yBuffer[50] = {};
-		//float pox = mTransform->GetPos().x;
-		//float poy = mTransform->GetPos().y;
+		wchar_t xBuffer[50] = {};
+		wchar_t yBuffer[50] = {};
+		float pox = mTransform->GetPos().x;
+		float poy = mTransform->GetPos().y;
 
-		//swprintf_s(xBuffer, L"fps : %f", pox);
-		//swprintf_s(yBuffer, L"fps : %f", poy);
-		//int xLen = wcsnlen_s(xBuffer, 50);
-		//int yLen = wcsnlen_s(yBuffer, 50);
+		swprintf_s(xBuffer, L"fps : %f", pox);
+		swprintf_s(yBuffer, L"fps : %f", poy);
+		int xLen = wcsnlen_s(xBuffer, 50);
+		int yLen = wcsnlen_s(yBuffer, 50);
 
-		//TextOut(hdc, 10, 10, xBuffer, xLen);
-		//TextOut(hdc, 10, 50, yBuffer, yLen);
+		TextOut(hdc, 10, 10, xBuffer, xLen);
+		TextOut(hdc, 10, 50, yBuffer, yLen);
 	}
 
 	void Player_stage::OnCollisionEnter(Collider* other)
@@ -244,15 +248,10 @@ namespace me
 			parrySound->Play(false);
 			return;
 		}
-		if (other->GetOwner()->GetTag() == enums::eGameObjType::enemy) // 수정 필요
-			GetHit();
 	}
 
 	void Player_stage::OnCollisionStay(Collider* other)
 	{
-		if (other->GetOwner()->GetTag() == enums::eGameObjType::enemy) // 수정 필요
-			GetHit();
-
 		if (mIsParrying && other->GetOwner()->GetIsParryable())
 		{
 			mIsParrying = false;
@@ -700,17 +699,18 @@ namespace me
 			mIsParrying = true;
 			mParryStartTime = Time::GetTime();
 		}
+		else if ((KeyInput::GetKeyDown(KeyCode::Z) || mJumpMinHeight > fabs(mJumpStartHeight - mTransform->GetPos().y)) && mIsJumping)
+		{
+			mTransform->SetPos(math::Vector2(mTransform->GetPos().x, mTransform->GetPos().y - 700.f * Time::GetDeltaTime()));
+		}
+		else
+			mIsJumping = false;
 		
 		if (mIsDash)
 		{
 			mCurState = Player_state::Dash;
 			mIsJumping = false;
 			return;
-		}
-
-		if (mIsJumping)
-		{
-			mTransform->SetPos(math::Vector2(mTransform->GetPos().x, mTransform->GetPos().y - 700.f * Time::GetDeltaTime()));
 		}
 
 		if (parrySuccess)
@@ -730,7 +730,7 @@ namespace me
 
 		}
 
-		if (mIsGround)
+		if (mIsGround || !mIsJumping)
 		{
 			canParry = true;
 
@@ -829,6 +829,9 @@ namespace me
 				mCurState = Player_state::Idle;
 
 			mPrevState = Player_state::Dash;
+
+			mCollider->SetSize(math::Vector2(COLLIDER_DEFAULT_SIZE_X, COLLIDER_DEFAULT_SIZE_Y));
+			mCollider->SetOffset(math::Vector2(COLLIDER_DEFAULT_OFFSET_X, COLLIDER_DEFAULT_OFFSET_Y));
 		}
 		else if(mIsDash)
 		{

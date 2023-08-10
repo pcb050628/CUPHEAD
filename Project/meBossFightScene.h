@@ -2,6 +2,7 @@
 #include "meScene.h"
 #include "meBoss.h"
 #include "mePlayer_stage.h"
+#include "meWall.h"
 
 namespace me
 {
@@ -26,14 +27,23 @@ namespace me
 		{
 			T* tmp = new T(name);
 			Scene::AddBoss(tmp);
-			tmp->Init();
+			tmp->Init();			
 			tmp->GetComponent<Transform>()->SetPos(pos);
 			return tmp;
-		} 
+		}
+
+		void RemoveBoss()
+		{
+			delete mBoss;
+			mBoss = nullptr;
+		}
 
 	private:
 		Boss*			mBoss;
 		Player_stage*	mPlayer;
+
+		Wall* wall1;
+		Wall* wall2;
 	};
 }
 

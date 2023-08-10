@@ -25,19 +25,19 @@ namespace me
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Bullet, enums::eLayer::Enemy, true);
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Bullet, enums::eLayer::Background, true);
 
-		Wall* wall_1 = AddGameObj<Wall>(enums::eLayer::Background, L"Wall_1");
-		Wall* wall_2 = AddGameObj<Wall>(enums::eLayer::Background, L"Wall_2");
+		wall1 = AddGameObj<Wall>(enums::eLayer::Background, L"Wall_1");
+		wall2 = AddGameObj<Wall>(enums::eLayer::Background, L"Wall_2");
 
-		wall_1->GetComponent<Transform>()->SetPos(wall_1->GetComponent<Transform>()->GetPos() - math::Vector2(690, 0));
-		wall_2->GetComponent<Transform>()->SetPos(wall_2->GetComponent<Transform>()->GetPos() + math::Vector2(690, 0));
+	}
+	void BossFightScene::Setting()
+	{
+		wall1->GetComponent<Transform>()->SetPos(math::Vector2(-690, 0));
+		wall2->GetComponent<Transform>()->SetPos(math::Vector2(690, 0));
 
 		mPlayer = AddPlayer_stage(L"CupHead_stage");
 
 		HealthBar* hpbar = AddGameObj<HealthBar>(enums::eLayer::UI, L"hpbar");
 		hpbar->SetPlayer(mPlayer);
-	}
-	void BossFightScene::Setting()
-	{
 	}
 	void BossFightScene::Update()
 	{
@@ -52,5 +52,7 @@ namespace me
 	}
 	void BossFightScene::Clear()
 	{
+		RemovePlayer_stage();
+		RemoveBoss();
 	}
 }

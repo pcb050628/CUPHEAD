@@ -49,6 +49,8 @@ namespace me
 
 		int GetHP() { return HP; }
 
+		bool GetIsGround() { return mIsGround; }
+
 	private:
 		int HP;
 
@@ -78,6 +80,7 @@ namespace me
 		float mInvincibleTime;
 
 		bool mIsJumping;
+		float mJumpMinHeight;
 		float mJumpMaxHeight;
 		float mJumpStartHeight;
 

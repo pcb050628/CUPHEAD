@@ -12,7 +12,7 @@ namespace me
 
 		static void SetTarget(class GameObject* target) { mTarget = target; }
 
-		static math::Vector2 AffectCameraPos(math::Vector2& pos);
+		static void AffectCameraPos(math::Vector2& pos);
 
 	private:
 		static math::Vector2 mLookPos;

@@ -15,7 +15,7 @@ void me::Wall::Init()
 	GameObject::Init();
 
 	mCollider = AddComponent<BoxCollider>(enums::eComponentType::Collider);
-	mCollider->SetSize(math::Vector2(100, 3000));
+	mCollider->SetSize(math::Vector2(100, 1000));
 }
 
 void me::Wall::Update()
@@ -31,22 +31,26 @@ void me::Wall::Render(HDC hdc)
 void me::Wall::OnCollisionEnter(Collider* other)
 {
 	float dist = 0;
+
+	Transform* mTransform = this->GetComponent<Transform>();
+	Transform* otherTransform = other->GetOwner()->GetComponent<Transform>();
+
 	if (other->GetType() == enums::eColliderType::Box)
 	{
-		dist = (other->GetOwner()->GetComponent<BoxCollider>()->GetSize().x / 2) + (GetComponent<BoxCollider>()->GetSize().x / 2);
+		dist = (dynamic_cast<BoxCollider*>(other)->GetSize().x / 2) + (GetComponent<BoxCollider>()->GetSize().x / 2);
 	}
 	else
 	{
-		dist = (other->GetOwner()->GetComponent<CircleCollider>()->GetRadius()) + (GetComponent<BoxCollider>()->GetSize().x / 2);
+		dist = (dynamic_cast<CircleCollider*>(other)->GetRadius()) + (GetComponent<BoxCollider>()->GetSize().x / 2);
 	}
 
-	if (other->GetOwner()->GetComponent<Transform>()->GetPos().x < GetComponent<Transform>()->GetPos().x)
+	if (otherTransform->GetPos().x < mTransform->GetPos().x)
 	{
-		other->GetOwner()->GetComponent<Transform>()->SetPos(math::Vector2(GetComponent<Transform>()->GetPos().x - dist, other->GetOwner()->GetComponent<Transform>()->GetPos().y));
+		otherTransform->SetPos(math::Vector2(mTransform->GetPos().x - dist, otherTransform->GetPos().y));
 	}
-	else if (other->GetOwner()->GetComponent<Transform>()->GetPos().x > GetComponent<Transform>()->GetPos().x)
+	else if (otherTransform->GetPos().x > mTransform->GetPos().x)
 	{
-		other->GetOwner()->GetComponent<Transform>()->SetPos(math::Vector2(GetComponent<Transform>()->GetPos().x + dist, other->GetOwner()->GetComponent<Transform>()->GetPos().y));
+		otherTransform->SetPos(math::Vector2(mTransform->GetPos().x + dist, otherTransform->GetPos().y));
 	}
 }
 

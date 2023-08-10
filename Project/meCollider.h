@@ -24,7 +24,10 @@ namespace me
 
 		void SetPos(math::Vector2 pos) { mPos = pos; }
 		void SetOffset(math::Vector2 offset) { mOffset = offset; }
-		math::Vector2& GetPos() { return mPos; }
+		math::Vector2& GetPos() 
+		{ 
+			return mPos; 
+		}
 		math::Vector2& GetOffset() { return mOffset; }
 
 	private:

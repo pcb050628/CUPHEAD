@@ -36,7 +36,7 @@ namespace me
 			math::Vector2 pos = tr->GetPos();
 
 			if (mAffectCamera)
-				pos = Camera::AffectCameraPos(pos);
+				Camera::AffectCameraPos(pos);
 
 			if (mCurPlayAnim->GetType() == enums::eAnimType::Sheet && mCurPlayAnim->GetSheet()->GetType() == eTextureType::png)
 			{

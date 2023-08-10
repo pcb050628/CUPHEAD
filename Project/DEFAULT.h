@@ -68,6 +68,7 @@ namespace me
 			enemy,
 			player,
 			bullet,
+			end,
 		};
 
 	}

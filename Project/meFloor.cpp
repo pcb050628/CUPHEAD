@@ -1,4 +1,5 @@
 #include "meFloor.h"
+#include "mePlayer_stage.h"
 
 namespace me
 {
@@ -27,23 +28,59 @@ namespace me
 
 	void Floor::OnCollisionEnter(Collider* other)
 	{
-		if (other->GetOwner()->GetTag() == enums::eGameObjType::player)
+		if (other->GetOwner()->GetTag() == enums::eGameObjType::player && !dynamic_cast<Player_stage*>(other->GetOwner())->GetIsGround())
 		{			
 			BoxCollider* box = GetComponent<BoxCollider>();
 			BoxCollider* otherBox = dynamic_cast<BoxCollider*>(other);
 
-			if (box->GetPos().y - box->GetSize().y / 2 < otherBox->GetPos().y + otherBox->GetSize().y / 2)
+			float len = fabs(otherBox->GetPos().y - box->GetPos().y);
+			float scale = fabs((otherBox->GetSize().y / 2) + (box->GetSize().y / 2));
+
+			if (len < scale)
 			{
 				Transform* tr = other->GetOwner()->GetComponent<Transform>();
-				/*float len = fabs(other->GetSize().y / 2 + box->GetSize().y / 2);
-				float dif = fabs(box->GetPos().x - other->GetPos().y);
+				math::Vector2 PlayerPos = tr->GetPos();
+				PlayerPos.y -= (scale - len) + 1.f;
 
-				len -= dif;
-				tr->SetPos(tr->GetPos() + math::Vector2(0, -len));*/
-
-				float len = box->GetPos().y - 460 - tr->GetPos().y;
-				tr->SetPos(tr->GetPos() + math::Vector2(0, len));
+				tr->SetPos(PlayerPos);
 			}
+		}
+		else if (other->GetOwner()->GetTag() == enums::eGameObjType::enemy)
+		{
+			BoxCollider* box = GetComponent<BoxCollider>();
+			if (dynamic_cast<BoxCollider*>(other) == nullptr)
+			{
+				CircleCollider* otherCircle = dynamic_cast<CircleCollider*>(other);
+
+				float len = fabs(otherCircle->GetPos().y - box->GetPos().y);
+				float scale = fabs(otherCircle->GetRadius() + (box->GetSize().y / 2));
+
+				if (len < scale)
+				{
+					Transform* tr = other->GetOwner()->GetComponent<Transform>();
+					math::Vector2 otherPos = tr->GetPos();
+					otherPos.y -= (scale - len) - 10.f;
+
+					tr->SetPos(otherPos);
+				}
+			}
+			else
+			{
+				BoxCollider* otherBox = dynamic_cast<BoxCollider*>(other);
+
+				float len = fabs(otherBox->GetPos().y - box->GetPos().y);
+				float scale = fabs((otherBox->GetSize().y / 2) + (box->GetSize().y / 2));
+
+				if (len < scale)
+				{
+					Transform* tr = other->GetOwner()->GetComponent<Transform>();
+					math::Vector2 otherPos = tr->GetPos();
+					otherPos.y -= (scale - len) + 10.f;
+
+					tr->SetPos(otherPos);
+				}
+			}
+
 		}
 	}
 	void Floor::OnCollisionStay(Collider* other)

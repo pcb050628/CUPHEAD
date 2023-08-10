@@ -2,6 +2,7 @@
 #include "meBoss.h"
 #include "meSensor.h"
 #include "meSound.h"
+#include "meRigidbody.h"
 
 namespace me
 {	
@@ -30,8 +31,7 @@ namespace me
 		void Ph3Intro();
 
 		void Jump();
-		void MoveUp();
-		void MoveDown();
+		void JumpEffect();
 
 		void Punch();
 
@@ -40,13 +40,15 @@ namespace me
 
 	private:
 		Transform* mTransform;
+		Rigidbody* mRigidbody;
+
 		Animator* mMainAnimator;
 		Animator* mPh2DustAnimator;
 		Animator* mPh3IntroAnimator;
 
 		CircleCollider* mMainCollider;
 
-		float attackStartTime;
+		float attackTime;
 		float attackCooldown;
 		Sensor* mPlayerSensor;
 
@@ -54,6 +56,7 @@ namespace me
 		bool mIsPunching;
 		bool stretch;
 		bool back;
+		float punchStartTime;
 		float smallPunchHoldingTime;
 		float bigPunchHoldingTime;
 		Sound* stretchSound;
@@ -61,11 +64,11 @@ namespace me
 		bool mIsSmashing;
 		Sensor* mSmashCollider;
 
-		bool mIsGround;
-
 		bool mIsJumping;
+		bool jumpUp;
+		bool jumpDown;
+		float prevVelocity;
 		float mJumpMaxHeight;
-		float mJumpStartPoint;
 		Sound* smallJumpSound;
 		Sound* smallLandSound;
 		Sound* bigJumpSound;

@@ -15,15 +15,19 @@ namespace me
 	}
 	Collider::~Collider()
 	{
+		GetOwner()->ColliderCountDecrease();
 	}
 	void Collider::Init()
 	{
 		Component::Init();
+
+		mPos = GetOwner()->GetComponent<Transform>()->GetPos() + mOffset;
+		//Camera::AffectCameraPos(mPos);
 	}
 	void Collider::Update()
 	{
 		mPos = GetOwner()->GetComponent<Transform>()->GetPos() + mOffset;
-		mPos = Camera::AffectCameraPos(mPos);
+		Camera::AffectCameraPos(mPos);
 	}
 	void Collider::Render(HDC hdc)
 	{

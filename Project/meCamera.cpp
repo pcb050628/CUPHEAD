@@ -35,8 +35,8 @@ namespace me
 		mLookPos = math::Vector2::Zero;
 	}
 
-	math::Vector2 Camera::AffectCameraPos(math::Vector2& pos)
+	void Camera::AffectCameraPos(math::Vector2& pos)
 	{
-		return pos - mDist;
+		return pos -= mDist;
 	}
 }

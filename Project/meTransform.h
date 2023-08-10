@@ -14,7 +14,10 @@ namespace me
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
-		void SetPos(math::Vector2 pos) { mPosition = pos; }
+		void SetPos(math::Vector2 pos) 
+		{ 
+			mPosition = pos; 
+		}
 		math::Vector2 GetPos() { return mPosition; }
 
 		void SetScale(math::Vector2 scale) { mScale = scale; }

@@ -30,6 +30,36 @@ namespace me
 				mAnims.insert(std::make_pair(anim.GetName(), anim));
 		}
 
+		virtual void ForcePlayAnim(const std::wstring& name)
+		{
+			auto iter = mAnims.find(name);
+			if (iter != mAnims.end())
+			{
+				mCurPlayAnim = &iter->second;
+				isPlay = true;
+				mCurPlayAnim->Reset();
+			}
+		}
+
+		virtual void ForcePlayAnim(const std::wstring& name, bool flip)
+		{
+			std::wstring _name = name;
+
+			if (flip)
+				_name += L"_L";
+			else
+				_name += L"_R";
+
+			auto iter = mAnims.find(_name);
+
+			if (iter != mAnims.end())
+			{
+				mCurPlayAnim = &iter->second;
+				mCurPlayAnim->Reset();
+				isPlay = true;
+			}
+		}
+
 		virtual void PlayAnim(const std::wstring& name)
 		{
 			auto iter = mAnims.find(name);

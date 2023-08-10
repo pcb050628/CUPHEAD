@@ -38,6 +38,12 @@ namespace me
 
 	void Scene::Update()
 	{
+		if (!IsSetting)
+		{
+			IsSetting = true;
+			Setting();
+		}
+
 		for (Layer& lys : mLayers)
 		{
 			lys.Update();
@@ -77,6 +83,11 @@ namespace me
 		p->Init();
 		p->GetComponent<Transform>()->SetPos(math::Vector2(-300, 0));
 		return p;
+	}
+
+	void Scene::RemovePlayer_stage()
+	{
+		mLayers[(int)enums::eLayer::Player].RemovePlayer_stage();
 	}
 
 	void Scene::AddBoss(Boss* boss)

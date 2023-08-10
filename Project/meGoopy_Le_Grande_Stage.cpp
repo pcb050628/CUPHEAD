@@ -17,9 +17,6 @@ namespace me
 	{
 		BossFightScene::Init();
 
-		ColliderManager::CollisionLayerCheck(enums::eLayer::Background, enums::eLayer::Player, true);
-		ColliderManager::CollisionLayerCheck(enums::eLayer::Background, enums::eLayer::Enemy, true);
-
 		//GameObject* bg_evergreen = AddGameObj(enums::eLayer::Background, L"1_stage_backgroung_evergreen", enums::eGameObjType::background);
 		//SpriteRenderer* evergreen_sr = bg_evergreen->AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
 		//evergreen_sr->SetImage(ResourceManager::Load<Texture>(L"Goopy_Le_background_evergreen", L"..\\content\\BossFight\\Goopy Le Grande\\Background\\slime_bg_bg_evergreens.bmp"));
@@ -39,12 +36,20 @@ namespace me
 		SpriteRenderer* main_ground_sr = bg_main_ground->AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
 		main_ground_sr->SetImage(ResourceManager::Load<Texture>(L"Goopy_Le_background_main_ground", L"..\\content\\BossFight\\Goopy Le Grande\\Background\\slime_bg_mg_main_ground.bmp"));
 
-		Floor* floor = AddGameObj<Floor>(enums::eLayer::Background, L"floor_Collider");
+		Floor* floor = AddGameObj<Floor>(enums::eLayer::floor, L"floor_");
 	}
 	void Goopy_Le_Grande_Stage::Setting()
 	{
+		BossFightScene::Setting();
+
+		ColliderManager::CollisionLayerCheck(enums::eLayer::Background, enums::eLayer::Player, true);
+		ColliderManager::CollisionLayerCheck(enums::eLayer::Background, enums::eLayer::Enemy, true);
+		ColliderManager::CollisionLayerCheck(enums::eLayer::floor, enums::eLayer::Enemy, true);
+		ColliderManager::CollisionLayerCheck(enums::eLayer::floor, enums::eLayer::Sensor, true);
+		ColliderManager::CollisionLayerCheck(enums::eLayer::Player, enums::eLayer::Sensor, true);
+
 		GetPlayer()->GetComponent<Transform>()->SetPos(math::Vector2(-420, 200));
-		AddBoss<Goopy_Le_Grande_Boss>(L"Goopy Le Grande", math::Vector2(300, 160));
+		AddBoss<Goopy_Le_Grande_Boss>(L"Goopy Le Grande", math::Vector2(300, -500));
 	}
 	void Goopy_Le_Grande_Stage::Update()
 	{
@@ -53,5 +58,13 @@ namespace me
 	void Goopy_Le_Grande_Stage::Render(HDC hdc)
 	{
 		BossFightScene::Render(hdc);
+	}
+	void Goopy_Le_Grande_Stage::Clear()
+	{
+		ColliderManager::CollisionLayerCheck(enums::eLayer::Background, enums::eLayer::Player, false);
+		ColliderManager::CollisionLayerCheck(enums::eLayer::Background, enums::eLayer::Enemy, false);
+		ColliderManager::CollisionLayerCheck(enums::eLayer::floor, enums::eLayer::Enemy, false);
+		ColliderManager::CollisionLayerCheck(enums::eLayer::floor, enums::eLayer::Sensor, false);
+		ColliderManager::CollisionLayerCheck(enums::eLayer::Player, enums::eLayer::Sensor, false);
 	}
 }

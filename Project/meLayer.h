@@ -45,6 +45,20 @@ namespace me
 			return tmp;
 		}
 
+		void RemovePlayer_stage()
+		{
+			for (std::vector<GameObject*>::iterator iter = mGameObjs.begin();
+				iter != mGameObjs.end();
+				)
+			{
+				if (dynamic_cast<Player_stage*>(*iter) != nullptr)
+				{
+					delete *iter;
+					mGameObjs.erase(iter);
+				}
+			}
+		}
+
 		void AddBoss(Boss* boss)
 		{
 			mGameObjs.push_back(boss);

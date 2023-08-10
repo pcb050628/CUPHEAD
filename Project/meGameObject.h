@@ -49,6 +49,9 @@ namespace me
 			case me::enums::eComponentType::Animator:
 				name = L"defaultAnimator";
 				break;
+			case me::enums::eComponentType::Rigidbody:
+				name = L"defaultRigidbody";
+				break;
 			}
 
 			T* tmp = new T(this, name);
@@ -99,8 +102,65 @@ namespace me
 				return nullptr;
 		}
 
+		template <typename T>
+		bool RemoveComponent()
+		{
+			T* tmp = nullptr;
+
+			if (mComponents.size() > 0)
+			{
+				for (std::vector<Component*>::iterator iter = mComponents.begin();
+					iter != mComponents.end();
+					)
+				{
+					if (dynamic_cast<T*>((*iter)) != nullptr)
+					{
+						delete* iter;
+						iter = mComponents.erase(iter);
+
+						return true;
+					}
+					else
+					{
+						iter++;
+					}
+				}
+			}
+
+			return false;
+		}
+
+		template <typename T>
+		bool RemoveComponent(const std::wstring& name)
+		{
+			T* tmp = nullptr;
+
+			if (mComponents.size() > 0)
+			{
+				for (std::vector<Component*>::iterator iter = mComponents.begin();
+					iter != mComponents.end();
+					)
+				{
+					if (dynamic_cast<T*>((*iter)) != nullptr && (*iter)->GetName() == name)
+					{
+						delete* iter;
+						iter = mComponents.erase(iter);
+
+						return true;
+					}
+					else
+					{
+						iter++;
+					}
+				}
+			}
+
+			return false;
+		}
+
 		virtual int GetColliderCount() { return mColliderCount; }
 		virtual void ColliderCountIncrease() { mColliderCount += 1; }
+		virtual void ColliderCountDecrease() { mColliderCount -= 1; }
 
 		
 		virtual std::vector<Collider*> GetCollider() 

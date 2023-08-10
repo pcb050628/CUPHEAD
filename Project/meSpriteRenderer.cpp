@@ -30,7 +30,7 @@ namespace me
 		math::Vector2 pos = tr->GetPos();
 
 		if(mAffectCamera)
-			pos = Camera::AffectCameraPos(pos);
+			Camera::AffectCameraPos(pos);
 
 		if (mTexture != nullptr)
 		{
