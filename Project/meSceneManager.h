@@ -46,6 +46,7 @@ namespace me
 	private:
 		static Scene* mCurScene;
 		static std::map<std::wstring, Scene*> mScenes;
+
 	}; 
 }
 

@@ -20,7 +20,6 @@ namespace me
 		CreateScene<WorldMapScene>(L"overWorld");
 		CreateScene<Goopy_Le_Grande_Stage>(L"test");
 
-		LoadScene(L"test");
 	}
 
 	void SceneManager::Update()

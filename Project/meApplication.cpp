@@ -4,6 +4,7 @@
 #include "meCamera.h"
 #include "meSoundManager.h"
 
+
 me::Application::Application()
 	: mHwnd(NULL)
 	, mHdc(NULL)

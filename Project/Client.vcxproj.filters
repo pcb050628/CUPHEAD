@@ -22,9 +22,6 @@
     <Filter Include="Engine\Time">
       <UniqueIdentifier>{17a8cd12-1171-4c72-96fa-1558478424fd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Entity">
-      <UniqueIdentifier>{5c1b4dea-4e2d-48fc-8a7a-f31699c954e7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\SceneManager">
       <UniqueIdentifier>{452c6fb7-e638-43f0-af17-1b09f42f6aa0}</UniqueIdentifier>
     </Filter>
@@ -141,6 +138,9 @@
     </Filter>
     <Filter Include="Contents\GameObject\QuestionMark">
       <UniqueIdentifier>{39c16807-fe24-45fe-a56e-b37afef9c260}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Entity">
+      <UniqueIdentifier>{5c1b4dea-4e2d-48fc-8a7a-f31699c954e7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

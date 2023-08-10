@@ -56,8 +56,8 @@ namespace me
 		{
 			lys.Render(hdc);
 		}
-	}
 
+	}
 	GameObject* Scene::AddGameObj(enums::eLayer layerType, std::wstring name, enums::eGameObjType type)
 	{
 		GameObject* obj = mLayers[(int)layerType].AddGameObj(name, type);

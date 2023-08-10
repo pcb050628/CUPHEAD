@@ -32,7 +32,7 @@ namespace me
 			SceneManager::LoadScene(L"title");
 		}
 
-		if (KeyInput::GetKeyDown(KeyCode::L))
+		if (KeyInput::GetKeyPressed(KeyCode::Enter))
 		{
 			SceneManager::LoadScene(L"overWorld");
 		}

@@ -4,6 +4,8 @@
 
 namespace me
 {
+	static RECT ClientRect;
+
 	class Application
 	{
 	public:

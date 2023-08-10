@@ -14,10 +14,10 @@ namespace me
 		Scene(std::wstring name);
 		virtual ~Scene() override;
 
-		void Init() override;
+		virtual void Init() override;
 		virtual void Setting();
-		void Update() override;
-		void Render(HDC hdc) override;
+		virtual void Update() override;
+		virtual void Render(HDC hdc) override;
 
 		virtual GameObject* AddGameObj(enums::eLayer layerType, std::wstring name, enums::eGameObjType type);
 		virtual GameObject* GetGameObj(enums::eLayer layerType, std::wstring name);
