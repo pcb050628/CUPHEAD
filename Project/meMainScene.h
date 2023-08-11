@@ -17,6 +17,8 @@ namespace me
 		virtual void Clear() override;
 
 	private:
+		SpriteRenderer* smileSprite;
+		Animator* smileAnim;
 
 	};
 }

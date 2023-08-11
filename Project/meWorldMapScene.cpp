@@ -31,6 +31,7 @@ namespace me
 
 		GoopyLeGrandeStage = AddGameObj<Sensor>(enums::eLayer::Sensor, L"glgStageSensor");
 		GoopyLeGrandeStage->SetTargetType(enums::eGameObjType::player);
+		GoopyLeGrandeStage->GetComponent<Transform>()->SetPos(math::Vector2(1240, -220));
 	}
 	void WorldMapScene::Setting()
 	{
