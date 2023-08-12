@@ -44,9 +44,15 @@ namespace me
 		}
 
 	private:
+		static void BlackScreen(HDC hdc);
+
+	private:
 		static Scene* mCurScene;
 		static std::map<std::wstring, Scene*> mScenes;
 
+		static bool loading;
+		static float loadingStartTime;
+		static Scene* LoadedScene;
 	}; 
 }
 

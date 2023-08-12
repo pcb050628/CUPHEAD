@@ -90,4 +90,5 @@ void me::Application::Render()
 
 void me::Application::Release()
 {
+
 }

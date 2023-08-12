@@ -142,6 +142,9 @@
     <Filter Include="Engine\Entity">
       <UniqueIdentifier>{5c1b4dea-4e2d-48fc-8a7a-f31699c954e7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Scene\ClearScene">
+      <UniqueIdentifier>{e93b75d4-2229-46b7-839d-9ca2a279efbc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -285,6 +288,9 @@
     <ClInclude Include="meQuestionMark.h">
       <Filter>Contents\GameObject\QuestionMark</Filter>
     </ClInclude>
+    <ClInclude Include="meClearScene.h">
+      <Filter>Contents\Scene\ClearScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -420,6 +426,9 @@
     </ClCompile>
     <ClCompile Include="meQuestionMark.cpp">
       <Filter>Contents\GameObject\QuestionMark</Filter>
+    </ClCompile>
+    <ClCompile Include="meClearScene.cpp">
+      <Filter>Contents\Scene\ClearScene</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

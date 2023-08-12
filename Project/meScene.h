@@ -47,7 +47,6 @@ namespace me
 
 	private:
 		std::vector<Layer> mLayers;
-		bool IsSetting = false;
 	};
 }
 

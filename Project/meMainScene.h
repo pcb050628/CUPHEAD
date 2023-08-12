@@ -20,6 +20,7 @@ namespace me
 		SpriteRenderer* smileSprite;
 		Animator* smileAnim;
 
+		bool loadMap;
 	};
 }
 

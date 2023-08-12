@@ -16,6 +16,7 @@ namespace me
 	BossFightScene::~BossFightScene()
 	{
 	}
+
 	void BossFightScene::Init()
 	{
 		Scene::Init();
@@ -50,6 +51,7 @@ namespace me
 	{
 		Scene::Render(hdc);
 	}
+
 	void BossFightScene::Clear()
 	{
 		RemovePlayer_stage();

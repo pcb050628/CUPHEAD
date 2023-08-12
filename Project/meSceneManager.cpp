@@ -20,7 +20,7 @@ namespace me
 		CreateScene<WorldMapScene>(L"overWorld");
 		CreateScene<Goopy_Le_Grande_Stage>(L"test");
 
-		LoadScene(L"overWorld");
+		LoadScene(L"main");
 	}
 
 	void SceneManager::Update()
@@ -56,8 +56,8 @@ namespace me
 		Camera::Reset();
 
 		mCurScene->Clear();
+		iter->second->Setting();
 		mCurScene = iter->second;
-		//mCurScene->Setting();
 		return iter->second;
 	}
 }

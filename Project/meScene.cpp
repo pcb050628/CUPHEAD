@@ -23,13 +23,8 @@ namespace me
 			mLayers.push_back(Layer());
 		}
 
-		ColliderManager::CollisionLayerCheck(enums::eLayer::Sensor, enums::eLayer::Enemy, true);
-		ColliderManager::CollisionLayerCheck(enums::eLayer::Sensor, enums::eLayer::Player, true);
-
-		// screenfx 추가 코드 - 프레임드랍이 너무 심함
-		/*GameObject* scfx = mLayers[(int)enums::eLayer::ScreenFx].AddGameObj(L"scrrenFx");
-		scfx->AddComponent<Animator>()->AddAnimation(L"..\\content\\screen fx\\");
-		scfx->GetComponent<Animator>()->SetScale(math::Vector2(1.25f, 1.40625f));*/
+		//ColliderManager::CollisionLayerCheck(enums::eLayer::Sensor, enums::eLayer::Enemy, true);
+		//ColliderManager::CollisionLayerCheck(enums::eLayer::Sensor, enums::eLayer::Player, true);
 	}
 
 	void Scene::Setting()
@@ -38,12 +33,6 @@ namespace me
 
 	void Scene::Update()
 	{
-		if (!IsSetting)
-		{
-			IsSetting = true;
-			Setting();
-		}
-
 		for (Layer& lys : mLayers)
 		{
 			lys.Update();

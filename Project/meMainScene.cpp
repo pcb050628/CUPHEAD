@@ -6,6 +6,9 @@
 namespace me
 {
 	MainScene::MainScene(std::wstring name) : Scene(name)
+		, smileAnim(nullptr)
+		, smileSprite(nullptr)
+		, loadMap(false)
 	{
 	}
 	MainScene::~MainScene()
@@ -34,7 +37,7 @@ namespace me
 
 		smileAnim = select_smile->AddComponent<Animator>(enums::eComponentType::Animator);
 		smileAnim->AddAnim(*ResourceManager::Load<Animation>(L"mainscreen_smile", L"..\\content\\main screen\\smile anim\\"));
-		smileAnim->GetAnim(L"mainscreen_smile")->SetDuration(0.14f);
+		smileAnim->GetAnim(L"mainscreen_smile")->SetDuration(0.12f);
 		smileAnim->GetAnim(L"mainscreen_smile")->SetLoop(false);
 	}
 	void MainScene::Setting()
@@ -54,6 +57,12 @@ namespace me
 		{
 			smileSprite->SetActivate(false);
 			smileAnim->PlayAnim(L"mainscreen_smile");
+			loadMap = true;
+		}
+
+		if (loadMap && smileAnim->GetAnim(L"mainscreen_smile")->IsComplete())
+		{
+			loadMap = false;
 			SceneManager::LoadScene(L"overWorld");
 		}
 	}
@@ -63,5 +72,6 @@ namespace me
 	}
 	void MainScene::Clear()
 	{
+		loadMap = false;
 	}
 }

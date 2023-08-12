@@ -42,14 +42,14 @@ namespace me
 	{
 		BossFightScene::Setting();
 
+		GetPlayer()->GetComponent<Transform>()->SetPos(math::Vector2(-420, 200));
+		AddBoss<Goopy_Le_Grande_Boss>(L"Goopy Le Grande", math::Vector2(300, -500));
+
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Background, enums::eLayer::Player, true);
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Background, enums::eLayer::Enemy, true);
 		ColliderManager::CollisionLayerCheck(enums::eLayer::floor, enums::eLayer::Enemy, true);
 		ColliderManager::CollisionLayerCheck(enums::eLayer::floor, enums::eLayer::Sensor, true);
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Player, enums::eLayer::Sensor, true);
-
-		GetPlayer()->GetComponent<Transform>()->SetPos(math::Vector2(-420, 200));
-		AddBoss<Goopy_Le_Grande_Boss>(L"Goopy Le Grande", math::Vector2(300, -500));
 	}
 	void Goopy_Le_Grande_Stage::Update()
 	{
@@ -61,6 +61,8 @@ namespace me
 	}
 	void Goopy_Le_Grande_Stage::Clear()
 	{
+		BossFightScene::Clear();
+
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Background, enums::eLayer::Player, false);
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Background, enums::eLayer::Enemy, false);
 		ColliderManager::CollisionLayerCheck(enums::eLayer::floor, enums::eLayer::Enemy, false);
