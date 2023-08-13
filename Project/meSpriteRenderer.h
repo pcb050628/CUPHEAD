@@ -48,6 +48,26 @@ namespace me
 		virtual void SetStartPointY(ULONG y) { mStartPointY = y; }
 		virtual void SetAffectCamera(bool value) { mAffectCamera = value; }
 		
+		virtual bool SetAlpha(float value) {
+			if (mTexture->GetType() == eTextureType::bmp32)
+			{
+				mTexture->SetAlpha(value);
+				return true;
+			}
+			else
+				return false;
+		}
+
+
+		virtual float GetAlpha() {
+			if (mTexture->GetType() == eTextureType::bmp32)
+			{
+				return mTexture->GetAlpha();
+			}
+			else
+				return -1;
+		}
+
 	private:
 		Texture* mTexture;
 

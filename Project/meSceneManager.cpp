@@ -4,6 +4,7 @@
 #include "meResourceManager.h"
 #include "meTItleScene.h"
 #include "meMainScene.h"
+#include "meClearScene.h"
 #include "meWorldMapScene.h"
 #include "meGoopy_Le_Grande_Stage.h"
 #include "meTexture.h"
@@ -18,9 +19,8 @@ namespace me
 		CreateScene<TitleScene>(L"title");
 		CreateScene<MainScene>(L"main");
 		CreateScene<WorldMapScene>(L"overWorld");
-		CreateScene<Goopy_Le_Grande_Stage>(L"test");
-
-		LoadScene(L"main");
+		CreateScene<ClearScene>(L"clear");
+		CreateScene<Goopy_Le_Grande_Stage>(L"slime_stage");
 	}
 
 	void SceneManager::Update()

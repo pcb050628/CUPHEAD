@@ -1,6 +1,7 @@
 #include "meScene.h"
 #include "COMPONENTS.h"
 #include "meColliderManager.h"
+#include "meResourceManager.h"
 #include "mePlayer_map.h"
 #include "mePlayer_stage.h"
 
@@ -23,6 +24,10 @@ namespace me
 			mLayers.push_back(Layer());
 		}
 
+		fadeoutRenderer = AddGameObj(enums::eLayer::Background, L"fadeout", enums::eGameObjType::background)->AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
+		fadeoutRenderer->SetImage(ResourceManager::Load<Texture>(L"blackScreen32bmp", L"..\\content\\Scene\\test.bmp"));
+		fadeoutRenderer->SetActivate(false);
+
 		//ColliderManager::CollisionLayerCheck(enums::eLayer::Sensor, enums::eLayer::Enemy, true);
 		//ColliderManager::CollisionLayerCheck(enums::eLayer::Sensor, enums::eLayer::Player, true);
 	}
@@ -37,15 +42,38 @@ namespace me
 		{
 			lys.Update();
 		}
+
+		/*if (KeyInput::GetKeyPressed(KeyCode::K))
+		{
+			if (!fadeoutCall)
+				RunFadeout();
+			else
+				StopFadeout();
+		}*/
 	}
 
 	void Scene::Render(HDC hdc)
 	{
+		if (fadeoutCall)
+		{
+			fadeoutRenderer->SetAlpha(fadeoutRenderer->GetAlpha() + 0.1f * Time::GetDeltaTime());
+		}
+
 		for (Layer& lys : mLayers)
 		{
 			lys.Render(hdc);
 		}
-
+	}
+	void Scene::RunFadeout()
+	{
+		fadeoutCall = true;
+		fadeoutRenderer->SetActivate(true);
+	}
+	void Scene::StopFadeout()
+	{
+		fadeoutCall = false;
+		fadeoutRenderer->SetActivate(false);
+		fadeoutRenderer->SetAlpha(0);
 	}
 	GameObject* Scene::AddGameObj(enums::eLayer layerType, std::wstring name, enums::eGameObjType type)
 	{

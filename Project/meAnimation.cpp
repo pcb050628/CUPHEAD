@@ -105,22 +105,6 @@ namespace me
 		{
 			if (mTextures[mIdx]->GetType() == eTextureType::bmp)
 			{
-				//// BLENDFUNCTION 구조체
-
-				//BLENDFUNCTION bf;
-
-				//bf.BlendOp = AC_SRC_OVER; // 무조건 AC_SRC_OVER이어야 하고 원본과 대상 이미지를 합친다는 의미
-				//bf.BlendFlags = 0; // 무조건 0이어야 한다
-				//bf.AlphaFormat = AC_SRC_ALPHA; // 비트맵 종류로 일반 비트맵의 경우 0, 32비트 비트맵의 경우 AC_SRC_ALPHA
-				//bf.SourceConstantAlpha = 255 * alpha; // 투명도(투명 0 - 불투명 255)
-
-				//AlphaBlend(hdc
-				//	, pos.x - (mTextures[mIdx]->GetWidth() * scale.x / 2) + mOffset.x
-				//	, pos.y - (mTextures[mIdx]->GetHeight() * scale.y / 2) + mOffset.y
-				//	, mTextures[mIdx]->GetWidth() * scale.x
-				//	, mTextures[mIdx]->GetHeight() * scale.y
-				//	, mTextures[mIdx]->GetHdc(), 0, 0, mTextures[mIdx]->GetWidth(), mTextures[mIdx]->GetHeight(), bf);
-
 				TransparentBlt(hdc
 					, pos.x - (mTextures[mIdx]->GetWidth() * scale.x / 2) + mOffset.x
 					, pos.y - (mTextures[mIdx]->GetHeight() * scale.y / 2) + mOffset.y

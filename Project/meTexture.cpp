@@ -31,11 +31,14 @@ namespace me
 
 			mType = eTextureType::bmp;
 
-			BITMAP tmp = {};
-			GetObject(mBitMap, sizeof(BITMAP), &tmp);
+			BITMAP info = {};
+			GetObject(mBitMap, sizeof(BITMAP), &info);
 
-			mWidth = tmp.bmWidth;
-			mHeight = tmp.bmHeight;
+			if (info.bmBitsPixel == 32)
+				mType = eTextureType::bmp32;
+
+			mWidth = info.bmWidth;
+			mHeight = info.bmHeight;
 
 			mHdc = CreateCompatibleDC(app.GetHDC());
 

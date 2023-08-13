@@ -24,7 +24,7 @@ namespace me
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Background, enums::eLayer::Player, true);
 
 		GameObject* map = AddGameObj(enums::eLayer::Background, L"map_ocean", enums::eGameObjType::background);
-		Texture* image_map = ResourceManager::Load<Texture>(L"world_ocean", L"..\\\content\\overWorld\\Inkwell Isle I\\world1_map_.bmp");
+		Texture* image_map = ResourceManager::Load<Texture>(L"world_ocean", L"..\\content\\Scene\\overWorld\\Inkwell Isle I\\world1_map_.bmp");
 		SpriteRenderer* map_sr = map->AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
 		map_sr->SetImage(image_map);
 		map->GetComponent<Transform>()->SetPos(math::Vector2(1060, 420));

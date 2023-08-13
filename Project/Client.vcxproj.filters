@@ -67,9 +67,6 @@
     <Filter Include="Engine\Component\Animator">
       <UniqueIdentifier>{3ed4445d-7a59-4ad9-8644-75b0fc41cdb7}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Component\Rigidbody">
-      <UniqueIdentifier>{69581da9-c924-4936-b391-c5446ff55a29}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Component\Collider">
       <UniqueIdentifier>{a90d8cd6-8b74-4e93-a74b-78bd726967c9}</UniqueIdentifier>
     </Filter>
@@ -144,6 +141,9 @@
     </Filter>
     <Filter Include="Contents\Scene\ClearScene">
       <UniqueIdentifier>{e93b75d4-2229-46b7-839d-9ca2a279efbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\SpriteRenderer\Rigidbody">
+      <UniqueIdentifier>{69581da9-c924-4936-b391-c5446ff55a29}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -253,7 +253,7 @@
       <Filter>Engine\ColliderManager</Filter>
     </ClInclude>
     <ClInclude Include="meRigidbody.h">
-      <Filter>Engine\Component\Rigidbody</Filter>
+      <Filter>Engine\Component\SpriteRenderer\Rigidbody</Filter>
     </ClInclude>
     <ClInclude Include="meFloor.h">
       <Filter>Contents\GameObject\Floor</Filter>
@@ -395,7 +395,7 @@
       <Filter>Engine\ColliderManager</Filter>
     </ClCompile>
     <ClCompile Include="meRigidbody.cpp">
-      <Filter>Engine\Component\Rigidbody</Filter>
+      <Filter>Engine\Component\SpriteRenderer\Rigidbody</Filter>
     </ClCompile>
     <ClCompile Include="meFloor.cpp">
       <Filter>Contents\GameObject\Floor</Filter>

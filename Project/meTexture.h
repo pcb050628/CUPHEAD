@@ -7,6 +7,7 @@ namespace me
 	{
 		png,
 		bmp,
+		bmp32,
 		none
 	};
 	
@@ -29,8 +30,12 @@ namespace me
 
 		eTextureType GetType() { return mType; }
 
+		float GetAlpha() { return alpha; }
+		void SetAlpha(float value) { alpha = value; }
+
 	private:
 		eTextureType mType;
+		float alpha = 1;
 
 		Gdiplus::Image* mImage;
 

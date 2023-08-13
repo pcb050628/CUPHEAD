@@ -18,6 +18,8 @@ namespace me
 		virtual void Setting();
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
+		virtual void RunFadeout();
+		virtual void StopFadeout();
 
 		virtual GameObject* AddGameObj(enums::eLayer layerType, std::wstring name, enums::eGameObjType type);
 		virtual GameObject* GetGameObj(enums::eLayer layerType, std::wstring name);
@@ -47,6 +49,9 @@ namespace me
 
 	private:
 		std::vector<Layer> mLayers;
+
+		SpriteRenderer* fadeoutRenderer;
+		bool fadeoutCall;
 	};
 }
 

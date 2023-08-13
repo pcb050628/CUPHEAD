@@ -18,10 +18,10 @@ void me::HealthBar::Init()
 	Health3 = AddComponent<SpriteRenderer>(L"healthBar3");
 	Dead = AddComponent<SpriteRenderer>(L"healthBarDead");
 
-	Health1->SetImage(ResourceManager::Load<Texture>(L"HealthBar_1", L"..\\content\\BossFight\\CupHead\\Health\\Health_1.bmp"));
-	Health2->SetImage(ResourceManager::Load<Texture>(L"HealthBar_2", L"..\\content\\BossFight\\CupHead\\Health\\Health_2.bmp"));
-	Health3->SetImage(ResourceManager::Load<Texture>(L"HealthBar_3", L"..\\content\\BossFight\\CupHead\\Health\\Health_3.bmp"));
-	Dead->SetImage(ResourceManager::Load<Texture>(L"HealthBar_dead", L"..\\content\\BossFight\\CupHead\\Health\\Health_dead.bmp"));
+	Health1->SetImage(ResourceManager::Load<Texture>(L"HealthBar_1", L"..\\content\\Scene\\BossFight\\CupHead\\Health\\Health_1.bmp"));
+	Health2->SetImage(ResourceManager::Load<Texture>(L"HealthBar_2", L"..\\content\\Scene\\BossFight\\CupHead\\Health\\Health_2.bmp"));
+	Health3->SetImage(ResourceManager::Load<Texture>(L"HealthBar_3", L"..\\content\\Scene\\BossFight\\CupHead\\Health\\Health_3.bmp"));
+	Dead->SetImage(ResourceManager::Load<Texture>(L"HealthBar_dead", L"..\\content\\Scene\\BossFight\\CupHead\\Health\\Health_dead.bmp"));
 
 	GetComponent<Transform>()->SetPos(math::Vector2(100, math::Vector2::Client_Size.y - 50));
 	Health1->SetAffectCamera(false);

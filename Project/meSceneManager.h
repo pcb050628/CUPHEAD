@@ -16,6 +16,7 @@ namespace me
 		template <typename T>
 		static T* CreateScene(std::wstring name);
 		static Scene* LoadScene(std::wstring name);
+		static void Fadeout();
 
 		template <typename T>
 		static T* Instantiate(enums::eLayer layerType, math::Vector2 pos = math::Vector2::Zero, const std::wstring& name = L"object")
@@ -42,9 +43,6 @@ namespace me
 		{
 			gobj->SetState(GameObject::ObjState::Dead);
 		}
-
-	private:
-		static void BlackScreen(HDC hdc);
 
 	private:
 		static Scene* mCurScene;
