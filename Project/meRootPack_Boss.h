@@ -24,7 +24,6 @@ namespace me
 		virtual void Phase3() override;
 		virtual void Death() override;
 
-
 	private:
 		CircleCollider* mMainCollider;
 		Animator* mMainAnimator;
