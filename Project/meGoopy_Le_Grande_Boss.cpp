@@ -29,6 +29,21 @@ namespace me
 	}
 	Goopy_Le_Grande_Boss::~Goopy_Le_Grande_Boss()
 	{
+		//sensor release
+		SceneManager::Destroy(mSmashCollider);
+		SceneManager::Destroy(mPunchCollider);
+		SceneManager::Destroy(mPlayerSensor);
+
+		mSmashCollider	= nullptr;
+		mPunchCollider	= nullptr;
+		mPlayerSensor	= nullptr;
+
+		//sound release
+		stretchSound	= nullptr;
+		smallJumpSound	= nullptr;
+		smallLandSound	= nullptr;
+		bigJumpSound	= nullptr;
+		bigLandSound	= nullptr;
 	}
 	void Goopy_Le_Grande_Boss::Init()
 	{
@@ -42,19 +57,19 @@ namespace me
 		mMainCollider = AddComponent<CircleCollider>(L"Main");
 		mMainCollider->SetRadius(100);
 
-		mPunchCollider = SceneManager::Instantiate<Sensor>(L"test", enums::eLayer::Sensor, mTransform->GetPos(), L"Punch");
+		mPunchCollider = SceneManager::Instantiate<Sensor>(L"slime_stage", enums::eLayer::Sensor, mTransform->GetPos(), L"Punch");
 		mPunchCollider->SetOwner(this);
 		mPunchCollider->SetTargetType(enums::eGameObjType::player);
 		mPunchCollider->SetColliderSize(math::Vector2(250, 250));
 		mPunchCollider->SetOffset(math::Vector2(0, -130));
 		
-		mPlayerSensor = SceneManager::Instantiate<Sensor>(L"test", enums::eLayer::Sensor, mTransform->GetPos(), L"enemySensor");
+		mPlayerSensor = SceneManager::Instantiate<Sensor>(L"slime_stage", enums::eLayer::Sensor, mTransform->GetPos(), L"enemySensor");
 		mPlayerSensor->SetOwner(this);
 		mPlayerSensor->SetTargetType(enums::eGameObjType::player);
 		mPlayerSensor->SetOffset(math::Vector2(-180, 0));
 		mPlayerSensor->SetColliderSize(math::Vector2(400, 100));
 
-		mSmashCollider = SceneManager::Instantiate<Sensor>(L"test", enums::eLayer::Sensor, mTransform->GetPos(), L"Smash");
+		mSmashCollider = SceneManager::Instantiate<Sensor>(L"slime_stage", enums::eLayer::Sensor, mTransform->GetPos(), L"Smash");
 
 		mPunchCollider->SetActive(false);
 		mSmashCollider->SetActive(false);
@@ -175,6 +190,8 @@ namespace me
 		smallLandSound = ResourceManager::Load<Sound>(L"slime_small_land", L"..\\content\\Sound\\AudioClip\\BossFightScene\\Goopy Le Grande\\sfx_slime_small_land_01.wav");
 		bigJumpSound = ResourceManager::Load<Sound>(L"slime_big_jump", L"..\\content\\Sound\\AudioClip\\BossFightScene\\Goopy Le Grande\\sfx_slime_big_jump_03.wav");
 		bigLandSound = ResourceManager::Load<Sound>(L"slime_big_jump", L"..\\content\\Sound\\AudioClip\\BossFightScene\\Goopy Le Grande\\sfx_slime_big_land_03.wav");
+
+		SetHP(0);
 	}
 	void Goopy_Le_Grande_Boss::Update()
 	{

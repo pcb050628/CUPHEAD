@@ -21,8 +21,8 @@ void me::QuestionMark::Init()
 
 	mAnimator = AddComponent<Animator>(enums::eComponentType::Animator);
 
-	mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Question_Mark_Appear", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Question Marks\\Appear\\"));
-	mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Question_Mark_Disappear", L"..\\content\\BossFight\\Goopy Le Grande\\Phase 1\\Question Marks\\Disappear\\"));
+	mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Question_Mark_Appear", L"..\\content\\Scene\\BossFight\\Goopy Le Grande\\Phase 1\\Question Marks\\Appear\\"));
+	mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Question_Mark_Disappear", L"..\\content\\Scene\\BossFight\\Goopy Le Grande\\Phase 1\\Question Marks\\Disappear\\"));
 
 	mAnimator->GetAnim(L"Question_Mark_Appear")->SetLoop(false);
 	mAnimator->GetAnim(L"Question_Mark_Disappear")->SetLoop(false);

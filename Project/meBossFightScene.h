@@ -29,13 +29,8 @@ namespace me
 			Scene::AddBoss(tmp);
 			tmp->Init();			
 			tmp->GetComponent<Transform>()->SetPos(pos);
+			mBoss = tmp;
 			return tmp;
-		}
-
-		void RemoveBoss()
-		{
-			delete mBoss;
-			mBoss = nullptr;
 		}
 
 	private:
@@ -44,6 +39,8 @@ namespace me
 
 		Wall* wall1;
 		Wall* wall2;
+
+		float savedTime;
 	};
 }
 

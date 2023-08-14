@@ -53,15 +53,35 @@ namespace me
 			{
 				if (dynamic_cast<Player_stage*>(*iter) != nullptr)
 				{
-					delete *iter;
-					mGameObjs.erase(iter);
+					delete* iter;
+					iter = mGameObjs.erase(iter);
+
+					return;
 				}
+				else
+					iter++;
 			}
 		}
 
 		void AddBoss(Boss* boss)
 		{
 			mGameObjs.push_back(boss);
+		}
+
+		void RemoveBoss()
+		{
+			for (std::vector<GameObject*>::iterator iter = mGameObjs.begin();
+				iter != mGameObjs.end();
+				)
+			{
+				if (dynamic_cast<Boss*>(*iter) != nullptr)
+				{
+					delete* iter;
+					iter = mGameObjs.erase(iter);
+				}
+				else
+					iter++;
+			}
 		}
 
 		GameObject* GetGameObj(std::wstring name)

@@ -39,12 +39,12 @@ namespace me
 		void TombMove();
 
 	private:
-		Transform* mTransform;
-		Rigidbody* mRigidbody;
+		Transform*	mTransform;
+		Rigidbody*	mRigidbody;
 
-		Animator* mMainAnimator;
-		Animator* mPh2DustAnimator;
-		Animator* mPh3IntroAnimator;
+		Animator*	mMainAnimator;
+		Animator*	mPh2DustAnimator;
+		Animator*	mPh3IntroAnimator;
 
 		CircleCollider* mMainCollider;
 

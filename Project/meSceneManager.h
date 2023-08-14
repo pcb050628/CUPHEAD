@@ -10,6 +10,7 @@ namespace me
 		static void Init();
 		static void Update();
 		static void Render(HDC hdc);
+		static void Release();
 
 		static Scene* GetCurScene() { return mCurScene; }
 

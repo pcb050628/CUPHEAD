@@ -37,6 +37,9 @@ namespace me
 		virtual void RemovePlayer_stage();
 
 		virtual void AddBoss(Boss* boss);
+		virtual void RemoveBoss();
+
+		virtual void DeleteAllSensor();
 
 		virtual Layer& GetLayer(enums::eLayer type) { return mLayers[(int)type]; }
 

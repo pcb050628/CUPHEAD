@@ -11,6 +11,7 @@ namespace me
 	BossFightScene::BossFightScene(std::wstring name) : Scene(name)
 		, mBoss(NULL)
 		, mPlayer(NULL)
+		, savedTime(-1)
 	{
 	}
 	BossFightScene::~BossFightScene()
@@ -46,6 +47,14 @@ namespace me
 
 		if (KeyInput::GetKeyPressed(KeyCode::Space))
 			mPlayer->GetComponent<Transform>()->SetPos(math::Vector2(0, 0));
+
+		if (mBoss->GetHP() <= 0 && savedTime == -1)
+		{
+			savedTime = Time::GetTime();
+		}
+
+		if (savedTime != -1 && fabs(savedTime - Time::GetTime()) > 6)
+			SceneManager::LoadScene(L"clear");
 	}
 	void BossFightScene::Render(HDC hdc)
 	{
@@ -56,5 +65,6 @@ namespace me
 	{
 		RemovePlayer_stage();
 		RemoveBoss();
+		savedTime = -1;
 	}
 }

@@ -145,6 +145,12 @@
     <Filter Include="Engine\Component\SpriteRenderer\Rigidbody">
       <UniqueIdentifier>{69581da9-c924-4936-b391-c5446ff55a29}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Scene\BossFightScene\RootPack">
+      <UniqueIdentifier>{3b08a3e0-678e-4161-ac70-5bffa98f0e0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Boss\RootPack">
+      <UniqueIdentifier>{d7cbad62-ab94-45f6-b0db-1a2482b5040f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -291,6 +297,12 @@
     <ClInclude Include="meClearScene.h">
       <Filter>Contents\Scene\ClearScene</Filter>
     </ClInclude>
+    <ClInclude Include="meRootPack_Stage.h">
+      <Filter>Contents\Scene\BossFightScene\RootPack</Filter>
+    </ClInclude>
+    <ClInclude Include="meRootPack_Boss.h">
+      <Filter>Contents\GameObject\Boss\RootPack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -429,6 +441,12 @@
     </ClCompile>
     <ClCompile Include="meClearScene.cpp">
       <Filter>Contents\Scene\ClearScene</Filter>
+    </ClCompile>
+    <ClCompile Include="meRootPack_Stage.cpp">
+      <Filter>Contents\Scene\BossFightScene\RootPack</Filter>
+    </ClCompile>
+    <ClCompile Include="meRootPack_Boss.cpp">
+      <Filter>Contents\GameObject\Boss\RootPack</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

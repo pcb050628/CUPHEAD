@@ -1,5 +1,6 @@
 #include "meGameObject.h"
 #include "COMPONENTS.h"
+#include "meSceneManager.h"
 
 namespace me
 {
@@ -20,6 +21,7 @@ namespace me
 				delete comp;
 			}
 		}
+
 		mComponents.clear();
 	}
 

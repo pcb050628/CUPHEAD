@@ -159,6 +159,8 @@
     <ClInclude Include="mePlayer_stage.h" />
     <ClInclude Include="meQuestionMark.h" />
     <ClInclude Include="meRigidbody.h" />
+    <ClInclude Include="meRootPack_Boss.h" />
+    <ClInclude Include="meRootPack_Stage.h" />
     <ClInclude Include="meSensor.h" />
     <ClInclude Include="meSoundManager.h" />
     <ClInclude Include="meTexture.h" />
@@ -206,6 +208,8 @@
     <ClCompile Include="mePlayer_stage.cpp" />
     <ClCompile Include="meQuestionMark.cpp" />
     <ClCompile Include="meRigidbody.cpp" />
+    <ClCompile Include="meRootPack_Boss.cpp" />
+    <ClCompile Include="meRootPack_Stage.cpp" />
     <ClCompile Include="meSensor.cpp" />
     <ClCompile Include="meSoundManager.cpp" />
     <ClCompile Include="meTexture.cpp" />

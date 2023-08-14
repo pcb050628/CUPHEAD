@@ -21,6 +21,8 @@ namespace me
 		CreateScene<WorldMapScene>(L"overWorld");
 		CreateScene<ClearScene>(L"clear");
 		CreateScene<Goopy_Le_Grande_Stage>(L"slime_stage");
+
+		LoadScene(L"slime_stage");
 	}
 
 	void SceneManager::Update()
@@ -31,6 +33,16 @@ namespace me
 	void SceneManager::Render(HDC hdc)
 	{
 		mCurScene->Render(hdc);
+	}
+
+	void SceneManager::Release()
+	{
+		for (auto iter : mScenes)
+		{
+			delete iter.second;
+		}
+
+		mScenes.clear();
 	}
 
 	template <typename T>

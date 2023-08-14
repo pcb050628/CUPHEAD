@@ -20,6 +20,7 @@ namespace me
 	}
 	Animator::~Animator()
 	{
+		mAnims.clear();
 	}
 
 	void Animator::Init()

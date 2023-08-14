@@ -96,6 +96,14 @@ namespace me
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_parry_R", L"..\\content\\Scene\\BossFight\\Cuphead\\Parry\\Hand\\Left\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_parry_L", L"..\\content\\Scene\\BossFight\\Cuphead\\Parry\\Hand\\Right\\"));
 
+		mAnimator->GetAnim(L"CupHead_stage_anim_intro")->SetDuration(0.05f);
+		mAnimator->GetAnim(L"CupHead_stage_anim_run_R")->SetDuration(0.04f);
+		mAnimator->GetAnim(L"CupHead_stage_anim_run_L")->SetDuration(0.04f);
+		mAnimator->GetAnim(L"CupHead_stage_anim_shoot_straight_run_R")->SetDuration(0.04f);
+		mAnimator->GetAnim(L"CupHead_stage_anim_shoot_straight_run_L")->SetDuration(0.04f);
+		mAnimator->GetAnim(L"CupHead_stage_anim_shoot_diagonal_up_run_R")->SetDuration(0.04f);
+		mAnimator->GetAnim(L"CupHead_stage_anim_shoot_diagonal_up_run_L")->SetDuration(0.04f); 
+
 		mAnimator->GetAnim(L"CupHead_stage_anim_hit_air_R")->SetLoop(false);
 		mAnimator->GetAnim(L"CupHead_stage_anim_hit_air_L")->SetLoop(false);
 		mAnimator->GetAnim(L"CupHead_stage_anim_hit_ground_R")->SetLoop(false);
@@ -103,11 +111,11 @@ namespace me
 		mAnimator->GetAnim(L"CupHead_stage_anim_parry_R")->SetLoop(false);
 		mAnimator->GetAnim(L"CupHead_stage_anim_parry_L")->SetLoop(false);
 
-		jumpSound = ResourceManager::Load<Sound>(L"CupHead_stage_sound_jump", L"..\\content\\Sound\\AudioClip\\Scene\\BossFightScene\\Player_stage\\sfx_player_jump_01.wav");
-		shootSound = ResourceManager::Load<Sound>(L"CupHead_stage_sound_shoot", L"..\\content\\Sound\\AudioClip\\Scene\\BossFightScene\\Player_stage\\sfx_player_spreadshot_fire_loop_002.wav");
-		hitSound = ResourceManager::Load<Sound>(L"CupHead_stage_sound_hit", L"..\\content\\Sound\\AudioClip\\Scene\\BossFightScene\\Player_stage\\sfx_player_hit_03.wav");
-		dashSound = ResourceManager::Load<Sound>(L"CupHead_stage_sound_dash", L"..\\content\\Sound\\AudioClip\\Scene\\BossFightScene\\Player_stage\\sfx_player_dash_03.wav");
-		parrySound = ResourceManager::Load<Sound>(L"CupHead_stage_sound_parry_slap", L"..\\content\\Sound\\AudioClip\\Scene\\BossFightScene\\Player_stage\\sfx_player_parry_slap_02.wav");
+		jumpSound = ResourceManager::Load<Sound>(L"CupHead_stage_sound_jump", L"..\\content\\Sound\\AudioClip\\BossFightScene\\Player_stage\\sfx_player_jump_01.wav");
+		shootSound = ResourceManager::Load<Sound>(L"CupHead_stage_sound_shoot", L"..\\content\\Sound\\AudioClip\\BossFightScene\\Player_stage\\sfx_player_spreadshot_fire_loop_002.wav");
+		hitSound = ResourceManager::Load<Sound>(L"CupHead_stage_sound_hit", L"..\\content\\Sound\\AudioClip\\BossFightScene\\Player_stage\\sfx_player_hit_03.wav");
+		dashSound = ResourceManager::Load<Sound>(L"CupHead_stage_sound_dash", L"..\\content\\Sound\\AudioClip\\BossFightScene\\Player_stage\\sfx_player_dash_03.wav");
+		parrySound = ResourceManager::Load<Sound>(L"CupHead_stage_sound_parry_slap", L"..\\content\\Sound\\AudioClip\\BossFightScene\\Player_stage\\sfx_player_parry_slap_02.wav");
 	}
 	void Player_stage::Update()
 	{

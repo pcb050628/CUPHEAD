@@ -13,6 +13,7 @@ namespace me
 
 	Scene::~Scene()
 	{
+
 	}
 
 	void Scene::Init()
@@ -110,6 +111,16 @@ namespace me
 	void Scene::AddBoss(Boss* boss)
 	{
 		mLayers[(int)enums::eLayer::Enemy].AddBoss(boss);
+	}
+
+	void Scene::RemoveBoss()
+	{
+		mLayers[(int)enums::eLayer::Enemy].RemoveBoss();
+	}
+
+	void Scene::DeleteAllSensor()
+	{
+
 	}
 
 	void Scene::Clear()

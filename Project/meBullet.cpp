@@ -20,14 +20,14 @@ namespace me
 		CircleCollider* collider = AddComponent<CircleCollider>(enums::eComponentType::Collider);
 		
 		
-		LeftAnim = ResourceManager::Load<Animation>(L"bullet_anim_straight_L", L"..//content\\BossFight\\Cuphead\\Bullet\\Left\\");
-		RightAnim = ResourceManager::Load<Animation>(L"bullet_anim_straight_R", L"..//content\\BossFight\\Cuphead\\Bullet\\Right\\");
-		UpAnim = ResourceManager::Load<Animation>(L"bullet_anim_up", L"..//content\\BossFight\\Cuphead\\Bullet\\Up\\");
-		DownAnim = ResourceManager::Load<Animation>(L"bullet_anim_down", L"..//content\\BossFight\\Cuphead\\Bullet\\Down\\");
-		DiagonalUpLeftAnim = ResourceManager::Load<Animation>(L"bullet_anim_diagonal_up_L", L"..//content\\BossFight\\Cuphead\\Bullet\\Diagonal Up\\Left\\");
-		DiagonalUpRightAnim = ResourceManager::Load<Animation>(L"bullet_anim_diagonal_up_R", L"..//content\\BossFight\\Cuphead\\Bullet\\Diagonal Up\\Right\\");
-		DiagonalDownLeftAnim = ResourceManager::Load<Animation>(L"bullet_anim_diagonal_down_L", L"..//content\\BossFight\\Cuphead\\Bullet\\Diagonal Down\\Left\\");
-		DiagonalDownRightAnim = ResourceManager::Load<Animation>(L"bullet_anim_diagonal_down_R", L"..//content\\BossFight\\Cuphead\\Bullet\\Diagonal Down\\Right\\");
+		LeftAnim = ResourceManager::Load<Animation>(L"bullet_anim_straight_L", L"..\\content\\Scene\\BossFight\\Cuphead\\Bullet\\Left\\");
+		RightAnim = ResourceManager::Load<Animation>(L"bullet_anim_straight_R", L"..\\content\\Scene\\BossFight\\Cuphead\\Bullet\\Right\\");
+		UpAnim = ResourceManager::Load<Animation>(L"bullet_anim_up", L"..\\content\\Scene\\BossFight\\Cuphead\\Bullet\\Up\\");
+		DownAnim = ResourceManager::Load<Animation>(L"bullet_anim_down", L"..\\content\\Scene\\BossFight\\Cuphead\\Bullet\\Down\\");
+		DiagonalUpLeftAnim = ResourceManager::Load<Animation>(L"bullet_anim_diagonal_up_L", L"..\\content\\Scene\\BossFight\\Cuphead\\Bullet\\Diagonal Up\\Left\\");
+		DiagonalUpRightAnim = ResourceManager::Load<Animation>(L"bullet_anim_diagonal_up_R", L"..\\content\\Scene\\BossFight\\Cuphead\\Bullet\\Diagonal Up\\Right\\");
+		DiagonalDownLeftAnim = ResourceManager::Load<Animation>(L"bullet_anim_diagonal_down_L", L"..\\content\\Scene\\BossFight\\Cuphead\\Bullet\\Diagonal Down\\Left\\");
+		DiagonalDownRightAnim = ResourceManager::Load<Animation>(L"bullet_anim_diagonal_down_R", L"..\\content\\Scene\\BossFight\\Cuphead\\Bullet\\Diagonal Down\\Right\\");
 
 		mAnimator = AddComponent<Animator>(enums::eComponentType::Animator);
 		mAnimator->AddAnim(*LeftAnim);

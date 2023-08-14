@@ -1,4 +1,5 @@
 #include "meClearScene.h"
+#include "meSceneManager.h"
 #include "meResourceManager.h"
 
 me::ClearScene::ClearScene(std::wstring name) : Scene(name)
@@ -9,8 +10,8 @@ me::ClearScene::ClearScene(std::wstring name) : Scene(name)
 
 me::ClearScene::~ClearScene()
 {
-	delete bg;
-	delete result;
+	bg = nullptr;
+	result = nullptr;
 }
 
 void me::ClearScene::Init()
@@ -35,9 +36,17 @@ void me::ClearScene::Setting()
 void me::ClearScene::Update()
 {
 	Scene::Update();
+
+	if (KeyInput::GetKeyPressed(KeyCode::Z))
+		SceneManager::LoadScene(L"overWorld");
 }
 
 void me::ClearScene::Render(HDC hdc)
 {
 	Scene::Render(hdc);
+}
+
+void me::ClearScene::Clear()
+{
+	Scene::Clear();
 }

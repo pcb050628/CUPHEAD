@@ -18,6 +18,8 @@ namespace me
 	}
 	Animation::~Animation()
 	{
+		mTextures.clear();
+		mSheet = nullptr;
 	}
 
 	bool Animation::Load(const std::wstring& path)

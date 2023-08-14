@@ -20,9 +20,6 @@ namespace me
 	{
 		Scene::Init();
 
-		ColliderManager::CollisionLayerCheck(enums::eLayer::Sensor, enums::eLayer::Player, true);
-		ColliderManager::CollisionLayerCheck(enums::eLayer::Background, enums::eLayer::Player, true);
-
 		GameObject* map = AddGameObj(enums::eLayer::Background, L"map_ocean", enums::eGameObjType::background);
 		Texture* image_map = ResourceManager::Load<Texture>(L"world_ocean", L"..\\content\\Scene\\overWorld\\Inkwell Isle I\\world1_map_.bmp");
 		SpriteRenderer* map_sr = map->AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
@@ -36,13 +33,16 @@ namespace me
 	void WorldMapScene::Setting()
 	{
 		Camera::SetTarget(AddPlayer_map(L"CupHead_map"));
+
+		ColliderManager::CollisionLayerCheck(enums::eLayer::Sensor, enums::eLayer::Player, true);
+		ColliderManager::CollisionLayerCheck(enums::eLayer::Background, enums::eLayer::Player, true);
 	}
 	void WorldMapScene::Update()
 	{
 		Scene::Update();
 
 		if (KeyInput::GetKeyDown(KeyCode::Z) && GoopyLeGrandeStage->Sensed())
-			SceneManager::LoadScene(L"test");
+			SceneManager::LoadScene(L"slime_stage");
 	}
 	void WorldMapScene::Render(HDC hdc)
 	{
