@@ -18,6 +18,11 @@ namespace me
 		{ 
 			mPosition = pos; 
 		}
+
+		void SetPos(float x, float y)
+		{
+			mPosition = math::Vector2(x, y);
+		}
 		math::Vector2 GetPos() { return mPosition; }
 
 		void SetScale(math::Vector2 scale) { mScale = scale; }

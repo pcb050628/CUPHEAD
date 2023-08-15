@@ -3,6 +3,7 @@
 #include "meBoss.h"
 #include "mePlayer_stage.h"
 #include "meWall.h"
+#include "meFloor.h"
 
 namespace me
 {
@@ -39,6 +40,7 @@ namespace me
 
 		Wall* wall1;
 		Wall* wall2;
+		Floor* floor;
 
 		float savedTime;
 	};

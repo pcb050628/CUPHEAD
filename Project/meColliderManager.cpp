@@ -10,7 +10,6 @@ namespace me
 
 	void ColliderManager::Init()
 	{
-		CollisionLayerCheck(enums::eLayer::Player, enums::eLayer::Enemy, true);
 	}
 	void ColliderManager::Update()
 	{
@@ -92,8 +91,17 @@ namespace me
 	void ColliderManager::ColliderCollision(Collider* left, Collider* right)
 	{
 		ColliderId id = {};
- 		id.left = (UINT)left;
-		id.right = (UINT)right;
+
+		if ((UINT)left < (UINT)right)
+		{
+ 			id.left = (UINT)left;
+			id.right = (UINT)right;
+		}
+		else
+		{
+			id.left = (UINT)right;
+			id.right = (UINT)left;
+		}
 
 		std::map<UINT64, bool>::iterator iter = mCollisionMap.find(id.id);
 

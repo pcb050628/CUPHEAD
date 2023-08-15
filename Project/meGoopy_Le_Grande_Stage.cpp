@@ -35,8 +35,6 @@ namespace me
 		bg_main_ground->GetComponent<Transform>()->SetPos(bg_main_ground->GetComponent<Transform>()->GetPos() + math::Vector2(0, 80.f));
 		SpriteRenderer* main_ground_sr = bg_main_ground->AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
 		main_ground_sr->SetImage(ResourceManager::Load<Texture>(L"Goopy_Le_background_main_ground", L"..\\content\\Scene\\BossFight\\Goopy Le Grande\\Background\\slime_bg_mg_main_ground.bmp"));
-
-		Floor* floor = AddGameObj<Floor>(enums::eLayer::floor, L"floor_");
 	}
 	void Goopy_Le_Grande_Stage::Setting()
 	{

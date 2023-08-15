@@ -17,6 +17,8 @@ namespace me
 		virtual void OnCollisionStay(Collider* other);
 		virtual void OnCollisionExit(Collider* other);
 
+		virtual void SetActivate(bool value) override;
+
 		virtual void SetType(enums::eColliderType type) { mType = type;	}
 		virtual enums::eColliderType GetType() { return mType; }
 
@@ -32,6 +34,8 @@ namespace me
 
 	private:
 		enums::eColliderType mType;
+
+		Collider* otherCollider;
 		bool isCollision;
 
 		math::Vector2 mPos;

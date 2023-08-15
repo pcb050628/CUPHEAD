@@ -1,4 +1,5 @@
 #include "meCollider.h"
+#include "meColliderManager.h"
 #include "meGameObject.h"
 #include "meCamera.h"
 
@@ -16,13 +17,17 @@ namespace me
 	Collider::~Collider()
 	{
 		GetOwner()->ColliderCountDecrease();
+
+		Component::SetActivate(false);
+
+		if (otherCollider != nullptr)
+			ColliderManager::ColliderCollision(this, otherCollider);
 	}
 	void Collider::Init()
 	{
 		Component::Init();
 
 		mPos = GetOwner()->GetComponent<Transform>()->GetPos() + mOffset;
-		//Camera::AffectCameraPos(mPos);
 	}
 	void Collider::Update()
 	{
@@ -35,6 +40,7 @@ namespace me
 	void Collider::OnCollisionEnter(Collider* other)
 	{
 		GetOwner()->OnCollisionEnter(other);
+		otherCollider = other;
 		isCollision = true;
 	}
 	void Collider::OnCollisionStay(Collider* other)
@@ -44,6 +50,14 @@ namespace me
 	void Collider::OnCollisionExit(Collider* other)
 	{
 		GetOwner()->OnCollisionExit(other);
+		otherCollider = nullptr;
 		isCollision = false;
+	}
+	void Collider::SetActivate(bool value)
+	{
+		Component::SetActivate(value);
+
+		if(otherCollider != nullptr && value == false)
+			ColliderManager::ColliderCollision(this, otherCollider);
 	}
 }

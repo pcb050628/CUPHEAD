@@ -151,6 +151,15 @@
     <Filter Include="Contents\GameObject\Boss\RootPack">
       <UniqueIdentifier>{d7cbad62-ab94-45f6-b0db-1a2482b5040f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Boss\RootPack\Dust">
+      <UniqueIdentifier>{45149bba-e243-4fe9-af89-113912506909}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Boss\RootPack\CarrotMissile">
+      <UniqueIdentifier>{38750969-8981-4abc-9352-33bf2dcca493}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Boss\RootPack\Tear">
+      <UniqueIdentifier>{5fdbd5d3-30c5-4899-87ce-c2e743f25668}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -303,6 +312,15 @@
     <ClInclude Include="meRootPack_Boss.h">
       <Filter>Contents\GameObject\Boss\RootPack</Filter>
     </ClInclude>
+    <ClInclude Include="meDust.h">
+      <Filter>Contents\GameObject\Boss\RootPack\Dust</Filter>
+    </ClInclude>
+    <ClInclude Include="meCarrotMissile.h">
+      <Filter>Contents\GameObject\Boss\RootPack\CarrotMissile</Filter>
+    </ClInclude>
+    <ClInclude Include="meTear.h">
+      <Filter>Contents\GameObject\Boss\RootPack\Tear</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -447,6 +465,15 @@
     </ClCompile>
     <ClCompile Include="meRootPack_Boss.cpp">
       <Filter>Contents\GameObject\Boss\RootPack</Filter>
+    </ClCompile>
+    <ClCompile Include="meDust.cpp">
+      <Filter>Contents\GameObject\Boss\RootPack\Dust</Filter>
+    </ClCompile>
+    <ClCompile Include="meCarrotMissile.cpp">
+      <Filter>Contents\GameObject\Boss\RootPack\CarrotMissile</Filter>
+    </ClCompile>
+    <ClCompile Include="meTear.cpp">
+      <Filter>Contents\GameObject\Boss\RootPack\Tear</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

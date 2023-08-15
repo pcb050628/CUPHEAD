@@ -3,7 +3,6 @@
 #include "meResourceManager.h"
 #include "meSceneManager.h"
 #include "meColliderManager.h"
-#include "meWall.h"
 #include "meHealthBar.h"
 
 namespace me
@@ -22,17 +21,19 @@ namespace me
 	{
 		Scene::Init();
 
+		wall1 = AddGameObj<Wall>(enums::eLayer::Background, L"Wall_1");
+		wall2 = AddGameObj<Wall>(enums::eLayer::Background, L"Wall_2");
+		floor = AddGameObj<Floor>(enums::eLayer::floor, L"floor");
+	}
+	void BossFightScene::Setting()
+	{
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Player, enums::eLayer::floor, true);
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Player, enums::eLayer::Enemy, true);
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Bullet, enums::eLayer::Enemy, true);
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Bullet, enums::eLayer::Background, true);
+		ColliderManager::CollisionLayerCheck(enums::eLayer::Player, enums::eLayer::Enemy, true);
+		ColliderManager::CollisionLayerCheck(enums::eLayer::floor, enums::eLayer::Enemy, true);
 
-		wall1 = AddGameObj<Wall>(enums::eLayer::Background, L"Wall_1");
-		wall2 = AddGameObj<Wall>(enums::eLayer::Background, L"Wall_2");
-
-	}
-	void BossFightScene::Setting()
-	{
 		wall1->GetComponent<Transform>()->SetPos(math::Vector2(-690, 0));
 		wall2->GetComponent<Transform>()->SetPos(math::Vector2(690, 0));
 

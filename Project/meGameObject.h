@@ -24,11 +24,11 @@ namespace me
 		virtual void Update() override;
 		virtual void Render(HDC hdc) override;
 
-		virtual enums::eGameObjType GetTag() { return type; }
-
 		virtual void OnCollisionEnter(Collider* other);
 		virtual void OnCollisionStay(Collider* other);
 		virtual void OnCollisionExit(Collider* other);
+
+		virtual enums::eGameObjType GetTag() { return type; }
 		
 		template <typename T>
 		T* AddComponent(enums::eComponentType type)
@@ -102,66 +102,9 @@ namespace me
 				return nullptr;
 		}
 
-		template <typename T>
-		bool RemoveComponent()
-		{
-			T* tmp = nullptr;
-
-			if (mComponents.size() > 0)
-			{
-				for (std::vector<Component*>::iterator iter = mComponents.begin();
-					iter != mComponents.end();
-					)
-				{
-					if (dynamic_cast<T*>((*iter)) != nullptr)
-					{
-						delete* iter;
-						iter = mComponents.erase(iter);
-
-						return true;
-					}
-					else
-					{
-						iter++;
-					}
-				}
-			}
-
-			return false;
-		}
-
-		template <typename T>
-		bool RemoveComponent(const std::wstring& name)
-		{
-			T* tmp = nullptr;
-
-			if (mComponents.size() > 0)
-			{
-				for (std::vector<Component*>::iterator iter = mComponents.begin();
-					iter != mComponents.end();
-					)
-				{
-					if (dynamic_cast<T*>((*iter)) != nullptr && (*iter)->GetName() == name)
-					{
-						delete* iter;
-						iter = mComponents.erase(iter);
-
-						return true;
-					}
-					else
-					{
-						iter++;
-					}
-				}
-			}
-
-			return false;
-		}
-
 		virtual int GetColliderCount() { return mColliderCount; }
 		virtual void ColliderCountIncrease() { mColliderCount += 1; }
 		virtual void ColliderCountDecrease() { mColliderCount -= 1; }
-
 		
 		virtual std::vector<Collider*> GetCollider() 
 		{

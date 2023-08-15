@@ -1,6 +1,9 @@
 #pragma once
 #include "meBoss.h"
 #include "meSensor.h"
+#include "meDust.h"
+#include "meTear.h"
+#include "meCarrotMissile.h"
 
 namespace me
 {
@@ -28,7 +31,6 @@ namespace me
 		CircleCollider* mMainCollider;
 		Animator* mMainAnimator;
 
-		// Èëµ¢ÀÌ¶û ´«¹° Åº¸· ¸¸µé±â
 	};
 }
 
