@@ -10,7 +10,7 @@ namespace me
 		, mCollider(nullptr)
 		, mAnimator(nullptr)
 		, crash(false)
-		, hp(12)
+		, hp(24)
 	{
 	}
 	Dust::~Dust()
@@ -62,10 +62,7 @@ namespace me
 	{
 		if (other->GetOwner()->GetTag() == enums::eGameObjType::wall)
 		{
-			mAnimator->SetActivate(false);
-			mCollider->SetActivate(false);
-
-			SceneManager::Destroy(this);
+			crash = true;
 		}
 		else if (other->GetOwner()->GetTag() == enums::eGameObjType::player)
 		{

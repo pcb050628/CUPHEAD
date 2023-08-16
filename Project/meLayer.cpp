@@ -23,6 +23,7 @@ namespace me
 		}
 	}
 	void Layer::Render(HDC hdc)
+
 	{
 		for (auto gobj : mGameObjs)
 		{

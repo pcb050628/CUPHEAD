@@ -31,13 +31,13 @@ namespace me
 	{
 		BossFightScene::Setting();
 
-		//AddBoss<RootPack_Boss>(L"rootpack", math::Vector2());
+		AddBoss<RootPack_Boss>(L"rootpack", math::Vector2());
 	}
 
 	void RootPack_Stage::Update()
 	{
-		//BossFightScene::Update(); // boss 안만들어줘서 오류남, 만들어주면 이걸로 바꿔야함
-		Scene::Update();
+		BossFightScene::Update(); // boss 안만들어줘서 오류남, 만들어주면 이걸로 바꿔야함
+		//Scene::Update();
 	}
 
 	void RootPack_Stage::Render(HDC hdc)

@@ -4,3 +4,4 @@ C:\Users\chanb\OneDrive\바탕 화면\WinApi32\Project\x64\Debug\Client.exe
 C:\Users\chanb\OneDrive\바탕 화면\INFERNAX\Project\x64\Debug\Client.exe
 C:\Users\chanb\OneDrive\바탕 화면\CupHead\Project\x64\Debug\Client.exe
 C:\Users\chanb\Documents\GitHub\CUPHEAD\Project\x64\Debug\Client.exe
+E:\project_api\CUPHEAD\Project\x64\Debug\Client.exe

@@ -55,6 +55,7 @@ namespace me
 			}
 
 			T* tmp = new T(this, name);
+			tmp->Init();
 			mComponents.push_back(tmp);
 
 			return tmp;
@@ -64,6 +65,7 @@ namespace me
 		T* AddComponent(const std::wstring& name)
 		{
 			T* tmp = new T(this, name);
+			tmp->Init();
 			mComponents.push_back(tmp);
 
 			return tmp;

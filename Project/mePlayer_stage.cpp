@@ -852,11 +852,11 @@ namespace me
 
 			if (dir.y == 1)
 			{
-				comPos.y += 30.f;
+				comPos.y += 90.f;
 			}
 			else if (dir.y == -1)
 			{
-				comPos.y -= 30.f;
+				comPos.y -= 70.f;
 			}
 
 			if (dir.x == 0)

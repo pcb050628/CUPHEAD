@@ -81,7 +81,8 @@ namespace me
 				dynamic_cast<Boss*>(other->GetOwner())->SetHP(dynamic_cast<Boss*>(other->GetOwner())->GetHP() - 4);
 		}
 		
-		mAnimator->SetActivate(false);
+		if(other->GetOwner()->GetTag() != enums::eGameObjType::player)
+			mAnimator->SetActivate(false);
 	}
 	void Bullet::OnCollisionStay(Collider* other)
 	{

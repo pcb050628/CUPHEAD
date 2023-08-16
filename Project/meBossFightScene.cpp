@@ -31,6 +31,8 @@ namespace me
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Player, enums::eLayer::Enemy, true);
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Bullet, enums::eLayer::Enemy, true);
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Bullet, enums::eLayer::Background, true);
+		ColliderManager::CollisionLayerCheck(enums::eLayer::Bullet, enums::eLayer::Player, true);
+		ColliderManager::CollisionLayerCheck(enums::eLayer::Bullet, enums::eLayer::Bullet, true);
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Player, enums::eLayer::Enemy, true);
 		ColliderManager::CollisionLayerCheck(enums::eLayer::floor, enums::eLayer::Enemy, true);
 
