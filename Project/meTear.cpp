@@ -10,6 +10,7 @@ namespace me
 		, mRigidbody(nullptr)
 		, mCollider(nullptr)
 		, mAnimator(nullptr)
+		, mSpriteRenderer(nullptr)
 		, splash(false)
 	{
 	}
@@ -43,7 +44,6 @@ namespace me
 		if (splash)
 		{
 			mRigidbody->SetActivate(false);
-			mCollider->SetActivate(false);
 			mSpriteRenderer->SetActivate(false);
 			mAnimator->SetActivate(true);
 			mAnimator->PlayAnim(L"tear_splash");

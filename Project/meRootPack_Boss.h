@@ -25,20 +25,21 @@ namespace me
 		virtual void Death() override;
 
 		void PotatoIntro();
-		void OnionIntro();
-		void CarrotIntro();
-
 		void PotatoShoot();
+		void PotatoOutro();
+
+		void OnionIntro();
 		void OnionCry();
+		void OnionOutro();
+
+		void CarrotIntro();
 		void CarrotAttack();
 
-		void PotatoOutro();
-		void OnionOutro();
-		void CarrotOutro();
-
 		void DustSpawn();
+		void TearSpawn(int idx);
 
 	private:
+		Transform* mTransform;
 		CircleCollider* mMainCollider;
 		Animator* mMainAnimator;
 
@@ -50,6 +51,9 @@ namespace me
 		int potatoShootCount;
 		bool potatoCanShoot;
 		float prevShootTime;
+
+		float tearPosX[10] = {-700, -560, -390, -170, -80, 110, 230, 300, 430, 590};
+		float prevStartTime;
 
 		bool CheckOne;
 		bool CheckTwo;

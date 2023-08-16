@@ -31,7 +31,7 @@ namespace me
 	{
 		BossFightScene::Setting();
 
-		AddBoss<RootPack_Boss>(L"rootpack", math::Vector2());
+		AddBoss<RootPack_Boss>(L"rootpack", math::Vector2(400, 0));
 	}
 
 	void RootPack_Stage::Update()

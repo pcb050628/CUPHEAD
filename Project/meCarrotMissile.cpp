@@ -28,6 +28,7 @@ namespace me
 		mCollider->SetRadius(50.f);
 
 		mSpriteRenderer->SetImage(ResourceManager::Load<Texture>(L"Carrot", L"..\\content\\Scene\\BossFight\\The Root Pack\\carrot\\attack\\missile\\carrot_missile.bmp"));
+		mSpriteRenderer->SetScale(math::Vector2(0.8f, 0.8f));
 	}
 	void CarrotMissile::Update()
 	{

@@ -28,6 +28,11 @@ namespace me
 	}
 	void Animator::Update()
 	{
+		if (mCurPlayAnim == nullptr && mNextAnims != nullptr)
+		{
+			mCurPlayAnim = mNextAnims;
+			mNextAnims = nullptr;
+		}
 	}
 	void Animator::Render(HDC hdc)
 	{

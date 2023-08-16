@@ -8,6 +8,7 @@
 namespace me
 {
 	RootPack_Boss::RootPack_Boss(const std::wstring& name) : Boss(name)
+		, mTransform(nullptr)
 		, mMainCollider(nullptr)
 		, mMainAnimator(nullptr)
 		, canAttack(true)
@@ -15,6 +16,7 @@ namespace me
 		, potatoShootCount(NULL)
 		, potatoCanShoot(true)
 		, prevShootTime(NULL)
+		, prevStartTime(-1)
 		, CheckOne(false)
 		, CheckTwo(false)
 		, CheckThree(false)
@@ -28,7 +30,9 @@ namespace me
 	{
 		Boss::Init();
 
-		SetHP(900); // 1300
+		SetHP(475); // 1300
+
+		mTransform = GetComponent<Transform>();
 
 		mMainCollider = AddComponent<CircleCollider>(enums::eComponentType::Collider);
 
@@ -48,6 +52,8 @@ namespace me
 		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"onion_anim_cry_loop", L"..\\content\\Scene\\BossFight\\The Root Pack\\onion\\Body\\cry\\loop\\"));
 		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"onion_anim_cry_end", L"..\\content\\Scene\\BossFight\\The Root Pack\\onion\\Body\\cry\\end\\"));
 		mMainAnimator->GetAnim(L"onion_anim_intro")->SetLoop(false);
+		mMainAnimator->GetAnim(L"onion_anim_cry_end")->SetLoop(false);
+		mMainAnimator->GetAnim(L"onion_anim_cry_loop")->SetOffset(math::Vector2(0, -50));
 
 		//carrot anim
 		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"carrot_anim_intro", L"..\\content\\Scene\\BossFight\\The Root Pack\\carrot\\intro\\"));
@@ -93,8 +99,22 @@ namespace me
 		{
 			OnionOutro();
 		}
-		else
+		else if (canAttack)
+		{
 			OnionCry();
+		}
+		else
+		{
+			if (fabs(prevAttackTime - Time::GetTime()) > 1.5f)
+			{
+				mMainAnimator->PlayAnim(L"onion_anim_cry_start");
+				canAttack = true;
+			}
+			else
+			{
+				mMainAnimator->PlayAnim(L"onion_anim_idle");
+			}
+		}
 	}
 	void RootPack_Boss::Phase3()
 	{
@@ -107,7 +127,6 @@ namespace me
 	}
 	void RootPack_Boss::Death()
 	{
-		CarrotOutro();
 	}
 
 	void RootPack_Boss::PotatoIntro()
@@ -117,23 +136,6 @@ namespace me
 		if (mMainAnimator->GetCurAnim()->IsComplete())
 			SetState(BossPhase_state::phase1);
 	}
-	void RootPack_Boss::OnionIntro()
-	{
-		mMainAnimator->PlayAnim(L"onion_anim_intro");
-		
-		// 위치를 중간으로 옮기기
-		// 애니메이션 오프셋으로 아래에서 올라오는 연출 만들기
-
-		if (mMainAnimator->GetCurAnim()->IsComplete())
-		{
-			SetState(BossPhase_state::phase2);
-			CheckOne = false;
-		}
-	}
-	void RootPack_Boss::CarrotIntro()
-	{
-	}
-
 	void RootPack_Boss::PotatoShoot()
 	{
 		mMainAnimator->PlayAnim(L"potato_anim_shoot");
@@ -149,13 +151,6 @@ namespace me
 			potatoCanShoot = true;
 		}
 	}
-	void RootPack_Boss::OnionCry()
-	{
-	}
-	void RootPack_Boss::CarrotAttack()
-	{
-	}
-
 	void RootPack_Boss::PotatoOutro()
 	{
 		if (!CheckOne)
@@ -178,16 +173,88 @@ namespace me
 			OnionIntro();
 		}
 	}
+
+	void RootPack_Boss::OnionIntro()
+	{
+		mMainAnimator->PlayAnim(L"onion_anim_intro");
+		
+		mTransform->SetPos(math::Vector2());
+
+		if (50 < mMainAnimator->GetOffset().y)
+		{
+			mMainAnimator->SetOffset(mMainAnimator->GetOffset() + math::Vector2(0, -2000 * Time::GetDeltaTime()));
+		}
+		else
+			int a = 0;
+
+		if (mMainAnimator->GetCurAnim()->IsComplete())
+		{
+			SetState(BossPhase_state::phase2);
+			CheckOne = false;
+		}
+	}
+	void RootPack_Boss::OnionCry()
+	{
+		if (fabs(prevShootTime - Time::GetTime()) > 0.5f)
+		{
+			srand((unsigned int)(Time::GetTime() * Time::GetDeltaTime()));
+
+			TearSpawn((unsigned int)(rand() % 10));
+		}
+
+		if (fabs(prevStartTime - Time::GetTime()) > 5) // 시간으로 바꾸기
+		{
+			canAttack = false;
+			prevStartTime = Time::GetTime();
+			mMainAnimator->PlayAnim(L"onion_anim_cry_end");
+		}
+		else
+		{
+			mMainAnimator->NextPlayAnim(L"onion_anim_cry_loop");
+		}
+	}
 	void RootPack_Boss::OnionOutro()
 	{
+		if (!CheckOne)
+		{
+			if (phSavedTime == -1)
+				phSavedTime = Time::GetTime();
+
+			mMainAnimator->PlayAnim(L"onion_anim_death");
+
+			mMainAnimator->SetOffset(mMainAnimator->GetOffset() + math::Vector2(0, 200 * Time::GetDeltaTime()));
+
+			if (fabs(phSavedTime - Time::GetTime()) > 2.f)
+			{
+				CheckOne = true;
+				phSavedTime = -1;
+			}
+		}
+		else if (CheckOne)
+		{
+			CarrotIntro();
+		}
 	}
-	void RootPack_Boss::CarrotOutro()
+
+	void RootPack_Boss::CarrotIntro()
 	{
 	}
 
+	void RootPack_Boss::CarrotAttack()
+	{
+		
+	}
+
+
 	void RootPack_Boss::DustSpawn()
 	{
-		SceneManager::Instantiate<Dust>(enums::eLayer::Bullet, math::Vector2());
+		SceneManager::Instantiate<Dust>(enums::eLayer::Bullet, mTransform->GetPos() + math::Vector2(-100, 0));
 		potatoShootCount++;
+	}
+
+	void RootPack_Boss::TearSpawn(int idx)
+	{
+		SceneManager::Instantiate<Tear>(enums::eLayer::Bullet, math::Vector2(tearPosX[idx], -400));
+		prevShootTime = Time::GetTime(); 
 	}
 }
