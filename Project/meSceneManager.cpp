@@ -24,7 +24,7 @@ namespace me
 		CreateScene<Goopy_Le_Grande_Stage>(L"slime_stage");
 		CreateScene<RootPack_Stage>(L"rootpack_stage");
 
-		LoadScene(L"rootpack_stage");
+		//LoadScene(L"slime_stage");
 	}
 
 	void SceneManager::Update()
@@ -67,10 +67,8 @@ namespace me
 		if (iter == mScenes.end())
 			return nullptr;
 
-		Camera::Reset();
-
 		mCurScene->Clear();
-		iter->second->Setting();
+		Camera::Reset();
 		mCurScene = iter->second;
 		return iter->second;
 	}

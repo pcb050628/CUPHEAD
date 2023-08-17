@@ -1,5 +1,6 @@
 #include "meGoopy_Le_Grande_Stage.h"
 #include "meGoopy_Le_Grande_Boss.h"
+#include "meCamera.h"
 #include "meResourceManager.h"
 #include "meColliderManager.h"
 #include "meFloor.h"
@@ -41,7 +42,7 @@ namespace me
 		BossFightScene::Setting();
 
 		GetPlayer()->GetComponent<Transform>()->SetPos(math::Vector2(-420, 200));
-		AddBoss<Goopy_Le_Grande_Boss>(L"Goopy Le Grande", math::Vector2(300, -500));
+		AddBoss<Goopy_Le_Grande_Boss>(L"Goopy Le Grande", math::Vector2(300, -400));
 
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Background, enums::eLayer::Player, true);
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Background, enums::eLayer::Enemy, true);

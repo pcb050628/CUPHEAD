@@ -19,6 +19,10 @@ namespace me
 		virtual void Clear() override;
 
 	private:
+		Sound* bgm;
+
+		Player_map* mPlayer;
+
 		Sensor* GoopyLeGrandeStage;
 		
 	};

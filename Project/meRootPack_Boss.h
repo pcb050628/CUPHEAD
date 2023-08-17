@@ -37,10 +37,11 @@ namespace me
 
 		void DustSpawn();
 		void TearSpawn(int idx);
+		void MissileSpawn(int idx);
 
 	private:
 		Transform* mTransform;
-		CircleCollider* mMainCollider;
+		BoxCollider* mMainCollider;
 		Animator* mMainAnimator;
 
 		float phSavedTime;
@@ -54,6 +55,7 @@ namespace me
 
 		float tearPosX[10] = {-700, -560, -390, -170, -80, 110, 230, 300, 430, 590};
 		float prevStartTime;
+		int prevIdx = -1;
 
 		bool CheckOne;
 		bool CheckTwo;

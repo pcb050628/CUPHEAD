@@ -10,7 +10,7 @@ namespace me
 		, mCollider(nullptr)
 		, mAnimator(nullptr)
 		, crash(false)
-		, hp(24)
+		, hp(36)
 	{
 	}
 	Dust::~Dust()

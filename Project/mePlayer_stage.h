@@ -10,6 +10,7 @@ namespace me
 		enum class Player_state
 		{
 			none,
+			Intro,
 			Idle,
 			Aim,
 			Run,
@@ -31,6 +32,7 @@ namespace me
 		virtual void OnCollisionStay(Collider* other) override;
 		virtual void OnCollisionExit(Collider* other) override;
 
+		void Intro();
 		void Idle();
 		void Aim();
 		void Run();

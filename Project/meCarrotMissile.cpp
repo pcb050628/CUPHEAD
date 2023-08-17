@@ -10,7 +10,7 @@ namespace me
 		, mSpriteRenderer(nullptr)
 		, Target(nullptr)
 		, crash(false)
-		, hp(8)
+		, hp(24)
 		, timeCount(0)
 	{
 	}
@@ -25,7 +25,7 @@ namespace me
 		mCollider = AddComponent<CircleCollider>(enums::eComponentType::Collider);
 		mSpriteRenderer = AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
 
-		mCollider->SetRadius(50.f);
+		mCollider->SetRadius(20.f);
 
 		mSpriteRenderer->SetImage(ResourceManager::Load<Texture>(L"Carrot", L"..\\content\\Scene\\BossFight\\The Root Pack\\carrot\\attack\\missile\\carrot_missile.bmp"));
 		mSpriteRenderer->SetScale(math::Vector2(0.8f, 0.8f));
@@ -42,14 +42,14 @@ namespace me
 			float y = mTransform->GetPos().y;
 
 			if (Target->GetPos().x > x)
-				x += 400 * Time::GetDeltaTime();
+				x += 100 * Time::GetDeltaTime();
 			else
-				x -= 400 * Time::GetDeltaTime();
+				x -= 100 * Time::GetDeltaTime();
 
 			if (Target->GetPos().y > y)
-				y += 400 * Time::GetDeltaTime();
+				y += 100 * Time::GetDeltaTime();
 			else
-				y -= 400 * Time::GetDeltaTime();
+				y -= 100 * Time::GetDeltaTime();
 
 			mTransform->SetPos(x, y);
 		}

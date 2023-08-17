@@ -26,13 +26,20 @@ namespace me
 		map_sr->SetImage(image_map);
 		map->GetComponent<Transform>()->SetPos(math::Vector2(1060, 420));
 
+		bgm = ResourceManager::Load<Sound>(L"worldmap_bgm", L"..\\content\\Sound\\AudioClip\\OverWorld\\bgm_map_gdc.wav");
+
+		mPlayer = AddPlayer_map(L"CupHead_map");
+		mPlayer->GetComponent<Transform>()->SetPos(mPlayer->GetComponent<Transform>()->GetPos() + math::Vector2(450, 60));
+
 		GoopyLeGrandeStage = AddGameObj<Sensor>(enums::eLayer::Sensor, L"glgStageSensor");
 		GoopyLeGrandeStage->SetTargetType(enums::eGameObjType::player);
 		GoopyLeGrandeStage->GetComponent<Transform>()->SetPos(math::Vector2(1240, -220));
 	}
 	void WorldMapScene::Setting()
 	{
-		Camera::SetTarget(AddPlayer_map(L"CupHead_map"));
+		Camera::SetTarget(mPlayer);
+
+		bgm->Play(true);
 
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Sensor, enums::eLayer::Player, true);
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Background, enums::eLayer::Player, true);
@@ -41,7 +48,7 @@ namespace me
 	{
 		Scene::Update();
 
-		if (KeyInput::GetKeyDown(KeyCode::Z) && GoopyLeGrandeStage->Sensed())
+		if (KeyInput::GetKeyPressed(KeyCode::Z) && GoopyLeGrandeStage->Sensed())
 			SceneManager::LoadScene(L"slime_stage");
 	}
 	void WorldMapScene::Render(HDC hdc)
@@ -50,5 +57,6 @@ namespace me
 	}
 	void WorldMapScene::Clear()
 	{
+		bgm->Stop(true);
 	}
 }

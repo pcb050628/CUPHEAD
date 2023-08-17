@@ -43,6 +43,7 @@ namespace me
 
 		if (splash)
 		{
+			mCollider->SetActivate(false);
 			mRigidbody->SetActivate(false);
 			mSpriteRenderer->SetActivate(false);
 			mAnimator->SetActivate(true);

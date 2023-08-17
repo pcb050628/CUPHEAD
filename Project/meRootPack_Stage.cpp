@@ -31,6 +31,7 @@ namespace me
 	{
 		BossFightScene::Setting();
 
+		GetPlayer()->GetComponent<Transform>()->SetPos(math::Vector2(-420, 200));
 		AddBoss<RootPack_Boss>(L"rootpack", math::Vector2(400, 0));
 	}
 

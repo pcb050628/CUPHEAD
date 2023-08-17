@@ -104,6 +104,7 @@ namespace me
 		mAnimator->GetAnim(L"CupHead_stage_anim_shoot_diagonal_up_run_R")->SetDuration(0.04f);
 		mAnimator->GetAnim(L"CupHead_stage_anim_shoot_diagonal_up_run_L")->SetDuration(0.04f); 
 
+		mAnimator->GetAnim(L"CupHead_stage_anim_intro")->SetLoop(false);
 		mAnimator->GetAnim(L"CupHead_stage_anim_hit_air_R")->SetLoop(false);
 		mAnimator->GetAnim(L"CupHead_stage_anim_hit_air_L")->SetLoop(false);
 		mAnimator->GetAnim(L"CupHead_stage_anim_hit_ground_R")->SetLoop(false);
@@ -182,6 +183,9 @@ namespace me
 
 		switch (mCurState)
 		{
+		case me::Player_stage::Player_state::Intro:
+			Intro();
+			break;
 		case me::Player_stage::Player_state::Idle:
 			Idle();
 			break;
@@ -262,6 +266,17 @@ namespace me
 	void Player_stage::OnCollisionExit(Collider* other)
 	{
 
+	}
+
+	void Player_stage::Intro()
+	{
+		mAnimator->PlayAnim(L"CupHead_stage_anim_intro");
+		mTransform->SetPos(math::Vector2(-420, 200));
+		if (mAnimator->GetCurAnim()->IsComplete())
+		{
+			mPrevState = Player_state::Intro;
+			mCurState = Player_state::Idle;
+		}
 	}
 
 	void Player_stage::Idle()

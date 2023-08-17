@@ -39,6 +39,12 @@ namespace me
 
 	void Scene::Update()
 	{
+		if (!isSetting)
+		{
+			isSetting = true;
+			Setting();
+		}
+
 		for (Layer& lys : mLayers)
 		{
 			lys.Update();
@@ -125,5 +131,6 @@ namespace me
 
 	void Scene::Clear()
 	{
+		isSetting = false;
 	}
 }

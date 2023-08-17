@@ -11,6 +11,7 @@ namespace me
 		, mPos(gobj->GetComponent<Transform>()->GetPos())
 		, mOffset(math::Vector2::Zero)
 		, isCollision(false)
+		, otherCollider(nullptr)
 	{
 		gobj->ColliderCountIncrease();
 	}
@@ -20,7 +21,7 @@ namespace me
 
 		Component::SetActivate(false);
 
-		if (otherCollider != nullptr)
+		if (otherCollider != nullptr && isCollision)
 			ColliderManager::ColliderCollision(this, otherCollider);
 	}
 	void Collider::Init()

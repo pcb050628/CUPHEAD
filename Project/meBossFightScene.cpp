@@ -1,5 +1,6 @@
 #include "meBossFightScene.h"
 #include "COMPONENTS.h"
+#include "meCamera.h"
 #include "meResourceManager.h"
 #include "meSceneManager.h"
 #include "meColliderManager.h"
@@ -27,6 +28,8 @@ namespace me
 	}
 	void BossFightScene::Setting()
 	{
+		Camera::Reset();
+
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Player, enums::eLayer::floor, true);
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Player, enums::eLayer::Enemy, true);
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Bullet, enums::eLayer::Enemy, true);

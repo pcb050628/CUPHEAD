@@ -190,8 +190,6 @@ namespace me
 		smallLandSound = ResourceManager::Load<Sound>(L"slime_small_land", L"..\\content\\Sound\\AudioClip\\BossFightScene\\Goopy Le Grande\\sfx_slime_small_land_01.wav");
 		bigJumpSound = ResourceManager::Load<Sound>(L"slime_big_jump", L"..\\content\\Sound\\AudioClip\\BossFightScene\\Goopy Le Grande\\sfx_slime_big_jump_03.wav");
 		bigLandSound = ResourceManager::Load<Sound>(L"slime_big_jump", L"..\\content\\Sound\\AudioClip\\BossFightScene\\Goopy Le Grande\\sfx_slime_big_land_03.wav");
-
-		SetHP(0);
 	}
 	void Goopy_Le_Grande_Boss::Update()
 	{
@@ -393,8 +391,8 @@ namespace me
 		mMainCollider->SetRadius(170);
 		mMainCollider->SetOffset(mMainCollider->GetOffset() + math::Vector2(0, -25));
 
-		mPlayerSensor->SetColliderSize(math::Vector2(500, 150));
-		mPunchCollider->SetOffset(mPunchCollider->GetOffset() + math::Vector2(0, 40));
+		mPlayerSensor->SetColliderSize(math::Vector2(500, 250));
+		mPunchCollider->SetOffset(mPunchCollider->GetOffset() + math::Vector2(0, 60));
 		mPunchCollider->SetColliderSize(math::Vector2(200, 200));
 
 		phCheckOne = false;

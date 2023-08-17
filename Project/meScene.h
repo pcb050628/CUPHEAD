@@ -52,6 +52,7 @@ namespace me
 
 	private:
 		std::vector<Layer> mLayers;
+		bool isSetting;
 
 		SpriteRenderer* fadeoutRenderer;
 		bool fadeoutCall;
