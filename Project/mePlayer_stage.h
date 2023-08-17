@@ -19,6 +19,7 @@ namespace me
 			Jump,
 			Hit,
 			Dash,
+			Dead
 		};
 
 		Player_stage(const std::wstring& name);
@@ -42,6 +43,7 @@ namespace me
 		void Parry();
 		void Hit();
 		void Dash();
+		void Dead();
 
 		bool isParrySuccess() { return parrySuccess; }
 

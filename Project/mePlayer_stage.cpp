@@ -4,7 +4,7 @@
 #include "meResourceManager.h"
 #include "meBullet.h"
 
-#define COLLIDER_DEFAULT_SIZE_X 100.f
+#define COLLIDER_DEFAULT_SIZE_X 85.f
 #define COLLIDER_DEFAULT_SIZE_Y 130.f
 #define COLLIDER_DEFAULT_OFFSET_X 0
 #define COLLIDER_DEFAULT_OFFSET_Y 10.f
@@ -149,7 +149,7 @@ namespace me
 			mCollider->SetOffset(math::Vector2(COLLIDER_DUCK_OFFSET_X, COLLIDER_DUCK_OFFSET_Y));
 		}
 
-		if (mCurState != Player_state::Aim && mCurState != Player_state::Duck && !mIsHit && !mIsDash)
+		if (mCurState != Player_state::Aim && mCurState != Player_state::Duck && mCurState != Player_state::Dead && !mIsHit && !mIsDash)
 		{
 			if (KeyInput::GetKey(KeyCode::RightArrow))
 				mTransform->SetPos(math::Vector2(mTransform->GetPos().x + 350.f * Time::GetDeltaTime(), mTransform->GetPos().y));
@@ -158,7 +158,7 @@ namespace me
 				mTransform->SetPos(math::Vector2(mTransform->GetPos().x - 350.f * Time::GetDeltaTime(), mTransform->GetPos().y));
 		}
 
-		if (KeyInput::GetKeyUp(KeyCode::X) || mIsHit)
+		if (mCurState != Player_state::Dead && KeyInput::GetKeyUp(KeyCode::X) || mIsHit)
 		{
 			mShootAnim_R->StopPlay();
 			mShootAnim_L->StopPlay();
@@ -173,7 +173,7 @@ namespace me
 				mShootAnim_L->StopPlay();
 		}
 
-		if (!mIsGround && !mIsJumping && !mIsDash)
+		if (mCurState != Player_state::Dead && !mIsGround && !mIsJumping && !mIsDash)
 		{
 			Transform* tr = GetComponent<Transform>();
 			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y + 700.f * Time::GetDeltaTime()));
@@ -209,6 +209,9 @@ namespace me
 			break;
 		case me::Player_stage::Player_state::Dash:
 			Dash();
+			break;
+		case me::Player_stage::Player_state::Dead:
+			Dead();
 			break;
 		}
 	}
@@ -857,6 +860,11 @@ namespace me
 
 			mTransform->SetPos(nPos);
 		}
+	}
+
+	void Player_stage::Dead()
+	{
+
 	}
 
 	void Player_stage::SpawnBullet(math::Vector2 dir)
