@@ -32,6 +32,12 @@ namespace me
 		mAnimator->AddAnim(*ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_diagonal_back_walk", L"..\\content\\Scene\\overWorld\\Cuphead Overworld.png", math::Vector2(412.25f, 452.5f), 16, 12));
 		mAnimator->AddAnim(*ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_back_walk", L"..\\content\\Scene\\overWorld\\Cuphead Overworld.png", math::Vector2(0, 678.75f), 16, 13));
 		mAnimator->PlayAnim(L"CupHead_map_anim_back_idle");
+
+		mAnimator->GetAnim(L"CupHead_map_anim_front_walk")->SetDuration(0.05f);
+		mAnimator->GetAnim(L"CupHead_map_anim_diagonal_front_walk")->SetDuration(0.05f);
+		mAnimator->GetAnim(L"CupHead_map_anim_horizontal_walk")->SetDuration(0.05f);
+		mAnimator->GetAnim(L"CupHead_map_anim_diagonal_back_walk")->SetDuration(0.05f);
+		mAnimator->GetAnim(L"CupHead_map_anim_back_walk")->SetDuration(0.05f);
 	}
 	void Player_map::Update()
 	{
@@ -45,13 +51,13 @@ namespace me
 		math::Vector2 pos = mTransform->GetPos();
 
 		if (KeyInput::GetKey(KeyCode::UpArrow))
-			pos.y -= 100.f * Time::GetDeltaTime();
+			pos.y -= 150.f * Time::GetDeltaTime();
 		if (KeyInput::GetKey(KeyCode::DownArrow))					   
-			pos.y += 100.f * Time::GetDeltaTime();
+			pos.y += 150.f * Time::GetDeltaTime();
 		if (KeyInput::GetKey(KeyCode::RightArrow))
-			pos.x += 100.f * Time::GetDeltaTime();
+			pos.x += 150.f * Time::GetDeltaTime();
 		if (KeyInput::GetKey(KeyCode::LeftArrow))	   
-			pos.x -= 100.f * Time::GetDeltaTime();
+			pos.x -= 150.f * Time::GetDeltaTime();
 
 		mTransform->SetPos(pos);
 
