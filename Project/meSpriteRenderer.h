@@ -68,6 +68,15 @@ namespace me
 				return -1;
 		}
 
+		bool CompareImage(Texture* other) {
+			if (other != mTexture)
+				return false;
+			else if (other == mTexture)
+				return true;
+			else
+				return false;
+		}
+
 	private:
 		Texture* mTexture;
 

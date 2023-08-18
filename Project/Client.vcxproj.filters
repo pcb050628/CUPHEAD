@@ -160,6 +160,9 @@
     <Filter Include="Contents\GameObject\Boss\RootPack\Tear">
       <UniqueIdentifier>{5fdbd5d3-30c5-4899-87ce-c2e743f25668}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\DeadUI">
+      <UniqueIdentifier>{0fd77529-7fa4-4dd4-80ae-bad28b3cb88b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -321,6 +324,9 @@
     <ClInclude Include="meTear.h">
       <Filter>Contents\GameObject\Boss\RootPack\Tear</Filter>
     </ClInclude>
+    <ClInclude Include="meDeadUI.h">
+      <Filter>Contents\GameObject\DeadUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -474,6 +480,9 @@
     </ClCompile>
     <ClCompile Include="meTear.cpp">
       <Filter>Contents\GameObject\Boss\RootPack\Tear</Filter>
+    </ClCompile>
+    <ClCompile Include="meDeadUI.cpp">
+      <Filter>Contents\GameObject\DeadUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

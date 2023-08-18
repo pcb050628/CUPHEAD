@@ -25,6 +25,9 @@ namespace me
 		wall1 = AddGameObj<Wall>(enums::eLayer::Background, L"Wall_1");
 		wall2 = AddGameObj<Wall>(enums::eLayer::Background, L"Wall_2");
 		floor = AddGameObj<Floor>(enums::eLayer::floor, L"floor");
+
+		deadUI = AddGameObj<DeadUI>(enums::eLayer::UI, L"deadUI");
+		deadUI->SetActive(false);
 	}
 	void BossFightScene::Setting()
 	{
@@ -53,6 +56,22 @@ namespace me
 	{
 		Scene::Update();
 
+		if (mPlayer->GetHP() <= 0)
+		{
+			if (!deadUI->GetActive())
+			{
+				deadUI->SetActive(true);
+			}
+
+			if (KeyInput::GetKeyPressed(KeyCode::DownArrow) || KeyInput::GetKeyPressed(KeyCode::UpArrow))
+			{
+				deadUI->Change();
+			}
+
+			if (KeyInput::GetKeyPressed(KeyCode::Z))
+				return;
+		}
+
 		if (KeyInput::GetKeyPressed(KeyCode::Space))
 			mPlayer->GetComponent<Transform>()->SetPos(math::Vector2(0, 0));
 
@@ -71,6 +90,8 @@ namespace me
 
 	void BossFightScene::Clear()
 	{
+		Scene::Clear();
+		ColliderManager::Clear();
 		RemovePlayer_stage();
 		RemoveBoss();
 		savedTime = -1;

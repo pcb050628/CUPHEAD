@@ -72,4 +72,9 @@ namespace me
 		mCurScene = iter->second;
 		return iter->second;
 	}
+	void SceneManager::ReLoadCurScene()
+	{
+		Camera::Reset();
+		mCurScene->Clear();
+	}
 }

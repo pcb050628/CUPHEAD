@@ -4,6 +4,7 @@
 #include "mePlayer_stage.h"
 #include "meWall.h"
 #include "meFloor.h"
+#include "meDeadUI.h"
 
 namespace me
 {
@@ -41,6 +42,8 @@ namespace me
 		Wall* wall1;
 		Wall* wall2;
 		Floor* floor;
+
+		DeadUI* deadUI;
 
 		float savedTime;
 	};

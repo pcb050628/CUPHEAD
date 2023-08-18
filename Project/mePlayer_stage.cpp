@@ -95,6 +95,7 @@ namespace me
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_dash_L", L"..\\content\\Scene\\BossFight\\Cuphead\\Dash\\Ground\\Left\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_parry_R", L"..\\content\\Scene\\BossFight\\Cuphead\\Parry\\Hand\\Left\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_parry_L", L"..\\content\\Scene\\BossFight\\Cuphead\\Parry\\Hand\\Right\\"));
+		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_ghost", L"..\\content\\Scene\\BossFight\\Cuphead\\Ghost\\"));
 
 		mAnimator->GetAnim(L"CupHead_stage_anim_intro")->SetDuration(0.05f);
 		mAnimator->GetAnim(L"CupHead_stage_anim_run_R")->SetDuration(0.04f);
@@ -130,7 +131,7 @@ namespace me
 				mAnimator->SetFlipX(true);
 		}
 
-		if(KeyInput::GetKeyPressed(KeyCode::Z) && mIsGround && !mIsJumping)
+		if(KeyInput::GetKeyPressed(KeyCode::Z) && mIsGround && !mIsJumping && !mIsHit)
 		{
 			mIsJumping = true;
 			mIsGround = false;
@@ -284,7 +285,11 @@ namespace me
 
 	void Player_stage::Idle()
 	{
-		if (mIsHit)
+		if (HP <= 0)
+		{
+			mCurState = Player_state::Dead;
+		}
+		else if (mIsHit)
 		{
 			mCurState = Player_state::Hit;
 			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_ground", mAnimator->GetFlipX());
@@ -329,7 +334,11 @@ namespace me
 
 	void Player_stage::Aim()
 	{
-		if (mIsHit)
+		if (HP <= 0)
+		{
+			mCurState = Player_state::Dead;
+		}
+		else if (mIsHit)
 		{
 			mCurState = Player_state::Hit;
 			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_ground", mAnimator->GetFlipX());
@@ -448,7 +457,11 @@ namespace me
 
 	void Player_stage::Run()
 	{
-		if (mIsHit)
+		if (HP <= 0)
+		{
+			mCurState = Player_state::Dead;
+		}
+		else if (mIsHit)
 		{
 			mCurState = Player_state::Hit;
 			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_ground", mAnimator->GetFlipX());
@@ -539,7 +552,14 @@ namespace me
 		mCollider->SetSize(math::Vector2(COLLIDER_DUCK_SIZE_X, COLLIDER_DUCK_SIZE_Y));
 		mCollider->SetOffset(math::Vector2(COLLIDER_DUCK_OFFSET_X, COLLIDER_DUCK_OFFSET_Y));
 
-		if (mIsHit)
+		if (HP <= 0)
+		{
+			mCurState = Player_state::Dead;
+
+			mCollider->SetSize(math::Vector2(COLLIDER_DEFAULT_SIZE_X, COLLIDER_DEFAULT_SIZE_Y));
+			mCollider->SetOffset(math::Vector2(COLLIDER_DEFAULT_OFFSET_X, COLLIDER_DEFAULT_OFFSET_Y));
+		}
+		else if (mIsHit)
 		{
 			mCurState = Player_state::Hit;
 			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_ground", mAnimator->GetFlipX());
@@ -610,7 +630,11 @@ namespace me
 
 	void Player_stage::Shooting()
 	{
-		if (mIsHit)
+		if (HP <= 0)
+		{
+			mCurState = Player_state::Dead;
+		}
+		else if (mIsHit)
 		{
 			mCurState = Player_state::Hit;
 			mAnimator->PlayAnim(L"CupHead_stage_anim_hit_ground", mAnimator->GetFlipX());
@@ -682,7 +706,11 @@ namespace me
 
 	void Player_stage::Jump()
 	{
-		if (mIsHit)
+		if (HP <= 0)
+		{
+			mCurState = Player_state::Dead;
+		}
+		else if (mIsHit)
 		{
 			mCurState = Player_state::Hit;
 			mPrevState = Player_state::Jump;
@@ -765,7 +793,11 @@ namespace me
 
 	void Player_stage::Parry()
 	{
-		if (mIsHit)
+		if (HP <= 0)
+		{
+			mCurState = Player_state::Dead;
+		}
+		else if (mIsHit)
 		{
 			mCurState = Player_state::Hit;
 			mIsParrying = false;
@@ -783,6 +815,11 @@ namespace me
 
 	void Player_stage::Hit()
 	{
+		if (HP <= 0)
+		{
+			mCurState = Player_state::Dead;
+		}
+
 		if (mHitStartTime + mHitHoldingTime < Time::GetTime())
 		{
 			mIsHit = false;
@@ -809,6 +846,11 @@ namespace me
 
 	void Player_stage::Dash()
 	{
+		if (HP <= 0)
+		{
+			mCurState = Player_state::Dead;
+		}
+
 		if (mIsHit)
 		{
 			mIsDash = false;
@@ -864,7 +906,7 @@ namespace me
 
 	void Player_stage::Dead()
 	{
-
+		mAnimator->PlayAnim(L"CupHead_stage_anim_ghost");
 	}
 
 	void Player_stage::SpawnBullet(math::Vector2 dir)

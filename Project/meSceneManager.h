@@ -17,6 +17,7 @@ namespace me
 		template <typename T>
 		static T* CreateScene(std::wstring name);
 		static Scene* LoadScene(std::wstring name);
+		static void ReLoadCurScene();
 		static void Fadeout();
 
 		template <typename T>
