@@ -34,6 +34,10 @@ namespace me
 		GoopyLeGrandeStage = AddGameObj<Sensor>(enums::eLayer::Sensor, L"glgStageSensor");
 		GoopyLeGrandeStage->SetTargetType(enums::eGameObjType::player);
 		GoopyLeGrandeStage->GetComponent<Transform>()->SetPos(math::Vector2(1240, -220));
+
+		RootPackStage = AddGameObj<Sensor>(enums::eLayer::Sensor, L"trpStageSensor");
+		RootPackStage->SetTargetType(enums::eGameObjType::player);
+		RootPackStage->GetComponent<Transform>()->SetPos(math::Vector2(960, 570));
 	}
 	void WorldMapScene::Setting()
 	{
@@ -50,6 +54,9 @@ namespace me
 
 		if (KeyInput::GetKeyPressed(KeyCode::Z) && GoopyLeGrandeStage->Sensed())
 			SceneManager::LoadScene(L"slime_stage");
+
+		if (KeyInput::GetKeyPressed(KeyCode::Z) && RootPackStage->Sensed())
+			SceneManager::LoadScene(L"rootpack_stage");
 	}
 	void WorldMapScene::Render(HDC hdc)
 	{
@@ -57,6 +64,8 @@ namespace me
 	}
 	void WorldMapScene::Clear()
 	{
+		Scene::Clear();
+
 		bgm->Stop(true);
 	}
 }

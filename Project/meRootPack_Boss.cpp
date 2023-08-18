@@ -30,7 +30,7 @@ namespace me
 	{
 		Boss::Init();
 
-		SetHP(475); // 1300
+		SetHP(1300); // 1300
 
 		mTransform = GetComponent<Transform>();
 

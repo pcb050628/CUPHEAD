@@ -24,7 +24,7 @@ namespace me
 		CreateScene<Goopy_Le_Grande_Stage>(L"slime_stage");
 		CreateScene<RootPack_Stage>(L"rootpack_stage");
 
-		//LoadScene(L"slime_stage");
+		LoadScene(L"slime_stage");
 	}
 
 	void SceneManager::Update()

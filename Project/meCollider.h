@@ -32,6 +32,8 @@ namespace me
 		}
 		math::Vector2& GetOffset() { return mOffset; }
 
+		void RemoveOther() { otherCollider = nullptr; }
+
 	private:
 		enums::eColliderType mType;
 

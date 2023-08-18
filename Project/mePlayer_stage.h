@@ -55,6 +55,9 @@ namespace me
 
 		bool GetIsGround() { return mIsGround; }
 
+		Player_state GetPrevState() { return mPrevState; }
+		Player_state GetCurState() { return mCurState; }
+
 	private:
 		int HP;
 

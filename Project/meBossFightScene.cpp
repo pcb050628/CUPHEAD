@@ -11,6 +11,10 @@ namespace me
 	BossFightScene::BossFightScene(std::wstring name) : Scene(name)
 		, mBoss(NULL)
 		, mPlayer(NULL)
+		, floor(nullptr)
+		, wall1(nullptr)
+		, wall2(nullptr)
+		, deadUI(nullptr)
 		, savedTime(-1)
 	{
 	}
@@ -56,8 +60,11 @@ namespace me
 	{
 		Scene::Update();
 
-		if (mPlayer->GetHP() <= 0)
+		if (mPlayer != nullptr && mPlayer->GetHP() <= 0)
 		{
+			if(!gameover)
+				gameover = true;
+
 			if (!deadUI->GetActive())
 			{
 				deadUI->SetActive(true);
@@ -75,7 +82,7 @@ namespace me
 		if (KeyInput::GetKeyPressed(KeyCode::Space))
 			mPlayer->GetComponent<Transform>()->SetPos(math::Vector2(0, 0));
 
-		if (mBoss->GetHP() <= 0 && savedTime == -1)
+		if (mBoss != nullptr && mBoss->GetHP() <= 0 && savedTime == -1)
 		{
 			savedTime = Time::GetTime();
 		}
@@ -93,7 +100,11 @@ namespace me
 		Scene::Clear();
 		ColliderManager::Clear();
 		RemovePlayer_stage();
+		mPlayer = nullptr;
 		RemoveBoss();
+		mBoss = nullptr;
+		deadUI->SetActive(false);
 		savedTime = -1;
+		gameover = false;
 	}
 }

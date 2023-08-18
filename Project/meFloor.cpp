@@ -28,7 +28,7 @@ namespace me
 
 	void Floor::OnCollisionEnter(Collider* other)
 	{
-		if (other->GetOwner()->GetTag() == enums::eGameObjType::player && !dynamic_cast<Player_stage*>(other->GetOwner())->GetIsGround())
+		if (other->GetOwner()->GetTag() == enums::eGameObjType::player && dynamic_cast<Player_stage*>(other->GetOwner())->GetPrevState() != Player_stage::Player_state::Duck)
 		{			
 			BoxCollider* box = GetComponent<BoxCollider>();
 			BoxCollider* otherBox = dynamic_cast<BoxCollider*>(other);
@@ -40,7 +40,7 @@ namespace me
 			{
 				Transform* tr = other->GetOwner()->GetComponent<Transform>();
 				math::Vector2 PlayerPos = tr->GetPos();
-				PlayerPos.y -= (scale - len) + 1.f;
+				PlayerPos.y -= (scale - len) + 15.f;
 
 				tr->SetPos(PlayerPos);
 			}

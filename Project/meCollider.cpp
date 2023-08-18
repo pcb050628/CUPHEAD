@@ -17,12 +17,11 @@ namespace me
 	}
 	Collider::~Collider()
 	{
-		GetOwner()->ColliderCountDecrease();
-
 		Component::SetActivate(false);
 
-		if (otherCollider != nullptr && isCollision)
-			ColliderManager::ColliderCollision(this, otherCollider);
+		otherCollider = nullptr;
+
+		GetOwner()->ColliderCountDecrease();
 	}
 	void Collider::Init()
 	{

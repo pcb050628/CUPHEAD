@@ -5,6 +5,7 @@
 namespace me
 {
 	Player_map::Player_map(const std::wstring& name) : GameObject(name, enums::eGameObjType::player)
+		, mTransform(nullptr)
 		, mAnimator(nullptr)
 	{
 	}
@@ -15,7 +16,11 @@ namespace me
 	{
 		GameObject::Init();
 
-		AddComponent<BoxCollider>(enums::eComponentType::Collider);
+		mTransform = GetComponent<Transform>();
+
+		BoxCollider* bc = AddComponent<BoxCollider>(enums::eComponentType::Collider);
+		bc->SetSize(math::Vector2(40, 40));
+		bc->SetOffset(math::Vector2(0, 35));
 
 		mAnimator = AddComponent<Animator>(L"CupHead_map_anim");
 		mAnimator->AddAnim(*ResourceManager::Load(L"CupHead_map_anim", L"CupHead_map_anim_front_idle", L"..\\content\\Scene\\overWorld\\Cuphead Overworld.png", math::Vector2(0, 0), 16, 4));
@@ -37,16 +42,18 @@ namespace me
 		if (KeyInput::GetKeyDown(KeyCode::RightArrow) && KeyInput::GetKeyUp(KeyCode::LeftArrow))
 			mAnimator->SetFlipX(false);
 
-		Transform* tr = GetComponent<Transform>();
+		math::Vector2 pos = mTransform->GetPos();
 
 		if (KeyInput::GetKey(KeyCode::UpArrow))
-			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y - (100.f * Time::GetDeltaTime())));
+			pos.y -= 100.f * Time::GetDeltaTime();
 		if (KeyInput::GetKey(KeyCode::DownArrow))					   
-			tr->SetPos(math::Vector2(tr->GetPos().x, tr->GetPos().y + (100.f * Time::GetDeltaTime())));
+			pos.y += 100.f * Time::GetDeltaTime();
 		if (KeyInput::GetKey(KeyCode::RightArrow))
-			tr->SetPos(math::Vector2(tr->GetPos().x + (100.f * Time::GetDeltaTime()), tr->GetPos().y));
+			pos.x += 100.f * Time::GetDeltaTime();
 		if (KeyInput::GetKey(KeyCode::LeftArrow))	   
-			tr->SetPos(math::Vector2(tr->GetPos().x - (100.f * Time::GetDeltaTime()), tr->GetPos().y));
+			pos.x -= 100.f * Time::GetDeltaTime();
+
+		mTransform->SetPos(pos);
 
 		if (KeyInput::GetKey(KeyCode::UpArrow))
 		{

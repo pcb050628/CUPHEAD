@@ -52,7 +52,9 @@ namespace me
 		SetHP(1400);
 
 		mTransform = GetComponent<Transform>();
+
 		mRigidbody = AddComponent<Rigidbody>(enums::eComponentType::Rigidbody);
+		mRigidbody->SetGround(true);
 
 		mMainCollider = AddComponent<CircleCollider>(L"Main");
 		mMainCollider->SetRadius(100);
@@ -199,6 +201,18 @@ namespace me
 		{
 			dynamic_cast<Player_stage*>(mPunchCollider->GetSensedObj())->GetHit();
 		}
+
+		/*if (dynamic_cast<BossFightScene*>(SceneManager::GetCurScene())->gameover)
+		{
+			mPunchCollider->SetTargetType(enums::eGameObjType::none);
+			mPunchCollider->SetActive(false);
+
+			mPlayerSensor->SetTargetType(enums::eGameObjType::none);
+			mPlayerSensor->SetActive(false);
+
+			mSmashCollider->SetTargetType(enums::eGameObjType::none);
+			mSmashCollider->SetActive(false);
+		}*/
 	}
 	void Goopy_Le_Grande_Boss::Render(HDC hdc)
 	{
@@ -492,26 +506,26 @@ namespace me
 				{
 					Player_stage* player = dynamic_cast<BossFightScene*>(SceneManager::GetCurScene())->GetPlayer();
 
-					if (fabs(player->GetComponent<Transform>()->GetPos().x - mTransform->GetPos().x) > 300)
+					if (fabs(player->GetComponent<Transform>()->GetPos().x - mTransform->GetPos().x) > 150)
 					{
-						mRigidbody->AddForce(math::Vector2(-50000, -50000));
+						mRigidbody->AddForce(math::Vector2(-100000, -100000));
 					}
 					else
 					{
-						mRigidbody->AddForce(math::Vector2(-35000, -40000));
+						mRigidbody->AddForce(math::Vector2(-70000, -80000));
 					}
 				}
 				else
 				{
 					Player_stage* player = dynamic_cast<BossFightScene*>(SceneManager::GetCurScene())->GetPlayer();
 
-					if (fabs(player->GetComponent<Transform>()->GetPos().x - mTransform->GetPos().x) > 300)
+					if (fabs(player->GetComponent<Transform>()->GetPos().x - mTransform->GetPos().x) > 150)
 					{
-						mRigidbody->AddForce(math::Vector2(50000, -50000));
+						mRigidbody->AddForce(math::Vector2(100000, -100000));
 					}
 					else
 					{
-						mRigidbody->AddForce(math::Vector2(35000, -40000));
+						mRigidbody->AddForce(math::Vector2(70000, -80000));
 					}
 				}
 

@@ -24,6 +24,7 @@ namespace me
 		Player_map* mPlayer;
 
 		Sensor* GoopyLeGrandeStage;
+		Sensor* RootPackStage;
 		
 	};
 }

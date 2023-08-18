@@ -18,6 +18,7 @@ namespace me
 		virtual void OnCollisionExit(Collider* other) override;
 
 	private:
+		Transform* mTransform;
 		Animator* mAnimator;
 	};
 }

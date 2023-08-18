@@ -137,7 +137,7 @@ namespace me
 			iter->second = false;
 		}
 	}
-
+	
 	bool ColliderManager::Intersect(Collider* left, Collider* right)
 	{
 		if (!right->GetActivate() || !right->GetOwner()->GetActive() || !left->GetActivate() || !left->GetOwner()->GetActive())

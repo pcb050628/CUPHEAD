@@ -4,11 +4,16 @@ me::Sensor::Sensor(const std::wstring& name) : GameObject(name, enums::eGameObjT
 	, mCollider(nullptr)
 	, TargetType(enums::eGameObjType::none)
 	, mSensed(false)
+	, SensedObj(nullptr)
+	, mOwner(nullptr)
 {
 }
 
 me::Sensor::~Sensor()
 {
+	SensedObj = nullptr;
+	mOwner = nullptr;
+	mCollider = nullptr;
 }
 
 void me::Sensor::Init()

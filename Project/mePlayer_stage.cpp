@@ -265,6 +265,11 @@ namespace me
 			canParry = true;
 			parrySound->Play(false);
 		}
+
+		if (other->GetOwner()->GetTag() == enums::eGameObjType::floor)
+		{
+			mIsGround = true;
+		}
 	}
 
 	void Player_stage::OnCollisionExit(Collider* other)
@@ -815,6 +820,12 @@ namespace me
 
 	void Player_stage::Hit()
 	{
+		if (mPrevState == Player_state::Duck || mPrevState == Player_state::Dash)
+		{
+			mCollider->SetSize(math::Vector2(COLLIDER_DEFAULT_SIZE_X, COLLIDER_DEFAULT_SIZE_Y));
+			mCollider->SetOffset(math::Vector2(COLLIDER_DEFAULT_OFFSET_X, COLLIDER_DEFAULT_OFFSET_Y));
+		}
+
 		if (HP <= 0)
 		{
 			mCurState = Player_state::Dead;
