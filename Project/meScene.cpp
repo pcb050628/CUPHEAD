@@ -26,11 +26,8 @@ namespace me
 		}
 
 		fadeoutRenderer = AddGameObj(enums::eLayer::Background, L"fadeout", enums::eGameObjType::background)->AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
-		fadeoutRenderer->SetImage(ResourceManager::Load<Texture>(L"blackScreen32bmp", L"..\\content\\Scene\\test.bmp"));
+		fadeoutRenderer->SetImage(ResourceManager::Load<Texture>(L"test32bmp", L"..\\content\\Scene\\test.bmp"));
 		fadeoutRenderer->SetActivate(false);
-
-		//ColliderManager::CollisionLayerCheck(enums::eLayer::Sensor, enums::eLayer::Enemy, true);
-		//ColliderManager::CollisionLayerCheck(enums::eLayer::Sensor, enums::eLayer::Player, true);
 	}
 
 	void Scene::Setting()
@@ -50,13 +47,13 @@ namespace me
 			lys.Update();
 		}
 
-		/*if (KeyInput::GetKeyPressed(KeyCode::K))
+		if (KeyInput::GetKeyPressed(KeyCode::K))
 		{
 			if (!fadeoutCall)
 				RunFadeout();
 			else
 				StopFadeout();
-		}*/
+		}
 	}
 
 	void Scene::Render(HDC hdc)

@@ -53,7 +53,6 @@ namespace me
 					, (int)(mHeight * mScale.y) 
 				};
 
-
 				graphics.DrawImage
 				(
 					mTexture->GetImage()
@@ -73,13 +72,14 @@ namespace me
 
 				AlphaBlend(
 					hdc
-					, (int)(pos.x - (mTexture->GetWidth() * mTexture->GetWidth() / 2) + mTexture->GetOffset().x)
-					, (int)(pos.y - (mTexture->GetHeight() * mTexture->GetHeight() / 2) + mTexture->GetOffset().y)
+					, (int)(pos.x - (mTexture->GetWidth() * mScale.x / 2) + mTexture->GetOffset().x)
+					, (int)(pos.y - (mTexture->GetHeight() * mScale.y / 2) + mTexture->GetOffset().y)
 					, (int)(mTexture->GetWidth() * mScale.x)
 					, (int)(mTexture->GetHeight() * mScale.y)
 					, mTexture->GetHdc()
 					, 0, 0
-					, (int)mTexture->GetWidth(), (int)mTexture->GetHeight(), bf);
+					, (int)mTexture->GetWidth(), (int)mTexture->GetHeight()
+					, bf);
 			}
 		}
 	}

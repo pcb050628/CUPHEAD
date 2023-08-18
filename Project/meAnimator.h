@@ -154,6 +154,7 @@ namespace me
 
 		math::Vector2 mScale;
 		math::Vector2 mOffset;
+		float mAlpha; // 알파값이 렌더에 적용되게 만들기
 
 		bool isFlipX;
 		bool isFlipY;
