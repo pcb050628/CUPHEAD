@@ -21,7 +21,7 @@ namespace me
 		, mAnimator(nullptr), mTransform(nullptr), mCollider(nullptr)
 		, mCurState(Player_state::Idle), mPrevState(Player_state::none)
 		, mIsGround(true)
-		, mIsHit(false), mHitStartTime(0), mHitHoldingTime(0.1f), mInvincibleTime(1.f), hitSound(nullptr)
+		, mIsHit(false), mHitStartTime(0), mHitHoldingTime(0.1f), mInvincibleTime(2.f), hitSound(nullptr)
 		, mIsJumping(false), mJumpStartHeight(0), mJumpMinHeight(250.f), mJumpMaxHeight(300.f), jumpSound(nullptr)
 		, canParry(true), mIsParrying(false), parrySuccess(false), mParryStartTime(-1.f), mParryHoldingTime(0.3f)
 		, mIsDash(false), mDashMaxDist(300.f), dashSound(nullptr)
@@ -52,6 +52,8 @@ namespace me
 		mShootAnim_L->SetOffset(mShootAnim_L->GetOffset() + math::Vector2(-60 , 0));
 
 		mAnimator = AddComponent<Animator>(L"CupHead_stage_anim");
+		mAnimator->SetFlashingLoop(true);
+
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_intro", L"..\\content\\Scene\\BossFight\\Cuphead\\Intros\\Regular\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_idle_R", L"..\\content\\Scene\\BossFight\\Cuphead\\Idle_R\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_idle_L", L"..\\content\\Scene\\BossFight\\Cuphead\\Idle_L\\"));
@@ -103,7 +105,7 @@ namespace me
 		mAnimator->GetAnim(L"CupHead_stage_anim_shoot_straight_run_R")->SetDuration(0.04f);
 		mAnimator->GetAnim(L"CupHead_stage_anim_shoot_straight_run_L")->SetDuration(0.04f);
 		mAnimator->GetAnim(L"CupHead_stage_anim_shoot_diagonal_up_run_R")->SetDuration(0.04f);
-		mAnimator->GetAnim(L"CupHead_stage_anim_shoot_diagonal_up_run_L")->SetDuration(0.04f); 
+		mAnimator->GetAnim(L"CupHead_stage_anim_shoot_diagonal_up_run_L")->SetDuration(0.04f);
 
 		mAnimator->GetAnim(L"CupHead_stage_anim_intro")->SetLoop(false);
 		mAnimator->GetAnim(L"CupHead_stage_anim_hit_air_R")->SetLoop(false);
@@ -182,6 +184,11 @@ namespace me
 			mCurState = Player_state::Jump;
 		}
 
+		if (mAnimator->IsFlashing() && (mHitStartTime + mInvincibleTime) < Time::GetTime())
+		{
+			mAnimator->FlashingStop();
+		}
+
 		switch (mCurState)
 		{
 		case me::Player_stage::Player_state::Intro:
@@ -221,18 +228,18 @@ namespace me
 	{
 		GameObject::Render(hdc);
 
-		wchar_t xBuffer[50] = {};
-		wchar_t yBuffer[50] = {};
-		float pox = mTransform->GetPos().x;
-		float poy = mTransform->GetPos().y;
-
-		swprintf_s(xBuffer, L"fps : %f", pox);
-		swprintf_s(yBuffer, L"fps : %f", poy);
-		int xLen = wcsnlen_s(xBuffer, 50);
-		int yLen = wcsnlen_s(yBuffer, 50);
-
-		TextOut(hdc, 10, 10, xBuffer, xLen);
-		TextOut(hdc, 10, 50, yBuffer, yLen);
+		//wchar_t xBuffer[50] = {};
+		//wchar_t yBuffer[50] = {};
+		//float pox = mTransform->GetPos().x;
+		//float poy = mTransform->GetPos().y;
+		//
+		//swprintf_s(xBuffer, L"fps : %f", pox);
+		//swprintf_s(yBuffer, L"fps : %f", poy);
+		//int xLen = wcsnlen_s(xBuffer, 50);
+		//int yLen = wcsnlen_s(yBuffer, 50);
+		//
+		//TextOut(hdc, 10, 10, xBuffer, xLen);
+		//TextOut(hdc, 10, 50, yBuffer, yLen);
 	}
 
 	void Player_stage::OnCollisionEnter(Collider* other)
@@ -970,6 +977,7 @@ namespace me
 			mHitStartTime = Time::GetTime();
 			HP -= 1;
 			hitSound->Play(false);
+			mAnimator->FlashingStart();
 		}
 	}
 }

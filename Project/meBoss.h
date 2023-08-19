@@ -38,10 +38,16 @@ namespace me
 		virtual int GetHP() { return mHP; }
 		virtual void SetHP(int value) { mHP = value; }
 
+		virtual void GetHit(int damage) { mHP -= damage; isHit = true; }
+
+		bool GetIsHIt() { return isHit; }
+		void SetIsHit(bool value) { isHit = value; }
+
 	private:
 		BossPhase_state mState;
 
 		int mHP;
+		bool isHit;
 
 	};
 }

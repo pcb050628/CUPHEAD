@@ -9,6 +9,7 @@
 namespace me
 {
 	RootPack_Stage::RootPack_Stage(std::wstring name) : BossFightScene(name)
+		,bgm(nullptr)
 	{
 	}
 
@@ -25,6 +26,8 @@ namespace me
 		sr->SetImage(ResourceManager::Load<Texture>(L"rootpack_stage_bg", L"..\\content\\Scene\\BossFight\\The Root Pack\\rootpack_stage_comp_bg.bmp"));
 		sr->SetScale(math::Vector2(1.35f, 1.3f));
 		bg->GetComponent<Transform>()->SetPos(bg->GetComponent<Transform>()->GetPos() + math::Vector2(0, 25));
+
+		bgm = ResourceManager::Load<Sound>(L"rootPackStageBgm", L"..\\content\\Sound\\AudioClip\\BossFightScene\\The Root Pack\\bgm_level_veggies.wav");
 	}
 
 	void RootPack_Stage::Setting()
@@ -33,12 +36,13 @@ namespace me
 
 		GetPlayer()->GetComponent<Transform>()->SetPos(math::Vector2(-420, 200));
 		AddBoss<RootPack_Boss>(L"rootpack", math::Vector2(400, 0));
+
+		bgm->Play(true);
 	}
 
 	void RootPack_Stage::Update()
 	{
-		BossFightScene::Update(); // boss 안만들어줘서 오류남, 만들어주면 이걸로 바꿔야함
-		//Scene::Update();
+		BossFightScene::Update();
 	}
 
 	void RootPack_Stage::Render(HDC hdc)
@@ -49,5 +53,6 @@ namespace me
 	void RootPack_Stage::Clear()
 	{
 		BossFightScene::Clear();
+		bgm->Stop(true);
 	}
 }

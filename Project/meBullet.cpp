@@ -77,8 +77,8 @@ namespace me
 	{
 		if (other->GetOwner()->GetTag() == enums::eGameObjType::enemy)
 		{
-			if(dynamic_cast<Boss*>(other->GetOwner()) != nullptr)
-				dynamic_cast<Boss*>(other->GetOwner())->SetHP(dynamic_cast<Boss*>(other->GetOwner())->GetHP() - 4);
+			if (dynamic_cast<Boss*>(other->GetOwner()) != nullptr)
+				dynamic_cast<Boss*>(other->GetOwner())->GetHit(4);
 		}
 		
 		if(other->GetOwner()->GetTag() != enums::eGameObjType::player)

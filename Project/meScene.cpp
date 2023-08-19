@@ -8,6 +8,9 @@
 namespace me
 {
 	Scene::Scene(std::wstring name) : Entity(name)
+		, fadeoutCall(false)
+		, fadeoutRenderer(nullptr)
+		, isSetting(false)
 	{
 	}
 
@@ -28,10 +31,13 @@ namespace me
 		fadeoutRenderer = AddGameObj(enums::eLayer::Background, L"fadeout", enums::eGameObjType::background)->AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
 		fadeoutRenderer->SetImage(ResourceManager::Load<Texture>(L"test32bmp", L"..\\content\\Scene\\test.bmp"));
 		fadeoutRenderer->SetActivate(false);
+		fadeoutRenderer->SetAlpha(0);
 	}
 
 	void Scene::Setting()
 	{
+		//Animator* tmp = AddPlayer_stage(L"")->GetComponent<Animator>();;
+		//tmp->FlashingStart();
 	}
 
 	void Scene::Update()
@@ -60,7 +66,10 @@ namespace me
 	{
 		if (fadeoutCall)
 		{
-			fadeoutRenderer->SetAlpha(fadeoutRenderer->GetAlpha() + 0.1f * Time::GetDeltaTime());
+			if (fadeoutRenderer->GetAlpha() < 1.f)
+				fadeoutRenderer->SetAlpha(fadeoutRenderer->GetAlpha() + 0.1f * Time::GetDeltaTime());
+			else
+				fadeoutCall = false;
 		}
 
 		for (Layer& lys : mLayers)

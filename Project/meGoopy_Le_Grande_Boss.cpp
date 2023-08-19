@@ -77,6 +77,7 @@ namespace me
 		mSmashCollider->SetActive(false);
 
 		mMainAnimator = AddComponent<Animator>(enums::eComponentType::Animator);
+		mMainAnimator->SetFlashingDuration(0.01f);
 
 		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_intro", L"..\\content\\Scene\\BossFight\\Goopy Le Grande\\Phase 1\\Intro\\"));
 		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Goopy Le Grande_small_air_down_L", L"..\\content\\Scene\\BossFight\\Goopy Le Grande\\Phase 1\\Air Down_L\\"));
@@ -200,6 +201,12 @@ namespace me
 		if (mPunchCollider->Sensed())
 		{
 			dynamic_cast<Player_stage*>(mPunchCollider->GetSensedObj())->GetHit();
+		}
+
+		if (GetIsHIt())
+		{
+			SetIsHit(false);
+			mMainAnimator->FlashingStart();
 		}
 
 		/*if (dynamic_cast<BossFightScene*>(SceneManager::GetCurScene())->gameover)

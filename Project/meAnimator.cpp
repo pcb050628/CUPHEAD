@@ -15,6 +15,11 @@ namespace me
 		, isFlipX(false)
 		, isFlipY(false)
 		, isPlay(false)
+		, mAlpha(1)
+		, flashing(false)
+		, flashingLoop(false)
+		, flashingDuration(0.1f)
+		, prevFlahsingTime(NULL)
 	{
 		mAnims = {};
 	}
@@ -32,6 +37,30 @@ namespace me
 		{
 			mCurPlayAnim = mNextAnims;
 			mNextAnims = nullptr;
+		}
+
+		if (flashing)
+		{
+			if (fabs(prevFlahsingTime - Time::GetTime()) > flashingDuration)
+			{
+				if (mAlpha == 1)
+				{
+					mAlpha = 0.5f;
+					prevFlahsingTime = Time::GetTime();
+				}
+				else
+				{
+					mAlpha = 1;
+					prevFlahsingTime = Time::GetTime();
+					if(!flashingLoop)
+						flashing = false;
+				}
+			}
+		}
+
+		if (mCurPlayAnim != nullptr)
+		{
+			mCurPlayAnim->SetAlpha(mAlpha);
 		}
 	}
 	void Animator::Render(HDC hdc)

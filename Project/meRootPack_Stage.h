@@ -17,6 +17,7 @@ namespace me
 		virtual void Clear() override;
 
 	private:
+		Sound* bgm;
 
 	};
 }

@@ -25,15 +25,7 @@ namespace me
 		CreateScene<RootPack_Stage>(L"rootpack_stage");
 		CreateScene<Scene>(L"test");
 
-<<<<<<< Updated upstream
 		LoadScene(L"slime_stage");
-=======
-<<<<<<< HEAD
-		LoadScene(L"test");
-=======
-		LoadScene(L"slime_stage");
->>>>>>> d47d6e14adf9a35388ac1168b84ab563491c9f4c
->>>>>>> Stashed changes
 	}
 
 	void SceneManager::Update()

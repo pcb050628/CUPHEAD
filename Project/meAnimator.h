@@ -23,6 +23,22 @@ namespace me
 		virtual void SetFlipX(bool value) { isFlipX = value; }
 		virtual void SetFlipY(bool value) { isFlipY = value; }
 
+		virtual void SetAlpha(float value) {
+			mAlpha = value; if (mCurPlayAnim != nullptr)
+				mCurPlayAnim->SetAlpha(mAlpha);
+		}
+		virtual float GetAlpha() { return mAlpha; }
+
+		virtual void FlashingStart() { flashing = true; }
+		virtual void FlashingStop() { flashing = false; mAlpha = 1; }
+		virtual bool IsFlashing() { return flashing; }
+
+		virtual void SetFlashingLoop(bool value) { flashingLoop = value; }
+		virtual bool GetFlahsingLoop() { return flashingLoop; }
+
+		virtual void SetFlashingDuration(float value) { flashingDuration = value; }
+		virtual float GetFlashingDuration() { return flashingDuration; }
+
 		virtual void AddAnim(Animation anim)
 		{
 			auto iter = mAnims.find(anim.GetName());
@@ -36,6 +52,7 @@ namespace me
 			if (iter != mAnims.end())
 			{
 				mCurPlayAnim = &iter->second;
+				mCurPlayAnim->SetAlpha(mAlpha);
 				isPlay = true;
 				mCurPlayAnim->Reset();
 			}
@@ -55,6 +72,7 @@ namespace me
 			if (iter != mAnims.end())
 			{
 				mCurPlayAnim = &iter->second;
+				mCurPlayAnim->SetAlpha(mAlpha);
 				mCurPlayAnim->Reset();
 				isPlay = true;
 			}
@@ -66,6 +84,7 @@ namespace me
 			if (iter != mAnims.end() && mCurPlayAnim != &iter->second)
 			{
 				mCurPlayAnim = &iter->second;
+				mCurPlayAnim->SetAlpha(mAlpha);
 				isPlay = true;
 				mCurPlayAnim->Reset();
 			}
@@ -84,6 +103,7 @@ namespace me
 			if (iter != mAnims.end() && mCurPlayAnim != &iter->second)
 			{
 				mCurPlayAnim = &iter->second;
+				mCurPlayAnim->SetAlpha(mAlpha);
 				isPlay = true;
 				mCurPlayAnim->Reset();
 			}
@@ -95,6 +115,7 @@ namespace me
 			if (iter != mAnims.end() && mCurPlayAnim != &iter->second)
 			{
 				mCurPlayAnim = &iter->second;
+				mCurPlayAnim->SetAlpha(mAlpha);
 				isPlay = true;
 				mCurPlayAnim->Reset();
 				mCurPlayAnim->SetDuration(duration);
@@ -162,6 +183,11 @@ namespace me
 		bool isPlay;
 
 		bool mAffectCamera;
+
+		bool flashing;
+		bool flashingLoop;
+		float prevFlahsingTime;
+		float flashingDuration;
 	};
 }
 

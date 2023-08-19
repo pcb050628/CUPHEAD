@@ -20,8 +20,6 @@ namespace me
 	{
 		GameObject::Update();
 
-
-
 		switch (mState)
 		{
 		case me::BossPhase_state::intro:
