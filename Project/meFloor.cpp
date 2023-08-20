@@ -14,7 +14,7 @@ namespace me
 		GameObject::Init();
 
 		BoxCollider* floor_col = AddComponent<BoxCollider>(enums::eComponentType::Collider);
-		floor_col->SetOffset(math::Vector2(0, 300.f));
+		floor_col->SetOffset(math::Vector2(0, 330.f));
 		floor_col->SetSize(math::Vector2(1600, 50.f));
 	}
 	void Floor::Update()
@@ -40,7 +40,7 @@ namespace me
 			{
 				Transform* tr = other->GetOwner()->GetComponent<Transform>();
 				math::Vector2 PlayerPos = tr->GetPos();
-				PlayerPos.y -= (scale - len) + 15.f;
+				PlayerPos.y -= (scale - len) + 20.f;
 
 				tr->SetPos(PlayerPos);
 			}

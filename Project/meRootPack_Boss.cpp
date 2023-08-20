@@ -39,6 +39,7 @@ namespace me
 		mMainCollider->SetOffset(math::Vector2(0, 60));
 
 		mMainAnimator = AddComponent<Animator>(enums::eComponentType::Animator);
+		mMainAnimator->SetFlashingDuration(0.01f);
 
 		//potato anim
 		mMainAnimator->AddAnim(*ResourceManager::Load<Animation>(L"potato_anim_intro", L"..\\content\\Scene\\BossFight\\The Root Pack\\potato\\intro\\"));
@@ -73,6 +74,12 @@ namespace me
 	void RootPack_Boss::Render(HDC hdc)
 	{
 		Boss::Render(hdc);
+
+		if (GetIsHIt())
+		{
+			SetIsHit(false);
+			mMainAnimator->FlashingStart();
+		}
 	}
 
 	void RootPack_Boss::OnCollisionEnter(Collider* other)
