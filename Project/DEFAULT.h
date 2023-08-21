@@ -39,6 +39,7 @@ namespace me
 			Player,
 			Bullet,
 			UI,
+			Fade,
 			End
 		};
 
@@ -64,6 +65,7 @@ namespace me
 			background,
 			sensor,
 			floor,
+			platform,
 			wall,
 			enemy,
 			player,

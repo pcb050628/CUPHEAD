@@ -10,6 +10,7 @@ namespace me
 	Scene::Scene(std::wstring name) : Entity(name)
 		, fadeoutCall(false)
 		, fadeoutRenderer(nullptr)
+		, fadeoutEnd(false)
 		, isSetting(false)
 	{
 	}
@@ -28,7 +29,7 @@ namespace me
 			mLayers.push_back(Layer());
 		}
 
-		fadeoutRenderer = AddGameObj(enums::eLayer::Background, L"fadeout", enums::eGameObjType::background)->AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
+		fadeoutRenderer = AddGameObj(enums::eLayer::Fade, L"fadeout", enums::eGameObjType::background)->AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
 		fadeoutRenderer->SetImage(ResourceManager::Load<Texture>(L"test32bmp", L"..\\content\\Scene\\test.bmp"));
 		fadeoutRenderer->SetActivate(false);
 		fadeoutRenderer->SetAlpha(0);
@@ -53,13 +54,13 @@ namespace me
 			lys.Update();
 		}
 
-		if (KeyInput::GetKeyPressed(KeyCode::K))
-		{
-			if (!fadeoutCall)
-				RunFadeout();
-			else
-				StopFadeout();
-		}
+		//if (KeyInput::GetKeyPressed(KeyCode::K))
+		//{
+		//	if (!fadeoutCall)
+		//		RunFadeout();
+		//	else
+		//		StopFadeout();
+		//}
 	}
 
 	void Scene::Render(HDC hdc)
@@ -67,9 +68,12 @@ namespace me
 		if (fadeoutCall)
 		{
 			if (fadeoutRenderer->GetAlpha() < 1.f)
-				fadeoutRenderer->SetAlpha(fadeoutRenderer->GetAlpha() + 0.1f * Time::GetDeltaTime());
+				fadeoutRenderer->SetAlpha(fadeoutRenderer->GetAlpha() + 0.2f * Time::GetDeltaTime());
 			else
+			{
 				fadeoutCall = false;
+				fadeoutEnd = true;
+			}
 		}
 
 		for (Layer& lys : mLayers)
@@ -79,6 +83,7 @@ namespace me
 	}
 	void Scene::RunFadeout()
 	{
+		fadeoutEnd = false;
 		fadeoutCall = true;
 		fadeoutRenderer->SetActivate(true);
 	}
@@ -138,5 +143,7 @@ namespace me
 	void Scene::Clear()
 	{
 		isSetting = false;
+		fadeoutCall = false;
+		fadeoutEnd = false;
 	}
 }

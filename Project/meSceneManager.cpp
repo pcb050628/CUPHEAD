@@ -8,6 +8,7 @@
 #include "meWorldMapScene.h"
 #include "meGoopy_Le_Grande_Stage.h"
 #include "meRootPack_Stage.h"
+#include "meCagneyCarnation_stage.h"
 #include "meTexture.h"
 
 namespace me
@@ -23,9 +24,9 @@ namespace me
 		CreateScene<ClearScene>(L"clear");
 		CreateScene<Goopy_Le_Grande_Stage>(L"slime_stage");
 		CreateScene<RootPack_Stage>(L"rootpack_stage");
-		CreateScene<Scene>(L"test");
+		CreateScene<CagneyCarnation_stage>(L"carnation_stage");
 
-		LoadScene(L"slime_stage");
+		//LoadScene(L"slime_stage");
 	}
 
 	void SceneManager::Update()

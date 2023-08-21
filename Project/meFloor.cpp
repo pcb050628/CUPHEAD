@@ -14,7 +14,7 @@ namespace me
 		GameObject::Init();
 
 		BoxCollider* floor_col = AddComponent<BoxCollider>(enums::eComponentType::Collider);
-		floor_col->SetOffset(math::Vector2(0, 330.f));
+		floor_col->SetOffset(math::Vector2(0, 300.f));
 		floor_col->SetSize(math::Vector2(1600, 50.f));
 	}
 	void Floor::Update()
@@ -28,7 +28,9 @@ namespace me
 
 	void Floor::OnCollisionEnter(Collider* other)
 	{
-		if (other->GetOwner()->GetTag() == enums::eGameObjType::player && dynamic_cast<Player_stage*>(other->GetOwner())->GetPrevState() != Player_stage::Player_state::Duck)
+		if (other->GetOwner()->GetTag() == enums::eGameObjType::player 
+			&& dynamic_cast<Player_stage*>(other->GetOwner())->GetPrevState() != Player_stage::Player_state::Duck
+			&& dynamic_cast<Player_stage*>(other->GetOwner())->GetPrevState() != Player_stage::Player_state::Dash)
 		{			
 			BoxCollider* box = GetComponent<BoxCollider>();
 			BoxCollider* otherBox = dynamic_cast<BoxCollider*>(other);
@@ -40,7 +42,7 @@ namespace me
 			{
 				Transform* tr = other->GetOwner()->GetComponent<Transform>();
 				math::Vector2 PlayerPos = tr->GetPos();
-				PlayerPos.y -= (scale - len) + 20.f;
+				PlayerPos.y -= (scale - len) + 10.f;
 
 				tr->SetPos(PlayerPos);
 			}

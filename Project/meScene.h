@@ -20,6 +20,8 @@ namespace me
 		virtual void Render(HDC hdc) override;
 		virtual void RunFadeout();
 		virtual void StopFadeout();
+		virtual bool IsFadeoutRunning() { return fadeoutCall; }
+		virtual bool IsFadeoutEnd() { return fadeoutEnd; }
 
 		virtual GameObject* AddGameObj(enums::eLayer layerType, std::wstring name, enums::eGameObjType type);
 		virtual GameObject* GetGameObj(enums::eLayer layerType, std::wstring name);
@@ -56,6 +58,7 @@ namespace me
 
 		SpriteRenderer* fadeoutRenderer;
 		bool fadeoutCall;
+		bool fadeoutEnd;
 	};
 }
 

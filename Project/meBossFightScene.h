@@ -45,8 +45,6 @@ namespace me
 
 		DeadUI* deadUI;
 
-		float savedTime;
-
 	public:
 		bool gameover = false;
 	};

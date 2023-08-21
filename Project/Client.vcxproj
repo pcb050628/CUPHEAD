@@ -132,10 +132,13 @@
     <ClInclude Include="meAnimator.h" />
     <ClInclude Include="meApplication.h" />
     <ClInclude Include="Client.h" />
+    <ClInclude Include="meBoomerang.h" />
     <ClInclude Include="meBoss.h" />
     <ClInclude Include="meBossFightScene.h" />
     <ClInclude Include="meBoxCollider.h" />
     <ClInclude Include="meBullet.h" />
+    <ClInclude Include="meCagneyCarnation_Boss.h" />
+    <ClInclude Include="meCagneyCarnation_stage.h" />
     <ClInclude Include="meCamera.h" />
     <ClInclude Include="meCarrotMissile.h" />
     <ClInclude Include="meCircleCollider.h" />
@@ -158,6 +161,7 @@
     <ClInclude Include="meLayer.h" />
     <ClInclude Include="meMath.h" />
     <ClInclude Include="meMainScene.h" />
+    <ClInclude Include="mePlatform.h" />
     <ClInclude Include="mePlayer_map.h" />
     <ClInclude Include="mePlayer_stage.h" />
     <ClInclude Include="meQuestionMark.h" />
@@ -186,10 +190,13 @@
   <ItemGroup>
     <ClCompile Include="meAnimation.cpp" />
     <ClCompile Include="meAnimator.cpp" />
+    <ClCompile Include="meBoomerang.cpp" />
     <ClCompile Include="meBoss.cpp" />
     <ClCompile Include="meBossFightScene.cpp" />
     <ClCompile Include="meBoxCollider.cpp" />
     <ClCompile Include="meBullet.cpp" />
+    <ClCompile Include="meCagneyCarnation_Boss.cpp" />
+    <ClCompile Include="meCagneyCarnation_stage.cpp" />
     <ClCompile Include="meCamera.cpp" />
     <ClCompile Include="meCarrotMissile.cpp" />
     <ClCompile Include="meCircleCollider.cpp" />
@@ -211,6 +218,7 @@
     <ClCompile Include="meKeyInput.cpp" />
     <ClCompile Include="meLayer.cpp" />
     <ClCompile Include="meMainScene.cpp" />
+    <ClCompile Include="mePlatform.cpp" />
     <ClCompile Include="mePlayer_map.cpp" />
     <ClCompile Include="mePlayer_stage.cpp" />
     <ClCompile Include="meQuestionMark.cpp" />

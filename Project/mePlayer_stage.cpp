@@ -19,7 +19,7 @@ namespace me
 		, HP(3)
 		, shootDelay(0.1f), shootPrevTime(0), mShootAnim_L(nullptr), mShootAnim_R(nullptr), shootSound(nullptr)
 		, mAnimator(nullptr), mTransform(nullptr), mCollider(nullptr)
-		, mCurState(Player_state::Idle), mPrevState(Player_state::none)
+		, mCurState(Player_state::Intro), mPrevState(Player_state::none)
 		, mIsGround(true)
 		, mIsHit(false), mHitStartTime(0), mHitHoldingTime(0.1f), mInvincibleTime(2.f), hitSound(nullptr)
 		, mIsJumping(false), mJumpStartHeight(0), mJumpMinHeight(250.f), mJumpMaxHeight(300.f), jumpSound(nullptr)
@@ -247,7 +247,13 @@ namespace me
 		if (other->GetOwner()->GetTag() == enums::eGameObjType::floor)
 			mIsGround = true;
 		if (other->GetOwner()->GetTag() == enums::eGameObjType::wall)
+		{
 			mIsDash = false;
+			mPrevState = Player_state::Dash;
+
+			mCollider->SetSize(math::Vector2(COLLIDER_DEFAULT_SIZE_X, COLLIDER_DEFAULT_SIZE_Y));
+			mCollider->SetOffset(math::Vector2(COLLIDER_DEFAULT_OFFSET_X, COLLIDER_DEFAULT_OFFSET_Y));
+		}
 
 		if (mIsParrying && other->GetOwner()->GetIsParryable())
 		{
@@ -275,7 +281,7 @@ namespace me
 
 		if (other->GetOwner()->GetTag() == enums::eGameObjType::floor)
 		{
-			mIsGround = true;
+			//mIsGround = true;
 		}
 	}
 

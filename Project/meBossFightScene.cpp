@@ -15,7 +15,6 @@ namespace me
 		, wall1(nullptr)
 		, wall2(nullptr)
 		, deadUI(nullptr)
-		, savedTime(-1)
 	{
 	}
 	BossFightScene::~BossFightScene()
@@ -82,13 +81,16 @@ namespace me
 		if (KeyInput::GetKeyPressed(KeyCode::Space))
 			mPlayer->GetComponent<Transform>()->SetPos(math::Vector2(0, 0));
 
-		if (mBoss != nullptr && mBoss->GetHP() <= 0 && savedTime == -1)
+		if (mBoss != nullptr && mBoss->GetHP() <= 0)
 		{
-			savedTime = Time::GetTime();
-		}
+			ColliderManager::CollisionLayerCheck(enums::eLayer::Player, enums::eLayer::Enemy, false);
+			ColliderManager::CollisionLayerCheck(enums::eLayer::Player, enums::eLayer::Sensor, false);
 
-		if (savedTime != -1 && fabs(savedTime - Time::GetTime()) > 6)
-			SceneManager::LoadScene(L"clear");
+			if (!IsFadeoutRunning() && !IsFadeoutEnd())
+				RunFadeout();
+			else if (!IsFadeoutRunning() && IsFadeoutEnd())
+				SceneManager::LoadScene(L"clear");
+		}
 	}
 	void BossFightScene::Render(HDC hdc)
 	{
@@ -104,7 +106,6 @@ namespace me
 		RemoveBoss();
 		mBoss = nullptr;
 		deadUI->SetActive(false);
-		savedTime = -1;
 		gameover = false;
 	}
 }

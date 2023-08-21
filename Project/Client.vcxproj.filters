@@ -163,6 +163,18 @@
     <Filter Include="Engine\Component\Rigidbody">
       <UniqueIdentifier>{69581da9-c924-4936-b391-c5446ff55a29}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\Scene\BossFightScene\Cagney Carnation">
+      <UniqueIdentifier>{3de95ee0-4151-4994-ac04-ef41d8f35af4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Boss\Cagney Carnation">
+      <UniqueIdentifier>{2758ba96-76eb-4355-b1ec-348a651e57fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Boss\Cagney Carnation\Platform">
+      <UniqueIdentifier>{cd49547b-205e-4589-930f-f33349a5ceda}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Boss\Cagney Carnation\Boomerang">
+      <UniqueIdentifier>{9a66a7ea-1dba-4070-a23c-5848c0a5b9df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -327,6 +339,18 @@
     <ClInclude Include="meDeadUI.h">
       <Filter>Contents\GameObject\DeadUI</Filter>
     </ClInclude>
+    <ClInclude Include="meCagneyCarnation_stage.h">
+      <Filter>Contents\Scene\BossFightScene\Cagney Carnation</Filter>
+    </ClInclude>
+    <ClInclude Include="meCagneyCarnation_Boss.h">
+      <Filter>Contents\GameObject\Boss\Cagney Carnation</Filter>
+    </ClInclude>
+    <ClInclude Include="meBoomerang.h">
+      <Filter>Contents\GameObject\Boss\Cagney Carnation\Boomerang</Filter>
+    </ClInclude>
+    <ClInclude Include="mePlatform.h">
+      <Filter>Contents\GameObject\Boss\Cagney Carnation\Platform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -483,6 +507,18 @@
     </ClCompile>
     <ClCompile Include="meDeadUI.cpp">
       <Filter>Contents\GameObject\DeadUI</Filter>
+    </ClCompile>
+    <ClCompile Include="meCagneyCarnation_stage.cpp">
+      <Filter>Contents\Scene\BossFightScene\Cagney Carnation</Filter>
+    </ClCompile>
+    <ClCompile Include="meCagneyCarnation_Boss.cpp">
+      <Filter>Contents\GameObject\Boss\Cagney Carnation</Filter>
+    </ClCompile>
+    <ClCompile Include="meBoomerang.cpp">
+      <Filter>Contents\GameObject\Boss\Cagney Carnation\Boomerang</Filter>
+    </ClCompile>
+    <ClCompile Include="mePlatform.cpp">
+      <Filter>Contents\GameObject\Boss\Cagney Carnation\Platform</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
