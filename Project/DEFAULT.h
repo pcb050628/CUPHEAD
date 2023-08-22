@@ -34,6 +34,7 @@ namespace me
 			Background,
 			Map,
 			floor,
+			Boss,
 			Enemy,
 			Sensor,
 			Player,

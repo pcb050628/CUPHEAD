@@ -25,6 +25,7 @@ namespace me
 		//Sound*			mSound; // 이동하는 소리 구하면 적용
 
 		bool mFlip;
+		int CollisionCount;
 	};
 }
 

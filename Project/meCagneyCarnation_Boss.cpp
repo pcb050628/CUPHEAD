@@ -7,9 +7,16 @@
 namespace me
 {
 	CagneyCarnation_Boss::CagneyCarnation_Boss(const std::wstring& name) : Boss(name)
-		, mTransform(nullptr), mMainSensor(nullptr), mMainAnimator(nullptr)
-		, mFASensor(nullptr)
-		, mVineIntroAnimator(nullptr), mVineStabAnimator(nullptr)
+		//default
+		, mTransform(nullptr), mMainSensor(nullptr), mHitSensor(nullptr), mMainAnimator(nullptr)
+		// all pattern
+		, canAttack(true), prevAttackTime(-1)								
+		// boomerang
+		, createStartTime(-1), mbCreateBoomerang(false), isCreate(false)	
+		// Face Attack
+		, mFASensor(nullptr), mbFaceHighAttack(false), mbFaceLowAttack(false), faStartTime(-1)
+		// vines
+		, mVineIntroAnimator(nullptr), mVineStabAnimator(nullptr)			
 	{
 	}
 	CagneyCarnation_Boss::~CagneyCarnation_Boss()
@@ -60,6 +67,9 @@ namespace me
 
 		mMainAnimator->GetAnim(L"Carnation_intro")->SetLoop(false);
 		mMainAnimator->GetAnim(L"Carnation_idle")->SetDuration(0.05f);
+		mMainAnimator->GetAnim(L"Carnation_FA_high")->SetDuration(0.1f);
+		mMainAnimator->GetAnim(L"Carnation_FA_low")->SetDuration(0.1f);
+		mMainAnimator->GetAnim(L"Carnation_create_boomerang")->SetLoop(false);
 
 		mVineIntroAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Vine_intro", L"..\\content\\Scene\\BossFight\\Cagney Carnation\\Final Form\\Vines\\main\\"));
 		mVineStabAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Vine_stab", L"..\\content\\Scene\\BossFight\\Cagney Carnation\\Final Form\\Vines\\platform\\"));
@@ -115,9 +125,52 @@ namespace me
 	}
 	void CagneyCarnation_Boss::Phase1()
 	{
-		mMainAnimator->PlayAnim(L"Carnation_idle");
 		// 랜덤으로 패턴 실행하기 / 2 페이즈도 똑같이 랜덤으로 진행하기 
-		// 랜덤 함수는 체력 + 시간 + deltaTime 으로 시드값 주기 //srand((unsigned int)(GetHP() + prevIdx + Time::GetTime() + Time::GetDeltaTime())); //rand();
+		// 랜덤 함수는 체력 + 시간 + deltaTime 으로 시드값 주기 // //;
+
+		srand((unsigned int)(GetHP() +  Time::GetTime() + Time::GetDeltaTime()));
+
+		if (canAttack)
+		{
+			if (!mbCreateBoomerang && !mbFaceHighAttack && !mbFaceLowAttack)
+			{
+				if ((rand() % 9) < 3)
+				{
+					mbCreateBoomerang = true;
+					createStartTime = Time::GetTime();
+				}
+				else if ((rand() % 9) < 5)
+				{
+					mbFaceHighAttack = true;
+					faStartTime = Time::GetTime();
+				}
+				else
+				{
+					mbFaceLowAttack = true;
+					faStartTime = Time::GetTime();
+				}
+			}
+			else
+			{
+				if (mbCreateBoomerang)
+					CreateBoomerang();
+
+				if (mbFaceHighAttack)
+					FaceHighAttack();
+
+				if (mbFaceLowAttack)
+					FaceLowAttack();
+			}
+		}
+		else
+		{
+			mMainAnimator->PlayAnim(L"Carnation_idle");
+			if (prevAttackTime != -1 && fabs(prevAttackTime - Time::GetTime()) > 2.f)
+			{
+				canAttack = true;
+				prevAttackTime = -1;
+			}
+		}
 	}
 	void CagneyCarnation_Boss::Phase2()
 	{
@@ -131,9 +184,89 @@ namespace me
 
 	void CagneyCarnation_Boss::CreateBoomerang()
 	{
+		mMainAnimator->PlayAnim(L"Carnation_create_boomerang");
+
+		if ((fabs(createStartTime - Time::GetTime()) > 1.5f) && !isCreate)
+		{
+			SceneManager::Instantiate<Boomerang>(enums::eLayer::Enemy, math::Vector2(220, 0), L"boomerang");
+			isCreate = true;
+		}
+
+		if (mMainAnimator->GetCurAnim()->IsComplete())
+		{
+			mbCreateBoomerang = false;
+			isCreate = false;
+			createStartTime = -1;
+			canAttack = false;
+			prevAttackTime = Time::GetTime();
+		}
 	}
-	void CagneyCarnation_Boss::FaceAttack()
+
+	void CagneyCarnation_Boss::FaceHighAttack()
 	{
+		mMainAnimator->PlayAnim(L"Carnation_FA_high");
+
+		if (fabs(faStartTime - Time::GetTime()) > 1.3f)
+		{
+			if (mHitSensor->GetOffset().x < 0)
+				mHitSensor->SetOffset(mHitSensor->GetOffset() + math::Vector2(1000 * Time::GetDeltaTime(), 0));
+
+			if (mHitSensor->GetColliderSize().x >= 200)
+				mHitSensor->SetColliderSize(mHitSensor->GetColliderSize() + math::Vector2(-1500 * Time::GetDeltaTime(), 0));
+
+			if (mHitSensor->GetOffset().x >= 0 && mHitSensor->GetColliderSize().x <= 200)
+			{
+				mHitSensor->SetOffset(math::Vector2(0, -150));
+				mHitSensor->SetColliderSize(math::Vector2(200, 200));
+
+				mbFaceHighAttack = false;
+				faStartTime = -1;
+				canAttack = false;
+				prevAttackTime = Time::GetTime();
+			}
+		}
+		else if (fabs(faStartTime - Time::GetTime()) > 0.5f)
+		{
+			if(mHitSensor->GetOffset().x > -500)
+				mHitSensor->SetOffset(mHitSensor->GetOffset() + math::Vector2(-1000 * Time::GetDeltaTime(), 0));
+
+			if(mHitSensor->GetColliderSize().x < 900)
+				mHitSensor->SetColliderSize(mHitSensor->GetColliderSize() + math::Vector2(1500 * Time::GetDeltaTime(), 0));
+		}
+	}
+	void CagneyCarnation_Boss::FaceLowAttack()
+	{
+		mMainAnimator->PlayAnim(L"Carnation_FA_low");
+		if(mHitSensor->GetOffset().y == -150)
+			mHitSensor->SetOffset(mHitSensor->GetOffset() + math::Vector2(0, 300));
+
+		if (fabs(faStartTime - Time::GetTime()) > 1.1f)
+		{
+			if (mHitSensor->GetOffset().x < 0)
+				mHitSensor->SetOffset(mHitSensor->GetOffset() + math::Vector2(1100 * Time::GetDeltaTime(), 0));
+
+			if (mHitSensor->GetColliderSize().x >= 200)
+				mHitSensor->SetColliderSize(mHitSensor->GetColliderSize() + math::Vector2(-1600 * Time::GetDeltaTime(), 0));
+
+			if (mHitSensor->GetOffset().x >= 0 && mHitSensor->GetColliderSize().x <= 200)
+			{
+				mHitSensor->SetOffset(math::Vector2(0, -150));
+				mHitSensor->SetColliderSize(math::Vector2(200, 200));
+
+				mbFaceLowAttack = false;
+				faStartTime = -1;
+				canAttack = false;
+				prevAttackTime = Time::GetTime();
+			}
+		}
+		else if (fabs(faStartTime - Time::GetTime()) > 0.3f)
+		{
+			if (mHitSensor->GetOffset().x > -500)
+				mHitSensor->SetOffset(mHitSensor->GetOffset() + math::Vector2(-1100 * Time::GetDeltaTime(), 0));
+
+			if (mHitSensor->GetColliderSize().x < 900)
+				mHitSensor->SetColliderSize(mHitSensor->GetColliderSize() + math::Vector2(1600 * Time::GetDeltaTime(), 0));
+		}
 	}
 
 	void CagneyCarnation_Boss::FiringPollen()
@@ -142,6 +275,7 @@ namespace me
 	void CagneyCarnation_Boss::VineStab()
 	{
 	}
+
 	void CagneyCarnation_Boss::TransitionToPh2()
 	{
 	}

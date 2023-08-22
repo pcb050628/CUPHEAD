@@ -1,5 +1,6 @@
 #include "meBoomerang.h"
 #include "meResourceManager.h"
+#include "meSceneManager.h"
 #include "mePlayer_stage.h"
 
 namespace me
@@ -9,6 +10,7 @@ namespace me
 		, mCollider(nullptr)
 		, mAnimator(nullptr)
 		, mFlip(true)
+		, CollisionCount(0)
 	{
 	}
 	Boomerang::~Boomerang()
@@ -32,6 +34,9 @@ namespace me
 	{
 		GameObject::Update();
 
+		if (CollisionCount == 3)
+			SceneManager::Destroy(this);
+
 		//정해진 방향으로 이동 ( 처음에는 왼쪽
 		if(mFlip)
 			mTransform->SetPos(mTransform->GetPos() + math::Vector2(-500 * Time::GetDeltaTime(), 0));
@@ -47,18 +52,18 @@ namespace me
 	{
 		if (other->GetOwner()->GetTag() == enums::eGameObjType::player)
 			dynamic_cast<Player_stage*>(other->GetOwner())->GetHit();
-
-		//wall에 충돌하면 위치와 방향 아래 오른쪽으로 바꿔서 이동하게 만들기, 오른쪽으로 돌아가는 중 이었다면 destroy 호출하기
-		if (other->GetOwner()->GetTag() == enums::eGameObjType::wall)
-		{
-			mFlip = false;
-			mTransform->SetPos(mTransform->GetPos() + math::Vector2(0, 200));
-		}
 	}
 	void Boomerang::OnCollisionStay(Collider* other)
 	{
 	}
 	void Boomerang::OnCollisionExit(Collider* other)
 	{
+		//wall에 충돌하면 위치와 방향 아래 오른쪽으로 바꿔서 이동하게 만들기, 오른쪽으로 돌아가는 중 이었다면 destroy 호출하기
+		if (other->GetOwner()->GetTag() == enums::eGameObjType::wall)
+		{
+			mFlip = false;
+			mTransform->SetPos(mTransform->GetPos() + math::Vector2(0, 100));
+			CollisionCount++;
+		}
 	}
 }

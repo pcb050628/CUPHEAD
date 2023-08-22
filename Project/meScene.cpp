@@ -127,12 +127,12 @@ namespace me
 
 	void Scene::AddBoss(Boss* boss)
 	{
-		mLayers[(int)enums::eLayer::Enemy].AddBoss(boss);
+		mLayers[(int)enums::eLayer::Boss].AddBoss(boss);
 	}
 
 	void Scene::RemoveBoss()
 	{
-		mLayers[(int)enums::eLayer::Enemy].RemoveBoss();
+		mLayers[(int)enums::eLayer::Boss].RemoveBoss();
 	}
 
 	void Scene::DeleteAllSensor()

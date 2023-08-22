@@ -26,7 +26,8 @@ namespace me
 
 		//첫 페이즈
 		void CreateBoomerang();
-		void FaceAttack();
+		void FaceHighAttack();
+		void FaceLowAttack();
 
 		// 두번쨰 페이즈
 		void FiringPollen();
@@ -42,8 +43,20 @@ namespace me
 		Sensor*			mHitSensor;
 		Animator*		mMainAnimator;
 
-		//ph1
-		Sensor*			mFASensor;
+		// 모든 패턴의 공용 쿨타임
+		bool canAttack;
+		float prevAttackTime;
+
+		//boomerang
+		bool			mbCreateBoomerang;
+		float			createStartTime;
+		bool			isCreate;
+
+		//Face Attack
+		Sensor* mFASensor;
+		bool	mbFaceHighAttack;
+		bool	mbFaceLowAttack;
+		float	faStartTime;
 
 		//final form
 		Animator*		mVineIntroAnimator;

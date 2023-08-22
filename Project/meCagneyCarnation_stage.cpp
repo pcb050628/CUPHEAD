@@ -37,6 +37,8 @@ namespace me
 		BossFightScene::Setting();
 
 		ColliderManager::CollisionLayerCheck(enums::eLayer::Bullet, enums::eLayer::Sensor, true);
+		ColliderManager::CollisionLayerCheck(enums::eLayer::Player, enums::eLayer::Sensor, true);
+		ColliderManager::CollisionLayerCheck(enums::eLayer::Background, enums::eLayer::Enemy, true);
 
 		AddBoss<CagneyCarnation_Boss>(L"Cagney Carnation", math::Vector2(450, 50));
 		bgm->Play(true);

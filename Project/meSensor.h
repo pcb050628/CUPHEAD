@@ -28,6 +28,7 @@ namespace me
 		virtual void OnCollisionExit(Collider* other);
 
 		void SetColliderSize(math::Vector2 value) {	mCollider->SetSize(value); }
+		math::Vector2 GetColliderSize() { return mCollider->GetSize(); }
 
 		void AddTargetType(enums::eGameObjType type) { 
 			for (enums::eGameObjType target : TargetTypes)
