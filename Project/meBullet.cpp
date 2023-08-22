@@ -5,6 +5,7 @@
 namespace me
 {
 	Bullet::Bullet(const std::wstring& name) : GameObject(name, enums::eGameObjType::bullet)
+		, damage(4)
 		, mAnimator(nullptr)
 		, mDirection(math::Vector2(1, 0))
 		, flip(false)
@@ -17,8 +18,7 @@ namespace me
 	{
 		GameObject::Init();
 
-		CircleCollider* collider = AddComponent<CircleCollider>(enums::eComponentType::Collider);
-		
+		CircleCollider* collider = AddComponent<CircleCollider>(enums::eComponentType::Collider);		
 		
 		LeftAnim = ResourceManager::Load<Animation>(L"bullet_anim_straight_L", L"..\\content\\Scene\\BossFight\\Cuphead\\Bullet\\Left\\");
 		RightAnim = ResourceManager::Load<Animation>(L"bullet_anim_straight_R", L"..\\content\\Scene\\BossFight\\Cuphead\\Bullet\\Right\\");
@@ -78,7 +78,7 @@ namespace me
 		if (other->GetOwner()->GetTag() == enums::eGameObjType::enemy)
 		{
 			if (dynamic_cast<Boss*>(other->GetOwner()) != nullptr)
-				dynamic_cast<Boss*>(other->GetOwner())->GetHit(4);
+				dynamic_cast<Boss*>(other->GetOwner())->GetHit(damage);
 		}
 		
 		if(other->GetOwner()->GetTag() != enums::eGameObjType::player)

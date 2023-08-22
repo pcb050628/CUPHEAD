@@ -22,6 +22,13 @@ namespace me
 			Dead
 		};
 
+		enum class GroundType
+		{
+			floor,
+			platform,
+			none
+		};
+
 		Player_stage(const std::wstring& name);
 		virtual ~Player_stage() override;
 
@@ -54,6 +61,9 @@ namespace me
 		int GetHP() { return HP; }
 
 		bool GetIsGround() { return mIsGround; }
+		void SetIsGround(bool value) { mIsGround = value; }
+
+		void SetGroundType(GroundType type) { groundType = type; }
 
 		Player_state GetPrevState() { return mPrevState; }
 		Player_state GetCurState() { return mCurState; }
@@ -79,6 +89,7 @@ namespace me
 		Player_state mCurState;
 		Player_state mPrevState;
 
+		GroundType groundType;
 		bool mIsGround;
 
 		bool mIsHit;

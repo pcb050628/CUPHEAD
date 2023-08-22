@@ -91,9 +91,11 @@ namespace me
 		void SetFlip(bool value) { flip = value; }
 		bool GetFlip() { return flip; }
 
-		float ReturnDmg() {	return 4.f;	}
+		int ReturnDmg() { return damage; }
 
 	private:
+		int damage;
+
 		math::Vector2 mDirection;
 		bool flip;
 

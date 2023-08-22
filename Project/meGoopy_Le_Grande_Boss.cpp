@@ -61,13 +61,13 @@ namespace me
 
 		mPunchCollider = SceneManager::Instantiate<Sensor>(L"slime_stage", enums::eLayer::Sensor, mTransform->GetPos(), L"Punch");
 		mPunchCollider->SetOwner(this);
-		mPunchCollider->SetTargetType(enums::eGameObjType::player);
+		mPunchCollider->AddTargetType(enums::eGameObjType::player);
 		mPunchCollider->SetColliderSize(math::Vector2(250, 250));
 		mPunchCollider->SetOffset(math::Vector2(0, -130));
 		
 		mPlayerSensor = SceneManager::Instantiate<Sensor>(L"slime_stage", enums::eLayer::Sensor, mTransform->GetPos(), L"enemySensor");
 		mPlayerSensor->SetOwner(this);
-		mPlayerSensor->SetTargetType(enums::eGameObjType::player);
+		mPlayerSensor->AddTargetType(enums::eGameObjType::player);
 		mPlayerSensor->SetOffset(math::Vector2(-180, 0));
 		mPlayerSensor->SetColliderSize(math::Vector2(400, 100));
 
@@ -198,7 +198,7 @@ namespace me
 	{
 		Boss::Update();
 
-		if (mPunchCollider->Sensed())
+		if (mPunchCollider->Sensed() == enums::SenseType::Enter || mPunchCollider->Sensed() == enums::SenseType::Stay)
 		{
 			dynamic_cast<Player_stage*>(mPunchCollider->GetSensedObj())->GetHit();
 		}
@@ -294,7 +294,8 @@ namespace me
 			return;
 		}
 
-		if (mPlayerSensor->Sensed() && mRigidbody->GetIsGround() && !mIsPunching)
+		if (mPunchCollider->Sensed() == enums::SenseType::Enter || mPunchCollider->Sensed() == enums::SenseType::Stay 
+			&& mRigidbody->GetIsGround() && !mIsPunching)
 		{
 			if (fabs(attackTime - Time::GetTime()) > attackCooldown)
 			{
@@ -321,7 +322,8 @@ namespace me
 			return;
 		}
 
-		if (mPlayerSensor->Sensed() && mRigidbody->GetIsGround() && !mIsPunching)
+		if (mPunchCollider->Sensed() == enums::SenseType::Enter || mPunchCollider->Sensed() == enums::SenseType::Stay 
+			&& mRigidbody->GetIsGround() && !mIsPunching)
 		{
 			if (fabs(attackTime - Time::GetTime()) > attackCooldown)
 			{
@@ -348,7 +350,7 @@ namespace me
 			return;
 		}
 
-		if (mPlayerSensor->Sensed())
+		if (mPunchCollider->Sensed() == enums::SenseType::Enter || mPunchCollider->Sensed() == enums::SenseType::Stay)
 		{
 			if (fabs(attackTime - Time::GetTime()) > attackCooldown)
 			{
@@ -710,7 +712,8 @@ namespace me
 	{
 		mMainAnimator->PlayAnim(L"Goopy Le Grande_tomb_smash");
 
-		if ((fabs(attackTime - Time::GetTime()) > 0.7f) && mPlayerSensor->Sensed())
+		if ((fabs(attackTime - Time::GetTime()) > 0.7f) 
+			&& mPunchCollider->Sensed() == enums::SenseType::Enter || mPunchCollider->Sensed() == enums::SenseType::Stay)
 		{
 			dynamic_cast<Player_stage*>(mPlayerSensor->GetSensedObj())->GetHit();
 		}

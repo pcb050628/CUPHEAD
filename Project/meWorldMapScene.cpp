@@ -32,11 +32,11 @@ namespace me
 		mPlayer->GetComponent<Transform>()->SetPos(mPlayer->GetComponent<Transform>()->GetPos() + math::Vector2(450, 60));
 
 		GoopyLeGrandeStage = AddGameObj<Sensor>(enums::eLayer::Sensor, L"glgStageSensor");
-		GoopyLeGrandeStage->SetTargetType(enums::eGameObjType::player);
+		GoopyLeGrandeStage->AddTargetType(enums::eGameObjType::player);
 		GoopyLeGrandeStage->GetComponent<Transform>()->SetPos(math::Vector2(1240, -220));
 
 		RootPackStage = AddGameObj<Sensor>(enums::eLayer::Sensor, L"trpStageSensor");
-		RootPackStage->SetTargetType(enums::eGameObjType::player);
+		RootPackStage->AddTargetType(enums::eGameObjType::player);
 		RootPackStage->GetComponent<Transform>()->SetPos(math::Vector2(960, 570));
 	}
 	void WorldMapScene::Setting()
@@ -52,10 +52,10 @@ namespace me
 	{
 		Scene::Update();
 
-		if (KeyInput::GetKeyPressed(KeyCode::Z) && GoopyLeGrandeStage->Sensed())
+		if (KeyInput::GetKeyPressed(KeyCode::Z) && GoopyLeGrandeStage->Sensed() == enums::SenseType::Enter || GoopyLeGrandeStage->Sensed() == enums::SenseType::Stay)
 			SceneManager::LoadScene(L"slime_stage");
 
-		if (KeyInput::GetKeyPressed(KeyCode::Z) && RootPackStage->Sensed())
+		if (KeyInput::GetKeyPressed(KeyCode::Z) && RootPackStage->Sensed() == enums::SenseType::Enter || RootPackStage->Sensed() == enums::SenseType::Stay)
 			SceneManager::LoadScene(L"rootpack_stage");
 	}
 	void WorldMapScene::Render(HDC hdc)

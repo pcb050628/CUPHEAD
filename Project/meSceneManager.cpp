@@ -26,7 +26,7 @@ namespace me
 		CreateScene<RootPack_Stage>(L"rootpack_stage");
 		CreateScene<CagneyCarnation_stage>(L"carnation_stage");
 
-		//LoadScene(L"slime_stage");
+		LoadScene(L"carnation_stage");
 	}
 
 	void SceneManager::Update()

@@ -2,16 +2,15 @@
 
 me::Sensor::Sensor(const std::wstring& name) : GameObject(name, enums::eGameObjType::sensor)
 	, mCollider(nullptr)
-	, TargetType(enums::eGameObjType::none)
-	, mSensed(false)
-	, SensedObj(nullptr)
 	, mOwner(nullptr)
 {
+	TargetTypes = {};
+	isSensed = {};
+	SensedObjs = {};
 }
 
 me::Sensor::~Sensor()
 {
-	SensedObj = nullptr;
 	mOwner = nullptr;
 	mCollider = nullptr;
 }
@@ -40,22 +39,36 @@ void me::Sensor::Render(HDC hdc)
 
 void me::Sensor::OnCollisionEnter(Collider* other)
 {
-	if (other->GetOwner()->GetTag() == TargetType)
+	for (enums::eGameObjType type : TargetTypes)
 	{
-		mSensed = true;
-		SensedObj = other->GetOwner();
+		if (other->GetOwner()->GetTag() == type)
+		{
+			isSensed.find(type)->second = enums::SenseType::Enter;
+			SensedObjs.find(type)->second = other->GetOwner();
+		}
 	}
 }
 
 void me::Sensor::OnCollisionStay(Collider* other)
 {
+	for (enums::eGameObjType type : TargetTypes)
+	{
+		if (other->GetOwner()->GetTag() == type)
+		{
+			isSensed.find(type)->second = enums::SenseType::Stay;
+			SensedObjs.find(type)->second = other->GetOwner();
+		}
+	}
 }
 
 void me::Sensor::OnCollisionExit(Collider* other)
 {
-	if (other->GetOwner()->GetTag() == TargetType)
+	for (enums::eGameObjType type : TargetTypes)
 	{
-		mSensed = false;
-		SensedObj = nullptr;
+		if (other->GetOwner()->GetTag() == type)
+		{
+			isSensed.find(type)->second = enums::SenseType::none;
+			SensedObjs.find(type)->second = nullptr;
+		}
 	}
 }

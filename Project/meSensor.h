@@ -3,6 +3,16 @@
 
 namespace me
 {	
+	namespace enums
+	{
+		enum class SenseType
+		{
+			Enter,
+			Stay,
+			none,
+		};
+	}
+
 	class Sensor : public GameObject
 	{
 	public:
@@ -19,11 +29,56 @@ namespace me
 
 		void SetColliderSize(math::Vector2 value) {	mCollider->SetSize(value); }
 
-		void SetTargetType(enums::eGameObjType type) { TargetType = type; }
+		void AddTargetType(enums::eGameObjType type) { 
+			for (enums::eGameObjType target : TargetTypes)
+			{
+				if (target == type)
+					return;
+			}
 
-		bool Sensed() { return mSensed; }
+			TargetTypes.push_back(type);
+			isSensed.insert(std::make_pair(type, enums::SenseType::none));
+			SensedObjs.insert(std::make_pair(type, nullptr));
+		}
 
-		GameObject* GetSensedObj() { return SensedObj; }
+		enums::SenseType Sensed() {
+			if (TargetTypes.size() > 0)
+			{
+				for (auto iter : isSensed)
+				{
+					return iter.second;
+				}
+			}
+		}
+
+		enums::SenseType Sensed(enums::eGameObjType type) { 
+			if(isSensed.find(type) != isSensed.end())
+				return isSensed.find(type)->second;
+
+			return enums::SenseType::none;
+		}
+
+		GameObject* GetSensedObj() {
+			if (SensedObjs.size() > 0)
+			{
+				for (auto iter : SensedObjs)
+				{
+					return iter.second;
+				}
+			}
+			
+			return nullptr;
+		}
+
+		GameObject* GetSensedObj(enums::eGameObjType type) {
+			for (auto iter : SensedObjs)
+			{
+				if(iter.first == type)
+					return iter.second;
+			}
+
+			return nullptr;
+		}
 
 		void SetOwner(GameObject* owner) { mOwner = owner; }
 
@@ -40,9 +95,9 @@ namespace me
 		BoxCollider* mCollider;
 		math::Vector2 mOffset;
 
-		enums::eGameObjType TargetType;
-		GameObject* SensedObj;
-		bool mSensed;
+		std::vector<enums::eGameObjType> TargetTypes;
+		std::map<enums::eGameObjType, GameObject*> SensedObjs;
+		std::map<enums::eGameObjType, enums::SenseType> isSensed;
 	};
 }
 

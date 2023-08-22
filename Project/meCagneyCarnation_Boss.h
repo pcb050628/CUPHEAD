@@ -24,18 +24,22 @@ namespace me
 		virtual void Phase3() override;
 		virtual void Death() override;
 
+		//첫 페이즈
 		void CreateBoomerang();
 		void FaceAttack();
-		
+
+		// 두번쨰 페이즈
 		void FiringPollen();
 		void VineStab();
+
 
 		void TransitionToPh2();
 
 	private:
 		//default
 		Transform*		mTransform;
-		BoxCollider*	mMainCollider;
+		Sensor*			mMainSensor;
+		Sensor*			mHitSensor;
 		Animator*		mMainAnimator;
 
 		//ph1

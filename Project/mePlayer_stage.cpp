@@ -20,7 +20,7 @@ namespace me
 		, shootDelay(0.1f), shootPrevTime(0), mShootAnim_L(nullptr), mShootAnim_R(nullptr), shootSound(nullptr)
 		, mAnimator(nullptr), mTransform(nullptr), mCollider(nullptr)
 		, mCurState(Player_state::Intro), mPrevState(Player_state::none)
-		, mIsGround(true)
+		, mIsGround(true), groundType(GroundType::none)
 		, mIsHit(false), mHitStartTime(0), mHitHoldingTime(0.1f), mInvincibleTime(2.f), hitSound(nullptr)
 		, mIsJumping(false), mJumpStartHeight(0), mJumpMinHeight(250.f), mJumpMaxHeight(300.f), jumpSound(nullptr)
 		, canParry(true), mIsParrying(false), parrySuccess(false), mParryStartTime(-1.f), mParryHoldingTime(0.3f)
@@ -99,7 +99,7 @@ namespace me
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_parry_L", L"..\\content\\Scene\\BossFight\\Cuphead\\Parry\\Hand\\Right\\"));
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"CupHead_stage_anim_ghost", L"..\\content\\Scene\\BossFight\\Cuphead\\Ghost\\"));
 
-		mAnimator->GetAnim(L"CupHead_stage_anim_intro")->SetDuration(0.05f);
+		mAnimator->GetAnim(L"CupHead_stage_anim_intro")->SetDuration(0.07f);
 		mAnimator->GetAnim(L"CupHead_stage_anim_run_R")->SetDuration(0.04f);
 		mAnimator->GetAnim(L"CupHead_stage_anim_run_L")->SetDuration(0.04f);
 		mAnimator->GetAnim(L"CupHead_stage_anim_shoot_straight_run_R")->SetDuration(0.04f);
@@ -133,7 +133,15 @@ namespace me
 				mAnimator->SetFlipX(true);
 		}
 
-		if(KeyInput::GetKeyPressed(KeyCode::Z) && mIsGround && !mIsJumping && !mIsHit)
+		if (KeyInput::GetKeyPressed(KeyCode::Z) && KeyInput::GetKeyDown(KeyCode::DownArrow) && groundType == GroundType::platform && mIsGround && !mIsJumping && !mIsHit)
+		{
+			mIsGround = false;
+			jumpSound->Play(false);
+
+			mCollider->SetSize(math::Vector2(COLLIDER_DEFAULT_SIZE_X, COLLIDER_DEFAULT_SIZE_Y));
+			mCollider->SetOffset(math::Vector2(COLLIDER_DEFAULT_OFFSET_X, COLLIDER_DEFAULT_OFFSET_Y));
+		}
+		else if(KeyInput::GetKeyPressed(KeyCode::Z) && mIsGround && !mIsJumping && !mIsHit)
 		{
 			mIsJumping = true;
 			mIsGround = false;
@@ -245,7 +253,10 @@ namespace me
 	void Player_stage::OnCollisionEnter(Collider* other)
 	{
 		if (other->GetOwner()->GetTag() == enums::eGameObjType::floor)
+		{
 			mIsGround = true;
+			groundType = GroundType::floor;
+		}
 		if (other->GetOwner()->GetTag() == enums::eGameObjType::wall)
 		{
 			mIsDash = false;
@@ -277,11 +288,6 @@ namespace me
 			mJumpStartHeight = mTransform->GetPos().y;
 			canParry = true;
 			parrySound->Play(false);
-		}
-
-		if (other->GetOwner()->GetTag() == enums::eGameObjType::floor)
-		{
-			//mIsGround = true;
 		}
 	}
 
@@ -589,10 +595,16 @@ namespace me
 		else if (mIsDash)
 		{
 			mCurState = Player_state::Dash;
+
+			mCollider->SetSize(math::Vector2(COLLIDER_DEFAULT_SIZE_X, COLLIDER_DEFAULT_SIZE_Y));
+			mCollider->SetOffset(math::Vector2(COLLIDER_DEFAULT_OFFSET_X, COLLIDER_DEFAULT_OFFSET_Y));
 		}
 		else if (mIsJumping)
 		{
 			mCurState = Player_state::Jump;
+
+			mCollider->SetSize(math::Vector2(COLLIDER_DEFAULT_SIZE_X, COLLIDER_DEFAULT_SIZE_Y));
+			mCollider->SetOffset(math::Vector2(COLLIDER_DEFAULT_OFFSET_X, COLLIDER_DEFAULT_OFFSET_Y));
 		}
 		else if (KeyInput::GetKeyUp(KeyCode::DownArrow))
 		{
@@ -753,7 +765,7 @@ namespace me
 			}
 		}
 
-		if (KeyInput::GetKeyPressed(KeyCode::Z) && canParry)
+		if (KeyInput::GetKeyPressed(KeyCode::Z) && canParry && mIsJumping)
 		{
 			canParry = false;
 			mIsParrying = true;
@@ -781,13 +793,10 @@ namespace me
 				parrySuccess = false;
 			}
 		}
-		else
-		{
-			if (mJumpMaxHeight <= fabs(mJumpStartHeight - mTransform->GetPos().y) || mIsGround || mPrevState == Player_state::Hit)
-			{
-				mIsJumping = false;
-			}
 
+		if (mJumpMaxHeight <= fabs(mJumpStartHeight - mTransform->GetPos().y) || mIsGround || mPrevState == Player_state::Hit)
+		{
+			mIsJumping = false;
 		}
 
 		if (mIsGround || !mIsJumping)
@@ -886,6 +895,8 @@ namespace me
 			else
 				mAnimator->PlayAnim(L"CupHead_stage_anim_hit_air", mAnimator->GetFlipX());
 
+			mCollider->SetSize(math::Vector2(COLLIDER_DEFAULT_SIZE_X, COLLIDER_DEFAULT_SIZE_Y));
+			mCollider->SetOffset(math::Vector2(COLLIDER_DEFAULT_OFFSET_X, COLLIDER_DEFAULT_OFFSET_Y));
 			return;
 		}
 

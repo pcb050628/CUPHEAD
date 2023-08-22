@@ -1,5 +1,6 @@
 #pragma once
 #include "meBossFightScene.h"
+#include "mePlatform.h"
 
 namespace me
 {
@@ -18,6 +19,9 @@ namespace me
 	private:
 		Sound* bgm;
 
+		Platform* platform1;
+		Platform* platform2;
+		Platform* platform3;
 	};
 }
 
