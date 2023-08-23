@@ -38,10 +38,16 @@ namespace me
 		RootPackStage = AddGameObj<Sensor>(enums::eLayer::Sensor, L"trpStageSensor");
 		RootPackStage->AddTargetType(enums::eGameObjType::player);
 		RootPackStage->GetComponent<Transform>()->SetPos(math::Vector2(960, 570));
+		Animator* trp = RootPackStage->AddComponent<Animator>(enums::eComponentType::Animator);
+		trp->AddAnim(*ResourceManager::Load<Animation>(L"the root pack_world", L"..\\content\\Scene\\overWorld\\rootpack\\"));
+		trp->PlayAnim(L"the root pack_world");
 
 		CagneyCarnationStage = AddGameObj<Sensor>(enums::eLayer::Sensor, L"ccStageSensor");
 		CagneyCarnationStage->AddTargetType(enums::eGameObjType::player);
-		CagneyCarnationStage->GetComponent<Transform>()->SetPos(math::Vector2(960, 570));
+		CagneyCarnationStage->GetComponent<Transform>()->SetPos(math::Vector2(1300, 230));
+		Animator* cc = CagneyCarnationStage->AddComponent<Animator>(enums::eComponentType::Animator);
+		cc->AddAnim(*ResourceManager::Load<Animation>(L"cagney carnation_world", L"..\\content\\Scene\\overWorld\\cagney carnation\\"));
+		cc->PlayAnim(L"cagney carnation_world");
 	}
 	void WorldMapScene::Setting()
 	{
@@ -56,11 +62,14 @@ namespace me
 	{
 		Scene::Update();
 
-		if (KeyInput::GetKeyPressed(KeyCode::Z) && GoopyLeGrandeStage->Sensed() == enums::SenseType::Enter || GoopyLeGrandeStage->Sensed() == enums::SenseType::Stay)
+		if (KeyInput::GetKeyPressed(KeyCode::Z) && (GoopyLeGrandeStage->Sensed() == enums::SenseType::Enter || GoopyLeGrandeStage->Sensed() == enums::SenseType::Stay))
 			SceneManager::LoadScene(L"slime_stage");
 
-		if (KeyInput::GetKeyPressed(KeyCode::Z) && RootPackStage->Sensed() == enums::SenseType::Enter || RootPackStage->Sensed() == enums::SenseType::Stay)
+		if (KeyInput::GetKeyPressed(KeyCode::Z) && (RootPackStage->Sensed() == enums::SenseType::Enter || RootPackStage->Sensed() == enums::SenseType::Stay))
 			SceneManager::LoadScene(L"rootpack_stage");
+
+		if (KeyInput::GetKeyPressed(KeyCode::Z) && (CagneyCarnationStage->Sensed() == enums::SenseType::Enter || CagneyCarnationStage->Sensed() == enums::SenseType::Stay))
+			SceneManager::LoadScene(L"carnation_stage");
 	}
 	void WorldMapScene::Render(HDC hdc)
 	{
