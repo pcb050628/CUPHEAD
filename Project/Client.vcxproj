@@ -164,6 +164,7 @@
     <ClInclude Include="mePlatform.h" />
     <ClInclude Include="mePlayer_map.h" />
     <ClInclude Include="mePlayer_stage.h" />
+    <ClInclude Include="mePollen.h" />
     <ClInclude Include="meQuestionMark.h" />
     <ClInclude Include="meRigidbody.h" />
     <ClInclude Include="meRootPack_Boss.h" />
@@ -221,6 +222,7 @@
     <ClCompile Include="mePlatform.cpp" />
     <ClCompile Include="mePlayer_map.cpp" />
     <ClCompile Include="mePlayer_stage.cpp" />
+    <ClCompile Include="mePollen.cpp" />
     <ClCompile Include="meQuestionMark.cpp" />
     <ClCompile Include="meRigidbody.cpp" />
     <ClCompile Include="meRootPack_Boss.cpp" />

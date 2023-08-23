@@ -21,7 +21,6 @@ namespace me
 		virtual void Intro() override;
 		virtual void Phase1() override;
 		virtual void Phase2() override;
-		virtual void Phase3() override;
 		virtual void Death() override;
 
 		//첫 페이즈
@@ -59,8 +58,25 @@ namespace me
 		float	faStartTime;
 
 		//final form
+		float transitionStartTime;
+
 		Animator*		mVineIntroAnimator;
-		Animator*		mVineStabAnimator;
+		Sensor*			mVineFloorSensor;
+
+		// firing pollen
+		bool			mbFiringPollen;
+		float			fpStartTime;
+		bool			isFire;
+
+		//vine stab
+		//animator offset y : 10 / x : -350, -600, -850
+		int				vineStabT;
+		bool			mbVineStab;
+		float			vsStartTime;
+		Animator*		mVineStabAnimatorOne;
+		Animator*		mVineStabAnimatorTwo;
+		Sensor*			mVineStabSensorOne;
+		Sensor*			mVineStabSensorTwo;
 
 	};
 }

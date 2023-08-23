@@ -175,6 +175,9 @@
     <Filter Include="Contents\GameObject\Boss\Cagney Carnation\Boomerang">
       <UniqueIdentifier>{9a66a7ea-1dba-4070-a23c-5848c0a5b9df}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Boss\Cagney Carnation\Pollen">
+      <UniqueIdentifier>{70ba59b8-6c96-45be-8418-66bbcc486142}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -351,6 +354,9 @@
     <ClInclude Include="mePlatform.h">
       <Filter>Contents\GameObject\Boss\Cagney Carnation\Platform</Filter>
     </ClInclude>
+    <ClInclude Include="mePollen.h">
+      <Filter>Contents\GameObject\Boss\Cagney Carnation\Pollen</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -519,6 +525,9 @@
     </ClCompile>
     <ClCompile Include="mePlatform.cpp">
       <Filter>Contents\GameObject\Boss\Cagney Carnation\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="mePollen.cpp">
+      <Filter>Contents\GameObject\Boss\Cagney Carnation\Pollen</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

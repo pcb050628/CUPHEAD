@@ -81,7 +81,8 @@ namespace me
 				dynamic_cast<Boss*>(other->GetOwner())->GetHit(damage);
 		}
 		
-		if(other->GetOwner()->GetTag() != enums::eGameObjType::player)
+		if(other->GetOwner()->GetTag() != enums::eGameObjType::player
+			&& other->GetOwner()->GetTag() != enums::eGameObjType::platform)
 			mAnimator->SetActivate(false);
 	}
 	void Bullet::OnCollisionStay(Collider* other)
@@ -89,6 +90,7 @@ namespace me
 	}
 	void Bullet::OnCollisionExit(Collider* other)
 	{
-		SceneManager::Destroy(this);
+		if(!mAnimator->GetActivate())
+			SceneManager::Destroy(this);
 	}
 }

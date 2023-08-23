@@ -153,6 +153,12 @@ namespace me
 			isPlay = false;
 		}
 
+		virtual void DisableAnim()
+		{
+			if (mCurPlayAnim != nullptr)
+				mCurPlayAnim = nullptr;
+		}
+
 		virtual Animation* GetAnim(const std::wstring& name)
 		{
 			auto iter = mAnims.find(name);

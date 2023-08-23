@@ -28,8 +28,8 @@ namespace me
 		mAnimator->AddAnim(*ResourceManager::Load<Animation>(L"Platform_anim", L"..\\content\\Scene\\BossFight\\Cagney Carnation\\Platform\\Platform\\"));
 		mAnimator->PlayAnim(L"Platform_anim");
 
-		mCollider->SetOffset(math::Vector2(0, -25));
-		mCollider->SetSize(math::Vector2(120, 20));
+		mCollider->SetOffset(math::Vector2(0, 5));
+		mCollider->SetSize(math::Vector2(120, 50));
 	}
 	void Platform::Update()
 	{
@@ -44,13 +44,19 @@ namespace me
 	{
 		if (other->GetOwner()->GetTag() == enums::eGameObjType::player && other->GetOwner()->GetComponent<Transform>()->GetPos().y < mTransform->GetPos().y)
 		{
+			dynamic_cast<Player_stage*>(other->GetOwner())->SetIsGround(true);
+			dynamic_cast<Player_stage*>(other->GetOwner())->SetGroundType(Player_stage::GroundType::platform);
+
 			float len = fabs(other->GetPos().y - mCollider->GetPos().y);
 			float scale = fabs((dynamic_cast<BoxCollider*>(other)->GetSize().y / 2) + (mCollider->GetSize().y / 2));
 
-			if (fabs(len - scale) < 10)
+			if (len < scale)
 			{
-				dynamic_cast<Player_stage*>(other->GetOwner())->SetIsGround(true);
-				dynamic_cast<Player_stage*>(other->GetOwner())->SetGroundType(Player_stage::GroundType::platform);
+				Transform* tr = other->GetOwner()->GetComponent<Transform>();
+				math::Vector2 PlayerPos = tr->GetPos();
+				PlayerPos.y -= (scale - len) + 10.f;
+
+				tr->SetPos(PlayerPos);
 			}
 		}
 	}

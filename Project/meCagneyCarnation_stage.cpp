@@ -24,6 +24,10 @@ namespace me
 		bgm = ResourceManager::Load<Sound>(L"CagneyCarnation_bgm", L"..\\content\\Sound\\AudioClip\\BossFightScene\\Cagney Carnation\\CagneyCarnation_bgm.wav");
 		bgm->SetVolume(30.f);
 
+		GameObject* bg = AddGameObj<GameObject>(enums::eLayer::Background, L"background");
+		SpriteRenderer* bgsr = bg->AddComponent<SpriteRenderer>(enums::eComponentType::SpriteRenderer);
+		bgsr->SetImage(ResourceManager::Load<Texture>(L"ccbg", L"..\\content\\Scene\\BossFight\\Cagney Carnation\\Background\\ccbg_2.bmp"));
+
 		platform1 = AddGameObj<Platform>(enums::eLayer::floor, L"platform_1");
 		platform2 = AddGameObj<Platform>(enums::eLayer::floor, L"platform_2");
 		platform3 = AddGameObj<Platform>(enums::eLayer::floor, L"platform_3");
@@ -54,6 +58,8 @@ namespace me
 	void CagneyCarnation_stage::Clear()
 	{
 		BossFightScene::Clear();
+
+
 
 		bgm->Stop(true);
 	}

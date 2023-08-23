@@ -25,6 +25,7 @@ namespace me
 
 		Sensor* GoopyLeGrandeStage;
 		Sensor* RootPackStage;
+		Sensor* CagneyCarnationStage;
 		
 	};
 }

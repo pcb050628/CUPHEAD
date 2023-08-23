@@ -38,6 +38,10 @@ namespace me
 		RootPackStage = AddGameObj<Sensor>(enums::eLayer::Sensor, L"trpStageSensor");
 		RootPackStage->AddTargetType(enums::eGameObjType::player);
 		RootPackStage->GetComponent<Transform>()->SetPos(math::Vector2(960, 570));
+
+		CagneyCarnationStage = AddGameObj<Sensor>(enums::eLayer::Sensor, L"ccStageSensor");
+		CagneyCarnationStage->AddTargetType(enums::eGameObjType::player);
+		CagneyCarnationStage->GetComponent<Transform>()->SetPos(math::Vector2(960, 570));
 	}
 	void WorldMapScene::Setting()
 	{
