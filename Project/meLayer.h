@@ -45,6 +45,26 @@ namespace me
 			return tmp;
 		}
 
+		Player_map* GetPlayer_map() {
+			for (GameObject* obj : mGameObjs)
+			{
+				if (dynamic_cast<Player_map*>(obj) != nullptr)
+					return dynamic_cast<Player_map*>(obj);
+			}
+
+			return nullptr;
+		}
+
+		Player_stage* GetPlayer_stage() {
+			for (GameObject* obj : mGameObjs)
+			{
+				if (dynamic_cast<Player_stage*>(obj) != nullptr)
+					return dynamic_cast<Player_stage*>(obj);
+			}
+
+			return nullptr;
+		}
+
 		void RemovePlayer_stage()
 		{
 			for (std::vector<GameObject*>::iterator iter = mGameObjs.begin();
@@ -66,6 +86,16 @@ namespace me
 		void AddBoss(Boss* boss)
 		{
 			mGameObjs.push_back(boss);
+		}
+
+		Boss* GetBoss() {
+			for (GameObject* obj : mGameObjs)
+			{
+				if (dynamic_cast<Boss*>(obj) != nullptr)
+					return dynamic_cast<Boss*>(obj);
+			}
+
+			return nullptr;
 		}
 
 		void RemoveBoss()

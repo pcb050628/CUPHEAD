@@ -178,6 +178,12 @@
     <Filter Include="Contents\GameObject\Boss\Cagney Carnation\Pollen">
       <UniqueIdentifier>{70ba59b8-6c96-45be-8418-66bbcc486142}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\Player\Player_stage\Bullet\Peashooter">
+      <UniqueIdentifier>{a98aefb7-df0e-4a76-b38a-0360ee8ca95e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Player\Player_stage\Bullet\Chaser">
+      <UniqueIdentifier>{143966b6-6a01-4298-90d9-12ebc5778c55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -357,6 +363,12 @@
     <ClInclude Include="mePollen.h">
       <Filter>Contents\GameObject\Boss\Cagney Carnation\Pollen</Filter>
     </ClInclude>
+    <ClInclude Include="mePeashooter.h">
+      <Filter>Contents\GameObject\Player\Player_stage\Bullet\Peashooter</Filter>
+    </ClInclude>
+    <ClInclude Include="meChaser.h">
+      <Filter>Contents\GameObject\Player\Player_stage\Bullet\Chaser</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -528,6 +540,12 @@
     </ClCompile>
     <ClCompile Include="mePollen.cpp">
       <Filter>Contents\GameObject\Boss\Cagney Carnation\Pollen</Filter>
+    </ClCompile>
+    <ClCompile Include="mePeashooter.cpp">
+      <Filter>Contents\GameObject\Player\Player_stage\Bullet\Peashooter</Filter>
+    </ClCompile>
+    <ClCompile Include="meChaser.cpp">
+      <Filter>Contents\GameObject\Player\Player_stage\Bullet\Chaser</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

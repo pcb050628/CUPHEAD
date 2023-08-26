@@ -2,7 +2,8 @@
 #include "COMPONENTS.h"
 #include "meSceneManager.h"
 #include "meResourceManager.h"
-#include "meBullet.h"
+#include "mePeashooter.h"
+#include "meChaser.h"
 
 #define COLLIDER_DEFAULT_SIZE_X 85.f
 #define COLLIDER_DEFAULT_SIZE_Y 130.f
@@ -17,7 +18,7 @@ namespace me
 {
 	Player_stage::Player_stage(const std::wstring& name) : GameObject(name, enums::eGameObjType::player)
 		, HP(3)
-		, shootDelay(0.1f), shootPrevTime(0), mShootAnim_L(nullptr), mShootAnim_R(nullptr), shootSound(nullptr)
+		, shooterType(ShooterType::Chaser), shootDelay(0.1f), shootPrevTime(0), mShootAnim_L(nullptr), mShootAnim_R(nullptr), shootSound(nullptr)
 		, mAnimator(nullptr), mTransform(nullptr), mCollider(nullptr)
 		, mCurState(Player_state::Intro), mPrevState(Player_state::none)
 		, mIsGround(true), groundType(GroundType::none)
@@ -124,6 +125,10 @@ namespace me
 	void Player_stage::Update()
 	{
 		GameObject::Update();
+
+		if (KeyInput::GetKeyPressed(KeyCode::Tab))
+			ChangeShooterType();
+
 
 		if (!mIsDash)
 		{
@@ -981,9 +986,17 @@ namespace me
 				//mShootAnim_R->PlayAnim(L"bullet_anim_spawn_R");
 			}
 
-			Bullet* b = SceneManager::Instantiate<Bullet>(enums::eLayer::Bullet, comPos);
-			b->SetDirection(dir, mAnimator->GetFlipX());
-			shootPrevTime = Time::GetTime();
+			if (shooterType == ShooterType::Peashooter)
+			{
+				Peashooter* b = SceneManager::Instantiate<Peashooter>(enums::eLayer::Bullet, comPos);
+				b->SetDirection(dir, mAnimator->GetFlipX());
+				shootPrevTime = Time::GetTime();
+			}
+			else
+			{
+				Chaser* b = SceneManager::Instantiate<Chaser>(enums::eLayer::Bullet, comPos);
+				shootPrevTime = Time::GetTime();
+			}
 		}
 	}
 	void Player_stage::GetHit()

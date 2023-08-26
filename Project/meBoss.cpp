@@ -7,6 +7,7 @@ namespace me
 	Boss::Boss(const std::wstring& name) : GameObject(name, enums::eGameObjType::enemy)
 		, mHP(500)
 		, mState(BossPhase_state::intro)
+		, mHitPoint(math::Vector2::Zero)
 	{
 	}
 	Boss::~Boss()

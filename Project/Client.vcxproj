@@ -141,6 +141,7 @@
     <ClInclude Include="meCagneyCarnation_stage.h" />
     <ClInclude Include="meCamera.h" />
     <ClInclude Include="meCarrotMissile.h" />
+    <ClInclude Include="meChaser.h" />
     <ClInclude Include="meCircleCollider.h" />
     <ClInclude Include="meClearScene.h" />
     <ClInclude Include="meCollider.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="meLayer.h" />
     <ClInclude Include="meMath.h" />
     <ClInclude Include="meMainScene.h" />
+    <ClInclude Include="mePeashooter.h" />
     <ClInclude Include="mePlatform.h" />
     <ClInclude Include="mePlayer_map.h" />
     <ClInclude Include="mePlayer_stage.h" />
@@ -200,6 +202,7 @@
     <ClCompile Include="meCagneyCarnation_stage.cpp" />
     <ClCompile Include="meCamera.cpp" />
     <ClCompile Include="meCarrotMissile.cpp" />
+    <ClCompile Include="meChaser.cpp" />
     <ClCompile Include="meCircleCollider.cpp" />
     <ClCompile Include="meClearScene.cpp" />
     <ClCompile Include="meCollider.cpp" />
@@ -219,6 +222,7 @@
     <ClCompile Include="meKeyInput.cpp" />
     <ClCompile Include="meLayer.cpp" />
     <ClCompile Include="meMainScene.cpp" />
+    <ClCompile Include="mePeashooter.cpp" />
     <ClCompile Include="mePlatform.cpp" />
     <ClCompile Include="mePlayer_map.cpp" />
     <ClCompile Include="mePlayer_stage.cpp" />

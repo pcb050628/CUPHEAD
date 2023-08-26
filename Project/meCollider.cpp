@@ -57,7 +57,7 @@ namespace me
 	{
 		Component::SetActivate(value);
 
-		if(otherCollider != nullptr && value == false)
-			ColliderManager::ColliderCollision(this, otherCollider);
+		/*if(otherCollider != nullptr && value == false)
+			ColliderManager::ColliderCollision(this, otherCollider);*/
 	}
 }

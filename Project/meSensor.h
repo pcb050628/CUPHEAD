@@ -81,7 +81,19 @@ namespace me
 			return nullptr;
 		}
 
+		void RemoveSensedObj(enums::eGameObjType type)
+		{
+			for (auto iter : SensedObjs)
+			{
+				if (iter.first == type)
+				{
+					iter.second = nullptr;
+				}
+			}
+		}
+
 		void SetOwner(GameObject* owner) { mOwner = owner; }
+		GameObject* GetOwner() { return mOwner; }
 
 		void SetPos(math::Vector2 value) { GetComponent<Transform>()->SetPos(value); }
 		void SetOffset(math::Vector2 value) { mOffset = value; }

@@ -70,6 +70,7 @@ namespace me
 	void RootPack_Boss::Update()
 	{
 		Boss::Update();
+		SetHItPoint(mTransform->GetPos());
 	}
 	void RootPack_Boss::Render(HDC hdc)
 	{

@@ -36,9 +36,18 @@ namespace me
 
 		virtual Player_map* AddPlayer_map(std::wstring name);
 		virtual Player_stage* AddPlayer_stage(std::wstring name);
+		virtual Player_map* GetPlayer_map() {
+			return mLayers[(int)enums::eLayer::Player].GetPlayer_map();
+		}
+		virtual Player_stage* GetPlayer_stage() {
+			return mLayers[(int)enums::eLayer::Player].GetPlayer_stage();
+		}
 		virtual void RemovePlayer_stage();
 
 		virtual void AddBoss(Boss* boss);
+		virtual Boss* GetBoss() {
+			return mLayers[(int)enums::eLayer::Boss].GetBoss();
+		}
 		virtual void RemoveBoss();
 
 		virtual void DeleteAllSensor();

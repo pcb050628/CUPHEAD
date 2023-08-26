@@ -68,7 +68,6 @@ namespace me
 		mVineStabSensorTwo = SceneManager::Instantiate<Sensor>(L"carnation_stage", enums::eLayer::Sensor, mTransform->GetPos(), L"vine_stab_2");
 		mVineStabSensorTwo->SetOwner(this);
 
-
 		mMainSensor->SetColliderSize(math::Vector2(200, 600));
 		mMainSensor->AddTargetType(enums::eGameObjType::player);
 
@@ -125,13 +124,19 @@ namespace me
 		mVineStabSensorTwo->SetActive(false);
 		mVineStabSensorOne->SetColliderSize(math::Vector2(100, 500));
 		mVineStabSensorTwo->SetColliderSize(math::Vector2(100, 500));
+		mVineStabSensorOne->AddTargetType(enums::eGameObjType::player);
+		mVineStabSensorTwo->AddTargetType(enums::eGameObjType::player);
 	}
 	void CagneyCarnation_Boss::Update()
 	{
 		Boss::Update();
+		SetHItPoint(mHitSensor->GetPos());
 
 		if (mHitSensor->Sensed(enums::eGameObjType::bullet) == enums::SenseType::Enter)
-			GetHit(dynamic_cast<Bullet*>(mHitSensor->GetSensedObj(enums::eGameObjType::bullet))->ReturnDmg());
+		{
+			//GetHit(dynamic_cast<Bullet*>(mHitSensor->GetSensedObj(enums::eGameObjType::bullet))->ReturnDmg());
+			//mHitSensor->RemoveSensedObj(enums::eGameObjType::bullet);
+		}
 
 		if (mHitSensor->Sensed(enums::eGameObjType::player) == enums::SenseType::Enter || mHitSensor->Sensed(enums::eGameObjType::player) == enums::SenseType::Stay)
 			dynamic_cast<Player_stage*>(mHitSensor->GetSensedObj(enums::eGameObjType::player))->GetHit();
@@ -462,6 +467,8 @@ namespace me
 	void CagneyCarnation_Boss::TransitionToPh2()
 	{
 		mMainAnimator->PlayAnim(L"Carnation_Final_intro");
+		mHitSensor->SetOffset(math::Vector2(0, -150));
+		mHitSensor->SetColliderSize(math::Vector2(200, 250));
 
 		if(fabs(transitionStartTime - Time::GetTime()) > 1.7f)
 			mVineIntroAnimator->PlayAnim(L"Vine_intro");

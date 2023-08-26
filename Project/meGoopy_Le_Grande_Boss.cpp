@@ -197,6 +197,7 @@ namespace me
 	void Goopy_Le_Grande_Boss::Update()
 	{
 		Boss::Update();
+		SetHItPoint(mMainCollider->GetPos());
 
 		if (mPunchCollider->Sensed() == enums::SenseType::Enter || mPunchCollider->Sensed() == enums::SenseType::Stay)
 		{

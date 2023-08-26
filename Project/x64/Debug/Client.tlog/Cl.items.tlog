@@ -9,6 +9,7 @@ E:\project_api\CUPHEAD\Project\meCagneyCarnation_Boss.cpp;E:\project_api\CUPHEAD
 E:\project_api\CUPHEAD\Project\meCagneyCarnation_stage.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meCagneyCarnation_stage.obj
 E:\project_api\CUPHEAD\Project\meCamera.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meCamera.obj
 E:\project_api\CUPHEAD\Project\meCarrotMissile.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meCarrotMissile.obj
+E:\project_api\CUPHEAD\Project\meChaser.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meChaser.obj
 E:\project_api\CUPHEAD\Project\meCircleCollider.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meCircleCollider.obj
 E:\project_api\CUPHEAD\Project\meClearScene.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meClearScene.obj
 E:\project_api\CUPHEAD\Project\meCollider.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meCollider.obj
@@ -28,6 +29,7 @@ E:\project_api\CUPHEAD\Project\meGameObject.cpp;E:\project_api\CUPHEAD\Project\x
 E:\project_api\CUPHEAD\Project\meKeyInput.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meKeyInput.obj
 E:\project_api\CUPHEAD\Project\meLayer.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meLayer.obj
 E:\project_api\CUPHEAD\Project\meMainScene.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\meMainScene.obj
+E:\project_api\CUPHEAD\Project\mePeashooter.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\mePeashooter.obj
 E:\project_api\CUPHEAD\Project\mePlatform.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\mePlatform.obj
 E:\project_api\CUPHEAD\Project\mePlayer_map.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\mePlayer_map.obj
 E:\project_api\CUPHEAD\Project\mePlayer_stage.cpp;E:\project_api\CUPHEAD\Project\x64\Debug\mePlayer_stage.obj

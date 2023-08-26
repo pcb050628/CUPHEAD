@@ -29,6 +29,12 @@ namespace me
 			none
 		};
 
+		enum class ShooterType
+		{
+			Peashooter,
+			Chaser,
+		};
+
 		Player_stage(const std::wstring& name);
 		virtual ~Player_stage() override;
 
@@ -55,6 +61,12 @@ namespace me
 		bool isParrySuccess() { return parrySuccess; }
 
 		void SpawnBullet(math::Vector2 dir = math::Vector2(1, 0));
+		void ChangeShooterType() {
+			if (shooterType == ShooterType::Peashooter)
+				shooterType = ShooterType::Chaser;
+			else
+				shooterType = ShooterType::Peashooter;
+		}
 
 		void GetHit();
 
@@ -71,6 +83,7 @@ namespace me
 	private:
 		int HP;
 
+		ShooterType shooterType;
 		float shootDelay;
 		float shootPrevTime;
 

@@ -38,15 +38,19 @@ namespace me
 		virtual int GetHP() { return mHP; }
 		virtual void SetHP(int value) { mHP = value; }
 
-		virtual void GetHit(int damage) { mHP -= damage; isHit = true; }
+		virtual void GetHit(float damage) { mHP -= damage; isHit = true; }
 
 		bool GetIsHIt() { return isHit; }
 		void SetIsHit(bool value) { isHit = value; }
 
+		void SetHItPoint(math::Vector2 value) {	mHitPoint = value; }
+		math::Vector2* GetHItPoint() { return &mHitPoint; }
+
 	private:
 		BossPhase_state mState;
+		math::Vector2 mHitPoint;
 
-		int mHP;
+		float mHP;
 		bool isHit;
 
 	};
