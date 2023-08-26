@@ -109,9 +109,6 @@
     <Filter Include="Contents\GameObject\Player\Player_stage">
       <UniqueIdentifier>{1500ace7-220b-4234-8741-c41bb9cca66c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\Player\Player_stage\Bullet">
-      <UniqueIdentifier>{8e888882-2a3d-4668-8078-dda18af074aa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents\GameObject\Boss">
       <UniqueIdentifier>{a3153cd0-6671-4dc9-abcb-192972ab90a6}</UniqueIdentifier>
     </Filter>
@@ -178,10 +175,13 @@
     <Filter Include="Contents\GameObject\Boss\Cagney Carnation\Pollen">
       <UniqueIdentifier>{70ba59b8-6c96-45be-8418-66bbcc486142}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\Player\Player_stage\Bullet\Peashooter">
+    <Filter Include="Contents\GameObject\Bullet">
+      <UniqueIdentifier>{8e888882-2a3d-4668-8078-dda18af074aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\GameObject\Bullet\Peashooter">
       <UniqueIdentifier>{a98aefb7-df0e-4a76-b38a-0360ee8ca95e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Contents\GameObject\Player\Player_stage\Bullet\Chaser">
+    <Filter Include="Contents\GameObject\Bullet\Chaser">
       <UniqueIdentifier>{143966b6-6a01-4298-90d9-12ebc5778c55}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -298,7 +298,7 @@
       <Filter>Contents\GameObject\Floor</Filter>
     </ClInclude>
     <ClInclude Include="meBullet.h">
-      <Filter>Contents\GameObject\Player\Player_stage\Bullet</Filter>
+      <Filter>Contents\GameObject\Bullet</Filter>
     </ClInclude>
     <ClInclude Include="meCollider.h">
       <Filter>Engine\Component\Collider</Filter>
@@ -364,10 +364,10 @@
       <Filter>Contents\GameObject\Boss\Cagney Carnation\Pollen</Filter>
     </ClInclude>
     <ClInclude Include="mePeashooter.h">
-      <Filter>Contents\GameObject\Player\Player_stage\Bullet\Peashooter</Filter>
+      <Filter>Contents\GameObject\Bullet\Peashooter</Filter>
     </ClInclude>
     <ClInclude Include="meChaser.h">
-      <Filter>Contents\GameObject\Player\Player_stage\Bullet\Chaser</Filter>
+      <Filter>Contents\GameObject\Bullet\Chaser</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -479,7 +479,7 @@
       <Filter>Contents\GameObject\Floor</Filter>
     </ClCompile>
     <ClCompile Include="meBullet.cpp">
-      <Filter>Contents\GameObject\Player\Player_stage\Bullet</Filter>
+      <Filter>Contents\GameObject\Bullet</Filter>
     </ClCompile>
     <ClCompile Include="meCollider.cpp">
       <Filter>Engine\Component\Collider</Filter>
@@ -542,10 +542,10 @@
       <Filter>Contents\GameObject\Boss\Cagney Carnation\Pollen</Filter>
     </ClCompile>
     <ClCompile Include="mePeashooter.cpp">
-      <Filter>Contents\GameObject\Player\Player_stage\Bullet\Peashooter</Filter>
+      <Filter>Contents\GameObject\Bullet\Peashooter</Filter>
     </ClCompile>
     <ClCompile Include="meChaser.cpp">
-      <Filter>Contents\GameObject\Player\Player_stage\Bullet\Chaser</Filter>
+      <Filter>Contents\GameObject\Bullet\Chaser</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

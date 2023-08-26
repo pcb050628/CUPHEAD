@@ -46,14 +46,14 @@ namespace me
 				math::Vector2 targetPos = *Target;
 
 				if (pos.x > targetPos.x)
-					pos.x -= 500 * Time::GetDeltaTime();
+					pos.x -= 400 * Time::GetDeltaTime();
 				else if (pos.x < targetPos.x)
-					pos.x += 500 * Time::GetDeltaTime();
+					pos.x += 400 * Time::GetDeltaTime();
 
 				if (pos.y > targetPos.y)
-					pos.y -= 500 * Time::GetDeltaTime();
+					pos.y -= 400 * Time::GetDeltaTime();
 				else if (pos.y < targetPos.y)
-					pos.y += 500 * Time::GetDeltaTime();
+					pos.y += 400 * Time::GetDeltaTime();
 
 				mTransform->SetPos(pos);
 			}

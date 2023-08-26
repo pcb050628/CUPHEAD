@@ -28,6 +28,7 @@ namespace me
 		bg->GetComponent<Transform>()->SetPos(bg->GetComponent<Transform>()->GetPos() + math::Vector2(0, 25));
 
 		bgm = ResourceManager::Load<Sound>(L"rootPackStageBgm", L"..\\content\\Sound\\AudioClip\\BossFightScene\\The Root Pack\\bgm_level_veggies.wav");
+		bgm->SetVolume(70);
 	}
 
 	void RootPack_Stage::Setting()
