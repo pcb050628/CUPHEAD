@@ -49,7 +49,7 @@ namespace me
 	{
 		Boss::Init();
 
-		SetHP(1400);
+		SetHP(1400); // 1400
 
 		mTransform = GetComponent<Transform>();
 
@@ -72,6 +72,8 @@ namespace me
 		mPlayerSensor->SetColliderSize(math::Vector2(400, 100));
 
 		mSmashCollider = SceneManager::Instantiate<Sensor>(L"slime_stage", enums::eLayer::Sensor, mTransform->GetPos(), L"Smash");
+		mSmashCollider->AddTargetType(enums::eGameObjType::player);
+		mSmashCollider->SetOwner(this);
 
 		mPunchCollider->SetActive(false);
 		mSmashCollider->SetActive(false);
@@ -197,7 +199,7 @@ namespace me
 	void Goopy_Le_Grande_Boss::Update()
 	{
 		Boss::Update();
-		SetHItPoint(mMainCollider->GetPos());
+		SetHItPoint(mTransform->GetPos());
 
 		if (mPunchCollider->Sensed() == enums::SenseType::Enter || mPunchCollider->Sensed() == enums::SenseType::Stay)
 		{
@@ -295,7 +297,7 @@ namespace me
 			return;
 		}
 
-		if (mPunchCollider->Sensed() == enums::SenseType::Enter || mPunchCollider->Sensed() == enums::SenseType::Stay 
+		if (mPlayerSensor->Sensed(enums::eGameObjType::player) == enums::SenseType::Enter || mPlayerSensor->Sensed(enums::eGameObjType::player) == enums::SenseType::Stay
 			&& mRigidbody->GetIsGround() && !mIsPunching)
 		{
 			if (fabs(attackTime - Time::GetTime()) > attackCooldown)
@@ -323,7 +325,7 @@ namespace me
 			return;
 		}
 
-		if (mPunchCollider->Sensed() == enums::SenseType::Enter || mPunchCollider->Sensed() == enums::SenseType::Stay 
+		if (mPlayerSensor->Sensed(enums::eGameObjType::player) == enums::SenseType::Enter || mPlayerSensor->Sensed(enums::eGameObjType::player) == enums::SenseType::Stay
 			&& mRigidbody->GetIsGround() && !mIsPunching)
 		{
 			if (fabs(attackTime - Time::GetTime()) > attackCooldown)
@@ -351,7 +353,7 @@ namespace me
 			return;
 		}
 
-		if (mPunchCollider->Sensed() == enums::SenseType::Enter || mPunchCollider->Sensed() == enums::SenseType::Stay)
+		if (mPlayerSensor->Sensed(enums::eGameObjType::player) == enums::SenseType::Enter || mPlayerSensor->Sensed(enums::eGameObjType::player) == enums::SenseType::Stay)
 		{
 			if (fabs(attackTime - Time::GetTime()) > attackCooldown)
 			{
@@ -713,10 +715,10 @@ namespace me
 	{
 		mMainAnimator->PlayAnim(L"Goopy Le Grande_tomb_smash");
 
-		if ((fabs(attackTime - Time::GetTime()) > 0.7f) 
-			&& mPunchCollider->Sensed() == enums::SenseType::Enter || mPunchCollider->Sensed() == enums::SenseType::Stay)
+		if (fabs(attackTime - Time::GetTime()) > 0.7f
+			&& (mPlayerSensor->Sensed(enums::eGameObjType::player) == enums::SenseType::Enter || mPlayerSensor->Sensed(enums::eGameObjType::player) == enums::SenseType::Stay))
 		{
-			dynamic_cast<Player_stage*>(mPlayerSensor->GetSensedObj())->GetHit();
+			dynamic_cast<Player_stage*>(mPlayerSensor->GetSensedObj(enums::eGameObjType::player))->GetHit();
 		}
 
 		if (mMainAnimator->GetCurAnim()->IsComplete())
