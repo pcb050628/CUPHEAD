@@ -18,7 +18,7 @@ namespace me
 {
 	Player_stage::Player_stage(const std::wstring& name) : GameObject(name, enums::eGameObjType::player)
 		, HP(3)
-		, shooterType(ShooterType::Chaser), shootDelay(0.1f), shootPrevTime(0), mShootAnim_L(nullptr), mShootAnim_R(nullptr), shootSound(nullptr)
+		, shooterType(ShooterType::Peashooter), shootDelay(0.1f), shootPrevTime(0), mShootAnim_L(nullptr), mShootAnim_R(nullptr), shootSound(nullptr)
 		, mAnimator(nullptr), mTransform(nullptr), mCollider(nullptr)
 		, mCurState(Player_state::Intro), mPrevState(Player_state::none)
 		, mIsGround(true), groundType(GroundType::none)
