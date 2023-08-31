@@ -7,6 +7,7 @@ namespace me
 {
 	std::map<UINT64, bool>  ColliderManager::mCollisionMap = {};
 	std::bitset<(UINT)enums::eLayer::End>  ColliderManager::mLayerMatrix[(UINT)enums::eLayer::End] = {};
+	bool ColliderManager::render = false;
 
 	void ColliderManager::Init()
 	{

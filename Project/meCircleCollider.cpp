@@ -1,4 +1,5 @@
 #include "meCircleCollider.h"
+#include "meColliderManager.h"
 
 namespace me
 {
@@ -20,29 +21,32 @@ namespace me
 	}
 	void CircleCollider::Render(HDC hdc)
 	{
-		HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
-		HPEN pen;
-		if (GetCollision())
-			pen = CreatePen(PS_SOLID, 0, RGB(255, 0, 0));
-		else
-			pen = CreatePen(PS_SOLID, 0, RGB(0, 255, 0));
+		if (ColliderManager::GetRender())
+		{
+			HBRUSH brush = (HBRUSH)GetStockObject(NULL_BRUSH);
+			HPEN pen;
+			if (GetCollision())
+				pen = CreatePen(PS_SOLID, 0, RGB(255, 0, 0));
+			else
+				pen = CreatePen(PS_SOLID, 0, RGB(0, 255, 0));
 
-		HBRUSH oldB = (HBRUSH)SelectObject(hdc, brush);
-		HPEN oldP = (HPEN)SelectObject(hdc, pen);
+			HBRUSH oldB = (HBRUSH)SelectObject(hdc, brush);
+			HPEN oldP = (HPEN)SelectObject(hdc, pen);
 
-		math::Vector2 pos = GetPos();
+			math::Vector2 pos = GetPos();
 
-		Ellipse(hdc
-			, pos.x - mRadius
-			, pos.y - mRadius
-			, pos.x + mRadius
-			, pos.y + mRadius);
+			Ellipse(hdc
+				, pos.x - mRadius
+				, pos.y - mRadius
+				, pos.x + mRadius
+				, pos.y + mRadius);
 
-		SelectObject(hdc, oldB);
-		SelectObject(hdc, oldP);
+			SelectObject(hdc, oldB);
+			SelectObject(hdc, oldP);
 
-		DeleteObject(brush);
-		DeleteObject(pen);
+			DeleteObject(brush);
+			DeleteObject(pen);
+		}
 	}
 	void CircleCollider::OnCollisionEnter(Collider* other)
 	{

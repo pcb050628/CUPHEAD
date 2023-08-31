@@ -28,9 +28,13 @@ namespace me
 		static void ColliderCollision(Collider* left, Collider* right);
 		static bool Intersect(Collider* left, Collider* right);
 
+		static void SetRender(bool value) { render = value; }
+		static bool GetRender() { return render; }
+
 	private:
 		static std::map<UINT64, bool> mCollisionMap;
 		static std::bitset<(UINT)enums::eLayer::End> mLayerMatrix[(UINT)enums::eLayer::End];
+		static bool render;
 	};
 }
 

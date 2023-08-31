@@ -37,8 +37,6 @@ namespace me
 
 	void Scene::Setting()
 	{
-		//Animator* tmp = AddPlayer_stage(L"")->GetComponent<Animator>();;
-		//tmp->FlashingStart();
 	}
 
 	void Scene::Update()
@@ -49,18 +47,18 @@ namespace me
 			Setting();
 		}
 
+		if (KeyInput::GetKeyPressed(KeyCode::J))
+		{
+			if(ColliderManager::GetRender())
+				ColliderManager::SetRender(false);
+			else
+				ColliderManager::SetRender(true);
+		}
+
 		for (Layer& lys : mLayers)
 		{
 			lys.Update();
 		}
-
-		//if (KeyInput::GetKeyPressed(KeyCode::K))
-		//{
-		//	if (!fadeoutCall)
-		//		RunFadeout();
-		//	else
-		//		StopFadeout();
-		//}
 	}
 
 	void Scene::Render(HDC hdc)
