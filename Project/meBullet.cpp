@@ -35,7 +35,8 @@ namespace me
 		}	
 		else if (other->GetOwner()->GetTag() == enums::eGameObjType::sensor)
 		{
-			if (dynamic_cast<Boss*>(dynamic_cast<Sensor*>(other->GetOwner())->GetOwner()) != nullptr)
+			if (dynamic_cast<Boss*>(dynamic_cast<Sensor*>(other->GetOwner())->GetOwner()) != nullptr
+				&& dynamic_cast<Sensor*>(other->GetOwner())->FindTargetType(enums::eGameObjType::bullet))
 			{
 				dynamic_cast<Boss*>(dynamic_cast<Sensor*>(other->GetOwner())->GetOwner())->GetHit(damage);
 			}

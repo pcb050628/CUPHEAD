@@ -184,6 +184,9 @@
     <Filter Include="Contents\GameObject\Bullet\Chaser">
       <UniqueIdentifier>{143966b6-6a01-4298-90d9-12ebc5778c55}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents\GameObject\PauseUI">
+      <UniqueIdentifier>{d1f5459c-dd17-4d88-ac3c-cb8c533348e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -369,6 +372,9 @@
     <ClInclude Include="meChaser.h">
       <Filter>Contents\GameObject\Bullet\Chaser</Filter>
     </ClInclude>
+    <ClInclude Include="mePauseUI.h">
+      <Filter>Contents\GameObject\PauseUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -546,6 +552,9 @@
     </ClCompile>
     <ClCompile Include="meChaser.cpp">
       <Filter>Contents\GameObject\Bullet\Chaser</Filter>
+    </ClCompile>
+    <ClCompile Include="mePauseUI.cpp">
+      <Filter>Contents\GameObject\PauseUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

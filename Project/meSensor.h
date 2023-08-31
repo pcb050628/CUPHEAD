@@ -42,6 +42,16 @@ namespace me
 			SensedObjs.insert(std::make_pair(type, nullptr));
 		}
 
+		bool FindTargetType(enums::eGameObjType type) {
+			for (enums::eGameObjType target : TargetTypes)
+			{
+				if (target == type)
+					return true;
+			}
+
+			return false;
+		}
+
 		enums::SenseType Sensed() {
 			if (TargetTypes.size() > 0)
 			{

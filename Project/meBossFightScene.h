@@ -5,6 +5,7 @@
 #include "meWall.h"
 #include "meFloor.h"
 #include "meDeadUI.h"
+#include "mePauseUI.h"
 
 namespace me
 {
@@ -44,9 +45,11 @@ namespace me
 		Floor* floor;
 
 		DeadUI* deadUI;
+		PauseUI* pauseUI;
 
 	public:
 		bool gameover = false;
+		bool pause = false;
 	};
 }
 

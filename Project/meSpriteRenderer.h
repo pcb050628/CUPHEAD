@@ -25,6 +25,8 @@ namespace me
 			}
 		}
 
+		virtual Texture* GetImage() { return mTexture; }
+
 		virtual void SetScale(math::Vector2 scale) { mScale = scale; }
 		virtual math::Vector2 GetScale() { return mScale; }
 

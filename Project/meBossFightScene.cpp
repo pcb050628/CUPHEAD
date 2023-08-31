@@ -15,6 +15,7 @@ namespace me
 		, wall1(nullptr)
 		, wall2(nullptr)
 		, deadUI(nullptr)
+		, pauseUI(nullptr)
 	{
 	}
 	BossFightScene::~BossFightScene()
@@ -31,6 +32,9 @@ namespace me
 
 		deadUI = AddGameObj<DeadUI>(enums::eLayer::UI, L"deadUI");
 		deadUI->SetActive(false);
+
+		pauseUI = AddGameObj<PauseUI>(enums::eLayer::UI, L"pauseUI");
+		pauseUI->SetActive(false);
 	}
 	void BossFightScene::Setting()
 	{
